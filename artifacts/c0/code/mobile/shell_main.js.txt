@@ -1,0 +1,104 @@
+/* ANNOTATION_BLOCK_START
+{
+  "artifact_id": "c0_rn_shell_src_main",
+  "version_tag": "0.1.0-c0",
+  "g_created": 4,
+  "g_last_modified": 4,
+  "description": "Main annotated source code file (placeholder) for the React Native (Expo) shell application developed in Cycle 0. This represents the entry point or a primary structural component of the mobile app, featuring basic navigation and static content based on the Figma prototype.",
+  "artifact_type": "CODE_MODULE",
+  "status_in_lifecycle": "DEVELOPMENT",
+  "purpose_statement": "To provide a foundational, runnable React Native (Expo) application shell with basic navigation and UI stubs as defined in Cycle 0. This serves as the starting point for iterative development in subsequent cycles.",
+  "key_logic_points": [
+    "Initializes the Expo application.",
+    "Sets up basic navigation (e.g., Bottom Tab Navigator, Stack Navigators for core C0 flows).",
+    "Includes placeholder screens populated with static mock data.",
+    "Integrates Tailwind CSS for styling, referencing foundational design tokens.",
+    "This is a high-level placeholder; detailed component breakdown and logic will be developed by AI code agents and supervised by a human developer."
+  ],
+  "interfaces_provided": [
+    { "name": "Main App UI", "interface_type": "GUI", "details": "Provides the primary graphical user interface for the mobile application shell.", "notes": "Interaction limited to navigation between static/stubbed screens in Cycle 0." }
+  ],
+  "requisites": [
+    { "description": "Expo and React Native environment setup.", "type": "ENVIRONMENT" },
+    { "description": "Tailwind CSS and `tailwind-react-native-classnames` library integrated.", "type": "LIBRARY_DEPENDENCY" },
+    { "description": "Figma prototype (c0_figma_prototype) providing the UI/UX design for the shell.", "type": "DESIGN_INPUT" }
+  ],
+  "external_dependencies": [
+    { "name": "React", "version": "^18.x.x", "reason": "Core UI library for React Native." },
+    { "name": "React Native", "version": "0.74.x (Expo SDK 51 compatible)", "reason": "Framework for building native mobile apps." },
+    { "name": "Expo", "version": "SDK 51", "reason": "Platform and tools for universal React applications." },
+    { "name": "@react-navigation/native", "version": "^6.x", "reason": "Navigation library." },
+    { "name": "tailwind-react-native-classnames", "version": "Specific version used in project", "reason": "Tailwind CSS integration." }
+  ],
+  "internal_dependencies": ["c0_mobile_readme"],
+  "dependents": ["c1_rn_app_src"],
+  "linked_issue_ids": [],
+  "quality_notes": {
+    "linting": "PENDING (ESLint to be configured)",
+    "unit_tests": "PENDING (Jest tests to be developed)",
+    "manual_review_comment": "This is a placeholder for the main shell application code. AI code generation will populate this further. Initial structure based on Cycle 0 Blueprint.",
+    "last_security_review_g": null
+  }
+}
+ANNOTATION_BLOCK_END */
+
+// WorldChef/Cultif - Cycle 0 React Native Shell Application (Main Placeholder)
+// Artifact ID: c0_rn_shell_src_main
+// Version: 0.1.0-c0
+// Last Updated (g): 4
+
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+// import { NavigationContainer } from '@react-navigation/native'; // Example import
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; // Example import
+// import tw from 'tailwind-react-native-classnames'; // Example import if using this specific library
+
+/**
+ * Placeholder for the main App component or root navigator.
+ * Detailed implementation will be based on Cycle 0 Blueprint and Figma designs,
+ * likely involving React Navigation for screen management and Tailwind CSS for styling.
+ */
+
+// Example: Placeholder Home Screen
+const HomeScreenPlaceholder = () => {
+  return (
+    <View style={styles.container} /* style={tw`flex-1 items-center justify-center`} */>
+      <Text style={styles.text} /* style={tw`text-lg font-bold`} */>Home Screen Stub (Cycle 0)</Text>
+      <Text /* style={tw`mt-2 text-gray-600`} */>Navigation and static content as per Figma prototype.</Text>
+    </View>
+  );
+};
+
+// Example: Placeholder for the main App component
+const AppShell = () => {
+  // TODO: Implement NavigationContainer and navigators (Tab, Stack)
+  // based on Cycle 0 Blueprint (T-01b, T-11, T-02, T-03, T-06, T-04, T-08)
+  // and Figma Page Catalogue.
+  return (
+    // <NavigationContainer>
+    //   {/* Setup BottomTabNavigator and StackNavigators here */}
+    //   {/* Example: <Tab.Screen name="Home" component={HomeScreenPlaceholder} /> */}
+    // </NavigationContainer>
+    <HomeScreenPlaceholder /> // Simplified for initial placeholder
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#f0f0f0',
+  },
+  text: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+});
+
+// For Expo, the default export is usually the root component.
+export default AppShell;
+
+console.log('Cycle 0 React Native Shell Main Source File (c0_rn_shell_src_main) placeholder loaded.'); 

@@ -1,0 +1,199 @@
+{
+  "v": 1,
+  "id": "plan_cultif_main_mvp",
+  "status": "ACTIVE",
+  "goal": "To develop and launch a monetizable, mobile-first recipe platform ('Cultif' / 'WorldChef') enabling creators to publish content and users to subscribe for premium access. The MVP will include core functionalities for recipe creation and management (CRUD), image-based media storage, basic nutrition information, user authentication, a single-tier Stripe-based monthly subscription with paywall enforcement, content discovery via search and filters, manual meal planning with grocery list export, and basic user engagement features like likes, favorites, and push notifications. The project will be executed over approximately six 4-week cycles, adhering to the Shape Up methodology, with a strong emphasis on AI-assisted development and a lean, iterative approach to deliver a functional MVP within the defined timeline and resource constraints (side-hustle capacity of ~20 hrs/week).",
+  "scope": [
+    "Development of a React Native (Expo, Tailwind CSS) mobile application for iOS and Android.",
+    "Implementation of a Fastify (Node.js) backend API.",
+    "Utilization of Supabase for PostgreSQL database, authentication, and S3-compatible storage.",
+    "Cycle 0: Creation of a high-fidelity Figma click-through prototype and a basic, navigable React Native shell application.",
+    "Cycle 1: Implementation of a lean content pipeline including recipe CRUD, basic email authentication, image uploads, and a stubbed/cached nutrition data worker.",
+    "Cycle 2: Introduction of a micro-monetization layer with Stripe Hosted Checkout for a single-tier monthly subscription and paywall enforcement.",
+    "Cycle 3: Development of basic discovery features including full-text search for recipes/creators, filters, and a simplified 'Top Creators' leaderboard.",
+    "Cycle 4: Implementation of a Meal Plan MVP allowing users to create weekly meal plans and export a basic CSV grocery list.",
+    "Cycle 5: Addition of retention hooks such as 'likes' and 'favorites' for recipes, basic Expo push notifications, and a simplified creator analytics dashboard.",
+    "Adherence to defined technical requirements including API performance targets, security controls (RLS, JWT), CI/CD pipeline with GitHub Actions, and basic observability.",
+    "Implementation of a testing strategy including unit, integration, E2E, and basic performance tests, with AI assistance for test generation.",
+    "All development artifacts (source code, configuration files) that are text-based and managed by the AI will include embedded annotation blocks according to the specified schema.",
+    "Management of project state, plans, issues, and artifact registry according to the Hybrid_AI_OS vX.2 framework."
+  ],
+  "exclusions": [
+    "Multi-currency billing, coupons, or automated creator payout disbursement (beyond conceptual recording of platform revenue).",
+    "Real-time features such as user-to-user chat, comments on recipes, or live streaming.",
+    "Advanced Machine Learning-driven recommendations or automated/AI-generated meal planning.",
+    "A web desktop interface (mobile-first only for MVP).",
+    "Complex video transcoding or interactive video-style recipe playback.",
+    "Gamified leaderboards or user-submitted completion photos beyond basic engagement metrics.",
+    "Scheduled posting of recipes by creators.",
+    "Full dark/light mode implementation beyond initial token definition in early cycles.",
+    "Advanced search algorithms, synonym mapping, or 'smart' suggestions beyond basic capabilities.",
+    "Multi-timezone support for meal planning or complex recipe portion scaling in early MVP.",
+    "Advanced analytics segmentation or email digests.",
+    "Internationalization beyond English UI and basic i18n scaffolding."
+  ],
+  "g_created": 2,
+  "g_updated": 3,
+  "tasks": [
+    {
+      "id": "plan_cultif_main_mvp_cycle0",
+      "title": "Cycle 0: Proto Frame",
+      "description": "Establish the foundational visual and structural elements of the WorldChef mobile application. Deliver a high-fidelity Figma click-through prototype demonstrating core user flows and a basic React Native + Tailwind CSS shell application with navigation stubs. This provides a tangible artifact for early feedback and a skeleton for future development. No backend integration, no live data, no complex logic.",
+      "intent": "To create a visual and structural foundation for the application, enabling early feedback and guiding subsequent development cycles through a clickable prototype and a basic mobile shell.",
+      "inputs": [
+        { "name": "Project Charter", "source_description": "Core project definition document.", "details": "Provides overall project purpose, objectives, and high-level scope." },
+        { "name": "Product Requirements Document (PRD)", "source_description": "Product feature and requirements specification.", "details": "Defines target users, value proposition, and functional/non-functional requirements relevant to the prototype." },
+        { "name": "Shape Up Strategy Document", "source_description": "Overall project execution strategy.", "details": "Outlines the cycle-based approach and capacity model." },
+        { "name": "Cycle 0 Blueprint Document", "source_description": "Detailed plan for Cycle 0.", "details": "Specifies objectives, scope, deliverables, and work breakdown for the Proto Frame." },
+        { "name": "App UI Screen Catalogue & Figma Page Catalogue", "source_description": "UI design specifications.", "details": "Provides screen designs and component information for the Figma prototype and shell app." }
+      ],
+      "outputs": [
+        { "name": "Figma Design Library (Foundations, Atoms, Core Molecules)", "artifact_id": "c0_figma_library", "expected_path": "design/figma/cycle0_library.fig", "description": "Core Figma design library components: 00 README, 01 Foundations, 02 Atoms, 03 Molecules (core set). This is an external Figma artifact.", "embed_annotations_required": "false" },
+        { "name": "Figma Click-Through Prototype (Core Flows)", "artifact_id": "c0_figma_prototype", "expected_path": "design/figma/cycle0_prototype.fig", "description": "Comprehensive Figma click-through prototype for core user navigation paths. This is an external Figma artifact.", "embed_annotations_required": "false" },
+        { "name": "React Native Shell Application Main Source File", "artifact_id": "c0_rn_shell_src_main", "expected_path": "artifacts/c0/code/mobile/shell_main.js.txt", "description": "The main annotated source code file representing the React Native (Expo) shell application with Tailwind CSS, basic navigation, and static mock data.", "embed_annotations_required": "true" },
+        { "name": "Cycle 0 User Testing Feedback Report", "artifact_id": "c0_user_testing_report", "expected_path": "artifacts/c0/docs/user_testing_feedback.txt", "description": "Report summarizing feedback from informal user testing of the Figma prototype.", "embed_annotations_required": "true" },
+        { "name": "Mobile Shell Project README (Cycle 0)", "artifact_id": "c0_mobile_readme", "expected_path": "artifacts/c0/docs/readme_mobile_shell.md.txt", "description": "Updated README.md for the mobile shell project, reflecting Cycle 0 deliverables.", "embed_annotations_required": "true" }
+      ],
+      "dependencies": [],
+      "criticality": "HIGH",
+      "status": "ACTIVE",
+      "retry_count": 0,
+      "linked_issue_ids": [],
+      "notes": ["This cycle focuses on establishing the visual and structural groundwork. Backend and dynamic data are out of scope."],
+      "sub_tasks": []
+    },
+    {
+      "id": "plan_cultif_main_mvp_cycle1",
+      "title": "Cycle 1: Lean Content Pipeline",
+      "description": "Implement core content production and read flow: recipe CRUD (users, creators, recipes tables), image-based media storage, nutrition enrichment (stubbed/cached), public recipe view, and basic email authentication with RLS enforcement. This cycle establishes the foundational content backbone. No monetization, no advanced discovery/search, no meal-planning, no likes/favorites.",
+      "intent": "To establish the core infrastructure for content creation, storage, authentication, and public viewing, forming the backbone of the recipe platform.",
+      "inputs": [
+        { "name": "Cycle 0 Deliverables", "source_description": "Outputs from the Proto Frame cycle.", "details": "Includes Figma prototype, RN Shell App, and feedback reports." },
+        { "name": "Product Requirements Document (PRD)", "source_description": "Product feature specification.", "details": "Provides requirements for content features." },
+        { "name": "Technical Requirements Document (TRD)", "source_description": "Technical architecture and data model.", "details": "Defines stack, DB schema, and API surface for Cycle 1." },
+        { "name": "Cycle 1 Blueprint Document", "source_description": "Detailed plan for Cycle 1.", "details": "Specifies objectives, scope, and deliverables for the content pipeline." },
+        { "name": "App UI Screen Catalogue & Figma Page Catalogue (C1 relevant screens)", "source_description": "UI design specifications.", "details": "Provides designs for Auth, Home Feed, Recipe Detail, and Upload Wizard screens." }
+      ],
+      "outputs": [
+        { "name": "Supabase Schema Migrations (Cycle 1)", "artifact_id": "c1_db_migrations", "expected_path": "artifacts/c1/db/migrations/schema.sql.txt", "description": "SQL DDL migrations for users, creators, recipes tables, and RLS policies for Cycle 1.", "embed_annotations_required": "true" },
+        { "name": "Fastify API Source (Auth & Recipe CRUD - C1)", "artifact_id": "c1_api_src", "expected_path": "artifacts/c1/code/api/main.js.txt", "description": "Main annotated source code file for the Fastify API implementing authentication and recipe CRUD for Cycle 1.", "embed_annotations_required": "true" },
+        { "name": "Nutrition Worker Source (Stubbed/Cached - C1)", "artifact_id": "c1_worker_nutrition_src", "expected_path": "artifacts/c1/code/workers/nutrition_worker.js.txt", "description": "Main annotated source code for the nutrition worker with stubbed/cached Edamam API interaction for Cycle 1.", "embed_annotations_required": "true" },
+        { "name": "React Native Mobile App Source (C1 Features)", "artifact_id": "c1_rn_app_src", "expected_path": "artifacts/c1/code/mobile/main.js.txt", "description": "Main annotated source code for the React Native mobile app implementing C1 screens and API integration.", "embed_annotations_required": "true" },
+        { "name": "CI/CD Pipeline Configuration (C1)", "artifact_id": "c1_cicd_config", "expected_path": "artifacts/c1/devops/cicd_pipeline.yml.txt", "description": "Annotated GitHub Actions workflow configurations for Cycle 1.", "embed_annotations_required": "true" },
+        { "name": "Test Suites Summary (Unit, Integration, E2E - C1)", "artifact_id": "c1_tests_summary", "expected_path": "artifacts/c1/tests/summary.txt", "description": "Annotated summary document for test suites covering Cycle 1 features.", "embed_annotations_required": "true" },
+        { "name": "Cycle 1 Demo Video Link", "artifact_id": "c1_demo_video_link", "expected_path": "artifacts/c1/docs/demo_video_link.txt", "description": "Annotated text file containing the link to the recorded demo video for Cycle 1 deliverables.", "embed_annotations_required": "true" }
+      ],
+      "dependencies": ["plan_cultif_main_mvp_cycle0"],
+      "criticality": "HIGH",
+      "status": "PENDING",
+      "retry_count": 0,
+      "linked_issue_ids": [],
+      "notes": ["This cycle focuses on building the core content engine."],
+      "sub_tasks": []
+    },
+    {
+      "id": "plan_cultif_main_mvp_cycle2",
+      "title": "Cycle 2: Monetization Layer",
+      "description": "Activate the paid economy for the WorldChef platform. This involves implementing a single-tier monthly subscription using Stripe Hosted Checkout, enforcing content paywalls for premium recipes, and establishing a system to record revenue and calculate a platform/creator revenue split (recording payouts only, no actual disbursement). No changes to discovery, meal-planning, or core engagement features from Cycle 1.",
+      "intent": "To introduce the core monetization capabilities, allowing the platform to generate revenue through subscriptions and manage access to premium content.",
+      "inputs": [
+        { "name": "Cycle 1 Deliverables", "source_description": "Outputs from the Lean Content Pipeline cycle.", "details": "Includes working API, DB schema, mobile app with basic content features." },
+        { "name": "Technical Requirements Document (TRD)", "source_description": "Technical architecture and data model.", "details": "Defines data model additions (subscriptions, ledger) and API endpoints for monetization." },
+        { "name": "Cycle 2 Blueprint Document", "source_description": "Detailed plan for Cycle 2.", "details": "Specifies objectives, scope, and deliverables for the monetization layer." },
+        { "name": "App UI Screen Catalogue & Figma Page Catalogue (C2 relevant screens)", "source_description": "UI design specifications.", "details": "Provides designs for Subscription Flow and Paywall screens." }
+      ],
+      "outputs": [
+        { "name": "Supabase Schema Migrations (Cycle 2)", "artifact_id": "c2_db_migrations", "expected_path": "artifacts/c2/db/migrations/schema_updates.sql.txt", "description": "SQL DDL migrations for subscriptions and ledger tables for Cycle 2.", "embed_annotations_required": "true" },
+        { "name": "Fastify API Source (Subscriptions & Webhooks - C2)", "artifact_id": "c2_api_src", "expected_path": "artifacts/c2/code/api/main_subscriptions.js.txt", "description": "Main annotated source code for Fastify API implementing subscription management and Stripe webhooks for Cycle 2.", "embed_annotations_required": "true" },
+        { "name": "React Native Mobile App Source (C2 Features)", "artifact_id": "c2_rn_app_src", "expected_path": "artifacts/c2/code/mobile/main_subscriptions.js.txt", "description": "Main annotated source code for React Native mobile app implementing subscription flow and paywall UI for Cycle 2.", "embed_annotations_required": "true" },
+        { "name": "Test Suites Summary (Monetization - C2)", "artifact_id": "c2_tests_summary", "expected_path": "artifacts/c2/tests/summary_monetization.txt", "description": "Annotated summary document for test suites covering Cycle 2 monetization features.", "embed_annotations_required": "true" },
+        { "name": "Cycle 2 Demo Video Link", "artifact_id": "c2_demo_video_link", "expected_path": "artifacts/c2/docs/demo_video_link.txt", "description": "Annotated text file containing the link to the recorded demo video for Cycle 2 deliverables.", "embed_annotations_required": "true" }
+      ],
+      "dependencies": ["plan_cultif_main_mvp_cycle1"],
+      "criticality": "HIGH",
+      "status": "PENDING",
+      "retry_count": 0,
+      "linked_issue_ids": [],
+      "notes": ["This cycle introduces the ability to charge users and manage premium content access."],
+      "sub_tasks": []
+    },
+    {
+      "id": "plan_cultif_main_mvp_cycle3",
+      "title": "Cycle 3: Discovery & Search",
+      "description": "Enable users to effectively discover recipes and creators. This will be achieved through full-text search on key recipe/creator attributes, structured filtering capabilities, and a simple 'Top Creators' leaderboard. Monetization (Cycle 2), meal-planning, and core engagement features remain unchanged from their previous states.",
+      "intent": "To enhance user experience by providing robust search and filtering tools, making it easier for users to find relevant recipes and creators.",
+      "inputs": [
+        { "name": "Cycle 2 Deliverables", "source_description": "Outputs from the Monetization Layer cycle.", "details": "Includes working subscription system and paywalled content." },
+        { "name": "Technical Requirements Document (TRD)", "source_description": "Technical architecture and data model.", "details": "Defines DB extensions (pg_trgm), search indices, and API endpoints for discovery." },
+        { "name": "Cycle 3 Blueprint Document", "source_description": "Detailed plan for Cycle 3.", "details": "Specifies objectives, scope, and deliverables for discovery and search features." },
+        { "name": "App UI Screen Catalogue & Figma Page Catalogue (C3 relevant screens)", "source_description": "UI design specifications.", "details": "Provides designs for Search Bar, Filter Drawer, Search Results, and Leaderboard screens." }
+      ],
+      "outputs": [
+        { "name": "Supabase Schema Migrations (Search - C3)", "artifact_id": "c3_db_migrations", "expected_path": "artifacts/c3/db/migrations/schema_search.sql.txt", "description": "SQL DDL for PG extensions, search indices, and creator_trending Materialized View for Cycle 3.", "embed_annotations_required": "true" },
+        { "name": "Fastify API Source (Search & Leaderboard - C3)", "artifact_id": "c3_api_src", "expected_path": "artifacts/c3/code/api/main_search.js.txt", "description": "Main annotated source code for Fastify API implementing search and leaderboard endpoints for Cycle 3.", "embed_annotations_required": "true" },
+        { "name": "React Native Mobile App Source (C3 Features)", "artifact_id": "c3_rn_app_src", "expected_path": "artifacts/c3/code/mobile/main_search.js.txt", "description": "Main annotated source code for React Native mobile app implementing search, filter, and leaderboard UI for Cycle 3.", "embed_annotations_required": "true" },
+        { "name": "Test Suites Summary (Discovery - C3)", "artifact_id": "c3_tests_summary", "expected_path": "artifacts/c3/tests/summary_discovery.txt", "description": "Annotated summary document for test suites covering Cycle 3 discovery features.", "embed_annotations_required": "true" },
+        { "name": "Cycle 3 Demo Video Link", "artifact_id": "c3_demo_video_link", "expected_path": "artifacts/c3/docs/demo_video_link.txt", "description": "Annotated text file containing the link to the recorded demo video for Cycle 3 deliverables.", "embed_annotations_required": "true" }
+      ],
+      "dependencies": ["plan_cultif_main_mvp_cycle2"],
+      "criticality": "HIGH",
+      "status": "PENDING",
+      "retry_count": 0,
+      "linked_issue_ids": [],
+      "notes": ["This cycle focuses on making content easily discoverable."],
+      "sub_tasks": []
+    },
+    {
+      "id": "plan_cultif_main_mvp_cycle4",
+      "title": "Cycle 4: Meal-Planning Layer",
+      "description": "Implement the core functionality for users to create and manage weekly meal plans by adding recipes to a calendar grid. Provide a basic CSV export for a consolidated grocery list based on the planned meals. Monetization, discovery/search, and core engagement features remain static from their previous states.",
+      "intent": "To provide users with tools to organize recipes into weekly meal plans and generate grocery lists, adding significant utility to the platform.",
+      "inputs": [
+        { "name": "Cycle 3 Deliverables", "source_description": "Outputs from the Discovery & Search cycle.", "details": "Includes search and filter functionalities." },
+        { "name": "Technical Requirements Document (TRD)", "source_description": "Technical architecture and data model.", "details": "Defines data model for meal_plans and API endpoints for meal planning." },
+        { "name": "Cycle 4 Blueprint Document", "source_description": "Detailed plan for Cycle 4.", "details": "Specifies objectives, scope, and deliverables for the meal-planning layer." },
+        { "name": "App UI Screen Catalogue & Figma Page Catalogue (C4 relevant screens)", "source_description": "UI design specifications.", "details": "Provides designs for Plan Creation Wizard, Meal Plan Calendar View, and Grocery List Modal." }
+      ],
+      "outputs": [
+        { "name": "Supabase Schema Migrations (Meal Planning - C4)", "artifact_id": "c4_db_migrations", "expected_path": "artifacts/c4/db/migrations/schema_mealplan.sql.txt", "description": "SQL DDL migrations for meal_plans table for Cycle 4.", "embed_annotations_required": "true" },
+        { "name": "Fastify API Source (Meal Plan CRUD & Grocery List - C4)", "artifact_id": "c4_api_src", "expected_path": "artifacts/c4/code/api/main_mealplan.js.txt", "description": "Main annotated source code for Fastify API implementing meal plan CRUD and grocery list export for Cycle 4.", "embed_annotations_required": "true" },
+        { "name": "React Native Mobile App Source (C4 Features)", "artifact_id": "c4_rn_app_src", "expected_path": "artifacts/c4/code/mobile/main_mealplan.js.txt", "description": "Main annotated source code for React Native mobile app implementing meal planning UI and CSV export for Cycle 4.", "embed_annotations_required": "true" },
+        { "name": "Test Suites Summary (Meal Planning - C4)", "artifact_id": "c4_tests_summary", "expected_path": "artifacts/c4/tests/summary_mealplan.txt", "description": "Annotated summary document for test suites covering Cycle 4 meal planning features.", "embed_annotations_required": "true" },
+        { "name": "Cycle 4 Demo Video Link", "artifact_id": "c4_demo_video_link", "expected_path": "artifacts/c4/docs/demo_video_link.txt", "description": "Annotated text file containing the link to the recorded demo video for Cycle 4 deliverables.", "embed_annotations_required": "true" }
+      ],
+      "dependencies": ["plan_cultif_main_mvp_cycle3"],
+      "criticality": "HIGH",
+      "status": "PENDING",
+      "retry_count": 0,
+      "linked_issue_ids": [],
+      "notes": ["This cycle allows users to create and manage their meal plans."],
+      "sub_tasks": []
+    },
+    {
+      "id": "plan_cultif_main_mvp_cycle5",
+      "title": "Cycle 5: Engagement Layer",
+      "description": "Increase user retention and creator engagement by implementing core interaction mechanics: 'likes' and 'favorites' for recipes, basic Expo push notifications for relevant events (e.g., new recipes from followed/popular creators), and a simplified creator analytics dashboard displaying content performance metrics. Monetization (Cycle 2), discovery/search (Cycle 3), and meal-planning (Cycle 4) layers remain static from their previous states.",
+      "intent": "To enhance user and creator engagement by introducing interactive features like likes/favorites, push notifications, and a basic analytics dashboard for creators.",
+      "inputs": [
+        { "name": "Cycle 4 Deliverables", "source_description": "Outputs from the Meal-Planning Layer cycle.", "details": "Includes meal planning functionality." },
+        { "name": "Technical Requirements Document (TRD)", "source_description": "Technical architecture and data model.", "details": "Defines data model additions (likes, favorites, device_tokens, creator_stats_mv) and API endpoints for engagement features." },
+        { "name": "Cycle 5 Blueprint Document", "source_description": "Detailed plan for Cycle 5.", "details": "Specifies objectives, scope, and deliverables for the engagement layer." },
+        { "name": "App UI Screen Catalogue & Figma Page Catalogue (C5 relevant screens)", "source_description": "UI design specifications.", "details": "Provides designs for Like/Favorite icons, Saved Items, Push Opt-in, and Creator Dashboard." }
+      ],
+      "outputs": [
+        { "name": "Supabase Schema Migrations (Engagement - C5)", "artifact_id": "c5_db_migrations", "expected_path": "artifacts/c5/db/migrations/schema_engagement.sql.txt", "description": "SQL DDL for likes, favorites, device_tokens, creator_followers tables and creator_stats_mv for Cycle 5.", "embed_annotations_required": "true" },
+        { "name": "Fastify API Source (Engagement Features - C5)", "artifact_id": "c5_api_src", "expected_path": "artifacts/c5/code/api/main_engagement.js.txt", "description": "Main annotated source code for Fastify API implementing likes, favorites, push notifications, and creator analytics for Cycle 5.", "embed_annotations_required": "true" },
+        { "name": "React Native Mobile App Source (C5 Features)", "artifact_id": "c5_rn_app_src", "expected_path": "artifacts/c5/code/mobile/main_engagement.js.txt", "description": "Main annotated source code for React Native mobile app implementing engagement UI (likes, favorites, saved items, creator dashboard) for Cycle 5.", "embed_annotations_required": "true" },
+        { "name": "Test Suites Summary (Engagement - C5)", "artifact_id": "c5_tests_summary", "expected_path": "artifacts/c5/tests/summary_engagement.txt", "description": "Annotated summary document for test suites covering Cycle 5 engagement features.", "embed_annotations_required": "true" },
+        { "name": "Cycle 5 Demo Video Link", "artifact_id": "c5_demo_video_link", "expected_path": "artifacts/c5/docs/demo_video_link.txt", "description": "Annotated text file containing the link to the recorded demo video for Cycle 5 deliverables.", "embed_annotations_required": "true" }
+      ],
+      "dependencies": ["plan_cultif_main_mvp_cycle4"],
+      "criticality": "HIGH",
+      "status": "PENDING",
+      "retry_count": 0,
+      "linked_issue_ids": [],
+      "notes": ["This cycle adds features to improve user retention and creator interaction."],
+      "sub_tasks": []
+    }
+  ]
+} 

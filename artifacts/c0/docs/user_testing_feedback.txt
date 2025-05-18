@@ -1,0 +1,103 @@
+/* ANNOTATION_BLOCK_START
+{
+  "artifact_id": "c0_user_testing_report",
+  "version_tag": "0.1.0-c0",
+  "g_created": 4,
+  "g_last_modified": 4,
+  "description": "A report template summarizing feedback from informal user testing of the Figma prototype created during Cycle 0 of the WorldChef/Cultif project. This document is a placeholder to be filled with actual findings post-testing.",
+  "artifact_type": "DOCUMENTATION",
+  "status_in_lifecycle": "CONCEPT",
+  "purpose_statement": "To capture and consolidate user feedback on the Cycle 0 Figma prototype, informing design refinements and guiding priorities for subsequent development cycles.",
+  "key_logic_points": [
+    "Defines structure for recording user testing methodology.",
+    "Includes sections for key findings, positive feedback, areas for improvement, and actionable insights.",
+    "Serves as a placeholder until actual user testing is conducted and feedback is gathered."
+  ],
+  "interfaces_provided": [],
+  "requisites": [
+    { "description": "Completion of the Cycle 0 Figma click-through prototype.", "type": "ARTIFACT_DEPENDENCY" },
+    { "description": "Execution of informal user testing sessions with the Figma prototype.", "type": "PROCESS_DEPENDENCY" }
+  ],
+  "external_dependencies": [],
+  "internal_dependencies": ["c0_figma_prototype"],
+  "dependents": [],
+  "linked_issue_ids": [],
+  "quality_notes": {
+    "linting": "N/A",
+    "unit_tests": "N/A",
+    "manual_review_comment": "This is a template. Actual content to be added after user testing of the Figma prototype (c0_figma_prototype) is completed.",
+    "last_security_review_g": null
+  }
+}
+ANNOTATION_BLOCK_END */
+
+# WorldChef/Cultif - Cycle 0 Figma Prototype User Testing Feedback Report
+
+Version: 0.1.0-c0 (Template)
+Last Updated (g): 4
+Associated Figma Prototype Artifact ID: c0_figma_prototype
+
+## 1. Introduction
+
+This document summarizes the findings from informal user testing conducted on the Figma click-through prototype developed during Cycle 0: Proto Frame. The goal of this testing was to gather early feedback on core user flows, overall usability, and visual appeal.
+
+**Date of Testing:** [To Be Filled]
+**Number of Participants:** [To Be Filled]
+**Tester Demographics (Brief):** [To Be Filled]
+
+## 2. Methodology
+
+[Describe the methodology used for testing. E.g., remote moderated sessions, specific tasks given to users, think-aloud protocol, etc.]
+
+**Scenarios Tested:**
+
+1.  Onboarding Tour Navigation.
+2.  Accessing Auth Stubs (Login/Signup placeholders).
+3.  Navigating to Home Feed and viewing static recipe cards.
+4.  Viewing a static Recipe Detail page.
+5.  Accessing the Recipe Upload Wizard stub.
+6.  Viewing the static Subscription Offer screen.
+
+## 3. Key Findings & Observations
+
+[Summarize the most important findings and observations from the testing sessions. Use bullet points.]
+
+-   **Finding 1:** ...
+-   **Finding 2:** ...
+-   **Finding 3:** ...
+
+## 4. Positive Feedback
+
+[List aspects of the prototype that users responded to positively.]
+
+-   **Positive Point 1:** ...
+-   **Positive Point 2:** ...
+
+## 5. Areas for Improvement / Pain Points
+
+[Identify specific areas where users struggled, expressed confusion, or suggested improvements.]
+
+-   **Improvement Area 1:** (Description of issue, user quotes if relevant)
+-   **Improvement Area 2:** ...
+
+## 6. Bugs / Usability Issues Identified
+
+[List any specific bugs or significant usability problems encountered. Categorize by severity if possible (e.g., Critical, Major, Minor).]
+
+-   **Issue 1 (Severity):** ...
+-   **Issue 2 (Severity):** ...
+
+## 7. Actionable Insights & Recommendations
+
+[Translate the findings into actionable insights and specific recommendations for design or development changes. Prioritize if possible.]
+
+-   **Recommendation 1:** (Based on Finding X, consider doing Y)
+-   **Recommendation 2:** ...
+
+## 8. Appendix (Optional)
+
+-   [Links to anonymized notes, recordings (if consent given), or other relevant materials.]
+
+---
+
+**(Note: This is a template document. Content to be filled in after user testing is conducted.)** 
