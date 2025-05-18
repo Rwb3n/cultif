@@ -1,6 +1,6 @@
 {
-  "v": 5,
-  "g_updated": 27,
+  "v": 6,
+  "g_updated": 28,
   "artifact_registry_tree": {
     "artifacts": {
       "c0": {
@@ -35,6 +35,11 @@
     "deployment_configs": {
         "interactive_presentation_cycle0": {
             "vercel_deploy_config_g23": "deploy/vercel_config_interactive_pres_cycle0.txt"
+        }
+    },
+    "reports_and_logs": {
+        "cycle_0_interactive_presentation": {
+            "deploy_report_g25": "reports/vercel_deployment_cycle0_v1.md.txt"
         }
     }
   }

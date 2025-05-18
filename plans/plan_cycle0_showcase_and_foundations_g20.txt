@@ -1,5 +1,5 @@
 {
-  "v": 7,
+  "v": 8,
   "id": "plan_cycle0_showcase_and_foundations_g20",
   "status": "ACTIVE",
   "preceding_plan_id_ref": "plan_cultif_main_mvp",
@@ -16,7 +16,7 @@
     "Completion of the entire comprehensive Figma Design Library (atoms, molecules, organisms beyond core foundations)."
   ],
   "g_created": 20,
-  "g_updated": 27,
+  "g_updated": 28,
   "tasks": [
     {
       "id": "plan_cycle0_showcase_and_foundations_g20_task_001",
@@ -107,10 +107,10 @@
       ],
       "dependencies": ["plan_cycle0_showcase_and_foundations_g20_task_004"],
       "criticality": "HIGH",
-      "status": "PENDING",
+      "status": "ACTIVE",
       "retry_count": 0,
       "linked_issue_ids": [],
-      "notes": ["Target for cycle 0.5/1 presentation readiness."]
+      "notes": ["Target for cycle 0.5/1 presentation readiness.", "g:28 - Deployment report template created. Awaiting user deployment, testing, and URL input."]
     },
     {
       "id": "plan_cycle0_showcase_and_foundations_g20_task_006",

@@ -1,8 +1,8 @@
 {
-  "v": 20,
-  "g": 27,
+  "v": 21,
+  "g": 28,
   "ph": "CONSTRUCT",
-  "st": "READY",
+  "st": "BLOCK_INPUT",
   "cp_id": "plan_cycle0_showcase_and_foundations_g20.txt",
   "ct_id": "plan_cycle0_showcase_and_foundations_g20_task_005",
   "rt": {},
