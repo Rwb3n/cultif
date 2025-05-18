@@ -1,5 +1,23 @@
 {
-  "v": 0,
-  "g_updated": 0,
-  "artifact_registry_tree": {}
+  "v": 1,
+  "g_updated": 12,
+  "artifact_registry_tree": {
+    "artifacts": {
+      "c0": {
+        "docs": {
+          "c0_mobile_readme": "artifacts/c0/docs/readme_mobile_shell.md.txt",
+          "c0_user_testing_report": "artifacts/c0/docs/user_testing_feedback.txt"
+        },
+        "code": {
+          "mobile": {
+            "c0_rn_shell_src_main": "artifacts/c0/code/mobile/shell_main.js.txt"
+          }
+        }
+      }
+    },
+    "source_documents": {
+        "tech_req_doc_main": "source/4. Technical Requirements Document.txt",
+        "cycle0_blueprint_proto_frame": "source/1.0 Cycle 0 Blueprint — Proto Frame.txt"
+    }
+  }
 } 

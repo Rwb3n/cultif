@@ -1,10 +1,10 @@
 {
-  "v": 1,
+  "v": 2,
   "id": "plan_cultif_main_mvp",
   "status": "ACTIVE",
   "goal": "To develop and launch a monetizable, mobile-first recipe platform ('Cultif' / 'WorldChef') enabling creators to publish content and users to subscribe for premium access. The MVP will include core functionalities for recipe creation and management (CRUD), image-based media storage, basic nutrition information, user authentication, a single-tier Stripe-based monthly subscription with paywall enforcement, content discovery via search and filters, manual meal planning with grocery list export, and basic user engagement features like likes, favorites, and push notifications. The project will be executed over approximately six 4-week cycles, adhering to the Shape Up methodology, with a strong emphasis on AI-assisted development and a lean, iterative approach to deliver a functional MVP within the defined timeline and resource constraints (side-hustle capacity of ~20 hrs/week).",
   "scope": [
-    "Development of a React Native (Expo, Tailwind CSS) mobile application for iOS and Android.",
+    "Development of a React Native (Expo, React Native Paper - Material Design 3) mobile application for iOS and Android.",
     "Implementation of a Fastify (Node.js) backend API.",
     "Utilization of Supabase for PostgreSQL database, authentication, and S3-compatible storage.",
     "Cycle 0: Creation of a high-fidelity Figma click-through prototype and a basic, navigable React Native shell application.",
@@ -33,12 +33,12 @@
     "Internationalization beyond English UI and basic i18n scaffolding."
   ],
   "g_created": 2,
-  "g_updated": 3,
+  "g_updated": 9,
   "tasks": [
     {
       "id": "plan_cultif_main_mvp_cycle0",
       "title": "Cycle 0: Proto Frame",
-      "description": "Establish the foundational visual and structural elements of the WorldChef mobile application. Deliver a high-fidelity Figma click-through prototype demonstrating core user flows and a basic React Native + Tailwind CSS shell application with navigation stubs. This provides a tangible artifact for early feedback and a skeleton for future development. No backend integration, no live data, no complex logic.",
+      "description": "Establish the foundational visual and structural elements of the WorldChef mobile application. Deliver a high-fidelity Figma click-through prototype demonstrating core user flows and a basic React Native (Expo) + React Native Paper (Material Design 3) shell application with navigation stubs. This provides a tangible artifact for early feedback and a skeleton for future development. No backend integration, no live data, no complex logic.",
       "intent": "To create a visual and structural foundation for the application, enabling early feedback and guiding subsequent development cycles through a clickable prototype and a basic mobile shell.",
       "inputs": [
         { "name": "Project Charter", "source_description": "Core project definition document.", "details": "Provides overall project purpose, objectives, and high-level scope." },
@@ -50,7 +50,7 @@
       "outputs": [
         { "name": "Figma Design Library (Foundations, Atoms, Core Molecules)", "artifact_id": "c0_figma_library", "expected_path": "design/figma/cycle0_library.fig", "description": "Core Figma design library components: 00 README, 01 Foundations, 02 Atoms, 03 Molecules (core set). This is an external Figma artifact.", "embed_annotations_required": "false" },
         { "name": "Figma Click-Through Prototype (Core Flows)", "artifact_id": "c0_figma_prototype", "expected_path": "design/figma/cycle0_prototype.fig", "description": "Comprehensive Figma click-through prototype for core user navigation paths. This is an external Figma artifact.", "embed_annotations_required": "false" },
-        { "name": "React Native Shell Application Main Source File", "artifact_id": "c0_rn_shell_src_main", "expected_path": "artifacts/c0/code/mobile/shell_main.js.txt", "description": "The main annotated source code file representing the React Native (Expo) shell application with Tailwind CSS, basic navigation, and static mock data.", "embed_annotations_required": "true" },
+        { "name": "React Native Shell Application Main Source File", "artifact_id": "c0_rn_shell_src_main", "expected_path": "artifacts/c0/code/mobile/shell_main.js.txt", "description": "The main annotated source code file representing the React Native (Expo) shell application with React Native Paper (Material Design 3), basic navigation, and static mock data.", "embed_annotations_required": "true" },
         { "name": "Cycle 0 User Testing Feedback Report", "artifact_id": "c0_user_testing_report", "expected_path": "artifacts/c0/docs/user_testing_feedback.txt", "description": "Report summarizing feedback from informal user testing of the Figma prototype.", "embed_annotations_required": "true" },
         { "name": "Mobile Shell Project README (Cycle 0)", "artifact_id": "c0_mobile_readme", "expected_path": "artifacts/c0/docs/readme_mobile_shell.md.txt", "description": "Updated README.md for the mobile shell project, reflecting Cycle 0 deliverables.", "embed_annotations_required": "true" }
       ],
@@ -58,8 +58,8 @@
       "criticality": "HIGH",
       "status": "ACTIVE",
       "retry_count": 0,
-      "linked_issue_ids": [],
-      "notes": ["This cycle focuses on establishing the visual and structural groundwork. Backend and dynamic data are out of scope."],
+      "linked_issue_ids": ["issue_g5_visual_tech_strategy_update"],
+      "notes": ["This cycle focuses on establishing the visual and structural groundwork. Backend and dynamic data are out of scope. UI framework updated to React Native Paper (Material Design 3) as per issue_g5_visual_tech_strategy_update."],
       "sub_tasks": []
     },
     {

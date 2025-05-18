@@ -1,11 +1,11 @@
 {
-  "v": 4,
-  "g": 4,
+  "v": 5,
+  "g": 12,
   "ph": "CONSTRUCT",
   "st": "BUSY",
   "cp_id": "plan_cultif_main_mvp",
   "ct_id": "plan_cultif_main_mvp_cycle0",
   "rt": {},
-  "active_issue_ids": [],
+  "active_issue_ids": ["issue_g5_visual_tech_strategy_update"],
   "last_error": null
 } 
