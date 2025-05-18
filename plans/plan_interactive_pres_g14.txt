@@ -1,0 +1,98 @@
+{
+  "v": 3,
+  "id": "plan_interactive_pres_g14",
+  "status": "ARCHIVED",
+  "goal": "To design, develop, and deploy a visually engaging, interactive presentation consisting of animated application screens derived from provided Figma storyboards. This presentation will be hosted on Vercel to showcase the user interface flow and design concepts. The core animated screens are targeted for readiness by project cycle 0.5/1. The presentation will not include backend functionality.",
+  "scope": [
+    "Analysis of provided Figma screenshots to define screen sequences and interactions.",
+    "Design and storyboard of screen animations and transitions based on Figma visuals.",
+    "Development of interactive, animated screens using web technologies (e.g., HTML, CSS, JavaScript, or a suitable animation library/tool that exports to web formats).",
+    "Configuration for and deployment to Vercel.",
+    "Creation of purely presentational screens with no live data or backend integration."
+  ],
+  "exclusions": [
+    "Implementation of any backend logic or API integrations.",
+    "User authentication or data persistence features.",
+    "Full functional parity with any proposed final application.",
+    "Creation of new screens not present in the provided Figma designs, unless explicitly added as a new requirement."
+  ],
+  "g_created": 14,
+  "g_updated": 20,
+  "tasks": [
+    {
+      "id": "plan_interactive_pres_g14_task_001",
+      "title": "Analyze Figma Screens & Storyboard Animated Presentation",
+      "description": "Analyze the provided Figma screenshots to define the exact screens to be included and their sequence in the interactive presentation. Create a detailed storyboard for each screen, outlining the content, visual elements, animations, transitions, and interactive hotspots (e.g., clickable areas to navigate between screens). This storyboard will serve as the definitive guide for development.",
+      "intent": "To establish a clear and agreed-upon visual and interactive blueprint for the Vercel-hosted presentation, ensuring all key aspects of the desired user experience showcase are captured before development begins, based directly on the provided Figma designs.",
+      "inputs": [
+        { "name": "Figma Screen Designs", "source_description": "User-provided screenshots of Figma storyboards showing application UI.", "details": "These images provide the visual basis and content for the animated screens." },
+        { "name": "Key User Flows to Showcase (if any beyond visual sequence)", "source_description": "Optional clarification from user on primary user journeys or features to be highlighted if not immediately obvious from screen order.", "details": "To ensure the animated presentation effectively communicates the intended user experience." }
+      ],
+      "outputs": [
+        { "name": "Interactive Presentation Storyboard Document", "artifact_id": "pres_storyboard_g15", "expected_path": "design/interactive_presentation_storyboard_v1.md.txt", "description": "A comprehensive markdown document detailing screen sequences, animations, interactive elements, and content for each animated screen of the Vercel presentation, derived from the Figma inputs.", "embed_annotations_required": "true" }
+      ],
+      "dependencies": [],
+      "criticality": "HIGH",
+      "status": "DONE",
+      "retry_count": 0,
+      "linked_issue_ids": [],
+      "notes": ["Target completion for this storyboard is aligned with the initial phase of cycle 0.5/1. The provided Figma screenshots are the primary reference.", "This plan is superseded by plan_cycle0_showcase_and_foundations_g20.txt as of g=20."]
+    },
+    {
+      "id": "plan_interactive_pres_g14_task_002",
+      "title": "Develop Animated Screens Frontend",
+      "description": "Using the approved storyboard (output of Task 1), develop the frontend for the animated screens. Implement all specified animations, transitions, and interactive elements using appropriate web technologies (e.g., HTML5, CSS3, JavaScript, potentially a library like GSAP or Framer Motion if suitable and agreed). Focus purely on the presentational aspect.",
+      "intent": "To translate the storyboard into functional, visually appealing animated screens that can be deployed to Vercel, providing an interactive click-through experience.",
+      "inputs": [
+        { "name": "Approved Interactive Presentation Storyboard Document", "source_description": "Output artifact from Task 1 (pres_storyboard_g15).", "details": "Provides the specification for development." }
+      ],
+      "outputs": [
+        { "name": "Animated Screens Source Code", "artifact_id": "animated_screens_src_g16", "expected_path": "src/interactive_presentation/", "description": "Directory containing all HTML, CSS, JavaScript, and asset files for the animated screens. The primary entry point might be index.html within this folder.", "embed_annotations_required": "true" }
+      ],
+      "dependencies": ["plan_interactive_pres_g14_task_001"],
+      "criticality": "HIGH",
+      "status": "ACTIVE",
+      "retry_count": 0,
+      "linked_issue_ids": [],
+      "notes": ["Ensure all assets are optimized for web performance. This task will directly implement the visual and interactive details from the storyboard based on the Figma designs."]
+    },
+    {
+      "id": "plan_interactive_pres_g14_task_003",
+      "title": "Configure and Prepare for Vercel Deployment",
+      "description": "Prepare the developed animated screens (output of Task 2) for deployment on Vercel. This includes setting up any necessary Vercel project configurations (e.g., via a vercel.json file if needed), defining build settings, and ensuring the project structure is compatible with Vercel's deployment mechanisms for static sites or frontend projects.",
+      "intent": "To ensure a smooth and successful deployment of the interactive animated presentation to the Vercel platform.",
+      "inputs": [
+        { "name": "Animated Screens Source Code", "source_description": "Output artifact from Task 2 (animated_screens_src_g16).", "details": "The frontend code to be deployed." }
+      ],
+      "outputs": [
+        { "name": "Vercel Deployment Configuration", "artifact_id": "vercel_deploy_config_g17", "expected_path": "deploy/vercel_config_interactive_pres.txt", "description": "File containing Vercel-specific configuration (e.g., vercel.json content) or a markdown file detailing the deployment steps and project settings for Vercel tailored to the interactive presentation.", "embed_annotations_required": "true" }
+      ],
+      "dependencies": ["plan_interactive_pres_g14_task_002"],
+      "criticality": "MEDIUM",
+      "status": "PENDING",
+      "retry_count": 0,
+      "linked_issue_ids": [],
+      "notes": []
+    },
+    {
+      "id": "plan_interactive_pres_g14_task_004",
+      "title": "Deploy Interactive Presentation to Vercel & Test",
+      "description": "Deploy the prepared animated screens to Vercel. Once deployed, conduct thorough testing of the live presentation URL to ensure all animations, interactions, and screen flows work as intended according to the storyboard. Verify responsiveness if that was part of the scope.",
+      "intent": "To make the interactive animated presentation publicly accessible via a Vercel URL and confirm its correct operation in a live environment.",
+      "inputs": [
+        { "name": "Packaged Animated Screens for Deployment", "source_description": "Output from Task 2 (animated_screens_src_g16), prepared as per Task 3.", "details": "The application ready for deployment." },
+        { "name": "Vercel Account Credentials/Access", "source_description": "Necessary permissions to deploy to the target Vercel account/project.", "details": "Required to perform the deployment action." }
+      ],
+      "outputs": [
+        { "name": "Hosted Interactive Presentation URL", "artifact_id": "live_pres_url_g18", "expected_path": "N/A_URL_PROVIDED_IN_NOTES", "description": "The live, publicly accessible Vercel URL for the interactive animated presentation. The actual URL will be recorded in the task notes upon successful deployment.", "embed_annotations_required": "false" },
+        { "name": "Deployment Confirmation Report", "artifact_id": "deploy_report_g19", "expected_path": "reports/vercel_deployment_interactive_pres_v1.md.txt", "description": "A brief report confirming successful deployment, including the live URL, deployment date, and any critical observations from testing.", "embed_annotations_required": "true" }
+      ],
+      "dependencies": ["plan_interactive_pres_g14_task_003"],
+      "criticality": "HIGH",
+      "status": "PENDING",
+      "retry_count": 0,
+      "linked_issue_ids": [],
+      "notes": ["The final Vercel URL will be added here upon completion. Goal is to have this ready for cycle 0.5/1."]
+    }
+  ]
+} 

@@ -1,0 +1,202 @@
+/* Presentation-specific styles for Cultif Interactive Demo */
+
+body {
+    margin: 0;
+    font-family: var(--font-family-sans);
+    background-color: var(--bg-color-light);
+    color: var(--text-color-primary);
+    overflow: hidden; /* Prevent scrollbars during transitions */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Ensure it takes full viewport height */
+}
+
+.screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-lg);
+    box-sizing: border-box;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100%); /* Start off-screen to the right */
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, transform 0.5s ease-in-out;
+    text-align: center;
+    background-color: var(--bg-color-light); /* Default background for screens */
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.screen.exit-left {
+    transform: translateX(-100%);
+}
+
+/* Splash Screen Specific Styles */
+#screen-1-1 {
+    background-color: var(--primary-color); /* Or a custom splash background */
+}
+
+#screen-1-1.active {
+    transform: translateX(0); /* Splash screen enters directly */
+}
+
+#screen-1-1.exit-fade {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out; 
+    transform: translateX(0); /* Prevent sliding out if fading */
+}
+
+.splash-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column; /* Stack circle and text */
+    align-items: center;
+    color: var(--text-color-light);
+}
+
+.logo-circle {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(45deg, var(--accent-color-blue), var(--primary-color-dark));
+    border-radius: 50%;
+    margin-bottom: var(--space-md);
+    /* Animation for pulse/rotation can be added here */
+    animation: pulse 2s infinite ease-in-out;
+}
+
+.logo span {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Onboarding Specific Styles */
+.onboarding-content {
+    max-width: 400px;
+}
+
+.onboarding-image {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    margin-bottom: var(--space-lg);
+    border-radius: var(--border-radius-md);
+}
+
+.onboarding-content h1 {
+    font-size: 1.8rem;
+    color: var(--text-color-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.onboarding-content p {
+    font-size: 1rem;
+    color: var(--text-color-secondary);
+    margin-bottom: var(--space-lg);
+    line-height: 1.6;
+}
+
+.onboarding-content .btn {
+    margin-top: var(--space-md);
+    width: 100%;
+}
+
+.onboarding-content .btn-secondary {
+    margin-top: var(--space-sm);
+}
+
+/* Auth Form Styles (Login/Sign Up) */
+.auth-form {
+    width: 100%;
+    max-width: 360px;
+    background-color: var(--bg-color-light);
+    padding: var(--space-lg);
+    border-radius: var(--border-radius-md);
+    /* box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Optional shadow */
+}
+
+.auth-form h2 {
+    font-size: 1.8rem;
+    color: var(--text-color-primary);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="email"],
+.auth-form input[type="password"] {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    margin-bottom: var(--space-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.auth-form input[type="text"]:focus,
+.auth-form input[type="email"]:focus,
+.auth-form input[type="password"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 196, 154, 0.2);
+}
+
+.auth-form .btn {
+    width: 100%;
+    margin-top: var(--space-sm);
+}
+
+.auth-link {
+    display: block;
+    text-align: center;
+    margin-top: var(--space-lg);
+    color: var(--text-color-link);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.auth-link:hover {
+    text-decoration: underline;
+}
+
+/* Home Screen Placeholder Styles */
+.home-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-content h1 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: var(--space-md);
+}
+
+/* Add image placeholders or remove if not used */
+/* Make sure to create an 'images' folder in 'src/interactive_presentation/' if you use local images */
+.onboarding-image {
+    background-color: var(--bg-color-medium); /* Placeholder color */
+    min-height: 150px; /* Placeholder height */
+} 

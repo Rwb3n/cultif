@@ -1,5 +1,5 @@
 {
-  "v": 2,
+  "v": 3,
   "id": "plan_cultif_main_mvp",
   "status": "ACTIVE",
   "goal": "To develop and launch a monetizable, mobile-first recipe platform ('Cultif' / 'WorldChef') enabling creators to publish content and users to subscribe for premium access. The MVP will include core functionalities for recipe creation and management (CRUD), image-based media storage, basic nutrition information, user authentication, a single-tier Stripe-based monthly subscription with paywall enforcement, content discovery via search and filters, manual meal planning with grocery list export, and basic user engagement features like likes, favorites, and push notifications. The project will be executed over approximately six 4-week cycles, adhering to the Shape Up methodology, with a strong emphasis on AI-assisted development and a lean, iterative approach to deliver a functional MVP within the defined timeline and resource constraints (side-hustle capacity of ~20 hrs/week).",
@@ -7,7 +7,7 @@
     "Development of a React Native (Expo, React Native Paper - Material Design 3) mobile application for iOS and Android.",
     "Implementation of a Fastify (Node.js) backend API.",
     "Utilization of Supabase for PostgreSQL database, authentication, and S3-compatible storage.",
-    "Cycle 0: Creation of a high-fidelity Figma click-through prototype and a basic, navigable React Native shell application.",
+    "Cycle 0: Creation of a Vercel-hosted interactive UI presentation, foundational design elements, and a basic React Native shell. Detailed execution is managed by plan_cycle0_showcase_and_foundations_g20.txt.",
     "Cycle 1: Implementation of a lean content pipeline including recipe CRUD, basic email authentication, image uploads, and a stubbed/cached nutrition data worker.",
     "Cycle 2: Introduction of a micro-monetization layer with Stripe Hosted Checkout for a single-tier monthly subscription and paywall enforcement.",
     "Cycle 3: Development of basic discovery features including full-text search for recipes/creators, filters, and a simplified 'Top Creators' leaderboard.",
@@ -33,33 +33,30 @@
     "Internationalization beyond English UI and basic i18n scaffolding."
   ],
   "g_created": 2,
-  "g_updated": 9,
+  "g_updated": 20,
   "tasks": [
     {
       "id": "plan_cultif_main_mvp_cycle0",
-      "title": "Cycle 0: Proto Frame",
-      "description": "Establish the foundational visual and structural elements of the WorldChef mobile application. Deliver a high-fidelity Figma click-through prototype demonstrating core user flows and a basic React Native (Expo) + React Native Paper (Material Design 3) shell application with navigation stubs. This provides a tangible artifact for early feedback and a skeleton for future development. No backend integration, no live data, no complex logic.",
-      "intent": "To create a visual and structural foundation for the application, enabling early feedback and guiding subsequent development cycles through a clickable prototype and a basic mobile shell.",
+      "title": "Cycle 0: Interactive Showcase & Foundations",
+      "description": "Establish foundational visual elements, deliver a Vercel-hosted interactive animated presentation of core UI flows, and produce a basic React Native shell application. Detailed execution of these deliverables is managed by the dedicated Cycle 0 plan: plan_cycle0_showcase_and_foundations_g20.txt.",
+      "intent": "To create a visual and structural foundation for the application, enabling early feedback and guiding subsequent development cycles. This cycle is primarily driven by plan_cycle0_showcase_and_foundations_g20.txt.",
       "inputs": [
         { "name": "Project Charter", "source_description": "Core project definition document.", "details": "Provides overall project purpose, objectives, and high-level scope." },
-        { "name": "Product Requirements Document (PRD)", "source_description": "Product feature and requirements specification.", "details": "Defines target users, value proposition, and functional/non-functional requirements relevant to the prototype." },
-        { "name": "Shape Up Strategy Document", "source_description": "Overall project execution strategy.", "details": "Outlines the cycle-based approach and capacity model." },
-        { "name": "Cycle 0 Blueprint Document", "source_description": "Detailed plan for Cycle 0.", "details": "Specifies objectives, scope, deliverables, and work breakdown for the Proto Frame." },
-        { "name": "App UI Screen Catalogue & Figma Page Catalogue", "source_description": "UI design specifications.", "details": "Provides screen designs and component information for the Figma prototype and shell app." }
+        { "name": "Product Requirements Document (PRD)", "source_description": "Product feature and requirements specification.", "details": "Defines target users, value proposition, and functional/non-functional requirements relevant to Cycle 0 deliverables." },
+        { "name": "Dedicated Cycle 0 Plan", "source_description": "plan_cycle0_showcase_and_foundations_g20.txt", "details": "Contains the detailed task breakdown and specific artifact definitions for all Cycle 0 deliverables." }
       ],
       "outputs": [
-        { "name": "Figma Design Library (Foundations, Atoms, Core Molecules)", "artifact_id": "c0_figma_library", "expected_path": "design/figma/cycle0_library.fig", "description": "Core Figma design library components: 00 README, 01 Foundations, 02 Atoms, 03 Molecules (core set). This is an external Figma artifact.", "embed_annotations_required": "false" },
-        { "name": "Figma Click-Through Prototype (Core Flows)", "artifact_id": "c0_figma_prototype", "expected_path": "design/figma/cycle0_prototype.fig", "description": "Comprehensive Figma click-through prototype for core user navigation paths. This is an external Figma artifact.", "embed_annotations_required": "false" },
-        { "name": "React Native Shell Application Main Source File", "artifact_id": "c0_rn_shell_src_main", "expected_path": "artifacts/c0/code/mobile/shell_main.js.txt", "description": "The main annotated source code file representing the React Native (Expo) shell application with React Native Paper (Material Design 3), basic navigation, and static mock data.", "embed_annotations_required": "true" },
-        { "name": "Cycle 0 User Testing Feedback Report", "artifact_id": "c0_user_testing_report", "expected_path": "artifacts/c0/docs/user_testing_feedback.txt", "description": "Report summarizing feedback from informal user testing of the Figma prototype.", "embed_annotations_required": "true" },
-        { "name": "Mobile Shell Project README (Cycle 0)", "artifact_id": "c0_mobile_readme", "expected_path": "artifacts/c0/docs/readme_mobile_shell.md.txt", "description": "Updated README.md for the mobile shell project, reflecting Cycle 0 deliverables.", "embed_annotations_required": "true" }
+        { "name": "Hosted Vercel Interactive UI Presentation", "artifact_id": "live_pres_url_g24", "expected_path": "(Managed by plan_cycle0_showcase_and_foundations_g20.txt)", "description": "Primary demonstration artifact for Cycle 0. A Vercel-hosted interactive animated presentation of core UI flows.", "embed_annotations_required": "false" },
+        { "name": "Figma Design Library Foundations", "artifact_id": "c0_figma_library_foundations_g26", "expected_path": "(Managed by plan_cycle0_showcase_and_foundations_g20.txt)", "description": "Core foundational elements (colors, typography, etc.) established in Figma.", "embed_annotations_required": "true" },
+        { "name": "React Native Shell Application (Basic)", "artifact_id": "c0_rn_shell_src_main_revised_g27", "expected_path": "(Managed by plan_cycle0_showcase_and_foundations_g20.txt)", "description": "A basic React Native (Expo) shell app with navigation stubs and Material Design 3 components.", "embed_annotations_required": "true" },
+        { "name": "Cycle 0 User Testing Feedback Report (on Vercel Presentation)", "artifact_id": "c0_user_testing_report_revised_gXX", "expected_path": "(Managed by plan_cycle0_showcase_and_foundations_g20.txt)", "description": "Report summarizing feedback from informal user testing of the Vercel interactive presentation.", "embed_annotations_required": "true" }
       ],
       "dependencies": [],
       "criticality": "HIGH",
       "status": "ACTIVE",
       "retry_count": 0,
       "linked_issue_ids": ["issue_g5_visual_tech_strategy_update"],
-      "notes": ["This cycle focuses on establishing the visual and structural groundwork. Backend and dynamic data are out of scope. UI framework updated to React Native Paper (Material Design 3) as per issue_g5_visual_tech_strategy_update."],
+      "notes": ["This cycle focuses on establishing the visual and structural groundwork. Detailed execution is delegated to plan_cycle0_showcase_and_foundations_g20.txt. Original Cycle 0 RN shell and Figma prototype deliverables are evolved/clarified within that plan."],
       "sub_tasks": []
     },
     {
@@ -68,7 +65,7 @@
       "description": "Implement core content production and read flow: recipe CRUD (users, creators, recipes tables), image-based media storage, nutrition enrichment (stubbed/cached), public recipe view, and basic email authentication with RLS enforcement. This cycle establishes the foundational content backbone. No monetization, no advanced discovery/search, no meal-planning, no likes/favorites.",
       "intent": "To establish the core infrastructure for content creation, storage, authentication, and public viewing, forming the backbone of the recipe platform.",
       "inputs": [
-        { "name": "Cycle 0 Deliverables", "source_description": "Outputs from the Proto Frame cycle.", "details": "Includes Figma prototype, RN Shell App, and feedback reports." },
+        { "name": "Cycle 0 Deliverables (Ref. plan_cycle0_showcase_and_foundations_g20.txt)", "source_description": "Outputs from the Cycle 0 plan.", "details": "Includes Vercel Presentation, Design Foundations, RN Shell App, and feedback reports." },
         { "name": "Product Requirements Document (PRD)", "source_description": "Product feature specification.", "details": "Provides requirements for content features." },
         { "name": "Technical Requirements Document (TRD)", "source_description": "Technical architecture and data model.", "details": "Defines stack, DB schema, and API surface for Cycle 1." },
         { "name": "Cycle 1 Blueprint Document", "source_description": "Detailed plan for Cycle 1.", "details": "Specifies objectives, scope, and deliverables for the content pipeline." },

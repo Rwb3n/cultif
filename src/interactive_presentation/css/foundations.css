@@ -1,0 +1,144 @@
+/* ANNOTATION_BLOCK_START
+{
+  "artifact_id": "design_library_lite_css_g21",
+  "version_tag": "0.1.0",
+  "g_created": 22,
+  "g_last_modified": 22,
+  "description": "CSS Design Library Lite providing foundational styles (colors, typography, spacing, basic buttons) for the Cultif interactive presentation. Intended to ensure visual consistency and aid development.",
+  "artifact_type": "CODE_MODULE",
+  "status_in_lifecycle": "DEVELOPMENT",
+  "purpose_statement": "To establish a reusable and consistent set of CSS foundational styles for the Vercel presentation, improving development efficiency and visual consistency, and providing an initial code-based reference for the main Figma design library.",
+  "key_logic_points": [
+    "Defines core color palette as CSS custom properties.",
+    "Sets up basic typography rules and font families.",
+    "Provides utility classes for common spacing needs.",
+    "Includes styles for primary and secondary button variants based on Figma designs."
+  ],
+  "interfaces_provided": [
+    { "name": "CSS Custom Properties", "interface_type": "VARIABLES", "details": "--primary-color, --secondary-color, various text and background colors.", "notes": "For use in other CSS files." },
+    { "name": "Button Classes", "interface_type": "CSS_CLASSES", "details": ".btn, .btn-primary, .btn-secondary, .btn-text", "notes": "For styling button elements." }
+  ],
+  "requisites": [
+    { "description": "Figma screen designs for color, typography, and component style extraction.", "type": "VISUAL_GUIDELINE" }
+  ],
+  "external_dependencies": [],
+  "internal_dependencies": [],
+  "dependents": ["animated_screens_src_g22"],
+  "linked_issue_ids": [],
+  "quality_notes": {
+    "linting": "N/A (CSS)",
+    "unit_tests": "N/A",
+    "manual_review_comment": "Initial draft of CSS foundations. Colors and typography are based on prominent elements in Figma. Further refinement and expansion may be needed as development progresses. (g:22)",
+    "last_security_review_g": null
+  }
+}
+ANNOTATION_BLOCK_END */
+
+:root {
+  /* Color Palette */
+  --primary-color: #00C49A; /* Prominent Teal/Green from buttons and accents */
+  --primary-color-dark: #00A37E; /* Darker shade for hover/active */
+  --secondary-color: #007AFF; /* Blue used in bottom nav and some accents */
+  --accent-color-blue: #29ABE2; /* Lighter blue sometimes seen */
+
+  --text-color-primary: #202020; /* Dark grey for primary text */
+  --text-color-secondary: #505050; /* Medium grey for secondary text */
+  --text-color-light: #FFFFFF;
+  --text-color-link: var(--secondary-color);
+  --text-color-placeholder: #A0A0A0;
+
+  --bg-color-light: #FFFFFF;
+  --bg-color-medium: #F0F0F0; /* Light grey for backgrounds or cards */
+  --bg-color-dark: #1C2B3A; /* Dark blue from side menus */
+
+  --border-color: #E0E0E0;
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 16px;
+  --border-radius-pill: 50px;
+
+  /* Typography */
+  --font-family-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-size-root: 16px;
+  --line-height-base: 1.5;
+
+  /* Spacing (examples, can be expanded) */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+}
+
+body {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-root);
+  line-height: var(--line-height-base);
+  color: var(--text-color-primary);
+  background-color: var(--bg-color-light);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Basic Button Styles */
+.btn {
+  display: inline-block;
+  font-weight: 600;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: var(--space-sm) var(--space-md);
+  font-size: 1rem; /* Adjust as needed */
+  line-height: var(--line-height-base);
+  border-radius: var(--border-radius-pill);
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-primary {
+  color: var(--text-color-light);
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-color-dark);
+  border-color: var(--primary-color-dark);
+}
+
+.btn-secondary {
+  color: var(--primary-color);
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+  color: var(--text-color-light);
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+/* Example of a text/link style button if needed */
+.btn-text {
+  color: var(--text-color-link);
+  padding-left: var(--space-xs);
+  padding-right: var(--space-xs);
+}
+
+.btn-text:hover {
+  text-decoration: underline;
+}
+
+/* Utility classes (examples) */
+.text-center {
+  text-align: center;
+}
+
+.mb-md {
+  margin-bottom: var(--space-md);
+}
+
+/* Add more foundational styles, typography helpers, etc. as needed */ 

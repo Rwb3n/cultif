@@ -1,0 +1,155 @@
+{
+  "v": 7,
+  "id": "plan_cycle0_showcase_and_foundations_g20",
+  "status": "ACTIVE",
+  "preceding_plan_id_ref": "plan_cultif_main_mvp",
+  "goal": "To deliver a Vercel-hosted interactive animated presentation of the Cultif app's core UI flows (derived from existing Figma screens), establish foundational design elements (colors, typography, core button styles as a 'Design Library Lite' in CSS), and produce a basic React Native shell application with navigation stubs. The Vercel presentation is the primary demonstration artifact for Cycle 0.",
+  "scope": [
+    "Creation of an interactive animated presentation of app screens, hosted on Vercel.",
+    "Development of a 'Design Library Lite' in CSS (colors, typography, basic button styles) to support the Vercel presentation and inform the main Figma library.",
+    "Formalization of Figma Design Library Foundations (colors, typography, spacing, core iconography).",
+    "Development of a basic React Native (Expo) shell application with Material Design 3 components and navigation stubs."
+  ],
+  "exclusions": [
+    "Full backend integration for any deliverable in this cycle.",
+    "Complex business logic or live data in the Vercel presentation or RN shell.",
+    "Completion of the entire comprehensive Figma Design Library (atoms, molecules, organisms beyond core foundations)."
+  ],
+  "g_created": 20,
+  "g_updated": 27,
+  "tasks": [
+    {
+      "id": "plan_cycle0_showcase_and_foundations_g20_task_001",
+      "title": "Finalize Interactive Presentation Storyboard",
+      "description": "Review and confirm completeness of the existing storyboard artifact (pres_storyboard_g15). This task effectively acknowledges the completion of the initial storyboarding phase.",
+      "intent": "To formally recognize the satisfactory completion of the presentation storyboard, making it the approved blueprint for frontend development.",
+      "inputs": [
+        { "name": "Previously Generated Interactive Presentation Storyboard Document", "source_description": "Artifact pres_storyboard_g15 created under plan_interactive_pres_g14.", "details": "design/interactive_presentation_storyboard_v1.md.txt" }
+      ],
+      "outputs": [
+        { "name": "Confirmed Interactive Presentation Storyboard Document", "artifact_id": "pres_storyboard_g15", "expected_path": "design/interactive_presentation_storyboard_v1.md.txt", "description": "The existing storyboard, now formally adopted by this plan.", "embed_annotations_required": "true" }
+      ],
+      "dependencies": [],
+      "criticality": "HIGH",
+      "status": "DONE",
+      "retry_count": 0,
+      "linked_issue_ids": [],
+      "notes": ["Leverages the already satisfactory storyboard pres_storyboard_g15."]
+    },
+    {
+      "id": "plan_cycle0_showcase_and_foundations_g20_task_002",
+      "title": "Develop 'Design Library Lite' (CSS Foundations)",
+      "description": "Define and implement CSS custom properties for the primary color palette (main brand colors, neutrals, status colors), typography scale (font families, sizes, weights for h1-h6, body, captions), and basic spacing units (e.g., 4px grid). Create reusable CSS classes for 2-3 core button styles (e.g., primary, secondary, text-only) identified from Figma. This will be used for the Vercel presentation and inform the Figma library.",
+      "intent": "To establish a consistent and reusable set of CSS foundational styles for the Vercel presentation, improving development efficiency and visual consistency, and providing a starting point for the full Figma design library.",
+      "inputs": [
+        { "name": "Figma Screen Designs", "source_description": "User-provided screenshots of Figma storyboards.", "details": "Used to extract color palettes, typography, and button styles." },
+        { "name": "Confirmed Interactive Presentation Storyboard", "source_description": "Artifact pres_storyboard_g15.", "details": "Helps identify common elements needing foundational styles." }
+      ],
+      "outputs": [
+        { "name": "CSS Design Library Lite File", "artifact_id": "design_library_lite_css_g21", "expected_path": "src/interactive_presentation/css/foundations.css.txt", "description": "A CSS file containing custom properties for colors, typography, spacing, and classes for core button styles. This file will have an embedded annotation block.", "embed_annotations_required": "true" }
+      ],
+      "dependencies": ["plan_cycle0_showcase_and_foundations_g20_task_001"],
+      "criticality": "HIGH",
+      "status": "DONE",
+      "retry_count": 0,
+      "linked_issue_ids": [],
+      "notes": []
+    },
+    {
+      "id": "plan_cycle0_showcase_and_foundations_g20_task_003",
+      "title": "Develop Animated Screens Frontend for Vercel Presentation",
+      "description": "Using the storyboard (pres_storyboard_g15) and the 'Design Library Lite' (design_library_lite_css_g21), develop the HTML structure, CSS styling (leveraging foundational classes), and JavaScript for animations and interactivity for the Vercel presentation screens.",
+      "intent": "To create the functional frontend code for the interactive animated presentation, bringing the storyboard to life in a web browser.",
+      "inputs": [
+        { "name": "Confirmed Interactive Presentation Storyboard", "source_description": "Artifact pres_storyboard_g15.", "details": "The detailed blueprint for screen content, flow, and animations." },
+        { "name": "CSS Design Library Lite File", "source_description": "Artifact design_library_lite_css_g21.", "details": "Provides foundational CSS styles and classes to be used." }
+      ],
+      "outputs": [
+        { "name": "Animated Screens Source Code", "artifact_id": "animated_screens_src_g22", "expected_path": "src/interactive_presentation/", "description": "Directory containing all HTML, CSS (including main style sheets linking to foundations.css), JavaScript, and asset files for the animated screens. The primary entry point will be index.html within this folder. index.html will have an embedded annotation block.", "embed_annotations_required": "true" }
+      ],
+      "dependencies": ["plan_cycle0_showcase_and_foundations_g20_task_002"],
+      "criticality": "HIGH",
+      "status": "DONE",
+      "retry_count": 0,
+      "linked_issue_ids": [],
+      "notes": ["Initial interactive presentation frontend for key onboarding and auth screens completed."]
+    },
+    {
+      "id": "plan_cycle0_showcase_and_foundations_g20_task_004",
+      "title": "Configure and Prepare for Vercel Deployment",
+      "description": "Prepare the developed animated screens (animated_screens_src_g22) for deployment on Vercel. This includes setting up any necessary Vercel project configurations (e.g., via a vercel.json file if needed for redirects or headers), defining build settings (if any for a static site), and ensuring the project structure is compatible with Vercel's deployment mechanisms.",
+      "intent": "To ensure a smooth and successful deployment of the interactive animated presentation to the Vercel platform.",
+      "inputs": [
+        { "name": "Animated Screens Source Code", "source_description": "Artifact animated_screens_src_g22.", "details": "The frontend code to be deployed." }
+      ],
+      "outputs": [
+        { "name": "Vercel Deployment Configuration", "artifact_id": "vercel_deploy_config_g23", "expected_path": "deploy/vercel_config_interactive_pres_cycle0.txt", "description": "File containing Vercel-specific configuration (e.g., vercel.json content) or a markdown file detailing deployment steps and project settings for Vercel. This file will have an embedded annotation block.", "embed_annotations_required": "true" }
+      ],
+      "dependencies": ["plan_cycle0_showcase_and_foundations_g20_task_003"],
+      "criticality": "MEDIUM",
+      "status": "DONE",
+      "retry_count": 0,
+      "linked_issue_ids": [],
+      "notes": ["Vercel deployment guide/configuration created."]
+    },
+    {
+      "id": "plan_cycle0_showcase_and_foundations_g20_task_005",
+      "title": "Deploy Interactive Presentation to Vercel & Test",
+      "description": "Deploy the prepared animated screens to Vercel. Conduct thorough testing of the live presentation URL to ensure all animations, interactions, and screen flows work as intended per the storyboard. Verify responsiveness if outlined in the storyboard.",
+      "intent": "To make the interactive animated presentation publicly accessible via a Vercel URL and confirm its correct operation.",
+      "inputs": [
+        { "name": "Packaged Animated Screens for Deployment", "source_description": "Output from ...task_003, prepared as per ...task_004.", "details": "The application ready for deployment." },
+        { "name": "Vercel Account Credentials/Access", "source_description": "Permissions to deploy to the target Vercel account/project.", "details": "Required for deployment action." }
+      ],
+      "outputs": [
+        { "name": "Hosted Interactive Presentation URL", "artifact_id": "live_pres_url_g24", "expected_path": "N/A_URL_PROVIDED_IN_NOTES", "description": "The live Vercel URL. The actual URL will be recorded in task notes.", "embed_annotations_required": "false" },
+        { "name": "Deployment Confirmation Report", "artifact_id": "deploy_report_g25", "expected_path": "reports/vercel_deployment_cycle0_v1.md.txt", "description": "Report confirming deployment, including URL, date, and test observations. This file will have an embedded annotation block.", "embed_annotations_required": "true" }
+      ],
+      "dependencies": ["plan_cycle0_showcase_and_foundations_g20_task_004"],
+      "criticality": "HIGH",
+      "status": "PENDING",
+      "retry_count": 0,
+      "linked_issue_ids": [],
+      "notes": ["Target for cycle 0.5/1 presentation readiness."]
+    },
+    {
+      "id": "plan_cycle0_showcase_and_foundations_g20_task_006",
+      "title": "Develop Figma Design Library Foundations",
+      "description": "Based on the full set of Figma screen designs and informed by the 'Design Library Lite' (design_library_lite_css_g21), formalize foundational design elements (colors, typography, spacing, core iconography, grid definitions) within the main Figma design environment. This involves creating and organizing these elements as reusable styles and components in Figma.",
+      "intent": "To establish the core, reusable design foundations in Figma, ensuring consistency across all future design work and providing a solid base for more complex component creation.",
+      "inputs": [
+        { "name": "Figma Screen Designs (Full Set)", "source_description": "User-provided screenshots of Figma storyboards.", "details": "The complete visual reference for the application UI." },
+        { "name": "CSS Design Library Lite File", "source_description": "Artifact design_library_lite_css_g21.", "details": "Provides an initial, code-based extraction of colors and typography to ensure alignment." }
+      ],
+      "outputs": [
+        { "name": "Figma Design Library Foundations URL/Reference", "artifact_id": "c0_figma_library_foundations_g26", "expected_path": "design/figma/cycle0_foundations_link.txt", "description": "A text file containing a link to the Figma file/page where the Design Library Foundations are established, or a summary document if a direct link is not feasible. The .txt file itself will have an annotation block.", "embed_annotations_required": "true" }
+      ],
+      "dependencies": ["plan_cycle0_showcase_and_foundations_g20_task_002"],
+      "criticality": "MEDIUM",
+      "status": "PENDING",
+      "retry_count": 0,
+      "linked_issue_ids": [],
+      "notes": ["This task can run in parallel with Vercel presentation development after Task 2 is complete, or be sequenced after."]
+    },
+    {
+      "id": "plan_cycle0_showcase_and_foundations_g20_task_007",
+      "title": "Develop Basic React Native Shell with Navigation Stubs",
+      "description": "Create a basic React Native (Expo) application utilizing React Native Paper (Material Design 3). Implement main navigation structures (e.g., tab navigator, stack navigators for key sections) based on the Figma designs. Screens will be placeholders or contain static mock content. No backend integration, no complex logic.",
+      "intent": "To establish the skeletal structure of the mobile application with functional navigation, providing a tangible starting point for subsequent development cycles (Cycle 1 onwards).",
+      "inputs": [
+        { "name": "Figma Screen Designs (Full Set)", "source_description": "User-provided screenshots of Figma storyboards.", "details": "Dictates the navigation structure and screen flows." },
+        { "name": "Figma Design Library Foundations (Reference)", "source_description": "Output from ...task_006 (c0_figma_library_foundations_g26).", "details": "Provides guidance on core styling to be implemented in React Native Paper theming, if available at this stage." }
+      ],
+      "outputs": [
+        { "name": "React Native Shell Application Main Source File", "artifact_id": "c0_rn_shell_src_main_revised_g27", "expected_path": "artifacts/c0/code/mobile/shell_main_cycle0.js.txt", "description": "The main annotated source code file (or representative entry point) for the React Native (Expo) shell application with React Native Paper (MD3), basic navigation, and static mock data. This file will have an embedded annotation block.", "embed_annotations_required": "true" },
+        { "name": "React Native Shell Project README (Cycle 0)", "artifact_id": "c0_mobile_readme_revised_g28", "expected_path": "artifacts/c0/docs/readme_mobile_shell_cycle0.md.txt", "description": "Updated README.md for the mobile shell project, reflecting Cycle 0 deliverables, setup, and navigation overview. This file will have an embedded annotation block.", "embed_annotations_required": "true" }
+      ],
+      "dependencies": ["plan_cycle0_showcase_and_foundations_g20_task_006"],
+      "criticality": "MEDIUM",
+      "status": "PENDING",
+      "retry_count": 0,
+      "linked_issue_ids": [],
+      "notes": ["This task can run in parallel with Vercel presentation development, or be sequenced after."]
+    }
+  ]
+} 

@@ -1,0 +1,132 @@
+/* ANNOTATION_BLOCK_START
+{
+  "artifact_id": "vercel_deploy_config_g23",
+  "version_tag": "1.0.0",
+  "g_created": 27,
+  "g_last_modified": 27,
+  "description": "Deployment steps and project settings for deploying the Cycle 0 Interactive Presentation to Vercel. This document outlines the manual deployment process for the static site assets.",
+  "artifact_type": "DOCUMENTATION",
+  "status_in_lifecycle": "DEVELOPMENT",
+  "purpose_statement": "To provide clear, step-by-step instructions for deploying the interactive presentation (artifact animated_screens_src_g22) to the Vercel platform, ensuring consistency and repeatability of the deployment process.",
+  "key_logic_points": [
+    "The project is a static HTML, CSS, and JavaScript site.",
+    "Deployment to Vercel can be achieved by linking a GitHub repository or by using the Vercel CLI.",
+    "No specific build step is required; Vercel will serve the static files directly.",
+    "The root directory for Vercel should be set to 'src/interactive_presentation/' if deploying from the project root, or the contents of 'src/interactive_presentation/' should be the root of the deployed repository/folder."
+  ],
+  "interfaces_provided": [],
+  "requisites": [
+    { "description": "Vercel account with deployment permissions.", "type": "ACCOUNT_ACCESS" },
+    { "description": "Source code of the interactive presentation (artifact animated_screens_src_g22).", "type": "ARTIFACT_INPUT" }
+  ],
+  "external_dependencies": [
+    { "name": "Vercel Platform", "version": "N/A", "reason": "Target deployment platform." }
+  ],
+  "internal_dependencies": ["animated_screens_src_g22"],
+  "dependents": ["live_pres_url_g24", "deploy_report_g25"],
+  "linked_issue_ids": [],
+  "quality_notes": {
+    "linting": "N/A",
+    "unit_tests": "N/A",
+    "manual_review_comment": "g:27 - Initial draft of deployment instructions.",
+    "last_security_review_g": null
+  }
+}
+ANNOTATION_BLOCK_END */
+
+# Vercel Deployment Configuration & Steps: Interactive Presentation (Cycle 0)
+
+**Artifact ID:** `vercel_deploy_config_g23`
+**Related Task:** `plan_cycle0_showcase_and_foundations_g20_task_004`
+**Source Artifact ID:** `animated_screens_src_g22` (located at `src/interactive_presentation/`)
+
+## 1. Overview
+
+This document outlines the configuration and steps for deploying the Cycle 0 Interactive Presentation to Vercel. The presentation is a static website consisting of HTML, CSS, and JavaScript files located in the `src/interactive_presentation/` directory.
+
+## 2. Prerequisites
+
+*   A Vercel account.
+*   The project source code, particularly the contents of `src/interactive_presentation/`.
+*   Vercel CLI installed (optional, for CLI deployment). (Installation: `npm i -g vercel`)
+
+## 3. Deployment Options
+
+Choose one of the following methods:
+
+### Option A: Deploy via GitHub Integration (Recommended)
+
+1.  **Push to GitHub:** Ensure the `src/interactive_presentation/` directory (or its contents as the root) is part of a GitHub repository.
+2.  **Import Project on Vercel:**
+    *   Log in to your Vercel dashboard.
+    *   Click "Add New..." -> "Project".
+    *   Select "Import Git Repository" and connect to your GitHub account if not already done.
+    *   Choose the repository containing the presentation.
+3.  **Configure Project:**
+    *   **Framework Preset:** Vercel should automatically detect it as a static site ("Other"). If not, select "Other".
+    *   **Root Directory:**
+        *   If your repository root *is* the `src/interactive_presentation/` content (e.g., `index.html` is at the repo root), leave this as `./`.
+        *   If `src/interactive_presentation/` is a subdirectory within your repository, set the "Root Directory" to `src/interactive_presentation/`.
+    *   **Build and Output Settings:**
+        *   Leave the "Build Command" toggle OFF (or empty).
+        *   Leave the "Output Directory" toggle OFF (or empty).
+        *   Leave "Install Command" toggle OFF (or empty).
+4.  **Deploy:** Click the "Deploy" button.
+5.  **Access:** Once deployed, Vercel will provide a URL to your live presentation.
+
+### Option B: Deploy via Vercel CLI
+
+1.  **Navigate to Directory:** Open your terminal and navigate to the `src/interactive_presentation/` directory.
+    ```bash
+    cd path/to/your/project/src/interactive_presentation
+    ```
+2.  **Login to Vercel (if not already logged in):**
+    ```bash
+    vercel login
+    ```
+3.  **Deploy:** Run the deploy command.
+    ```bash
+    vercel
+    ```
+    *   Vercel will ask a series of questions:
+        *   "Set up and deploy ...?": Yes
+        *   "Which scope ...?": Choose your account.
+        *   "Link to existing project?": No (for the first time deployment of this specific presentation as a new project).
+        *   "What's your project's name?": (e.g., `cultif-interactive-pres-c0`)
+        *   "In which directory is your code located?": `./` (since you are already in `src/interactive_presentation/`)
+    *   Vercel will detect it as a static site and will not require build settings.
+4.  **Access:** Vercel CLI will output the live URL upon successful deployment.
+
+## 4. Vercel Project Settings (Post-Deployment / For Reference)
+
+If deployed via CLI, or for checking settings if deployed via Git:
+
+*   **Framework Preset:** Other
+*   **Root Directory:** Should point to the directory containing `index.html` (e.g., `./` if deployed from within `src/interactive_presentation`, or `src/interactive_presentation` if deployed from the project root and that's where the files are).
+*   **Build Command:** Not applicable / Should be empty.
+*   **Output Directory:** Not applicable / Should be empty.
+*   **Node.js Version:** While not strictly a Node.js project for its serving, Vercel uses Node.js environments. The default should be fine.
+
+## 5. No `vercel.json` Required (Currently)
+
+For this simple static site, a `vercel.json` file is not currently required. Default Vercel settings for static deployments are sufficient. If advanced configurations like custom headers, redirects (beyond basic trailing slash behavior), or serverless functions are needed in the future, a `vercel.json` file can be added to the root of the deployment directory (i.e., alongside `index.html`).
+
+Example minimal `vercel.json` (if ever needed, place in `src/interactive_presentation/`):
+```json
+{
+  "version": 2,
+  "public": true,
+  "name": "cultif-interactive-presentation-cycle0",
+  "alias": ["cultif-pres-c0"], // Optional: custom domain alias
+  "rewrites": [
+    // { "source": "/somepath", "destination": "/otherpath.html" }
+  ],
+  "headers": [
+    // {
+    //   "source": "/(.*)",
+    //   "headers": [{ "key": "X-Custom-Header", "value": "my-value" }]
+    // }
+  ]
+}
+```
+For now, this file is **not** being created or deployed as part of this task's output. The primary output is this markdown document. 

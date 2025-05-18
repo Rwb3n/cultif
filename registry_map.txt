@@ -1,6 +1,6 @@
 {
-  "v": 1,
-  "g_updated": 12,
+  "v": 5,
+  "g_updated": 27,
   "artifact_registry_tree": {
     "artifacts": {
       "c0": {
@@ -18,6 +18,24 @@
     "source_documents": {
         "tech_req_doc_main": "source/4. Technical Requirements Document.txt",
         "cycle0_blueprint_proto_frame": "source/1.0 Cycle 0 Blueprint — Proto Frame.txt"
+    },
+    "design_documents": {
+        "interactive_presentations": {
+            "pres_storyboard_g15": "design/interactive_presentation_storyboard_v1.md.txt"
+        }
+    },
+    "src_code": {
+        "interactive_presentation": {
+            "css": {
+                "design_library_lite_css_g21": "src/interactive_presentation/css/foundations.css.txt"
+            },
+            "animated_screens_src_g22": "src/interactive_presentation/index.html"
+        }
+    },
+    "deployment_configs": {
+        "interactive_presentation_cycle0": {
+            "vercel_deploy_config_g23": "deploy/vercel_config_interactive_pres_cycle0.txt"
+        }
     }
   }
 } 
