@@ -1,0 +1,21 @@
+{
+  "v": 1,
+  "id": "issue_g29_deploy_404",
+  "title": "Vercel Deployment Failed: 404 Not Found for Interactive Presentation",
+  "description": "The attempt to deploy the interactive presentation (task plan_cycle0_showcase_and_foundations_g20_task_005) to Vercel resulted in a 404 Not Found error when accessing the provided URL. This was reported by the user before a subsequent new requirement for the presentation to use React was introduced.",
+  "type": "RUNTIME_ERROR",
+  "severity": "HIGH",
+  "status": "OPEN",
+  "g_reported": 29,
+  "g_status_updated": 29,
+  "g_resolved": null,
+  "reported_by": "USER_FEEDBACK",
+  "plan_id_ref": "plan_cycle0_showcase_and_foundations_g20.txt",
+  "task_id_ref": "plan_cycle0_showcase_and_foundations_g20_task_005",
+  "artifact_id_ref": "animated_screens_src_g22",
+  "artifact_filepath_ref": "src/interactive_presentation/",
+  "resolution_summary": null,
+  "comments": [
+    { "g_ts": 29, "author": "Hybrid_AI_OS", "comment_text": "Issue created based on user report: 'validate fail: 404'." }
+  ]
+} 

@@ -1,0 +1,31 @@
+{
+  "v": 6,
+  "g_updated": 62,
+  "issues_map": {
+    "issue_g5_visual_tech_strategy_update": { 
+      "status": "OPEN", 
+      "title": "Update Visual Technical Strategy to Material Design 3", 
+      "severity": "HIGH" 
+    },
+    "issue_g29_deploy_404": {
+      "status": "OPEN",
+      "title": "Vercel Deployment Failed: 404 Not Found for Interactive Presentation",
+      "severity": "HIGH"
+    },
+    "issue_g30_react_requirement": {
+      "status": "OPEN",
+      "title": "New Requirement: Interactive Presentation to be built with React",
+      "severity": "HIGH"
+    },
+    "issue_g46_missing_css_foundations": {
+      "status": "RESOLVED",
+      "title": "Missing Artifact: CSS Foundations File (design_library_lite_css_g21)",
+      "severity": "CRITICAL"
+    },
+    "issue_g60_missing_css_dependency": {
+      "status": "RESOLVED",
+      "title": "Missing critical input: foundations.css (artifact design_library_lite_css_g21)",
+      "severity": "CRITICAL"
+    }
+  }
+} 

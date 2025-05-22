@@ -1,0 +1,244 @@
+{
+  "v": 1,
+  "id": "plan_cycle0_webreact_prototype_g112",
+  "status": "APPROVED",
+  "preceding_plan_id_ref": null,
+  "origin_artifact_id": "source_review_doc_g85",
+  "goal": "To create a high-fidelity, interactive click-through web prototype of the Cultif application\'s core user flows using React.js. This involves scaffolding the complete directory structure and all necessary files, embedding detailed comment-based placeholders that specify each file\'s purpose, planned content, UI element placeholders, references to design documentation (e.g., Figma Catalogue IDs), and implementation checklists. The primary objective is to provide a tangible web prototype for stakeholder review and feedback, enabling adjustments before committing to the React Native mobile application development.",
+  "scope": [
+    "Establishing a standard React.js project structure (e.g., using Create React App or Vite).",
+    "Scaffolding main directories for the prototype: `prototypes/cycle0_react_web/public`, `prototypes/cycle0_react_web/src`, `prototypes/cycle0_react_web/src/assets`, `prototypes/cycle0_react_web/src/components` (with subdirectories for `common`, `layout`, and feature-specific components like `onboarding`, `auth`, `recipe`, `mealplan`, `profile`, `creator`, `upload`, `subscription`), `prototypes/cycle0_react_web/src/contexts`, `prototypes/cycle0_react_web/src/hooks`, `prototypes/cycle0_react_web/src/pages` (or `screens`), `prototypes/cycle0_react_web/src/navigation` (or `routes`), `prototypes/cycle0_react_web/src/services` (for mock data), `prototypes/cycle0_react_web/src/styles`, `prototypes/cycle0_react_web/src/utils`.",
+    "Creating placeholder JavaScript/JSX files (e.g., `*.js` or `*.jsx`) for all identified UI components and pages relevant to core user flows (Onboarding, Authentication, Home/Discovery, Recipe/Dish Detail, Meal Planning, User Profile, Creator Profile, Recipe Upload, Subscription/Paywall interactions) based on `src_uiscreens_g85` and `src_figmacat_g85`.",
+    "Implementing basic routing and navigation using a library like React Router DOM to simulate user flows between scaffolded pages.",
+    "Defining mock data structures (as JavaScript objects or JSON) and service stubs (functions returning mock data) to populate the prototype components and pages.",
+    "Embedding comprehensive, structured comment blocks (as per Schema II.B.6, adapted for placeholder comments if full annotation is premature) within each scaffolded `.js`/`.jsx` file. These comments will outline its role, planned UI elements (with references to Figma Template IDs from `src_figmacat_g85`), expected props, state considerations, interaction points, navigation targets, and a checklist of elements to implement for the click-through functionality.",
+    "Creating a `README.md` file for the prototype project, explaining its purpose, how to install dependencies, how to run it locally, and an overview of the simulated flows.",
+    "Ensuring all scaffolded files that are text-editable and managed by the OS include the standard EmbeddedAnnotationBlock structure, even if some fields are marked as N/A or pending full implementation detail."
+  ],
+  "exclusions": [
+    "Development of the React Native mobile application shell or its specific components (this is a subsequent, separate effort).",
+    "Integration with any actual backend APIs, databases, or authentication services (all data and interactions will be client-side and mocked).",
+    "Full, pixel-perfect visual styling or theming. Basic layout structure and placeholders for UI elements are sufficient for the click-through prototype. Detailed styling according to Figma designs is deferred.",
+    "Complex state management solutions (e.g., Redux, Zustand full setup). Simple React context or component state will be used for navigation and basic interaction simulation.",
+    "Implementation of actual business logic, data validation, or error handling beyond what\'s necessary to demonstrate the click-through user flow.",
+    "Unit tests, integration tests, or E2E tests for the prototype itself. The primary goal is scaffolding for review, not production-ready code.",
+    "Performance optimization or browser compatibility testing beyond a modern evergreen browser.",
+    "Accessibility (a11y) implementation beyond semantic HTML structure where appropriate."
+  ],
+  "g_created": 112,
+  "g_updated": 118,
+  "tasks": [
+    {
+      "id": "pc0wp_task_001",
+      "title": "Initialize React.js Project & Define Core Directory Structure",
+      "description": "Initialize a new React.js project (e.g., using `create-react-app` or `Vite`) and create the main directory structure for the web prototype as outlined in the plan\'s scope. This includes `public`, `src`, and subdirectories within `src` like `assets`, `components`, `contexts`, `hooks`, `pages`, `navigation`, `services`, `styles`, `utils`.",
+      "intent": "To establish the foundational file system structure for the React.js web prototype, ensuring a clean and organized codebase from the start.",
+      "inputs": [
+        { "name": "Plan Scope Document", "source_description": "This plan file (`plan_cycle0_webreact_prototype_g112`)", "details": "Reference section on directory structure." }
+      ],
+      "outputs": [
+        {
+          "name": "React.js Project Root Directory",
+          "artifact_id": "cycle0_react_prototype_root_g112",
+          "expected_path": "prototypes/cycle0_react_web/",
+          "description": "The root directory containing the initialized React.js project and its core subdirectories. This is a container artifact.",
+          "embed_annotations_required": "false"
+        },
+        {
+          "name": "Prototype README.md",
+          "artifact_id": "cycle0_prototype_readme_g112",
+          "expected_path": "prototypes/cycle0_react_web/README.md",
+          "description": "A README file detailing the prototype\'s purpose, setup, and how to run it. Will contain standard annotation block.",
+          "embed_annotations_required": "true"
+        },
+        {
+          "name": "Basic React App Entry Point (e.g., App.js, index.js)",
+          "artifact_id": "cycle0_prototype_app_entry_g112",
+          "expected_path": "prototypes/cycle0_react_web/src/App.js", 
+          "description": "The main application component file with initial setup and placeholder for router. Will contain annotation block and detailed comment placeholders.",
+          "embed_annotations_required": "true"
+        }
+      ],
+      "execution_checklist": [
+        {"item_id": "pc0wp_task_001_check_001", "description": "Initialize React.js project using a standard tool (e.g., Vite: `npm create vite@latest prototypes/cycle0_react_web -- --template react`).", "status": "DONE", "target_artifact_id": "cycle0_react_prototype_root_g112", "notes": null},
+        {"item_id": "pc0wp_task_001_check_002", "description": "Create main source subdirectories: `assets`, `components`, `contexts`, `hooks`, `pages`, `navigation`, `services`, `styles`, `utils` inside `prototypes/cycle0_react_web/src/`.", "status": "DONE", "target_artifact_id": "cycle0_react_prototype_root_g112", "notes": null},
+        {"item_id": "pc0wp_task_001_check_003", "description": "Create `README.md` with initial content and annotation block.", "status": "DONE", "target_artifact_id": "cycle0_prototype_readme_g112", "notes": "Content to include purpose, setup, run instructions."},
+        {"item_id": "pc0wp_task_001_check_004", "description": "Create/Update `App.js` (or main entry) with annotation block and placeholder for router.", "status": "DONE", "target_artifact_id": "cycle0_prototype_app_entry_g112", "notes": null}
+      ],
+      "dependencies": [],
+      "criticality": "HIGH",
+      "status": "DONE",
+      "linked_issue_ids": [],
+      "notes": ["Ensure the chosen React.js setup tool (Vite preferred for speed) is run non-interactively if possible."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc0wp_task_002",
+      "title": "Scaffold Page/Screen Components with Detailed Placeholders",
+      "description": "Based on `src_uiscreens_g85`, `src_figmacat_g85`, and `src_presstory_g85`, create placeholder React components for all major pages/screens. These include: Onboarding (multi-step), Auth (Login, Signup, Forgot Password), Home (Feed), Recipe/Dish Detail, Meal Planning (Calendar View, Plan Creation/Edit), User Profile (View, Edit), Creator Profile (View), Recipe Upload (multi-step wizard), Subscription Modals/Pages. Each file must include a standard annotation block and detailed comment placeholders outlining its structure, elements (referencing Figma IDs), and interaction points for the click-through prototype.",
+      "intent": "To create the structural file for each distinct page/screen of the application, providing a clear blueprint for what needs to be implemented for the interactive prototype.",
+      "inputs": [
+        { "name": "App UI Screen Catalogue", "source_description": "Source document `src_uiscreens_g85`", "details": "Provides list of screens and their elements." },
+        { "name": "Figma Page Catalogue", "source_description": "Source document `src_figmacat_g85`", "details": "Provides Template IDs and Figma screen references." },
+        { "name": "Interactive Presentation Storyboard", "source_description": "Source document `src_presstory_g85`", "details": "Provides user flow sequences." },
+        { "name": "Scaffolded Directory Structure", "source_description": "Output of pc0wp_task_001", "details": "Path: `prototypes/cycle0_react_web/src/pages/`" }
+      ],
+      "outputs": [
+        { "name": "Onboarding Page Component(s)", "artifact_id": "cycle0_page_onboarding_g112", "expected_path": "prototypes/cycle0_react_web/src/pages/OnboardingPage.jsx", "description": "Placeholder for onboarding flow.", "embed_annotations_required": "true" },
+        { "name": "Login Page Component", "artifact_id": "cycle0_page_login_g112", "expected_path": "prototypes/cycle0_react_web/src/pages/LoginPage.jsx", "description": "Placeholder for login screen.", "embed_annotations_required": "true" },
+        { "name": "Signup Page Component", "artifact_id": "cycle0_page_signup_g112", "expected_path": "prototypes/cycle0_react_web/src/pages/SignupPage.jsx", "description": "Placeholder for signup screen.", "embed_annotations_required": "true" },
+        { "name": "Home Page Component", "artifact_id": "cycle0_page_home_g112", "expected_path": "prototypes/cycle0_react_web/src/pages/HomePage.jsx", "description": "Placeholder for home feed.", "embed_annotations_required": "true" },
+        { "name": "Recipe Detail Page Component", "artifact_id": "cycle0_page_recipedetail_g112", "expected_path": "prototypes/cycle0_react_web/src/pages/RecipeDetailPage.jsx", "description": "Placeholder for recipe details.", "embed_annotations_required": "true" },
+        { "name": "Meal Plan Page Component", "artifact_id": "cycle0_page_mealplan_g112", "expected_path": "prototypes/cycle0_react_web/src/pages/MealPlanPage.jsx", "description": "Placeholder for meal planning view.", "embed_annotations_required": "true" },
+        { "name": "User Profile Page Component", "artifact_id": "cycle0_page_userprofile_g112", "expected_path": "prototypes/cycle0_react_web/src/pages/UserProfilePage.jsx", "description": "Placeholder for user profile.", "embed_annotations_required": "true" },
+        { "name": "Creator Profile Page Component", "artifact_id": "cycle0_page_creatorprofile_g112", "expected_path": "prototypes/cycle0_react_web/src/pages/CreatorProfilePage.jsx", "description": "Placeholder for creator profile.", "embed_annotations_required": "true" },
+        { "name": "Recipe Upload Page Component", "artifact_id": "cycle0_page_recipeupload_g112", "expected_path": "prototypes/cycle0_react_web/src/pages/RecipeUploadPage.jsx", "description": "Placeholder for recipe upload wizard.", "embed_annotations_required": "true" },
+        { "name": "Subscription Page/Modal Component", "artifact_id": "cycle0_page_subscription_g112", "expected_path": "prototypes/cycle0_react_web/src/pages/SubscriptionPage.jsx", "description": "Placeholder for subscription offers/modals.", "embed_annotations_required": "true" }
+      ],
+      "execution_checklist": [
+        {"item_id": "pc0wp_task_002_check_001", "description": "Create `OnboardingPage.jsx` with annotations and detailed comments.", "status": "DONE", "target_artifact_id": "cycle0_page_onboarding_g112", "notes": "Reference T-01 from Figma Catalogue."},
+        {"item_id": "pc0wp_task_002_check_002", "description": "Create `LoginPage.jsx` with annotations and detailed comments.", "status": "DONE", "target_artifact_id": "cycle0_page_login_g112", "notes": "Reference T-03a from Figma Catalogue."},
+        {"item_id": "pc0wp_task_002_check_003", "description": "Create `SignupPage.jsx` with annotations and detailed comments.", "status": "PENDING", "target_artifact_id": "cycle0_page_signup_g112", "notes": "Reference T-03b from Figma Catalogue."},
+        {"item_id": "pc0wp_task_002_check_004", "description": "Create `HomePage.jsx` with annotations and detailed comments.", "status": "PENDING", "target_artifact_id": "cycle0_page_home_g112", "notes": "Reference T-02, T-05, T-06 from Figma Catalogue."},
+        {"item_id": "pc0wp_task_002_check_005", "description": "Create `RecipeDetailPage.jsx` with annotations and detailed comments.", "status": "PENDING", "target_artifact_id": "cycle0_page_recipedetail_g112", "notes": "Reference T-09 from Figma Catalogue."},
+        {"item_id": "pc0wp_task_002_check_006", "description": "Create `MealPlanPage.jsx` with annotations and detailed comments.", "status": "PENDING", "target_artifact_id": "cycle0_page_mealplan_g112", "notes": "Reference T-07, T-15 from Figma Catalogue."},
+        {"item_id": "pc0wp_task_002_check_007", "description": "Create `UserProfilePage.jsx` with annotations and detailed comments.", "status": "PENDING", "target_artifact_id": "cycle0_page_userprofile_g112", "notes": "Reference T-11 from Figma Catalogue."},
+        {"item_id": "pc0wp_task_002_check_008", "description": "Create `CreatorProfilePage.jsx` with annotations and detailed comments.", "status": "PENDING", "target_artifact_id": "cycle0_page_creatorprofile_g112", "notes": "Reference T-12 from Figma Catalogue."},
+        {"item_id": "pc0wp_task_002_check_009", "description": "Create `RecipeUploadPage.jsx` with annotations and detailed comments.", "status": "PENDING", "target_artifact_id": "cycle0_page_recipeupload_g112", "notes": "Reference T-13 from Figma Catalogue."},
+        {"item_id": "pc0wp_task_002_check_010", "description": "Create `SubscriptionPage.jsx` (or modal component placeholder) with annotations and detailed comments.", "status": "PENDING", "target_artifact_id": "cycle0_page_subscription_g112", "notes": "Reference T-04, T-08 from Figma Catalogue."}
+      ],
+      "dependencies": ["pc0wp_task_001"],
+      "criticality": "HIGH",
+      "status": "IN_PROGRESS_SUBTASKS",
+      "linked_issue_ids": [],
+      "notes": ["Ensure component names are consistent (e.g., `HomePage.jsx` or `Home.screen.jsx`). Using `.jsx` for React components."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc0wp_task_003",
+      "title": "Scaffold Reusable UI Components with Detailed Placeholders",
+      "description": "Based on common elements identified in Figma designs (`src_figmacat_g85`, UI screen catalogue `src_uiscreens_g85`), and the needs of the Page/Screen components, scaffold placeholder React components for reusable UI elements. Examples: `Button`, `Card`, `Modal`, `NavigationBar`, `Input`, `Chip`, `Avatar`, etc. These will be organized into subdirectories within `prototypes/cycle0_react_web/src/components/` (e.g., `common`, `layout`, feature-specific). Each file must include a standard annotation block and detailed comment placeholders.",
+      "intent": "To create a library of common UI building blocks that can be used across multiple pages, promoting consistency and reusability in the prototype.",
+      "inputs": [
+        { "name": "Figma Page Catalogue", "source_description": "Source document `src_figmacat_g85`", "details": "Helps identify recurring UI patterns and components." },
+        { "name": "App UI Screen Catalogue", "source_description": "Source document `src_uiscreens_g85`", "details": "Details elements on screens." },
+        { "name": "Scaffolded Directory Structure", "source_description": "Output of pc0wp_task_001", "details": "Path: `prototypes/cycle0_react_web/src/components/`" }
+      ],
+      "outputs": [
+        { "name": "Common Button Component", "artifact_id": "cycle0_comp_button_g112", "expected_path": "prototypes/cycle0_react_web/src/components/common/Button.jsx", "description": "Placeholder for a reusable button.", "embed_annotations_required": "true" },
+        { "name": "Common Card Component", "artifact_id": "cycle0_comp_card_g112", "expected_path": "prototypes/cycle0_react_web/src/components/common/Card.jsx", "description": "Placeholder for a reusable card.", "embed_annotations_required": "true" },
+        { "name": "Common Modal Component", "artifact_id": "cycle0_comp_modal_g112", "expected_path": "prototypes/cycle0_react_web/src/components/common/Modal.jsx", "description": "Placeholder for a reusable modal.", "embed_annotations_required": "true" },
+        { "name": "Layout Header Component", "artifact_id": "cycle0_comp_header_g112", "expected_path": "prototypes/cycle0_react_web/src/components/layout/Header.jsx", "description": "Placeholder for a site header/top navigation.", "embed_annotations_required": "true" },
+        { "name": "Layout Footer Component", "artifact_id": "cycle0_comp_footer_g112", "expected_path": "prototypes/cycle0_react_web/src/components/layout/Footer.jsx", "description": "Placeholder for a site footer.", "embed_annotations_required": "true" }
+      ],
+      "execution_checklist": [
+        {"item_id": "pc0wp_task_003_check_001", "description": "Create `components/common/Button.jsx` with annotations and comments.", "status": "PENDING", "target_artifact_id": "cycle0_comp_button_g112", "notes": "Props: variant, onClick, children, etc."},
+        {"item_id": "pc0wp_task_003_check_002", "description": "Create `components/common/Card.jsx` with annotations and comments.", "status": "PENDING", "target_artifact_id": "cycle0_comp_card_g112", "notes": "Props: title, children, image, etc."},
+        {"item_id": "pc0wp_task_003_check_003", "description": "Create `components/common/Modal.jsx` with annotations and comments.", "status": "PENDING", "target_artifact_id": "cycle0_comp_modal_g112", "notes": "Props: isOpen, onClose, title, children."},
+        {"item_id": "pc0wp_task_003_check_004", "description": "Create `components/layout/Header.jsx` with annotations and comments.", "status": "PENDING", "target_artifact_id": "cycle0_comp_header_g112", "notes": "Placeholder for logo, navigation links, user avatar."},
+        {"item_id": "pc0wp_task_003_check_005", "description": "Create `components/layout/Footer.jsx` with annotations and comments.", "status": "PENDING", "target_artifact_id": "cycle0_comp_footer_g112", "notes": "Placeholder for copyright, links."}
+      ],
+      "dependencies": ["pc0wp_task_001"],
+      "criticality": "HIGH",
+      "status": "PENDING",
+      "linked_issue_ids": [],
+      "notes": ["Focus on structural placeholders; detailed styling is out of scope for this task."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc0wp_task_004",
+      "title": "Implement Basic Routing and Navigation Structure",
+      "description": "Set up React Router DOM (or chosen routing library) to enable navigation between the scaffolded page components. Define routes for all main pages and implement basic navigation links (e.g., in a Header component or via button clicks in components) to create the click-through experience. The main App component will host the router configuration.",
+      "intent": "To make the prototype interactive by allowing navigation between different screens, simulating the user journey.",
+      "inputs": [
+        { "name": "Scaffolded Page Components", "source_description": "Outputs of pc0wp_task_002", "details": "All `*.jsx` files in `prototypes/cycle0_react_web/src/pages/`" },
+        { "name": "Main App Entry Point", "source_description": "Output of pc0wp_task_001 (`cycle0_prototype_app_entry_g112`)", "details": "`prototypes/cycle0_react_web/src/App.js`" }
+      ],
+      "outputs": [
+        {
+          "name": "Router Configuration File",
+          "artifact_id": "cycle0_router_config_g112",
+          "expected_path": "prototypes/cycle0_react_web/src/navigation/AppRouter.jsx",
+          "description": "Component file defining all application routes using React Router. Will include annotation block and detailed comments.",
+          "embed_annotations_required": "true"
+        },
+        {
+          "name": "Updated App.js with Router",
+          "artifact_id": "cycle0_prototype_app_entry_g112", 
+          "expected_path": "prototypes/cycle0_react_web/src/App.js",
+          "description": "The main application component updated to integrate the AppRouter. Annotation block will be updated.",
+          "embed_annotations_required": "true"
+        }
+      ],
+      "execution_checklist": [
+        {"item_id": "pc0wp_task_004_check_001", "description": "Install `react-router-dom`.", "status": "PENDING", "target_artifact_id": null, "notes": "Command: `npm install react-router-dom` in `prototypes/cycle0_react_web/`"},
+        {"item_id": "pc0wp_task_004_check_002", "description": "Create `navigation/AppRouter.jsx` to define routes for all pages from task `pc0wp_task_002`.", "status": "PENDING", "target_artifact_id": "cycle0_router_config_g112", "notes": null},
+        {"item_id": "pc0wp_task_004_check_003", "description": "Integrate `AppRouter` into `App.js`.", "status": "PENDING", "target_artifact_id": "cycle0_prototype_app_entry_g112", "notes": null},
+        {"item_id": "pc0wp_task_004_check_004", "description": "Add placeholder navigation links/buttons in relevant components (e.g., Header, Page components) to allow clicking through flows.", "status": "PENDING", "target_artifact_id": null, "notes": "This will modify components from task pc0wp_task_002 and pc0wp_task_003."}
+      ],
+      "dependencies": ["pc0wp_task_001", "pc0wp_task_002"],
+      "criticality": "HIGH",
+      "status": "PENDING",
+      "linked_issue_ids": [],
+      "notes": [],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc0wp_task_005",
+      "title": "Define Mock Data Structures and Service Stubs",
+      "description": "Create JavaScript files (e.g., in `prototypes/cycle0_react_web/src/services/mockData/`) to hold mock data for entities like recipes, users, creators, meal plans. Also, create service stub functions (e.g., `getRecipes()`, `getUserProfile()`) that return this mock data (possibly with a slight delay using `setTimeout` to simulate API calls). These will be used to populate the prototype pages.",
+      "intent": "To provide sample data that makes the prototype feel more realistic and demonstrates how content would appear on different screens.",
+      "inputs": [
+        { "name": "Data model understanding from TRD", "source_description": "Source document `src_trd_g85`", "details": "Provides schema ideas for mock data." },
+        { "name": "Page component requirements", "source_description": "Implicit from pc0wp_task_002", "details": "Pages will need specific data." }
+      ],
+      "outputs": [
+        { "name": "Mock Recipe Data", "artifact_id": "cycle0_mock_data_recipes_g112", "expected_path": "prototypes/cycle0_react_web/src/services/mockData/recipes.js", "description": "JS file exporting an array of mock recipe objects.", "embed_annotations_required": "true" },
+        { "name": "Mock User Data", "artifact_id": "cycle0_mock_data_users_g112", "expected_path": "prototypes/cycle0_react_web/src/services/mockData/users.js", "description": "JS file exporting mock user profile data.", "embed_annotations_required": "true" },
+        { "name": "Mock Data Service Stubs", "artifact_id": "cycle0_mock_services_g112", "expected_path": "prototypes/cycle0_react_web/src/services/api.js", "description": "JS file exporting functions that return mock data.", "embed_annotations_required": "true" }
+      ],
+      "execution_checklist": [
+        {"item_id": "pc0wp_task_005_check_001", "description": "Create `services/mockData/recipes.js` with sample recipe data and annotation block.", "status": "PENDING", "target_artifact_id": "cycle0_mock_data_recipes_g112", "notes": null},
+        {"item_id": "pc0wp_task_005_check_002", "description": "Create `services/mockData/users.js` with sample user data and annotation block.", "status": "PENDING", "target_artifact_id": "cycle0_mock_data_users_g112", "notes": null},
+        {"item_id": "pc0wp_task_005_check_003", "description": "Create `services/api.js` with stub functions (e.g., `fetchRecipes`, `fetchUserProfile`) that import and return mock data, include annotation block.", "status": "PENDING", "target_artifact_id": "cycle0_mock_services_g112", "notes": null}
+      ],
+      "dependencies": ["pc0wp_task_001"],
+      "criticality": "MEDIUM",
+      "status": "PENDING",
+      "linked_issue_ids": [],
+      "notes": ["Mock data should be rich enough to showcase different UI states if applicable."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc0wp_task_006",
+      "title": "Update Registry Map with All New Prototype Artifacts",
+      "description": "Ensure that `registry_map.txt` is updated to include entries for all new artifacts created as part of this plan (React project root, README, App.js, all page components, all reusable components, router config, mock data files, etc.). Each entry must map the unique `artifact_id` to its correct `expected_path`.",
+      "intent": "To maintain an accurate and up-to-date inventory of all project artifacts, crucial for traceability and dependency management.",
+      "inputs": [
+        { "name": "List of all artifact outputs from this plan", "source_description": "Tasks pc0wp_task_001 through pc0wp_task_005", "details": "Compile all `artifact_id` and `expected_path` values." },
+        { "name": "Existing Registry Map", "source_description": "File `registry_map.txt`", "details": "The current version of the registry map." }
+      ],
+      "outputs": [
+        {
+          "name": "Updated Registry Map",
+          "artifact_id": "registry_map_g112_cycle0_web_proto", 
+          "expected_path": "registry_map.txt",
+          "description": "The `registry_map.txt` file updated with all artifacts from the Cycle 0 web prototype scaffolding.",
+          "embed_annotations_required": "true" 
+        }
+      ],
+      "execution_checklist": [
+        {"item_id": "pc0wp_task_006_check_001", "description": "Read the current `registry_map.txt`.", "status": "PENDING", "target_artifact_id": null, "notes": null},
+        {"item_id": "pc0wp_task_006_check_002", "description": "Collect all artifact_ids and expected_paths from tasks 001-005.", "status": "PENDING", "target_artifact_id": null, "notes": null},
+        {"item_id": "pc0wp_task_006_check_003", "description": "Add new entries to the `artifact_registry_tree` in a structured way (e.g., under a `prototypes/cycle0_react_web` node).", "status": "PENDING", "target_artifact_id": "registry_map_g112_cycle0_web_proto", "notes": null},
+        {"item_id": "pc0wp_task_006_check_004", "description": "Increment version `v` and update `g_updated` in `registry_map.txt`.", "status": "PENDING", "target_artifact_id": "registry_map_g112_cycle0_web_proto", "notes": null}
+      ],
+      "dependencies": ["pc0wp_task_001", "pc0wp_task_002", "pc0wp_task_003", "pc0wp_task_004", "pc0wp_task_005"],
+      "criticality": "HIGH",
+      "status": "PENDING",
+      "linked_issue_ids": [],
+      "notes": ["This task is crucial for maintaining project integrity."],
+      "sub_tasks": []
+    }
+  ]
+} 

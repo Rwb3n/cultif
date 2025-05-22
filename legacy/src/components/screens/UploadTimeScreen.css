@@ -1,0 +1,92 @@
+.upload-time-screen-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: var(--spacing-lg);
+  background-color: var(--color-background);
+}
+
+.screen-subtitle {
+  font-size: var(--font-size-body-lg);
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+  font-weight: var(--font-weight-regular);
+}
+
+.time-options-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--spacing-xl) 0;
+  /* flex-grow: 1; -- Allow space for custom input too */
+  overflow-y: auto;
+  max-height: calc(100vh - 350px); /* Adjust based on other elements */
+}
+
+.time-option-item {
+  padding: var(--spacing-md);
+  cursor: pointer;
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--border-radius-lg);
+  font-size: var(--font-size-body-lg);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface);
+  margin-bottom: var(--spacing-sm);
+  text-align: center;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.time-option-item:last-child {
+  margin-bottom: 0;
+}
+
+.time-option-item:hover {
+  background-color: var(--color-neutral-100);
+  border-color: var(--color-neutral-400);
+}
+
+.time-option-item.selected {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary-dark);
+  font-weight: var(--font-weight-semibold);
+}
+
+.custom-time-container {
+  background-color: var(--color-surface);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  margin-bottom: var(--spacing-xl);
+  border: 1px solid var(--color-border);
+}
+
+.custom-time-container p {
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.custom-time-input {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-body);
+  margin-bottom: var(--spacing-md);
+}
+
+.custom-time-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-light, rgba(var(--color-primary-rgb), 0.2));
+}
+
+.add-custom-time-btn {
+  width: 100%;
+  /* Uses btn, btn-small, btn-outline-primary */
+}
+
+.back-btn {
+  width: 100%;
+  margin-top: auto; 
+} 

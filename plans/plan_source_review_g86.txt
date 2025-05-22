@@ -1,0 +1,328 @@
+{
+  "v": 1,
+  "id": "plan_source_review_g86",
+  "status": "COMPLETED_SUCCESS",
+  "preceding_plan_id_ref": null,
+  "origin_artifact_id": "source_review_doc_g85",
+  "goal": "To systematically review all provided source documents, extract key information using sparse representation, and populate the 'source_review_g85.md' document. This will ensure a comprehensive understanding of the project requirements and existing documentation, forming a solid basis for subsequent planning and development activities for the Cultif project.",
+  "scope": [
+    "Reading and summarizing each identified text-based document in the 'source/' directory.",
+    "Populating the 'Reviewed Documents Log' table in 'artifacts/reviews/source_review_g85.md' with file paths, assigned artifact IDs, and concise summaries.",
+    "Synthesizing information into the 'Integrated Summary & Key Insights' sections of 'artifacts/reviews/source_review_g85.md'.",
+    "Assigning unique artifact IDs to each source document for consistent referencing."
+  ],
+  "exclusions": [
+    "Deep technical validation of the source documents.",
+    "Generation of new project requirements beyond what's stated in the source documents.",
+    "Review of non-text-based files (e.g., 'Cultif.zip').",
+    "Review of 'python.py' unless explicitly linked as a requirement by other documents."
+  ],
+  "g_created": 86,
+  "g_updated": 95,
+  "tasks": [
+    {
+      "id": "psr_task_001",
+      "title": "Review Project Charter",
+      "description": "Read 'source/2. Project Charter.txt', extract key themes and summary points, and update 'artifacts/reviews/source_review_g85.md' in the corresponding row of the 'Reviewed Documents Log' and relevant parts of '3.1 Core Project Vision & Goals'.",
+      "intent": "To understand and document the core project definition, high-level goals, and stakeholders.",
+      "inputs": [
+        { "name": "Project Charter Document", "source_description": "File in source directory", "details": "source/2. Project Charter.txt" },
+        { "name": "Source Review Document", "source_description": "The master review document being populated", "details": "artifacts/reviews/source_review_g85.md" }
+      ],
+      "outputs": [
+        {
+          "name": "Updated Source Review Document (Charter Section)",
+          "artifact_id": "source_review_doc_g85",
+          "expected_path": "artifacts/reviews/source_review_g85.md",
+          "description": "The 'source_review_g85.md' file with entries for the Project Charter.",
+          "embed_annotations_required": "false"
+        }
+      ],
+      "dependencies": [], "criticality": "HIGH", "status": "DONE", "linked_issue_ids": [], "notes": [], "sub_tasks": []
+    },
+    {
+      "id": "psr_task_002",
+      "title": "Review Product Requirements Document (PRD)",
+      "description": "Read 'source/3. Product Requirements Document.txt', extract key themes and summary points, and update 'artifacts/reviews/source_review_g85.md' in the corresponding row of the 'Reviewed Documents Log' and relevant parts of '3.1 Core Project Vision & Goals' and '3.2 Key Product Features & Scope (MVP Focus)'.",
+      "intent": "To understand and document the product features, user stories, and functional requirements.",
+      "inputs": [
+        { "name": "Product Requirements Document", "source_description": "File in source directory", "details": "source/3. Product Requirements Document.txt" },
+        { "name": "Source Review Document", "source_description": "The master review document being populated", "details": "artifacts/reviews/source_review_g85.md" }
+      ],
+      "outputs": [
+        {
+          "name": "Updated Source Review Document (PRD Section)",
+          "artifact_id": "source_review_doc_g85",
+          "expected_path": "artifacts/reviews/source_review_g85.md",
+          "description": "The 'source_review_g85.md' file with entries for the PRD.",
+          "embed_annotations_required": "false"
+        }
+      ],
+      "dependencies": [], "criticality": "HIGH", "status": "DONE", "linked_issue_ids": [], "notes": [], "sub_tasks": []
+    },
+    {
+      "id": "psr_task_003",
+      "title": "Review Technical Requirements Document (TRD)",
+      "description": "Read 'source/4. Technical Requirements Document.txt', extract key themes and summary points, and update 'artifacts/reviews/source_review_g85.md' in the corresponding row of the 'Reviewed Documents Log' and '3.3 Technical Stack & Architecture Highlights'.",
+      "intent": "To understand and document the technical specifications, architecture, and non-functional requirements.",
+      "inputs": [
+        { "name": "Technical Requirements Document", "source_description": "File in source directory", "details": "source/4. Technical Requirements Document.txt" },
+        { "name": "Source Review Document", "source_description": "The master review document being populated", "details": "artifacts/reviews/source_review_g85.md" }
+      ],
+      "outputs": [
+        {
+          "name": "Updated Source Review Document (TRD Section)",
+          "artifact_id": "source_review_doc_g85",
+          "expected_path": "artifacts/reviews/source_review_g85.md",
+          "description": "The 'source_review_g85.md' file with entries for the TRD.",
+          "embed_annotations_required": "false"
+        }
+      ],
+      "dependencies": [], "criticality": "HIGH", "status": "DONE", "linked_issue_ids": [], "notes": [], "sub_tasks": []
+    },
+    {
+      "id": "psr_task_004",
+      "title": "Review Shape Up Strategy",
+      "description": "Read 'source/1. Plan_ Shape Up Strategy_.txt', extract key themes and summary points, and update 'artifacts/reviews/source_review_g85.md' in the corresponding row of the 'Reviewed Documents Log' and '3.4 Development Methodology & Cycle Structure'.",
+      "intent": "To understand and document the adopted development methodology and overall project phasing.",
+      "inputs": [
+        { "name": "Shape Up Strategy Document", "source_description": "File in source directory", "details": "source/1. Plan_ Shape Up Strategy_.txt" },
+        { "name": "Source Review Document", "source_description": "The master review document being populated", "details": "artifacts/reviews/source_review_g85.md" }
+      ],
+      "outputs": [
+        {
+          "name": "Updated Source Review Document (Shape Up Section)",
+          "artifact_id": "source_review_doc_g85",
+          "expected_path": "artifacts/reviews/source_review_g85.md",
+          "description": "The 'source_review_g85.md' file with entries for the Shape Up Strategy.",
+          "embed_annotations_required": "false"
+        }
+      ],
+      "dependencies": [], "criticality": "HIGH", "status": "DONE", "linked_issue_ids": [], "notes": [], "sub_tasks": []
+    },
+    {
+      "id": "psr_task_005",
+      "title": "Review Cycle 0 Blueprint — Proto Frame",
+      "description": "Read 'source/1.0 Cycle 0 Blueprint — Proto Frame.txt', extract key themes and summary points, and update 'artifacts/reviews/source_review_g85.md' in the corresponding row of the 'Reviewed Documents Log' and relevant parts of '3.2 Key Product Features & Scope (MVP Focus)' and '3.4 Development Methodology & Cycle Structure'.",
+      "intent": "To understand and document the plan and deliverables for Cycle 0.",
+      "inputs": [
+        { "name": "Cycle 0 Blueprint", "source_description": "File in source directory", "details": "source/1.0 Cycle 0 Blueprint — Proto Frame.txt" },
+        { "name": "Source Review Document", "source_description": "The master review document being populated", "details": "artifacts/reviews/source_review_g85.md" }
+      ],
+      "outputs": [
+        {
+          "name": "Updated Source Review Document (Cycle 0 Blueprint Section)",
+          "artifact_id": "source_review_doc_g85",
+          "expected_path": "artifacts/reviews/source_review_g85.md",
+          "description": "The 'source_review_g85.md' file with entries for the Cycle 0 Blueprint.",
+          "embed_annotations_required": "false"
+        }
+      ],
+      "dependencies": [], "criticality": "HIGH", "status": "DONE", "linked_issue_ids": [], "notes": [], "sub_tasks": []
+    },
+    {
+      "id": "psr_task_006",
+      "title": "Review Cycle 1 Blueprint — Lean Content Pipeline",
+      "description": "Read 'source/1.1 Cycle 1 Blueprint — Lean Content Pipeline.txt', extract key themes and summary points, and update 'artifacts/reviews/source_review_g85.md' as above.",
+      "intent": "To understand and document the plan and deliverables for Cycle 1.",
+      "inputs": [
+        { "name": "Cycle 1 Blueprint", "source_description": "File in source directory", "details": "source/1.1 Cycle 1 Blueprint — Lean Content Pipeline.txt" },
+        { "name": "Source Review Document", "source_description": "The master review document being populated", "details": "artifacts/reviews/source_review_g85.md" }
+      ],
+      "outputs": [
+        {
+          "name": "Updated Source Review Document (Cycle 1 Blueprint Section)",
+          "artifact_id": "source_review_doc_g85",
+          "expected_path": "artifacts/reviews/source_review_g85.md",
+          "description": "The 'source_review_g85.md' file with entries for the Cycle 1 Blueprint.",
+          "embed_annotations_required": "false"
+        }
+      ],
+      "dependencies": [], "criticality": "HIGH", "status": "DONE", "linked_issue_ids": [], "notes": [], "sub_tasks": []
+    },
+    {
+      "id": "psr_task_007",
+      "title": "Review Cycle 2 Blueprint — Monetization Layer",
+      "description": "Read 'source/1.2 Cycle 2 Blueprint — Monetization Layer.txt', extract key themes and summary points, and update 'artifacts/reviews/source_review_g85.md' as above.",
+      "intent": "To understand and document the plan and deliverables for Cycle 2.",
+      "inputs": [
+        { "name": "Cycle 2 Blueprint", "source_description": "File in source directory", "details": "source/1.2 Cycle 2 Blueprint — Monetization Layer.txt" },
+        { "name": "Source Review Document", "source_description": "The master review document being populated", "details": "artifacts/reviews/source_review_g85.md" }
+      ],
+      "outputs": [
+        {
+          "name": "Updated Source Review Document (Cycle 2 Blueprint Section)",
+          "artifact_id": "source_review_doc_g85",
+          "expected_path": "artifacts/reviews/source_review_g85.md",
+          "description": "The 'source_review_g85.md' file with entries for the Cycle 2 Blueprint.",
+          "embed_annotations_required": "false"
+        }
+      ],
+      "dependencies": [], "criticality": "HIGH", "status": "DONE", "linked_issue_ids": [], "notes": [], "sub_tasks": []
+    },
+    {
+      "id": "psr_task_008",
+      "title": "Review Cycle 3 Blueprint — Discovery & Search",
+      "description": "Read 'source/1.3 Cycle 3 Blueprint — Discovery & Search.txt', extract key themes and summary points, and update 'artifacts/reviews/source_review_g85.md' as above.",
+      "intent": "To understand and document the plan and deliverables for Cycle 3.",
+      "inputs": [
+        { "name": "Cycle 3 Blueprint", "source_description": "File in source directory", "details": "source/1.3 Cycle 3 Blueprint — Discovery & Search.txt" },
+        { "name": "Source Review Document", "source_description": "The master review document being populated", "details": "artifacts/reviews/source_review_g85.md" }
+      ],
+      "outputs": [
+        {
+          "name": "Updated Source Review Document (Cycle 3 Blueprint Section)",
+          "artifact_id": "source_review_doc_g85",
+          "expected_path": "artifacts/reviews/source_review_g85.md",
+          "description": "The 'source_review_g85.md' file with entries for the Cycle 3 Blueprint.",
+          "embed_annotations_required": "false"
+        }
+      ],
+      "dependencies": [], "criticality": "HIGH", "status": "DONE", "linked_issue_ids": [], "notes": [], "sub_tasks": []
+    },
+    {
+      "id": "psr_task_009",
+      "title": "Review Cycle 4 Blueprint — Meal-Planning Layer",
+      "description": "Read 'source/1.4 Cycle 4 Blueprint — Meal-Planning Layer.txt', extract key themes and summary points, and update 'artifacts/reviews/source_review_g85.md' as above.",
+      "intent": "To understand and document the plan and deliverables for Cycle 4.",
+      "inputs": [
+        { "name": "Cycle 4 Blueprint", "source_description": "File in source directory", "details": "source/1.4 Cycle 4 Blueprint — Meal-Planning Layer.txt" },
+        { "name": "Source Review Document", "source_description": "The master review document being populated", "details": "artifacts/reviews/source_review_g85.md" }
+      ],
+      "outputs": [
+        {
+          "name": "Updated Source Review Document (Cycle 4 Blueprint Section)",
+          "artifact_id": "source_review_doc_g85",
+          "expected_path": "artifacts/reviews/source_review_g85.md",
+          "description": "The 'source_review_g85.md' file with entries for the Cycle 4 Blueprint.",
+          "embed_annotations_required": "false"
+        }
+      ],
+      "dependencies": [], "criticality": "HIGH", "status": "DONE", "linked_issue_ids": [], "notes": [], "sub_tasks": []
+    },
+    {
+      "id": "psr_task_010",
+      "title": "Review Cycle 5 Blueprint — Engagement Layer",
+      "description": "Read 'source/1.5 Cycle 5 Blueprint — Engagement Layer.txt', extract key themes and summary points, and update 'artifacts/reviews/source_review_g85.md' as above.",
+      "intent": "To understand and document the plan and deliverables for Cycle 5.",
+      "inputs": [
+        { "name": "Cycle 5 Blueprint", "source_description": "File in source directory", "details": "source/1.5 Cycle 5 Blueprint — Engagement Layer.txt" },
+        { "name": "Source Review Document", "source_description": "The master review document being populated", "details": "artifacts/reviews/source_review_g85.md" }
+      ],
+      "outputs": [
+        {
+          "name": "Updated Source Review Document (Cycle 5 Blueprint Section)",
+          "artifact_id": "source_review_doc_g85",
+          "expected_path": "artifacts/reviews/source_review_g85.md",
+          "description": "The 'source_review_g85.md' file with entries for the Cycle 5 Blueprint.",
+          "embed_annotations_required": "false"
+        }
+      ],
+      "dependencies": [], "criticality": "HIGH", "status": "DONE", "linked_issue_ids": [], "notes": [], "sub_tasks": []
+    },
+    {
+      "id": "psr_task_011",
+      "title": "Review Test Strategy",
+      "description": "Read 'source/6. Test Strategy_.txt', extract key themes and summary points, and update 'artifacts/reviews/source_review_g85.md' in the corresponding row of the 'Reviewed Documents Log'.",
+      "intent": "To understand and document the project's overall testing approach and quality assurance measures.",
+      "inputs": [
+        { "name": "Test Strategy Document", "source_description": "File in source directory", "details": "source/6. Test Strategy_.txt" },
+        { "name": "Source Review Document", "source_description": "The master review document being populated", "details": "artifacts/reviews/source_review_g85.md" }
+      ],
+      "outputs": [
+        {
+          "name": "Updated Source Review Document (Test Strategy Section)",
+          "artifact_id": "source_review_doc_g85",
+          "expected_path": "artifacts/reviews/source_review_g85.md",
+          "description": "The 'source_review_g85.md' file with entries for the Test Strategy.",
+          "embed_annotations_required": "false"
+        }
+      ],
+      "dependencies": [], "criticality": "HIGH", "status": "DONE", "linked_issue_ids": [], "notes": [], "sub_tasks": []
+    },
+    {
+      "id": "psr_task_012",
+      "title": "Review App UI Screen Catalogue",
+      "description": "Read 'source/## App UI Screen Catalogue.txt', extract key themes and summary points, and update 'artifacts/reviews/source_review_g85.md' in the corresponding row of the 'Reviewed Documents Log' and '3.5 UI/UX Approach'.",
+      "intent": "To understand and document the defined UI screens and their high-level characteristics.",
+      "inputs": [
+        { "name": "App UI Screen Catalogue", "source_description": "File in source directory", "details": "source/## App UI Screen Catalogue.txt" },
+        { "name": "Source Review Document", "source_description": "The master review document being populated", "details": "artifacts/reviews/source_review_g85.md" }
+      ],
+      "outputs": [
+        {
+          "name": "Updated Source Review Document (UI Screen Catalogue Section)",
+          "artifact_id": "source_review_doc_g85",
+          "expected_path": "artifacts/reviews/source_review_g85.md",
+          "description": "The 'source_review_g85.md' file with entries for the App UI Screen Catalogue.",
+          "embed_annotations_required": "false"
+        }
+      ],
+      "dependencies": [], "criticality": "HIGH", "status": "DONE", "linked_issue_ids": [], "notes": [], "sub_tasks": []
+    },
+    {
+      "id": "psr_task_013",
+      "title": "Review Interactive Presentation Storyboard v1",
+      "description": "Read 'source/interactive_presentation_storyboard_v1.md', extract key themes and summary points, and update 'artifacts/reviews/source_review_g85.md' in the corresponding row of the 'Reviewed Documents Log' and '3.5 UI/UX Approach'.",
+      "intent": "To understand and document the storyboard for the interactive presentation, focusing on UI flows and user interactions.",
+      "inputs": [
+        { "name": "Interactive Presentation Storyboard", "source_description": "File in source directory", "details": "source/interactive_presentation_storyboard_v1.md" },
+        { "name": "Source Review Document", "source_description": "The master review document being populated", "details": "artifacts/reviews/source_review_g85.md" }
+      ],
+      "outputs": [
+        {
+          "name": "Updated Source Review Document (Presentation Storyboard Section)",
+          "artifact_id": "source_review_doc_g85",
+          "expected_path": "artifacts/reviews/source_review_g85.md",
+          "description": "The 'source_review_g85.md' file with entries for the Interactive Presentation Storyboard.",
+          "embed_annotations_required": "false"
+        }
+      ],
+      "dependencies": [], "criticality": "HIGH", "status": "DONE", "linked_issue_ids": [], "notes": [], "sub_tasks": []
+    },
+    {
+      "id": "psr_task_014",
+      "title": "Review Figma Page Catalogue",
+      "description": "Read 'source/Figma_Page_Catalogue.csv', extract key themes and summary points, and update 'artifacts/reviews/source_review_g85.md' in the corresponding row of the 'Reviewed Documents Log' and '3.5 UI/UX Approach'.",
+      "intent": "To understand and document the mapping of Figma pages to application features/screens.",
+      "inputs": [
+        { "name": "Figma Page Catalogue", "source_description": "File in source directory", "details": "source/Figma_Page_Catalogue.csv" },
+        { "name": "Source Review Document", "source_description": "The master review document being populated", "details": "artifacts/reviews/source_review_g85.md" }
+      ],
+      "outputs": [
+        {
+          "name": "Updated Source Review Document (Figma Catalogue Section)",
+          "artifact_id": "source_review_doc_g85",
+          "expected_path": "artifacts/reviews/source_review_g85.md",
+          "description": "The 'source_review_g85.md' file with entries for the Figma Page Catalogue.",
+          "embed_annotations_required": "false"
+        }
+      ],
+      "dependencies": [], "criticality": "HIGH", "status": "DONE", "linked_issue_ids": [], "notes": [], "sub_tasks": []
+    },
+    {
+      "id": "psr_task_015",
+      "title": "Synthesize Integrated Summary and Finalize Review Document",
+      "description": "After all individual documents are logged, synthesize the extracted information into the 'Integrated Summary & Key Insights' sections (3.1 to 3.5) and the 'Next Steps & Recommendations' section of 'artifacts/reviews/source_review_g85.md'. Ensure all references are consistent.",
+      "intent": "To consolidate all findings into a cohesive summary that captures the essence of the source materials and guides next steps.",
+      "inputs": [
+        { "name": "Populated Source Review Document (Individual Entries)", "source_description": "The review document with all individual log entries completed", "details": "artifacts/reviews/source_review_g85.md" }
+      ],
+      "outputs": [
+        {
+          "name": "Completed Source Review Document",
+          "artifact_id": "source_review_doc_g85",
+          "expected_path": "artifacts/reviews/source_review_g85.md",
+          "description": "The fully populated and synthesized 'source_review_g85.md' document.",
+          "embed_annotations_required": "false"
+        }
+      ],
+      "dependencies": [
+          "psr_task_001", "psr_task_002", "psr_task_003", "psr_task_004", "psr_task_005",
+          "psr_task_006", "psr_task_007", "psr_task_008", "psr_task_009", "psr_task_010",
+          "psr_task_011", "psr_task_012", "psr_task_013", "psr_task_014"
+      ],
+      "criticality": "HIGH", "status": "DONE", "linked_issue_ids": [], "notes": [], "sub_tasks": []
+    }
+  ]
+} 

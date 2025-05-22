@@ -1,0 +1,30 @@
+.screen-placeholder {
+  padding: 20px;
+  border: 1px dashed var(--color-neutral-400);
+  border-radius: var(--border-radius-md);
+  margin: 20px;
+  text-align: center;
+  background-color: var(--color-neutral-100);
+}
+
+.screen-placeholder h2 {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.screen-placeholder p {
+  margin-bottom: var(--spacing-md);
+}
+
+.screen-placeholder a {
+  display: inline-block;
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: var(--color-secondary);
+  color: var(--color-on-secondary);
+  border-radius: var(--border-radius-sm);
+  text-decoration: none;
+}
+.screen-placeholder a:hover {
+  background-color: var(--color-secondary-variant);
+} 

@@ -1,0 +1,17 @@
+{
+  "v": 53,
+  "g": 81,
+  "ph": "CONSTRUCT",
+  "st": "READY",
+  "cp_id": "plan_cycle0_showcase_and_foundations_g20.txt",
+  "ct_id": "plan_cycle0_showcase_and_foundations_g20_task_003",
+  "rt": {
+    "plan_cycle0_showcase_and_foundations_g20_task_005": 1
+  },
+  "active_issue_ids": [
+    "issue_g5_visual_tech_strategy_update",
+    "issue_g29_deploy_404",
+    "issue_g30_react_requirement"
+  ],
+  "last_error": null
+} 

@@ -1,0 +1,224 @@
+{
+  "v": 39,
+  "id": "plan_cycle0_showcase_and_foundations_g20",
+  "status": "ACTIVE",
+  "preceding_plan_id_ref": "plan_cultif_main_mvp",
+  "goal": "To deliver a Vercel-hosted interactive animated presentation of the Cultif app's core UI flows using React (addressing issue_g30_react_requirement due to vanilla HTML/CSS requiring too much tweaking), establish foundational design elements (colors, typography, core button styles as a 'Design Library Lite' in CSS), and produce a basic React Native shell application with navigation stubs. The Vercel presentation is the primary demonstration artifact for Cycle 0 and aims to resolve previous deployment failure issue_g29_deploy_404.",
+  "scope": [
+    "Creation of an interactive animated presentation of app screens (built with React), hosted on Vercel.",
+    "Development of a 'Design Library Lite' in CSS (colors, typography, basic button styles) to support the Vercel presentation and inform the main Figma library.",
+    "Formalization of Figma Design Library Foundations (colors, typography, spacing, core iconography).",
+    "Development of a basic React Native (Expo) shell application with Material Design 3 components and navigation stubs."
+  ],
+  "exclusions": [
+    "Full backend integration for any deliverable in this cycle.",
+    "Complex business logic or live data in the Vercel presentation or RN shell.",
+    "Completion of the entire comprehensive Figma Design Library (atoms, molecules, organisms beyond core foundations)."
+  ],
+  "g_created": 20,
+  "g_updated": 82,
+  "tasks": [
+    {
+      "id": "plan_cycle0_showcase_and_foundations_g20_task_001",
+      "title": "Finalize Interactive Presentation Storyboard",
+      "description": "Review and confirm completeness of the existing storyboard artifact (pres_storyboard_g15). This task effectively acknowledges the completion of the initial storyboarding phase.",
+      "intent": "To formally recognize the satisfactory completion of the presentation storyboard, making it the approved blueprint for frontend development.",
+      "inputs": [
+        { "name": "Previously Generated Interactive Presentation Storyboard Document", "source_description": "Artifact pres_storyboard_g15 created under plan_interactive_pres_g14.", "details": "design/interactive_presentation_storyboard_v1.md" }
+      ],
+      "outputs": [
+        { "name": "Confirmed Interactive Presentation Storyboard Document", "artifact_id": "pres_storyboard_g15", "expected_path": "design/interactive_presentation_storyboard_v1.md.txt", "description": "The existing storyboard, now formally adopted by this plan.", "embed_annotations_required": "true" }
+      ],
+      "dependencies": [],
+      "criticality": "HIGH",
+      "status": "DONE",
+      "retry_count": 0,
+      "linked_issue_ids": [],
+      "notes": ["Leverages the already satisfactory storyboard pres_storyboard_g15."]
+    },
+    {
+      "id": "plan_cycle0_showcase_and_foundations_g20_task_002",
+      "title": "Develop 'Design Library Lite' (CSS Foundations)",
+      "description": "Define and implement CSS custom properties for the primary color palette (main brand colors, neutrals, status colors), typography scale (font families, sizes, weights for h1-h6, body, captions), and basic spacing units (e.g., 4px grid). Create reusable CSS classes for 2-3 core button styles (e.g., primary, secondary, text-only) identified from Figma. This will be used for the Vercel presentation and inform the Figma library.",
+      "intent": "To establish a consistent and reusable set of CSS foundational styles for the Vercel presentation, improving development efficiency and visual consistency, and providing a starting point for the full Figma design library.",
+      "inputs": [
+        { "name": "Figma Screen Designs", "source_description": "User-provided screenshots of Figma storyboards.", "details": "Used to extract color palettes, typography, and button styles." },
+        { "name": "Confirmed Interactive Presentation Storyboard", "source_description": "Artifact pres_storyboard_g15.", "details": "Helps identify common elements needing foundational styles." },
+        { "name": "Figma Page Catalogue", "source_description": "User-provided CSV mapping Figma frames to features and MVP cycles.", "details": "source/Figma_Page_Catalogue.csv" }
+      ],
+      "outputs": [
+        { "name": "CSS Design Library Lite File", "artifact_id": "design_library_lite_css_g21", "expected_path": "src/css/foundations.css.txt", "description": "A CSS file containing custom properties for colors, typography, spacing, and classes for core button styles. This file will have an embedded annotation block.", "embed_annotations_required": "true" }
+      ],
+      "execution_checklist": [
+        { "item_id": "task002_check_001", "description": "Define CSS custom properties for the primary color palette (main brand colors, neutrals, status colors).", "status": "PENDING", "target_artifact_id": "design_library_lite_css_g21", "notes": null },
+        { "item_id": "task002_check_002", "description": "Define CSS custom properties for the typography scale (font families, sizes, weights for h1-h6, body, captions).", "status": "PENDING", "target_artifact_id": "design_library_lite_css_g21", "notes": null },
+        { "item_id": "task002_check_003", "description": "Define CSS custom properties for basic spacing units (e.g., 4px grid).", "status": "PENDING", "target_artifact_id": "design_library_lite_css_g21", "notes": null },
+        { "item_id": "task002_check_004", "description": "Create reusable CSS classes for 2-3 core button styles (e.g., primary, secondary, text-only).", "status": "PENDING", "target_artifact_id": "design_library_lite_css_g21", "notes": null },
+        { "item_id": "task002_check_005", "description": "Ensure all definitions are correctly implemented in the foundations CSS file.", "status": "PENDING", "target_artifact_id": "design_library_lite_css_g21", "notes": null }
+      ],
+      "dependencies": ["plan_cycle0_showcase_and_foundations_g20_task_001"],
+      "criticality": "HIGH",
+      "status": "DONE",
+      "retry_count": 0,
+      "linked_issue_ids": [],
+      "notes": ["g:52 - User provided content for artifact design_library_lite_css_g21 at conventional path src/interactive_presentation/src/foundations.css, resolving issue_g46_missing_css_foundations. Original g_created was 22.", "g:61 - Re-activating task to recreate missing foundations.css (issue_g60_missing_css_dependency).", "g:62 - Successfully recreated foundations.css.", "g:64 - Updated color palette in foundations.css based on user-provided image samples."]
+    },
+    {
+      "id": "plan_cycle0_showcase_and_foundations_g20_task_003",
+      "title": "Develop React-based Animated Screens Frontend for Vercel Presentation",
+      "description": "Using the storyboard (pres_storyboard_g15) and the 'Design Library Lite' (design_library_lite_css_g21), develop the React-based frontend for the Vercel presentation screens. This involves creating a React project (e.g., with Vite or Create React App), structuring the UI into reusable components, implementing animations and interactivity within these components, and integrating the foundational CSS styles appropriately (e.g., CSS Modules, global CSS). This task re-activates development due to new requirement issue_g30_react_requirement.",
+      "intent": "To create the functional React-based frontend code for the interactive animated presentation, addressing user feedback for a more robust frontend architecture.",
+      "inputs": [
+        { "name": "Confirmed Interactive Presentation Storyboard", "source_description": "Artifact pres_storyboard_g15.", "details": "The detailed blueprint for screen content, flow, and animations." },
+        { "name": "CSS Design Library Lite File", "source_description": "Artifact design_library_lite_css_g21.", "details": "Provides foundational CSS styles and classes from src/interactive_presentation/src/foundations.css. Now available (g:51)." },
+        { "name": "React Development Environment & Libraries", "source_description": "Standard React tooling.", "details": "Node.js, npm/yarn, React, ReactDOM, a chosen build tool (e.g., Vite, CRA scripts)." },
+        { "name": "Issue - React Requirement", "source_description": "User input issue_g30_react_requirement", "details": "Provides context for the change in technology." },
+        { "name": "Figma Page Catalogue", "source_description": "User-provided CSV mapping Figma frames to features and MVP cycles.", "details": "source/Figma_Page_Catalogue.csv" }
+      ],
+      "outputs": [
+        { "name": "React-based Animated Screens Source Code", "artifact_id": "animated_screens_src_g22", "expected_path": "src/package.json.txt", "description": "Directory containing all React source files (components, main app file like src/main.jsx or src/index.js, package.json, etc.), CSS (adapted from foundations.css or new component styles), JavaScript for logic/animations, and asset files for the animated screens. The primary entry point for the React application will be within this folder. The root package.json or a key entry file will have an embedded annotation block.", "embed_annotations_required": "true" },
+        { "name": "React Project Build Output Directory/Files", "artifact_id": "react_pres_build_g37", "expected_path": "src/dist/", "description": "The static, optimized build output generated by the React build process (e.g., 'npm run build'). This directory will be the target for Vercel deployment. An annotation block is not typically embedded in the build output itself but in its source configuration or a manifest file if applicable.", "embed_annotations_required": "false" }
+      ],
+      "execution_checklist": [
+        { "item_id": "task003_check_001", "description": "Set up Vite + React project structure in src/.", "status": "DONE", "target_artifact_id": "animated_screens_src_g22", "notes": "Based on g:65." },
+        { "item_id": "task003_check_002", "description": "Install react-router-dom and set up basic routing with placeholder screens (SplashScreen, OnboardingScreen1, LoginScreen, NotFoundScreen) in src/components/screens/.", "status": "DONE", "target_artifact_id": "animated_screens_src_g22", "notes": "Based on g:65." },
+        { "item_id": "task003_check_003", "description": "Create MobileScreenLayout.jsx for consistent mobile dimensions.", "status": "DONE", "target_artifact_id": "animated_screens_src_g22", "notes": "Based on g:66. Placeholder screens updated to use this." },
+        { "item_id": "task003_check_004", "description": "Implement SplashScreen.jsx (storyboard 1.1) with Framer Motion animations and auto-navigation. Add framer-motion dependency.", "status": "DONE", "target_artifact_id": "animated_screens_src_g22", "notes": "Based on g:67." },
+        { "item_id": "task003_check_005", "description": "Implement OnboardingScreen1.jsx (storyboard 1.2) with text, image placeholder, and button hover effect.", "status": "DONE", "target_artifact_id": "animated_screens_src_g22", "notes": "Based on g:69." },
+        { "item_id": "task003_check_006", "description": "Implement OnboardingScreen2.jsx (storyboard 1.3) with Framer Motion animations, revised text, and StepIndicators component.", "status": "DONE", "target_artifact_id": "animated_screens_src_g22", "notes": "Based on g:70." },
+        { "item_id": "task003_check_007", "description": "Implement OnboardingScreen3.jsx (storyboard 1.4) with Framer Motion animations and revised text. Completes App Entry & Onboarding (screens 1.1-1.4).", "status": "DONE", "target_artifact_id": "animated_screens_src_g22", "notes": "Based on g:71." },
+        { "item_id": "task003_check_008", "description": "Implement LoginScreen.jsx (storyboard 2.1) with form fields, animations, CSS, and simulated login logic. Create LoginScreen.css.", "status": "DONE", "target_artifact_id": "animated_screens_src_g22", "notes": "Based on g:72." },
+        { "item_id": "task003_check_009", "description": "Implement SignupScreen.jsx (storyboard 2.2) with form fields, animations, and simulated signup logic.", "status": "DONE", "target_artifact_id": "animated_screens_src_g22", "notes": "Based on g:73. Implemented SignupScreen.jsx and SignupScreen.css. Added route in App.jsx." },
+        { "item_id": "task003_check_010", "description": "Implement ForgotPasswordScreen.jsx (storyboard 2.3) with form fields, animations, and simulated password reset logic.", "status": "DONE", "target_artifact_id": "animated_screens_src_g22", "notes": "Based on g:74. Implemented ForgotPasswordScreen.jsx and ForgotPasswordScreen.css. Added route in App.jsx." },
+        { "item_id": "task003_check_011", "description": "Implement HomeScreen.jsx (storyboard 3.1) as the main post-login screen.", "status": "DONE", "target_artifact_id": "animated_screens_src_g22", "notes": "Based on g:75. Implemented HomeScreen.jsx as a placeholder with logout. Added route in App.jsx." },
+        { "item_id": "task003_check_012", "description": "Implement additional presentation screens as per the finalized storyboard (pres_storyboard_g15).", "status": "IN_PROGRESS", "target_artifact_id": "animated_screens_src_g22", "notes": "Ensure all storyboarded screens are covered. g:76 - Implemented CreateMenuScreen.jsx (storyboard 4.1). g:77 - Implemented UploadRulesScreen.jsx (storyboard 4.2). g:78 - Implemented UploadMainScreen.jsx (storyboard 4.3). g:79 - Implemented UploadIngredientsScreen.jsx (storyboard 4.4). g:80 - Implemented UploadCountryScreen.jsx (implied storyboard 4.5). g:81 - Implemented UploadWeightGoalScreen.jsx (implied storyboard 4.6). g:82 - Implemented UploadTimeScreen.jsx (implied storyboard 4.7)." },
+        { "item_id": "task003_check_013", "description": "Ensure all components correctly integrate foundational CSS from design_library_lite_css_g21.", "status": "PENDING", "target_artifact_id": "animated_screens_src_g22", "notes": "Styling consistency check." },
+        { "item_id": "task003_check_014", "description": "Add embedded annotation block to src/package.json.txt.", "status": "PENDING", "target_artifact_id": "animated_screens_src_g22", "notes": "Schema compliance for primary artifact file." }
+      ],
+      "dependencies": ["plan_cycle0_showcase_and_foundations_g20_task_002"],
+      "criticality": "HIGH",
+      "status": "ACTIVE",
+      "retry_count": 0,
+      "linked_issue_ids": ["issue_g30_react_requirement", "issue_g60_missing_css_dependency"],
+      "notes": ["g:37 - Task reactivated and fundamentally changed to use React due to issue_g30_react_requirement. Previous static HTML output is superseded.", "g:52 - Unblocked as design_library_lite_css_g21 is now available at src/interactive_presentation/src/foundations.css.", "g:60 - Task status changed to ACTIVE.", "g:60 - Task BLOCKED due to missing input artifact design_library_lite_css_g21 (foundations.css). See issue_g60_missing_css_dependency.", "g:62 - Unblocked as foundations.css (design_library_lite_css_g21) is now available after recreation.", "g:65 - Initial Vite + React project structure created in src/. package.json (animated_screens_src_g22) and basic app shell are in place. Added react-router-dom and set up basic routing with placeholder screen components (SplashScreen, OnboardingScreen1, LoginScreen, NotFoundScreen) in src/components/screens/.", "g:66 - Refactored screen structure: Introduced MobileScreenLayout.jsx component to enforce mobile dimensions and updated placeholder screens to use this layout for modularity.", "g:67 - Implemented SplashScreen.jsx with Framer Motion animations (entry, internal logo, auto-navigation) as per storyboard 1.1. Added framer-motion dependency.", "g:69 - Updated `OnboardingScreen1.jsx` with descriptive text and simplified image placeholder as per storyboard 1.2. Added hover effect to 'Next' button in `OnboardingScreen1.css`.", "g:70 - Updated `OnboardingScreen2.jsx` with Framer Motion animations, revised text, and `StepIndicators` component as per storyboard 1.3.", "g:71 - Updated `OnboardingScreen3.jsx` with Framer Motion animations and revised text, implementing storyboard screen 1.4. This completes the initial App Entry & Onboarding sequence (screens 1.1-1.4).", "g:72 - Implemented `LoginScreen.jsx` (storyboard 2.1) with form fields, animations, CSS, and simulated login logic. Created `LoginScreen.css`."]
+    },
+    {
+      "id": "plan_cycle0_showcase_and_foundations_g20_task_004",
+      "title": "Configure React Project and Prepare for Vercel Deployment",
+      "description": "Prepare the developed React-based animated screens (animated_screens_src_g22, specifically its build output react_pres_build_g37) for deployment on Vercel. This includes setting up Vercel project configurations (e.g., via a vercel.json file or Vercel dashboard settings) for a React application, specifying build commands (e.g., 'npm run build'), output directory (e.g., 'dist' or 'build'), and any necessary environment variables.",
+      "intent": "To ensure a smooth and successful deployment of the React-based interactive animated presentation to the Vercel platform.",
+      "inputs": [
+        { "name": "React-based Animated Screens Source Code & Build Output", "source_description": "Artifacts animated_screens_src_g22 and react_pres_build_g37.", "details": "The React project source and its build output to be deployed." }
+      ],
+      "outputs": [
+        { "name": "Vercel Deployment Configuration for React App", "artifact_id": "vercel_deploy_config_g23", "expected_path": "deploy/vercel_config_interactive_pres_cycle0.txt", "description": "File containing Vercel-specific configuration (e.g., vercel.json content for React, build settings) or a markdown file detailing deployment steps and project settings for the React presentation. This file will have an embedded annotation block.", "embed_annotations_required": "true" }
+      ],
+      "execution_checklist": [
+        { "item_id": "task004_check_001", "description": "Define Vercel project build command (e.g., 'npm run build' or 'vite build').", "status": "PENDING", "target_artifact_id": "vercel_deploy_config_g23", "notes": "To be specified in vercel.json or Vercel dashboard." },
+        { "item_id": "task004_check_002", "description": "Specify Vercel output directory (e.g., 'dist' for Vite).", "status": "PENDING", "target_artifact_id": "vercel_deploy_config_g23", "notes": "To be specified in vercel.json or Vercel dashboard." },
+        { "item_id": "task004_check_003", "description": "Configure any necessary environment variables for the Vercel deployment.", "status": "PENDING", "target_artifact_id": "vercel_deploy_config_g23", "notes": null },
+        { "item_id": "task004_check_004", "description": "Create/update vercel.json file with appropriate React/Vite settings if not using Vercel dashboard for all configurations.", "status": "PENDING", "target_artifact_id": "vercel_deploy_config_g23", "notes": null },
+        { "item_id": "task004_check_005", "description": "Document all deployment steps, Vercel project settings, and configurations in the output artifact.", "status": "PENDING", "target_artifact_id": "vercel_deploy_config_g23", "notes": "Ensure comprehensive details in deploy/vercel_config_interactive_pres_cycle0.txt." }
+      ],
+      "dependencies": ["plan_cycle0_showcase_and_foundations_g20_task_003"],
+      "criticality": "MEDIUM",
+      "status": "PENDING",
+      "retry_count": 0,
+      "linked_issue_ids": ["issue_g30_react_requirement"],
+      "notes": ["g:37 - Task reactivated to update Vercel configuration for a React application based on issue_g30_react_requirement. Previous static site guide is insufficient."]
+    },
+    {
+      "id": "plan_cycle0_showcase_and_foundations_g20_task_005",
+      "title": "Deploy React Interactive Presentation to Vercel & Test",
+      "description": "Deploy the prepared React-based animated screens to Vercel. Conduct thorough testing of the live presentation URL to ensure all animations, interactions, and screen flows work as intended per the storyboard (adapted for React components). Verify responsiveness if outlined in the storyboard.",
+      "intent": "To make the React-based interactive animated presentation publicly accessible via a Vercel URL and confirm its correct operation, resolving previous deployment issues (issue_g29_deploy_404).",
+      "inputs": [
+        { "name": "Built React Application for Deployment", "source_description": "Output from ...task_003 (react_pres_build_g37), prepared as per ...task_004.", "details": "The application ready for deployment." },
+        { "name": "Vercel Account Credentials/Access", "source_description": "Permissions to deploy to the target Vercel account/project.", "details": "Required for deployment action." }
+      ],
+      "outputs": [
+        { "name": "Hosted Interactive Presentation URL", "artifact_id": "live_pres_url_g24", "expected_path": "N/A_URL_PROVIDED_IN_NOTES", "description": "The live Vercel URL. The actual URL will be recorded in task notes.", "embed_annotations_required": "false" },
+        { "name": "Deployment Confirmation Report", "artifact_id": "deploy_report_g25", "expected_path": "reports/vercel_deployment_cycle0_v1.md.txt", "description": "Report confirming deployment, including URL, date, and test observations. This file will have an embedded annotation block.", "embed_annotations_required": "true" }
+      ],
+      "execution_checklist": [
+        { "item_id": "task005_check_001", "description": "Execute Vercel deployment command/process using configurations from task_004.", "status": "PENDING", "target_artifact_id": null, "notes": null },
+        { "item_id": "task005_check_002", "description": "Verify successful deployment and obtain the live Vercel URL.", "status": "PENDING", "target_artifact_id": "live_pres_url_g24", "notes": "URL to be recorded in task notes." },
+        { "item_id": "task005_check_003", "description": "Test SplashScreen (storyboard 1.1) functionality and animations on live URL.", "status": "PENDING", "target_artifact_id": null, "notes": null },
+        { "item_id": "task005_check_004", "description": "Test OnboardingScreen1 (storyboard 1.2) functionality and animations on live URL.", "status": "PENDING", "target_artifact_id": null, "notes": null },
+        { "item_id": "task005_check_005", "description": "Test OnboardingScreen2 (storyboard 1.3) functionality and animations on live URL.", "status": "PENDING", "target_artifact_id": null, "notes": null },
+        { "item_id": "task005_check_006", "description": "Test OnboardingScreen3 (storyboard 1.4) functionality and animations on live URL.", "status": "PENDING", "target_artifact_id": null, "notes": null },
+        { "item_id": "task005_check_007", "description": "Test LoginScreen (storyboard 2.1) functionality, form input, and simulated login on live URL.", "status": "PENDING", "target_artifact_id": null, "notes": null },
+        { "item_id": "task005_check_008", "description": "Test any other implemented screens (e.g., Signup, Forgot Password, Home) on live URL.", "status": "PENDING", "target_artifact_id": null, "notes": "Depends on progress in task_003." },
+        { "item_id": "task005_check_009", "description": "Verify overall interactivity and navigation flow between screens.", "status": "PENDING", "target_artifact_id": null, "notes": null },
+        { "item_id": "task005_check_010", "description": "Verify responsiveness on different screen sizes if specified in storyboard.", "status": "PENDING", "target_artifact_id": null, "notes": null },
+        { "item_id": "task005_check_011", "description": "Complete and save the Deployment Confirmation Report.", "status": "PENDING", "target_artifact_id": "deploy_report_g25", "notes": "Include URL, date, test observations in reports/vercel_deployment_cycle0_v1.md.txt." }
+      ],
+      "dependencies": ["plan_cycle0_showcase_and_foundations_g20_task_004"],
+      "criticality": "HIGH",
+      "status": "FAILED",
+      "retry_count": 1,
+      "linked_issue_ids": ["issue_g29_deploy_404", "issue_g30_react_requirement"],
+      "notes": ["Target for cycle 0.5/1 presentation readiness.", "g:28 - Deployment report template created. Awaiting user deployment, testing, and URL input.", "g:33 - Deployment failed with 404 (issue_g29_deploy_404). User also introduced new React requirement (issue_g30_react_requirement), invalidating current deployment approach for static site.", "g:37 - This task will be re-attempted after React version development (task 003) and Vercel config update (task 004) are completed."]
+    },
+    {
+      "id": "plan_cycle0_showcase_and_foundations_g20_task_006",
+      "title": "Develop Figma Design Library Foundations",
+      "description": "Based on the full set of Figma screen designs and informed by the 'Design Library Lite' (design_library_lite_css_g21), formalize foundational design elements (colors, typography, spacing, core iconography, grid definitions) within the main Figma design environment. This involves creating and organizing these elements as reusable styles and components in Figma.",
+      "intent": "To establish the core, reusable design foundations in Figma, ensuring consistency across all future design work and providing a solid base for more complex component creation.",
+      "inputs": [
+        { "name": "Figma Screen Designs (Full Set)", "source_description": "User-provided screenshots of Figma storyboards.", "details": "The complete visual reference for the application UI." },
+        { "name": "CSS Design Library Lite File", "source_description": "Artifact design_library_lite_css_g21.", "details": "Provides an initial, code-based extraction of colors and typography to ensure alignment." },
+        { "name": "Figma Page Catalogue", "source_description": "User-provided CSV mapping Figma frames to features and MVP cycles.", "details": "source/Figma_Page_Catalogue.csv" }
+      ],
+      "outputs": [
+        { "name": "Figma Design Library Foundations URL/Reference", "artifact_id": "c0_figma_library_foundations_g26", "expected_path": "design/figma/cycle0_foundations_link.txt", "description": "A text file containing a link to the Figma file/page where the Design Library Foundations are established, or a summary document if a direct link is not feasible. The .txt file itself will have an annotation block.", "embed_annotations_required": "true" }
+      ],
+      "execution_checklist": [
+        { "item_id": "task006_check_001", "description": "Define and organize the primary color palette (main brand, neutrals, status) as reusable styles in Figma.", "status": "PENDING", "target_artifact_id": "c0_figma_library_foundations_g26", "notes": null },
+        { "item_id": "task006_check_002", "description": "Define and organize the typography scale (font families, sizes, weights) as reusable text styles in Figma.", "status": "PENDING", "target_artifact_id": "c0_figma_library_foundations_g26", "notes": null },
+        { "item_id": "task006_check_003", "description": "Define and organize basic spacing units (e.g., 4px or 8px grid based) as guidelines or documentation in Figma.", "status": "PENDING", "target_artifact_id": "c0_figma_library_foundations_g26", "notes": null },
+        { "item_id": "task006_check_004", "description": "Select and organize a set of core iconography as reusable components in Figma.", "status": "PENDING", "target_artifact_id": "c0_figma_library_foundations_g26", "notes": null },
+        { "item_id": "task006_check_005", "description": "Define base grid definitions (e.g., layout grids for mobile screens) in Figma.", "status": "PENDING", "target_artifact_id": "c0_figma_library_foundations_g26", "notes": null },
+        { "item_id": "task006_check_006", "description": "Ensure all foundational elements are clearly named and organized within the Figma library structure.", "status": "PENDING", "target_artifact_id": "c0_figma_library_foundations_g26", "notes": null },
+        { "item_id": "task006_check_007", "description": "Document the link to the Figma file/page or a summary in the output artifact.", "status": "PENDING", "target_artifact_id": "c0_figma_library_foundations_g26", "notes": "Ensure design/figma/cycle0_foundations_link.txt is created and annotated." }
+      ],
+      "dependencies": ["plan_cycle0_showcase_and_foundations_g20_task_002"],
+      "criticality": "MEDIUM",
+      "status": "PENDING",
+      "retry_count": 0,
+      "linked_issue_ids": [],
+      "notes": ["This task can run in parallel with Vercel presentation development after Task 2 is complete, or be sequenced after."]
+    },
+    {
+      "id": "plan_cycle0_showcase_and_foundations_g20_task_007",
+      "title": "Develop Basic React Native Shell with Navigation Stubs",
+      "description": "Create a basic React Native (Expo) application utilizing React Native Paper (Material Design 3). Implement main navigation structures (e.g., tab navigator, stack navigators for key sections) based on the Figma designs. Screens will be placeholders or contain static mock content. No backend integration, no complex logic.",
+      "intent": "To establish the skeletal structure of the mobile application with functional navigation, providing a tangible starting point for subsequent development cycles (Cycle 1 onwards).",
+      "inputs": [
+        { "name": "Figma Screen Designs (Full Set)", "source_description": "User-provided screenshots of Figma storyboards.", "details": "Dictates the navigation structure and screen flows." },
+        { "name": "Figma Design Library Foundations (Reference)", "source_description": "Output from ...task_006 (c0_figma_library_foundations_g26).", "details": "Provides guidance on core styling to be implemented in React Native Paper theming, if available at this stage." },
+        { "name": "Figma Page Catalogue", "source_description": "User-provided CSV mapping Figma frames to features and MVP cycles.", "details": "source/Figma_Page_Catalogue.csv" }
+      ],
+      "outputs": [
+        { "name": "React Native Shell Application Main Source File", "artifact_id": "c0_rn_shell_src_main_revised_g27", "expected_path": "artifacts/c0/code/mobile/shell_main_cycle0.js.txt", "description": "The main annotated source code file (or representative entry point) for the React Native (Expo) shell application with React Native Paper (MD3), basic navigation, and static mock data. This file will have an embedded annotation block.", "embed_annotations_required": "true" },
+        { "name": "React Native Shell Project README (Cycle 0)", "artifact_id": "c0_mobile_readme_revised_g28", "expected_path": "artifacts/c0/docs/readme_mobile_shell_cycle0.md.txt", "description": "Updated README.md for the mobile shell project, reflecting Cycle 0 deliverables, setup, and navigation overview. This file will have an embedded annotation block.", "embed_annotations_required": "true" }
+      ],
+      "execution_checklist": [
+        { "item_id": "task007_check_001", "description": "Initialize a new React Native (Expo) project.", "status": "PENDING", "target_artifact_id": "c0_rn_shell_src_main_revised_g27", "notes": null },
+        { "item_id": "task007_check_002", "description": "Install and configure React Native Paper for Material Design 3 components.", "status": "PENDING", "target_artifact_id": "c0_rn_shell_src_main_revised_g27", "notes": null },
+        { "item_id": "task007_check_003", "description": "Implement main navigation structure (e.g., TabNavigator using React Navigation).", "status": "PENDING", "target_artifact_id": "c0_rn_shell_src_main_revised_g27", "notes": null },
+        { "item_id": "task007_check_004", "description": "Implement stack navigators for key application sections identified in Figma designs.", "status": "PENDING", "target_artifact_id": "c0_rn_shell_src_main_revised_g27", "notes": null },
+        { "item_id": "task007_check_005", "description": "Create placeholder screens with static mock content for each navigation stub.", "status": "PENDING", "target_artifact_id": "c0_rn_shell_src_main_revised_g27", "notes": null },
+        { "item_id": "task007_check_006", "description": "Apply basic theming using React Native Paper, referencing Figma foundations (c0_figma_library_foundations_g26) if available.", "status": "PENDING", "target_artifact_id": "c0_rn_shell_src_main_revised_g27", "notes": null },
+        { "item_id": "task007_check_007", "description": "Ensure the main source file (e.g., App.js or equivalent) has an embedded annotation block.", "status": "PENDING", "target_artifact_id": "c0_rn_shell_src_main_revised_g27", "notes": "Path: artifacts/c0/code/mobile/shell_main_cycle0.js.txt" },
+        { "item_id": "task007_check_008", "description": "Create/update the README.md file for the mobile shell project, detailing setup, navigation, and Cycle 0 deliverables.", "status": "PENDING", "target_artifact_id": "c0_mobile_readme_revised_g28", "notes": "Path: artifacts/c0/docs/readme_mobile_shell_cycle0.md.txt. Ensure it has an annotation block." }
+      ],
+      "dependencies": ["plan_cycle0_showcase_and_foundations_g20_task_006"],
+      "criticality": "MEDIUM",
+      "status": "PENDING",
+      "retry_count": 0,
+      "linked_issue_ids": [],
+      "notes": ["This task can run in parallel with Vercel presentation development, or be sequenced after."]
+    }
+  ]
+} 

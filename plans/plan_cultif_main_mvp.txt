@@ -1,13 +1,13 @@
 {
-  "v": 3,
+  "v": 4,
   "id": "plan_cultif_main_mvp",
   "status": "ACTIVE",
-  "goal": "To develop and launch a monetizable, mobile-first recipe platform ('Cultif' / 'WorldChef') enabling creators to publish content and users to subscribe for premium access. The MVP will include core functionalities for recipe creation and management (CRUD), image-based media storage, basic nutrition information, user authentication, a single-tier Stripe-based monthly subscription with paywall enforcement, content discovery via search and filters, manual meal planning with grocery list export, and basic user engagement features like likes, favorites, and push notifications. The project will be executed over approximately six 4-week cycles, adhering to the Shape Up methodology, with a strong emphasis on AI-assisted development and a lean, iterative approach to deliver a functional MVP within the defined timeline and resource constraints (side-hustle capacity of ~20 hrs/week).",
+  "goal": "To develop and launch a monetizable, mobile-first recipe platform ('Cultif' / 'WorldChef') enabling creators to publish content and users to subscribe for premium access. The MVP will include core functionalities for recipe creation and management (CRUD), image-based media storage, basic nutrition information, user authentication, a single-tier Stripe-based monthly subscription with paywall enforcement, content discovery via search and filters, manual meal planning with grocery list export, and basic user engagement features like likes, favorites, and push notifications. The project will be executed over approximately six 4-week cycles, adhering to the Shape Up methodology, with a strong emphasis on AI-assisted development and a lean, iterative approach to deliver a functional MVP.",
   "scope": [
     "Development of a React Native (Expo, React Native Paper - Material Design 3) mobile application for iOS and Android.",
     "Implementation of a Fastify (Node.js) backend API.",
     "Utilization of Supabase for PostgreSQL database, authentication, and S3-compatible storage.",
-    "Cycle 0: Creation of a Vercel-hosted interactive UI presentation, foundational design elements, and a basic React Native shell. Detailed execution is managed by plan_cycle0_showcase_and_foundations_g20.txt.",
+    "Cycle 0: Creation of a Vercel-hosted interactive UI presentation, foundational design elements, and a basic React Native shell.",
     "Cycle 1: Implementation of a lean content pipeline including recipe CRUD, basic email authentication, image uploads, and a stubbed/cached nutrition data worker.",
     "Cycle 2: Introduction of a micro-monetization layer with Stripe Hosted Checkout for a single-tier monthly subscription and paywall enforcement.",
     "Cycle 3: Development of basic discovery features including full-text search for recipes/creators, filters, and a simplified 'Top Creators' leaderboard.",
@@ -33,7 +33,7 @@
     "Internationalization beyond English UI and basic i18n scaffolding."
   ],
   "g_created": 2,
-  "g_updated": 20,
+  "g_updated": 59,
   "tasks": [
     {
       "id": "plan_cultif_main_mvp_cycle0",
@@ -41,9 +41,9 @@
       "description": "Establish foundational visual elements, deliver a Vercel-hosted interactive animated presentation of core UI flows, and produce a basic React Native shell application. Detailed execution of these deliverables is managed by the dedicated Cycle 0 plan: plan_cycle0_showcase_and_foundations_g20.txt.",
       "intent": "To create a visual and structural foundation for the application, enabling early feedback and guiding subsequent development cycles. This cycle is primarily driven by plan_cycle0_showcase_and_foundations_g20.txt.",
       "inputs": [
-        { "name": "Project Charter", "source_description": "Core project definition document.", "details": "Provides overall project purpose, objectives, and high-level scope." },
-        { "name": "Product Requirements Document (PRD)", "source_description": "Product feature and requirements specification.", "details": "Defines target users, value proposition, and functional/non-functional requirements relevant to Cycle 0 deliverables." },
-        { "name": "Dedicated Cycle 0 Plan", "source_description": "plan_cycle0_showcase_and_foundations_g20.txt", "details": "Contains the detailed task breakdown and specific artifact definitions for all Cycle 0 deliverables." }
+        { "name": "Project Charter", "source_description": "Core project definition document.", "details": "source/2. Project Charter.txt" },
+        { "name": "Product Requirements Document (PRD)", "source_description": "Product feature and requirements specification.", "details": "source/3. Product Requirements Document.txt" },
+        { "name": "Dedicated Cycle 0 Plan", "source_description": "plan_cycle0_showcase_and_foundations_g20.txt", "details": "plans/plan_cycle0_showcase_and_foundations_g20.txt" }
       ],
       "outputs": [
         { "name": "Hosted Vercel Interactive UI Presentation", "artifact_id": "live_pres_url_g24", "expected_path": "(Managed by plan_cycle0_showcase_and_foundations_g20.txt)", "description": "Primary demonstration artifact for Cycle 0. A Vercel-hosted interactive animated presentation of core UI flows.", "embed_annotations_required": "false" },
@@ -66,10 +66,10 @@
       "intent": "To establish the core infrastructure for content creation, storage, authentication, and public viewing, forming the backbone of the recipe platform.",
       "inputs": [
         { "name": "Cycle 0 Deliverables (Ref. plan_cycle0_showcase_and_foundations_g20.txt)", "source_description": "Outputs from the Cycle 0 plan.", "details": "Includes Vercel Presentation, Design Foundations, RN Shell App, and feedback reports." },
-        { "name": "Product Requirements Document (PRD)", "source_description": "Product feature specification.", "details": "Provides requirements for content features." },
-        { "name": "Technical Requirements Document (TRD)", "source_description": "Technical architecture and data model.", "details": "Defines stack, DB schema, and API surface for Cycle 1." },
-        { "name": "Cycle 1 Blueprint Document", "source_description": "Detailed plan for Cycle 1.", "details": "Specifies objectives, scope, and deliverables for the content pipeline." },
-        { "name": "App UI Screen Catalogue & Figma Page Catalogue (C1 relevant screens)", "source_description": "UI design specifications.", "details": "Provides designs for Auth, Home Feed, Recipe Detail, and Upload Wizard screens." }
+        { "name": "Product Requirements Document (PRD)", "source_description": "Product feature specification.", "details": "source/3. Product Requirements Document.txt" },
+        { "name": "Technical Requirements Document (TRD)", "source_description": "Technical architecture and data model.", "details": "source/4. Technical Requirements Document.txt" },
+        { "name": "Cycle 1 Blueprint Document", "source_description": "Detailed plan for Cycle 1.", "details": "source/1.1 Cycle 1 Blueprint — Lean Content Pipeline.txt" },
+        { "name": "App UI Screen Catalogue & Figma Page Catalogue (C1 relevant screens)", "source_description": "UI design specifications.", "details": "References source/## App UI Screen Catalogue.txt and source/Figma_Page_Catalogue.csv" }
       ],
       "outputs": [
         { "name": "Supabase Schema Migrations (Cycle 1)", "artifact_id": "c1_db_migrations", "expected_path": "artifacts/c1/db/migrations/schema.sql.txt", "description": "SQL DDL migrations for users, creators, recipes tables, and RLS policies for Cycle 1.", "embed_annotations_required": "true" },
@@ -95,9 +95,9 @@
       "intent": "To introduce the core monetization capabilities, allowing the platform to generate revenue through subscriptions and manage access to premium content.",
       "inputs": [
         { "name": "Cycle 1 Deliverables", "source_description": "Outputs from the Lean Content Pipeline cycle.", "details": "Includes working API, DB schema, mobile app with basic content features." },
-        { "name": "Technical Requirements Document (TRD)", "source_description": "Technical architecture and data model.", "details": "Defines data model additions (subscriptions, ledger) and API endpoints for monetization." },
-        { "name": "Cycle 2 Blueprint Document", "source_description": "Detailed plan for Cycle 2.", "details": "Specifies objectives, scope, and deliverables for the monetization layer." },
-        { "name": "App UI Screen Catalogue & Figma Page Catalogue (C2 relevant screens)", "source_description": "UI design specifications.", "details": "Provides designs for Subscription Flow and Paywall screens." }
+        { "name": "Technical Requirements Document (TRD)", "source_description": "Technical architecture and data model.", "details": "source/4. Technical Requirements Document.txt" },
+        { "name": "Cycle 2 Blueprint Document", "source_description": "Detailed plan for Cycle 2.", "details": "source/1.2 Cycle 2 Blueprint — Monetization Layer.txt" },
+        { "name": "App UI Screen Catalogue & Figma Page Catalogue (C2 relevant screens)", "source_description": "UI design specifications.", "details": "References source/## App UI Screen Catalogue.txt and source/Figma_Page_Catalogue.csv" }
       ],
       "outputs": [
         { "name": "Supabase Schema Migrations (Cycle 2)", "artifact_id": "c2_db_migrations", "expected_path": "artifacts/c2/db/migrations/schema_updates.sql.txt", "description": "SQL DDL migrations for subscriptions and ledger tables for Cycle 2.", "embed_annotations_required": "true" },
@@ -121,9 +121,9 @@
       "intent": "To enhance user experience by providing robust search and filtering tools, making it easier for users to find relevant recipes and creators.",
       "inputs": [
         { "name": "Cycle 2 Deliverables", "source_description": "Outputs from the Monetization Layer cycle.", "details": "Includes working subscription system and paywalled content." },
-        { "name": "Technical Requirements Document (TRD)", "source_description": "Technical architecture and data model.", "details": "Defines DB extensions (pg_trgm), search indices, and API endpoints for discovery." },
-        { "name": "Cycle 3 Blueprint Document", "source_description": "Detailed plan for Cycle 3.", "details": "Specifies objectives, scope, and deliverables for discovery and search features." },
-        { "name": "App UI Screen Catalogue & Figma Page Catalogue (C3 relevant screens)", "source_description": "UI design specifications.", "details": "Provides designs for Search Bar, Filter Drawer, Search Results, and Leaderboard screens." }
+        { "name": "Technical Requirements Document (TRD)", "source_description": "Technical architecture and data model.", "details": "source/4. Technical Requirements Document.txt" },
+        { "name": "Cycle 3 Blueprint Document", "source_description": "Detailed plan for Cycle 3.", "details": "source/1.3 Cycle 3 Blueprint — Discovery & Search.txt" },
+        { "name": "App UI Screen Catalogue & Figma Page Catalogue (C3 relevant screens)", "source_description": "UI design specifications.", "details": "References source/## App UI Screen Catalogue.txt and source/Figma_Page_Catalogue.csv" }
       ],
       "outputs": [
         { "name": "Supabase Schema Migrations (Search - C3)", "artifact_id": "c3_db_migrations", "expected_path": "artifacts/c3/db/migrations/schema_search.sql.txt", "description": "SQL DDL for PG extensions, search indices, and creator_trending Materialized View for Cycle 3.", "embed_annotations_required": "true" },
@@ -147,9 +147,9 @@
       "intent": "To provide users with tools to organize recipes into weekly meal plans and generate grocery lists, adding significant utility to the platform.",
       "inputs": [
         { "name": "Cycle 3 Deliverables", "source_description": "Outputs from the Discovery & Search cycle.", "details": "Includes search and filter functionalities." },
-        { "name": "Technical Requirements Document (TRD)", "source_description": "Technical architecture and data model.", "details": "Defines data model for meal_plans and API endpoints for meal planning." },
-        { "name": "Cycle 4 Blueprint Document", "source_description": "Detailed plan for Cycle 4.", "details": "Specifies objectives, scope, and deliverables for the meal-planning layer." },
-        { "name": "App UI Screen Catalogue & Figma Page Catalogue (C4 relevant screens)", "source_description": "UI design specifications.", "details": "Provides designs for Plan Creation Wizard, Meal Plan Calendar View, and Grocery List Modal." }
+        { "name": "Technical Requirements Document (TRD)", "source_description": "Technical architecture and data model.", "details": "source/4. Technical Requirements Document.txt" },
+        { "name": "Cycle 4 Blueprint Document", "source_description": "Detailed plan for Cycle 4.", "details": "source/1.4 Cycle 4 Blueprint — Meal-Planning Layer.txt" },
+        { "name": "App UI Screen Catalogue & Figma Page Catalogue (C4 relevant screens)", "source_description": "UI design specifications.", "details": "References source/## App UI Screen Catalogue.txt and source/Figma_Page_Catalogue.csv" }
       ],
       "outputs": [
         { "name": "Supabase Schema Migrations (Meal Planning - C4)", "artifact_id": "c4_db_migrations", "expected_path": "artifacts/c4/db/migrations/schema_mealplan.sql.txt", "description": "SQL DDL migrations for meal_plans table for Cycle 4.", "embed_annotations_required": "true" },
@@ -173,9 +173,9 @@
       "intent": "To enhance user and creator engagement by introducing interactive features like likes/favorites, push notifications, and a basic analytics dashboard for creators.",
       "inputs": [
         { "name": "Cycle 4 Deliverables", "source_description": "Outputs from the Meal-Planning Layer cycle.", "details": "Includes meal planning functionality." },
-        { "name": "Technical Requirements Document (TRD)", "source_description": "Technical architecture and data model.", "details": "Defines data model additions (likes, favorites, device_tokens, creator_stats_mv) and API endpoints for engagement features." },
-        { "name": "Cycle 5 Blueprint Document", "source_description": "Detailed plan for Cycle 5.", "details": "Specifies objectives, scope, and deliverables for the engagement layer." },
-        { "name": "App UI Screen Catalogue & Figma Page Catalogue (C5 relevant screens)", "source_description": "UI design specifications.", "details": "Provides designs for Like/Favorite icons, Saved Items, Push Opt-in, and Creator Dashboard." }
+        { "name": "Technical Requirements Document (TRD)", "source_description": "Technical architecture and data model.", "details": "source/4. Technical Requirements Document.txt" },
+        { "name": "Cycle 5 Blueprint Document", "source_description": "Detailed plan for Cycle 5.", "details": "source/1.5 Cycle 5 Blueprint — Engagement Layer.txt" },
+        { "name": "App UI Screen Catalogue & Figma Page Catalogue (C5 relevant screens)", "source_description": "UI design specifications.", "details": "References source/## App UI Screen Catalogue.txt and source/Figma_Page_Catalogue.csv" }
       ],
       "outputs": [
         { "name": "Supabase Schema Migrations (Engagement - C5)", "artifact_id": "c5_db_migrations", "expected_path": "artifacts/c5/db/migrations/schema_engagement.sql.txt", "description": "SQL DDL for likes, favorites, device_tokens, creator_followers tables and creator_stats_mv for Cycle 5.", "embed_annotations_required": "true" },

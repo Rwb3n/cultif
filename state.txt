@@ -1,11 +1,11 @@
 {
-  "v": 21,
-  "g": 28,
+  "v": 2,
+  "g": 119,
   "ph": "CONSTRUCT",
-  "st": "BLOCK_INPUT",
-  "cp_id": "plan_cycle0_showcase_and_foundations_g20.txt",
-  "ct_id": "plan_cycle0_showcase_and_foundations_g20_task_005",
+  "st": "BUSY",
+  "cp_id": "plan_cycle0_webreact_prototype_g112",
+  "ct_id": "pc0wp_task_002",
   "rt": {},
-  "active_issue_ids": ["issue_g5_visual_tech_strategy_update"],
+  "active_issue_ids": [],
   "last_error": null
 } 

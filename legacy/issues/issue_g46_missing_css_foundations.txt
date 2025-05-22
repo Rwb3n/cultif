@@ -1,0 +1,22 @@
+{
+  "v": 2,
+  "id": "issue_g46_missing_css_foundations",
+  "title": "Missing Artifact: CSS Foundations File (design_library_lite_css_g21)",
+  "description": "The CSS foundations file (design_library_lite_css_g21), expected at 'src/interactive_presentation/css/foundations.css.txt' as per registry_map.txt and as an output of completed task plan_cycle0_showcase_and_foundations_g20_task_002, cannot be found in the workspace. This blocks development of the React-based interactive presentation (task plan_cycle0_showcase_and_foundations_g20_task_003) which depends on these styles.",
+  "type": "BUG",
+  "severity": "CRITICAL",
+  "status": "RESOLVED",
+  "g_reported": 46,
+  "g_status_updated": 53,
+  "g_resolved": 53,
+  "reported_by": "SELF_DETECTED",
+  "plan_id_ref": "plan_cycle0_showcase_and_foundations_g20.txt",
+  "task_id_ref": "plan_cycle0_showcase_and_foundations_g20_task_003",
+  "artifact_id_ref": "design_library_lite_css_g21",
+  "artifact_filepath_ref": "src/interactive_presentation/src/foundations.css",
+  "resolution_summary": "User provided the content for design_library_lite_css_g21 (foundations.css) at g:51 and it was placed at the conventional path src/interactive_presentation/src/foundations.css. This unblocks task ...003.",
+  "comments": [
+    { "g_ts": 46, "author": "Hybrid_AI_OS", "comment_text": "File not found during React project setup for task ...003. This artifact is a crucial input." },
+    { "g_ts": 53, "author": "Hybrid_AI_OS", "comment_text": "Issue resolved. User provided file content. Path corrected in registry and plan. Task ...003 unblocked." }
+  ]
+} 
