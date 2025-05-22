@@ -1,0 +1,184 @@
+{
+  "v": 1,
+  "id": "plan_cycle1_ui_refinement_g131",
+  "status": "APPROVED",
+  "preceding_plan_id_ref": "plan_cycle0_webreact_prototype_g112",
+  "origin_artifact_id": "cycle0_prototype_review_g130",
+  "goal": "To refine the Cycle 0 web prototype by: 1. Identifying and scaffolding new primitive UI components based on existing component needs. 2. Creating a dynamic UI Visual Library page within the prototype to showcase all components and primitives. 3. Ensuring all component annotations are updated for accurate bi-directional dependency tracking. 4. Beginning the process of populating existing page components with these refined UI components, guided by their embedded checklists and Figma references.",
+  "scope": [
+    "Analysis of existing scaffolded components (from plan_cycle0_webreact_prototype_g112) to identify common, reusable UI patterns suitable for abstraction into new 'primitive' components (e.g., Typography, IconWrapper, FormInputBase, GridItem, FlexContainer).",
+    "Scaffolding of new primitive React component files (.jsx) with comprehensive annotation blocks, placeholder comments for structure, props, and intended usage.",
+    "Creation of a dedicated 'UI Visual Library' page (e.g., StyleGuidePage.jsx) that imports and renders examples of all defined primitive and common UI components, showcasing their variations.",
+    "Updating the main application router (AppRouter.jsx) to include a navigable route to the new UI Visual Library page.",
+    "Systematic review and update of annotation blocks in all relevant existing and new UI components (primitives, common, layout) to ensure `internal_dependencies` and `dependents` are accurately listed and bi-directionally consistent.",
+    "Initial population of 1-2 existing page components (e.g., LoginPage.jsx, parts of HomePage.jsx) by replacing current placeholders with the newly defined/refined primitive and common UI components, following their embedded checklists and Figma references.",
+    "Ensuring all newly created and modified text-editable artifacts adhere to the standard EmbeddedAnnotationBlock structure and schema.",
+    "Updating registry_map.txt to include all new artifacts created as part of this plan."
+  ],
+  "exclusions": [
+    "Full population of all existing page components with new UI components; this plan covers only an initial set (1-2 pages) to establish the pattern.",
+    "Implementation of any backend logic or API integrations; focus remains on front-end UI structure and presentation.",
+    "Advanced state management for the UI Visual Library page beyond what's needed to display component variations.",
+    "Creation of a comprehensive design system or Figma component updates; this plan focuses on the code-level component library based on existing understanding.",
+    "Unit tests or integration tests for the new components or the visual library page (deferred to a subsequent testing-focused plan/cycle)."
+  ],
+  "g_created": 131,
+  "g_updated": 133,
+  "tasks": [
+    {
+      "id": "pc1uir_task_001",
+      "title": "Analyze Existing Components & Define New UI Primitives",
+      "description": "Review the existing scaffolded common components (Button, Card, Modal, Header, Footer from plan_cycle0_webreact_prototype_g112) and page component placeholders to identify recurring low-level UI patterns or elements that can be abstracted into new 'primitive' components. Define the list of these primitives, their expected props, and basic functionality.",
+      "intent": "To identify foundational UI building blocks that will promote consistency, reusability, and easier maintenance across the application UI, and to formalize their specifications before scaffolding.",
+      "inputs": [
+        { "name": "Cycle 0 Web Prototype Components", "source_description": "All .jsx files under prototypes/cycle0_react_web/src/components/ and prototypes/cycle0_react_web/src/pages/ created by plan_cycle0_webreact_prototype_g112.", "details": "Focus on their structure, comments, and Figma references to identify underlying patterns." },
+        { "name": "Figma Page Catalogue", "source_description": "Artifact `src_figmacat_g85` from `source_review_doc_g85`.", "details": "To cross-reference UI patterns with design definitions." },
+        { "name": "React Best Practices for Component Design", "source_description": "General knowledge.", "details": "Consider composition, reusability, and separation of concerns." }
+      ],
+      "outputs": [
+        {
+          "name": "UI Primitives Definition Document",
+          "artifact_id": "cycle1_ui_primitives_definition_g131",
+          "expected_path": "artifacts/design/cycle1_ui_primitives_definition_g131.md",
+          "description": "A markdown document listing the identified primitive components, their purpose, proposed props (name, type, description), and examples of where they would be used. Each primitive should have a proposed artifact_id.",
+          "embed_annotations_required": "true"
+        }
+      ],
+      "execution_checklist": [
+        {"item_id": "pc1uir_task_001_check_001", "description": "Review all existing page and common component scaffold files.", "status": "DONE", "target_artifact_id": null, "notes": "Completed at g=132"},
+        {"item_id": "pc1uir_task_001_check_002", "description": "Identify at least 3-5 candidates for new primitive components (e.g., Typography, Icon, InputBase, Layout primitives like Grid/Stack).", "status": "DONE", "target_artifact_id": null, "notes": "Identified Typography, Icon, Input, Box, Stack, Grid, Link as candidates at g=132."},
+        {"item_id": "pc1uir_task_001_check_003", "description": "For each candidate primitive, define its core purpose, essential props, and basic variations.", "status": "DONE", "target_artifact_id": null, "notes": "Defined in cycle1_ui_primitives_definition_g131.md at g=132."},
+        {"item_id": "pc1uir_task_001_check_004", "description": "Create the `cycle1_ui_primitives_definition_g131.md` document detailing these definitions and assign proposed artifact_ids.", "status": "DONE", "target_artifact_id": "cycle1_ui_primitives_definition_g131", "notes": "Created document at g=132."}
+      ],
+      "dependencies": [],
+      "criticality": "HIGH",
+      "status": "DONE",
+      "linked_issue_ids": [],
+      "notes": ["This task is foundational for standardizing the UI building blocks."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc1uir_task_002",
+      "title": "Scaffold New UI Primitive Component Files",
+      "description": "Based on the `cycle1_ui_primitives_definition_g131.md` document, create the .jsx files for each defined primitive UI component. Each file must include a comprehensive annotation block, placeholder comments for its structure, props, variants, and basic rendering logic.",
+      "intent": "To create the physical file structure and initial commented code for all new primitive UI components, ready for further implementation and use in the UI Visual Library.",
+      "inputs": [
+        { "name": "UI Primitives Definition Document", "source_description": "Output of pc1uir_task_001 (`cycle1_ui_primitives_definition_g131`).", "details": "Provides the list of primitives and their specifications." }
+      ],
+      "outputs": [
+        // Example output, repeat for each primitive defined in task 001
+        // { "name": "Typography Primitive Component", "artifact_id": "cycle1_primitive_typography_g131", "expected_path": "prototypes/cycle0_react_web/src/components/primitives/Typography.jsx", "description": "Scaffolded Typography component.", "embed_annotations_required": "true" },
+        // { "name": "Icon Primitive Component", "artifact_id": "cycle1_primitive_icon_g131", "expected_path": "prototypes/cycle0_react_web/src/components/primitives/Icon.jsx", "description": "Scaffolded Icon component.", "embed_annotations_required": "true" }
+        { "name": "Set of Primitive Component Files", "artifact_id": "cycle1_primitive_components_set_g131", "expected_path": "prototypes/cycle0_react_web/src/components/primitives/", "description": "Container for all primitive component files. Individual files will be listed as checklist items and registered.", "embed_annotations_required": "false" }
+      ],
+      "execution_checklist": [
+        {"item_id": "pc1uir_task_002_check_001", "description": "Create the `prototypes/cycle0_react_web/src/components/primitives/` directory.", "status": "DONE", "target_artifact_id": null, "notes": "Completed at g=133"},
+        {"item_id": "pc1uir_task_002_check_002", "description": "Scaffold Typography.jsx with annotations and placeholders.", "status": "DONE", "target_artifact_id": "cycle1_primitive_typography_g132", "notes": "Completed at g=134"},
+        {"item_id": "pc1uir_task_002_check_003", "description": "Scaffold Icon.jsx with annotations and placeholders.", "status": "DONE", "target_artifact_id": "cycle1_primitive_icon_g132", "notes": "Completed at g=134"},
+        {"item_id": "pc1uir_task_002_check_004", "description": "Scaffold Input.jsx with annotations and placeholders.", "status": "DONE", "target_artifact_id": "cycle1_primitive_input_g132", "notes": "Completed at g=134"},
+        {"item_id": "pc1uir_task_002_check_005", "description": "Scaffold Box.jsx with annotations and placeholders.", "status": "DONE", "target_artifact_id": "cycle1_primitive_box_g132", "notes": "Completed at g=134"},
+        {"item_id": "pc1uir_task_002_check_006", "description": "Scaffold Stack.jsx with annotations and placeholders.", "status": "DONE", "target_artifact_id": "cycle1_primitive_stack_g132", "notes": "Completed at g=134"},
+        {"item_id": "pc1uir_task_002_check_007", "description": "Scaffold Grid.jsx with annotations and placeholders.", "status": "DONE", "target_artifact_id": "cycle1_primitive_grid_g132", "notes": "Completed at g=134"},
+        {"item_id": "pc1uir_task_002_check_008", "description": "Scaffold Link.jsx with annotations and placeholders.", "status": "DONE", "target_artifact_id": "cycle1_primitive_link_g132", "notes": "Completed at g=134"}
+      ],
+      "dependencies": ["pc1uir_task_001"],
+      "criticality": "HIGH",
+      "status": "DONE",
+      "linked_issue_ids": [],
+      "notes": ["Ensure standard file naming (PascalCase) and .jsx extension. Annotations must be complete."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc1uir_task_003",
+      "title": "Create UI Visual Library Page",
+      "description": "Develop a new page component (e.g., `StyleGuidePage.jsx`) that serves as a visual library. This page will import and render examples of all newly created primitive components and existing common components (Button, Card, Modal, etc.). Add a route for this page in `AppRouter.jsx`.",
+      "intent": "To provide a centralized, interactive reference for all UI components, facilitating stakeholder review, developer consistency, and a visual source of truth for the component set.",
+      "inputs": [
+        { "name": "Scaffolded Primitive Components", "source_description": "Outputs of pc1uir_task_002.", "details": "All .jsx files in `prototypes/cycle0_react_web/src/components/primitives/`" },
+        { "name": "Existing Common Components", "source_description": "Files like Button.jsx, Card.jsx from `plan_cycle0_webreact_prototype_g112`.", "details": "Located in `prototypes/cycle0_react_web/src/components/common/` and `layout/`" },
+        { "name": "AppRouter.jsx", "source_description": "Artifact `cycle0_router_config_g112`.", "details": "File `prototypes/cycle0_react_web/src/navigation/AppRouter.jsx`" }
+      ],
+      "outputs": [
+        {
+          "name": "Style Guide Page Component",
+          "artifact_id": "cycle1_styleguide_page_g131",
+          "expected_path": "prototypes/cycle0_react_web/src/pages/StyleGuidePage.jsx",
+          "description": "React component file for the UI visual library.",
+          "embed_annotations_required": "true"
+        },
+        {
+          "name": "Updated AppRouter.jsx",
+          "artifact_id": "cycle0_router_config_g112", 
+          "expected_path": "prototypes/cycle0_react_web/src/navigation/AppRouter.jsx",
+          "description": "AppRouter.jsx updated to include a route to StyleGuidePage.jsx. Annotation block will be updated.",
+          "embed_annotations_required": "true"
+        }
+      ],
+      "execution_checklist": [
+        {"item_id": "pc1uir_task_003_check_001", "description": "Scaffold `StyleGuidePage.jsx` with annotation block and basic structure.", "status": "DONE", "target_artifact_id": "cycle1_styleguide_page_g131", "notes": "Completed at g=135"},
+        {"item_id": "pc1uir_task_003_check_002", "description": "Import and render examples of each primitive component in `StyleGuidePage.jsx`.", "status": "DONE", "target_artifact_id": "cycle1_styleguide_page_g131", "notes": "Initial examples added at g=135."},
+        {"item_id": "pc1uir_task_003_check_003", "description": "Import and render examples of existing common/layout components (Button, Card, Header etc.) in `StyleGuidePage.jsx`.", "status": "PENDING", "target_artifact_id": "cycle1_styleguide_page_g131", "notes": null},
+        {"item_id": "pc1uir_task_003_check_004", "description": "Add a new route (e.g., `/style-guide`) in `AppRouter.jsx` pointing to `StyleGuidePage.jsx`.", "status": "PENDING", "target_artifact_id": "cycle0_router_config_g112", "notes": null},
+        {"item_id": "pc1uir_task_003_check_005", "description": "Ensure basic navigation to the Style Guide page is possible (e.g., temporary link in Header or App.jsx for testing).", "status": "PENDING", "target_artifact_id": null, "notes": null}
+      ],
+      "dependencies": ["pc1uir_task_002"],
+      "criticality": "HIGH",
+      "status": "ACTIVE",
+      "linked_issue_ids": [],
+      "notes": ["The Style Guide page is crucial for visual reference and stakeholder communication."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc1uir_task_004",
+      "title": "Update Component Annotations for Bi-directional Linking",
+      "description": "Systematically review and update the `EmbeddedAnnotationBlock` for all relevant UI components (new primitives, existing common/layout components, and pages that will consume them). Ensure `internal_dependencies` accurately list all child components used, and `dependents` list all components/pages that use the current component. This ensures bi-directional traceability.",
+      "intent": "To establish and maintain a verifiable and accurate dependency graph within the codebase via annotations, fulfilling the 'referenced bi-directionally' requirement.",
+      "inputs": [
+        { "name": "All UI Component Files", "source_description": "All .jsx files in `prototypes/cycle0_react_web/src/components/` (primitives, common, layout) and `prototypes/cycle0_react_web/src/pages/`.", "details": "Both newly created and existing files from previous plan." }
+      ],
+      "outputs": [
+        { "name": "Set of Updated UI Component Files", "artifact_id": "cycle1_updated_annotated_components_set_g131", "expected_path": "prototypes/cycle0_react_web/src/", "description": "A conceptual output representing all components whose annotations were updated. No single new file, but existing files modified.", "embed_annotations_required": "false" }
+      ],
+      "execution_checklist": [
+        {"item_id": "pc1uir_task_004_check_001", "description": "For each new primitive component, verify its `internal_dependencies` (likely few) and identify its initial `dependents` (e.g., StyleGuidePage, common components that will use it). Update annotations.", "status": "PENDING", "target_artifact_id": null, "notes": null},
+        {"item_id": "pc1uir_task_004_check_002", "description": "For existing common/layout components, update their `internal_dependencies` if they now use new primitives. Update `dependents` if new pages/components use them. Update annotations.", "status": "PENDING", "target_artifact_id": null, "notes": null},
+        {"item_id": "pc1uir_task_004_check_003", "description": "For `StyleGuidePage.jsx`, ensure `internal_dependencies` lists all showcased components and their annotations list StyleGuidePage as a dependent. Update annotations.", "status": "PENDING", "target_artifact_id": null, "notes": null}
+      ],
+      "dependencies": ["pc1uir_task_002", "pc1uir_task_003"],
+      "criticality": "HIGH",
+      "status": "PENDING",
+      "linked_issue_ids": [],
+      "notes": ["This is a meticulous task requiring careful cross-referencing. g_last_modified and version_tag must be updated in each modified annotation."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc1uir_task_005",
+      "title": "Initial Population of Page Components with Refined UI Components",
+      "description": "Select 1-2 existing page components (e.g., LoginPage.jsx and a section of HomePage.jsx). Modify these pages to replace their high-level placeholders with compositions of the newly defined primitive and refined common UI components. Adhere to the checklists and Figma references within their existing annotations. Update their annotation blocks (dependencies, key_logic_points, g_last_modified, version_tag).",
+      "intent": "To begin the tangible process of using the new/refined UI component library to build out actual application pages, demonstrating the utility of the primitives and setting a pattern for further page development.",
+      "inputs": [
+        { "name": "Selected Page Component Files", "source_description": "E.g., `prototypes/cycle0_react_web/src/pages/LoginPage.jsx`, `prototypes/cycle0_react_web/src/pages/HomePage.jsx`.", "details": "Files from plan_cycle0_webreact_prototype_g112." },
+        { "name": "Primitive and Common UI Components", "source_description": "All components from `prototypes/cycle0_react_web/src/components/` (primitives, common, layout).", "details": "As defined/scaffolded/annotated in previous tasks of this plan." },
+        { "name": "Embedded Checklists and Figma References", "source_description": "Comments within the selected page component files.", "details": "Guides for UI element placement and structure." }
+      ],
+      "outputs": [
+        { "name": "Updated LoginPage.jsx", "artifact_id": "cycle0_page_login_g112", "expected_path": "prototypes/cycle0_react_web/src/pages/LoginPage.jsx", "description": "LoginPage.jsx updated with new UI components. Annotation block revised.", "embed_annotations_required": "true" },
+        { "name": "Updated HomePage.jsx (Partial)", "artifact_id": "cycle0_page_home_g112", "expected_path": "prototypes/cycle0_react_web/src/pages/HomePage.jsx", "description": "HomePage.jsx partially updated with new UI components in a selected section. Annotation block revised.", "embed_annotations_required": "true" }
+      ],
+      "execution_checklist": [
+        {"item_id": "pc1uir_task_005_check_001", "description": "Refactor `LoginPage.jsx` to use new/refined primitive and common components (e.g., for inputs, buttons, layout).", "status": "PENDING", "target_artifact_id": "cycle0_page_login_g112", "notes": null},
+        {"item_id": "pc1uir_task_005_check_002", "description": "Update annotation block of `LoginPage.jsx` (dependencies, logic, g_last_modified, version_tag).", "status": "PENDING", "target_artifact_id": "cycle0_page_login_g112", "notes": null},
+        {"item_id": "pc1uir_task_005_check_003", "description": "Select a section of `HomePage.jsx` (e.g., a recipe card list or header section) and refactor it using new/refined components.", "status": "PENDING", "target_artifact_id": "cycle0_page_home_g112", "notes": null},
+        {"item_id": "pc1uir_task_005_check_004", "description": "Update annotation block of `HomePage.jsx` (dependencies, logic, g_last_modified, version_tag).", "status": "PENDING", "target_artifact_id": "cycle0_page_home_g112", "notes": null}
+      ],
+      "dependencies": ["pc1uir_task_004"],
+      "criticality": "MEDIUM",
+      "status": "PENDING",
+      "linked_issue_ids": [],
+      "notes": ["Focus on demonstrating the integration pattern, not exhaustive page rebuilds at this stage."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc1uir_task_006",
+      "title": "Update Registry Map with New Artifacts from Cycle 1 UI Refinement",
+      "description": "Update `registry_map.txt`
