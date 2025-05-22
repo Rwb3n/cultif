@@ -1,17 +1,17 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle0_comp_footer_g112",
-  "version_tag": "0.1.0",
+  "version_tag": "0.1.2",
   "g_created": 124,
-  "g_last_modified": 124,
-  "description": "A reusable footer component for the application layout, typically containing copyright information, sitemap links, and social media links.",
+  "g_last_modified": 146,
+  "description": "A reusable footer component for the application layout. Uses Box for structure, Typography for text, and Link primitive for navigation.",
   "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEVELOPMENT",
   "purpose_statement": "To provide a consistent bottom bar across most pages of the application for secondary information and links. References Figma Catalogue: C-05 (Global Footer).",
   "key_logic_points": [
-    "Displays copyright information with the current year.",
-    "May contain links to pages like About Us, Contact, Privacy Policy, Terms of Service.",
-    "May include social media icons/links."
+    "Uses the Box primitive with `component=\"footer\"` as the main container.",
+    "Displays copyright information using the Typography primitive.",
+    "Contains footer navigation links and social media links using the Link primitive."
   ],
   "interfaces_provided": [
     { "name": "Footer", "interface_type": "REACT_COMPONENT", "details": "Props: footerLinks, socialLinks, className", "notes": "footerLinks and socialLinks are arrays of objects. Ref C-05_footer_standard_layout." }
@@ -19,22 +19,29 @@
   "requisites": [],
   "external_dependencies": [
     { "name": "React", "version": "^18.2.0", "reason": "Core React library." },
-    { "name": "react-router-dom", "version": "^6.x.x", "reason": "For navigation links (<Link>)." }
+    { "name": "react-router-dom", "version": "^6.x.x", "reason": "Used by Link primitive for internal routing." }
   ],
-  "internal_dependencies": [],
+  "internal_dependencies": [
+    "cycle1_primitive_box_g132",
+    "cycle1_primitive_link_g132",
+    "cycle1_primitive_typography_g132"
+  ],
   "dependents": [
-    "cycle0_prototype_app_entry_g112" // Typically used in the main App layout
+    "cycle0_prototype_app_entry_g112",
+    "cycle1_styleguide_page_g131"
   ],
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g124. Placeholder for a common footer. Styling and full prop handling to be implemented. Based on C-05."
+    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g124. Based on C-05. Dependents g140. Refactored to use Box, Typography, and Link primitives (g146). Styling needs refinement. Social icons are text placeholders."
   }
 }
 ANNOTATION_BLOCK_END */
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Box from '../primitives/Box';
+import PrimitiveLink from '../primitives/Link';
+import Typography from '../primitives/Typography';
 
 /**
  * Footer Component (References Figma Catalogue: C-05 - Global Footer)
@@ -67,76 +74,75 @@ const Footer = ({
 }) => {
   const currentYear = new Date().getFullYear();
 
-  // Basic placeholder styles - these should be in a CSS file or module
-  const footerStyle = {
-    padding: '2rem 1rem',
-    backgroundColor: '#343a40',
-    color: '#f8f9fa',
-    textAlign: 'center',
-    borderTop: '1px solid #495057',
-    // Add more from C-05_footer_base_style
+  const footerBoxProps = {
+    p: "2rem 1rem",
+    bgcolor: "#343a40",
+    color: "#f8f9fa",
+    sx: {
+      textAlign: 'center',
+      borderTop: '1px solid #495057',
+    },
   };
 
   const linkSectionStyle = {
     margin: '1rem 0',
-    // Add from C-05_footer_links_layout
   };
 
   const footerLinkStyle = {
-    color: '#adb5bd',
+    // color: '#adb5bd', // Let PrimitiveLink default or Typography handle color
     textDecoration: 'none',
     margin: '0 0.75rem',
-    // Add C-05_footer_link_style
   };
 
   const socialIconStyle = {
-    color: '#adb5bd',
+    // color: '#adb5bd', // Let PrimitiveLink default or Typography handle color
     textDecoration: 'none',
     margin: '0 0.5rem',
-    fontSize: '1.2rem', // Placeholder for icon size
-    // Add C-05_social_icon_style
+    fontSize: '1.2rem', // Placeholder for icon size, or use Icon primitive
   };
   
-  const copyrightStyle = {
-    fontSize: '0.9rem',
-    color: '#6c757d',
-    marginTop: '1rem',
-    // Add C-05_copyright_text_style
-  };
-
   return (
-    <footer style={footerStyle} className={`app-footer ${className}`.trim()}>
-      {/* C-05_footer_links_section & C-05_social_links_bar (Combined for simplicity here) */}
+    <Box component="footer" {...footerBoxProps} className={`app-footer ${className}`.trim()}>
       { (footerLinks.length > 0 || socialLinks.length > 0) && (
-        <div style={linkSectionStyle} className="footer-links-social">
+        <Box style={linkSectionStyle} className="footer-links-social">
           {footerLinks.map((link) => (
-            <Link key={link.path} to={link.path} style={footerLinkStyle} className="footer-nav-link">
+            <PrimitiveLink 
+              key={link.path} 
+              to={link.path} 
+              variant="subtle" // Assuming Link primitive has a 'subtle' variant for footer
+              color="#adb5bd"
+              style={footerLinkStyle} 
+              className="footer-nav-link"
+            >
               {link.label}
-            </Link>
+            </PrimitiveLink>
           ))}
-          {footerLinks.length > 0 && socialLinks.length > 0 && <span style={{ margin: '0 0.5rem' }}>|</span>}
+          {footerLinks.length > 0 && socialLinks.length > 0 && <Typography component="span" color="#adb5bd" style={{ margin: '0 0.5rem' }}>|</Typography>}
           {socialLinks.map((social) => (
-            <a 
+            <PrimitiveLink 
               key={social.name} 
               href={social.url} 
               target="_blank" 
               rel="noopener noreferrer" 
+              variant="subtle"
+              color="#adb5bd"
               style={socialIconStyle}
               aria-label={social.name}
               className="footer-social-link"
             >
               {social.icon || social.name} {/* Placeholder: Use actual icons instead of text/name */}
-            </a>
+            </PrimitiveLink>
           ))}
-        </div>
+        </Box>
       )}
 
-      {/* C-05_copyright_notice */}
-      <div style={copyrightStyle} className="footer-copyright">
+      <Typography variant="caption" color="textSecondary" component="div" className="footer-copyright" style={{color: '#6c757d', marginTop: '1rem'}}>
         &copy; {currentYear} Cultif. All Rights Reserved. (Placeholder Text)
-      </div>
-      <p style={{marginTop: '10px', fontSize: '0.8em', color:'#6c757d'}}>Figma Ref: C-05</p>
-    </footer>
+      </Typography>
+      <Typography variant="overline" display="block" color="textSecondary" style={{marginTop: '10px', fontSize: '0.8em', color:'#6c757d'}}>
+        Figma Ref: C-05
+      </Typography>
+    </Box>
   );
 };
 

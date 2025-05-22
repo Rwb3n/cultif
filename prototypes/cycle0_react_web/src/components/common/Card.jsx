@@ -1,44 +1,44 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle0_comp_card_g112",
-  "version_tag": "0.1.0",
+  "version_tag": "0.1.3",
   "g_created": 124,
-  "g_last_modified": 124,
-  "description": "A reusable card component for displaying content in a structured, visually distinct block.",
+  "g_last_modified": 149,
+  "description": "A reusable card component for displaying content in a structured, visually distinct block. Uses Box primitive for layout and Typography for title.",
   "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEVELOPMENT",
   "purpose_statement": "To provide a flexible container for various types of content such as recipe summaries, user profiles, or promotional items, ensuring consistent styling. References Figma Catalogue: C-02 (Card Variants).",
   "key_logic_points": [
-    "Can display an optional image (e.g., at the top or side).",
-    "Can have an optional title section.",
-    "Main content area for children elements.",
-    "Optional footer section for actions or supplementary information.",
-    "Accepts props for styling variations (e.g., shadow, border, padding)."
+    "Utilizes the Box primitive for its main container and structure.",
+    "Can optionally display a title using the Typography primitive.",
+    "Content area is flexible to accommodate diverse children elements."
   ],
   "interfaces_provided": [
-    { "name": "Card", "interface_type": "REACT_COMPONENT", "details": "Props: children, title, imageUrl, imageAlt, footerContent, variant, className", "notes": "Variant might control shadow depth or border presence. Ref C-02_card_standard, C-02_card_elevated." }
+    { "name": "Card", "interface_type": "REACT_COMPONENT", "details": "Props: children, title, sx (passed to Box), titleVariant (passed to Typography)", "notes": "Content is passed as children. Title is optional." }
   ],
   "requisites": [],
   "external_dependencies": [
     { "name": "React", "version": "^18.2.0", "reason": "Core React library." }
   ],
-  "internal_dependencies": [],
+  "internal_dependencies": [
+    "cycle1_primitive_box_g132",
+    "cycle1_primitive_typography_g132"
+  ],
   "dependents": [
-    "cycle0_page_home_g112", // For recipe cards, creator cards
-    "cycle0_page_userprofile_g112", // For displaying user's recipes or meal plans
-    "cycle0_page_creatorprofile_g112", // For creator's recipes
-    "cycle0_page_subscription_g112" // For tier display cards
-    // ... and potentially other components that need a card layout
+    "cycle1_styleguide_page_g131",
+    "cycle0_page_home_g112"
   ],
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g124. Placeholder for a common card component. Styling and full prop handling to be implemented. Based on C-02."
+    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g124. Refactored (g143) to use Box for container and Typography for title. Dependents updated at g140, g143 and g149."
   }
 }
 ANNOTATION_BLOCK_END */
 
 import React from 'react';
+import Box from '../primitives/Box';
+import Typography from '../primitives/Typography';
 
 /**
  * Card Component (References Figma Catalogue: C-02 - Card Variants)
@@ -88,47 +88,33 @@ const Card = ({
   ...otherProps
 }) => {
 
-  // Placeholder for dynamic class generation
-  const cardClasses = `card placeholder-card card-${variant} card-image-${imagePosition} ${onClick ? 'card-clickable' : ''} ${className}`.trim();
+  const cardClasses = `card placeholder-card card-image-${imagePosition} ${onClick ? 'card-clickable' : ''} ${className}`.trim();
 
-  // Basic placeholder styles - to be replaced with actual CSS or styled-components
-  // These are very simplified and don't account for imagePosition other than 'top'
-  const style = {
-    border: variant === 'flat' ? 'none' : '1px solid #ddd',
-    borderRadius: '8px',
-    boxShadow: variant === 'elevated' ? '0 4px 8px rgba(0,0,0,0.1)' : variant === 'standard' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none',
-    overflow: 'hidden',
-    backgroundColor: 'white',
-    display: 'flex',
+  // Mapping Card variant to Box props
+  let boxProps = {
+    borderRadius: "8px",
+    overflow: "hidden",
+    bgcolor: "white",
+    display: "flex",
     flexDirection: imagePosition === 'left' || imagePosition === 'right' ? 'row' : 'column',
-    cursor: onClick ? 'pointer' : 'default',
-    // Add more styles as needed based on C-02
+    sx: { cursor: onClick ? 'pointer' : 'default' }
   };
+
+  if (variant === 'elevated') {
+    boxProps.boxShadow = 1; // Assuming Box primitive maps 1 to a standard elevation shadow
+    boxProps.border = 'none';
+  } else if (variant === 'flat') {
+    boxProps.boxShadow = 0;
+    boxProps.border = 'none';
+  } else { // standard
+    boxProps.boxShadow = 0; // Or a very subtle shadow index if available
+    boxProps.border = '1px solid #ddd';
+  }
 
   const imageStyle = {
     width: imagePosition === 'left' || imagePosition === 'right' ? '120px' : '100%',
     height: imagePosition === 'top' ? '180px' : (imagePosition === 'left' || imagePosition === 'right' ? '100%': 'auto'),
     objectFit: 'cover',
-    // Add more styles as needed based on C-02_card_image_treatment
-  };
-
-  const contentStyle = {
-    padding: '15px',
-    flex: 1, // Allows content to take remaining space if image is side-by-side
-  };
-
-  const titleStyle = {
-    margin: '0 0 10px 0',
-    fontSize: '1.25rem',
-    fontWeight: 'bold',
-    // Add more styles from C-02_card_typography
-  };
-
-  const footerStyle = {
-    padding: '10px 15px',
-    borderTop: '1px solid #eee',
-    backgroundColor: '#f9f9f9',
-    // Add more styles from C-02_card_footer_style
   };
 
   const ImageComponent = imageUrl && (
@@ -136,18 +122,18 @@ const Card = ({
   );
 
   const mainContent = (
-    <div style={contentStyle} className="card-content">
-      {title && <h3 style={titleStyle} className="card-title">{title}</h3>}
+    <Box p={2} flex={1} className="card-content">
+      {title && <Typography variant="h5" component="h3" gutterBottom>{title}</Typography>}
       {children}
-    </div>
+    </Box>
   );
 
   return (
-    <div 
-      className={cardClasses} 
-      style={style} 
+    <Box 
+      className={cardClasses}
+      {...boxProps}
       onClick={onClick} 
-      tabIndex={onClick ? 0 : -1} // Make clickable cards focusable
+      // tabIndex={onClick ? 0 : -1} // Box might not need explicit tabIndex if not inherently interactive
       role={onClick ? 'button' : 'article'}
       {...otherProps}
     >
@@ -156,11 +142,11 @@ const Card = ({
       {mainContent}
       {imagePosition === 'right' && ImageComponent}
       {footerContent && (
-        <div style={footerStyle} className="card-footer">
+        <Box p={2} borderTop="1px solid #eee" bgcolor="#f9f9f9" className="card-footer">
           {footerContent}
-        </div>
+        </Box>
       )}
-    </div>
+    </Box>
   );
 };
 

@@ -1,0 +1,22 @@
+{
+  "v": 1,
+  "id": "issue_prop_types_g144",
+  "title": "Build Failure: Missing prop-types Dependency",
+  "description": "The build process for the React web prototype failed because the 'prop-types' package was not installed. This dependency is required by multiple primitive components (Grid.jsx, Link.jsx, Box.jsx, Typography.jsx, Stack.jsx, Input.jsx, Icon.jsx) for type checking.",
+  "type": "BUG",
+  "severity": "HIGH",
+  "status": "RESOLVED",
+  "g_reported": 143,
+  "g_status_updated": 144,
+  "g_resolved": 144,
+  "reported_by": "AI_VALIDATION",
+  "plan_id_ref": "plan_cycle1_ui_refinement_g131",
+  "task_id_ref": "pc1uir_task_008",
+  "artifact_id_ref": null,
+  "artifact_filepath_ref": "prototypes/cycle0_react_web/package.json",
+  "resolution_summary": "Installed 'prop-types' as a dev dependency using 'npm install --save-dev prop-types'. The command completed successfully (exit code 0) at g=144.",
+  "comments": [
+    { "g_ts": 143, "author": "AI_BUILD_SYSTEM", "comment_text": "Build failed with multiple errors indicating 'Failed to resolve import \"prop-types\" from \"src/components/primitives/*.jsx\".'" },
+    { "g_ts": 144, "author": "AI_OS", "comment_text": "Identified missing dependency and installed 'prop-types'. Marked issue as RESOLVED." }
+  ]
+} 

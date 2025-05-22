@@ -1,16 +1,16 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle1_styleguide_page_g131",
-  "version_tag": "0.1.1",
+  "version_tag": "0.1.2",
   "g_created": 134,
-  "g_last_modified": 135,
+  "g_last_modified": 147,
   "description": "A React component page that serves as a UI visual library. It imports and renders examples of all defined primitive and common UI components, showcasing their variations and usage.",
   "artifact_type": "CODE_MODULE", 
   "status_in_lifecycle": "DEVELOPMENT",
   "purpose_statement": "To provide a centralized, interactive reference for all UI components in the Cultif application, facilitating stakeholder review, developer consistency, and a visual source of truth for the component set. This page will be accessible via a dedicated route.",
   "key_logic_points": [
     "Imports all primitive components (Typography, Icon, Input, Box, Stack, Grid, Link).",
-    "Imports existing common components (e.g., Button, Card, Modal, Header, Footer - paths to be confirmed).",
+    "Imports existing common components (e.g., Button, Card, Modal, Header, Footer).",
     "Renders sections for each component, showcasing various props and states.",
     "Designed to be easily navigable and clear for visual inspection of components."
   ],
@@ -49,7 +49,7 @@
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. This page will dynamically showcase all UI components. Further population and styling needed. Common components imported at g135."
+    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Common components imported at g135. Internal dependencies list updated at g147 based on visible imports; full verification pending complete file view. Assumes all listed dependencies correctly list StyleGuidePage as a dependent."
   }
 }
 ANNOTATION_BLOCK_END */

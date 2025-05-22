@@ -1,9 +1,9 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle0_router_config_g112",
-  "version_tag": "0.1.0",
+  "version_tag": "0.1.1",
   "g_created": 124,
-  "g_last_modified": 124,
+  "g_last_modified": 136,
   "description": "Defines the main application routes using React Router DOM, mapping URL paths to their corresponding page components.",
   "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEVELOPMENT",
@@ -12,7 +12,8 @@
     "Imports all page components created in task pc0wp_task_002.",
     "Defines a <Routes> block containing individual <Route> configurations.",
     "Maps paths like '/', '/login', '/onboarding', '/recipe/:recipeId', '/meal-plan', etc., to their respective page components.",
-    "Includes a fallback route for 404 Not Found scenarios, potentially redirecting to Home or a dedicated NotFoundPage."
+    "Includes a fallback route for 404 Not Found scenarios, potentially redirecting to Home or a dedicated NotFoundPage.",
+    "Includes a route for the StyleGuidePage."
   ],
   "interfaces_provided": [
     { "name": "AppRouter", "interface_type": "REACT_COMPONENT", "details": "A React component that sets up all the application routes.", "notes": "To be used within the main App.js or a layout component." }
@@ -35,7 +36,8 @@
     "cycle0_page_userprofile_g112",
     "cycle0_page_creatorprofile_g112",
     "cycle0_page_recipeupload_g112",
-    "cycle0_page_subscription_g112"
+    "cycle0_page_subscription_g112",
+    "cycle1_styleguide_page_g131"
     // Potentially a NotFoundPage component if created
   ],
   "dependents": [
@@ -44,13 +46,13 @@
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g124. Defines routes for all created page components. Placeholder for layout integration and 404 handling."
+    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g124. Defines routes for all created page components. Placeholder for layout integration and 404 handling. StyleGuidePage route added at g136."
   }
 }
 ANNOTATION_BLOCK_END */
 
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, Link as RouterDomLink } from 'react-router-dom';
 
 // Import Page Components (ensure paths are correct based on actual file structure)
 import OnboardingPage from '../pages/OnboardingPage';
@@ -63,13 +65,14 @@ import UserProfilePage from '../pages/UserProfilePage';
 import CreatorProfilePage from '../pages/CreatorProfilePage';
 import RecipeUploadPage from '../pages/RecipeUploadPage';
 import SubscriptionPage from '../pages/SubscriptionPage';
+import StyleGuidePage from '../pages/StyleGuidePage';
 
 // (Optional) A simple NotFoundPage component placeholder
 const NotFoundPage = () => (
   <div style={{ textAlign: 'center', padding: '50px' }}>
     <h1>404 - Page Not Found</h1>
     <p>Sorry, the page you are looking for does not exist.</p>
-    <Link to="/">Go to Home</Link>
+    <RouterDomLink to="/">Go to Home</RouterDomLink>
   </div>
 );
 
@@ -115,6 +118,9 @@ const AppRouter = () => {
       <Route path="/upload-recipe" element={<RecipeUploadPage />} /> {/* T-13 */}
       
       <Route path="/subscription" element={<SubscriptionPage />} /> {/* T-04, T-08 */}
+
+      {/* Style Guide Route */}
+      <Route path="/style-guide" element={<StyleGuidePage />} />
 
       {/* (Optional) Example of other routes like terms, privacy if they are full pages */}
       {/* <Route path="/terms" element={<TermsPage />} /> */}

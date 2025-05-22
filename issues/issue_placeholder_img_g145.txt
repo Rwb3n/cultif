@@ -1,0 +1,22 @@
+{
+  "v": 2,
+  "id": "issue_placeholder_img_g145",
+  "title": "Network Error: Placeholder Images Not Resolving",
+  "description": "Multiple GET requests to `via.placeholder.com` were failing with `net::ERR_NAME_NOT_RESOLVED`. This affected images in `Header.jsx` and `HomePage.jsx`. Replaced external placeholder URLs with local image files.",
+  "type": "RUNTIME_ERROR",
+  "severity": "LOW",
+  "status": "RESOLVED",
+  "g_reported": 145,
+  "g_status_updated": 146,
+  "g_resolved": 146,
+  "reported_by": "USER_CONSOLE_LOG",
+  "plan_id_ref": "plan_cycle1_ui_refinement_g131",
+  "task_id_ref": "pc1uir_task_008",
+  "artifact_id_ref": null,
+  "artifact_filepath_ref": "prototypes/cycle0_react_web/public/assets/placeholders/",
+  "resolution_summary": "Replaced all instances of `via.placeholder.com` URLs in `Header.jsx` and `HomePage.jsx` with local image paths pointing to `/assets/placeholders/`. User provided generic placeholder images (40x40.png, 50x50.png, 220x120.png). This resolves the network errors.",
+  "comments": [
+    { "g_ts": 145, "author": "USER_CONSOLE_LOG", "comment_text": "Console shows multiple errors like: GET https://via.placeholder.com/40?text=DU net::ERR_NAME_NOT_RESOLVED. This impacts Header.jsx, RecipeCard (HomePage.jsx), CreatorCard (HomePage.jsx)." },
+    { "g_ts": 146, "author": "AI_OS", "comment_text": "Updated affected components to use local placeholder images provided by the user at g=146." }
+  ]
+} 

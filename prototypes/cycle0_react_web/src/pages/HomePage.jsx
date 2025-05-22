@@ -1,18 +1,18 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle0_page_home_g112",
-  "version_tag": "0.1.0",
+  "version_tag": "0.1.1",
   "g_created": 120,
-  "g_last_modified": 120,
-  "description": "Placeholder component for the Home page. This page will display various sections like featured recipes, creator spotlights, and potentially category carousels.",
+  "g_last_modified": 146,
+  "description": "Home page displaying featured recipes and creator spotlights. RecipeCard section refactored to use common Card and primitive components. Placeholder images updated to local versions.",
   "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEVELOPMENT",
-  "purpose_statement": "To provide the main landing and discovery page for users after login in the web prototype. References Figma Catalogue IDs: T-02 (Main Layout), T-05 (Content Cards), T-06 (Category/Filter Chips).",
+  "purpose_statement": "To provide the main landing and discovery page for users. References Figma Catalogue IDs: T-02, T-05, T-06.",
   "key_logic_points": [
-    "Display sections for different content types (e.g., featured, popular, new).",
-    "Utilize reusable card components for displaying recipes/creators.",
-    "Placeholder for search bar integration.",
-    "Placeholder for filter chip integration."
+    "Displays sections for different content types.",
+    "RecipeCard component (used in 'Featured Recipes') refactored to use common Card, Box, Typography, and Link components.",
+    "CreatorCard, SearchBar, FilterChip remain as inline placeholders for now.",
+    "Placeholder for search bar and filter chip integration."
   ],
   "interfaces_provided": [
     { "name": "HomePage", "interface_type": "REACT_COMPONENT", "details": "The main component for the home/discovery screen.", "notes": "" }
@@ -20,28 +20,38 @@
   "requisites": [],
   "external_dependencies": [
     { "name": "React", "version": "^18.2.0", "reason": "Core React library." },
-    { "name": "react-router-dom", "version": "^6.x.x", "reason": "For navigation (e.g., Link to recipe details)." }
+    { "name": "react-router-dom", "version": "^6.x.x", "reason": "For navigation (Link primitive usage)." }
   ],
   "internal_dependencies": [
-    // "cycle0_comp_card_g112" (RecipeCard, CreatorCard),
+    "cycle0_comp_card_g112",
+    "cycle1_primitive_box_g132",
+    "cycle1_primitive_typography_g132",
+    "cycle1_primitive_link_g132"
     // "cycle0_comp_searchbar_g112" (if created as a common component),
     // "cycle0_comp_chip_g112" (FilterChip),
     // "cycle0_mock_data_recipes_g112",
     // "cycle0_mock_data_users_g112" (for creators)
   ],
   "dependents": [
-    "cycle0_router_config_g112" // This page will be a route in AppRouter
+    "cycle0_router_config_g112"
   ],
-  "linked_issue_ids": [],
+  "linked_issue_ids": ["issue_placeholder_img_g145"],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g120. To be populated with specific UI placeholders and mock data integration based on T-02, T-05, T-06 (Figma)."
+    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g120. Featured Recipes section (RecipeCard component) refactored at g149 to use Card, Box, Typography, and Link components. Other sections (SearchBar, Filters, CreatorCard) are still placeholders."
   }
 }
 ANNOTATION_BLOCK_END */
 
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom'; // Replaced by PrimitiveLink where used
+
+// Refactored Components
+import Card from '../components/common/Card';
+import Box from '../components/primitives/Box';
+import Typography from '../components/primitives/Typography';
+import PrimitiveLink from '../components/primitives/Link';
+import Stack from '../components/primitives/Stack'; // Potentially useful for card content
 
 // Example: Mock API service (to be created in services/api.js or similar)
 // import { fetchFeaturedRecipes, fetchPopularCreators, fetchCategories } from '../services/api'; 
@@ -112,13 +122,13 @@ const HomePage = () => {
   useEffect(() => {
     // const data = await fetchFeaturedRecipes(); // example
     setFeaturedRecipes([
-      { id: 'r1', name: 'Spicy Chicken Pasta', creatorName: 'Chef John', prepTime: '30 min', calories: 500, imageUrl: 'https://via.placeholder.com/200x100?text=Pasta' },
-      { id: 'r2', name: 'Vegan Buddha Bowl', creatorName: 'Green Goddess', prepTime: '20 min', calories: 400, imageUrl: 'https://via.placeholder.com/200x100?text=Bowl' },
-      { id: 'r3', name: 'Berry Smoothie', creatorName: 'FitFoodie', prepTime: '5 min', calories: 250, imageUrl: 'https://via.placeholder.com/200x100?text=Smoothie' },
+      { id: 'r1', name: 'Spicy Chicken Pasta', creatorName: 'Chef John', prepTime: '30 min', calories: 500, imageUrl: '/assets/placeholders/220x120.png' },
+      { id: 'r2', name: 'Vegan Buddha Bowl', creatorName: 'Green Goddess', prepTime: '20 min', calories: 400, imageUrl: '/assets/placeholders/220x120.png' },
+      { id: 'r3', name: 'Berry Smoothie', creatorName: 'FitFoodie', prepTime: '5 min', calories: 250, imageUrl: '/assets/placeholders/220x120.png' },
     ]);
     setPopularCreators([
-      { id: 'c1', name: 'Chef John', profilePic: 'https://via.placeholder.com/50?text=CJ' },
-      { id: 'c2', name: 'Green Goddess', profilePic: 'https://via.placeholder.com/50?text=GG' },
+      { id: 'c1', name: 'Chef John', profilePic: '/assets/placeholders/50x50.png' },
+      { id: 'c2', name: 'Green Goddess', profilePic: '/assets/placeholders/50x50.png' },
     ]);
     setCategories([
       { id: 'cat1', name: 'Italian' }, { id: 'cat2', name: 'Vegan' }, { id: 'cat3', name: 'Quick & Easy' }, { id: 'cat4', name: 'Desserts' }
@@ -128,22 +138,39 @@ const HomePage = () => {
   // Placeholder components (can be moved to their own files later)
   const SearchBar = () => <input type="search" placeholder="Search recipes, ingredients... (T-02_search)" style={{width: 'calc(100% - 40px)', padding: '12px', margin: '20px', boxSizing: 'border-box', fontSize:'1em'}} />;
   
+  // Refactored RecipeCard using common Card and primitives
   const RecipeCard = ({ recipe }) => (
-    <div style={{ border: '1px solid #ddd', borderRadius: '8px', padding: '15px', margin: '0 10px 20px 10px', width: '220px', textAlign: 'left', boxShadow: '0 2px 5px rgba(0,0,0,0.1)' }}>
-      <img src={recipe.imageUrl || 'https://via.placeholder.com/220x120?text=Recipe+Image'} alt={recipe.name} style={{width: '100%', height: '120px', objectFit: 'cover', borderRadius: '4px'}}/>
-      <h4 style={{margin: '10px 0 5px 0'}}>{recipe.name} (T-05_title)</h4>
-      <p style={{fontSize: '0.9em', color: '#555', margin: '0 0 5px 0'}}>By: <Link to={`/creator/${recipe.creatorName.toLowerCase().replace(' ', '-')}`}>{recipe.creatorName}</Link> (T-05_creator)</p>
-      <p style={{fontSize: '0.8em', color: '#777', margin: '0 0 10px 0'}}>{recipe.prepTime} | {recipe.calories} cals (T-05_details)</p>
-      <Link to={`/recipe/${recipe.id}`} style={{textDecoration:'none', color:'blue'}}>View Recipe</Link>
-      {/* Placeholder for T-05_action_favorite */}
-      <span style={{float: 'right', cursor: 'pointer'}} title="Favorite (mock)">❤️</span>
-    </div>
+    <Card sx={{ width: 220, margin: '0 10px 20px 10px' }}>
+      <Box 
+        component="img" 
+        src={recipe.imageUrl || '/assets/placeholders/220x120.png'} 
+        alt={recipe.name} 
+        sx={{width: '100%', height: '120px', objectFit: 'cover', borderTopLeftRadius: 'inherit', borderTopRightRadius: 'inherit'}}
+      />
+      <Box p={2}>
+        <Typography variant="h6" component="h4" gutterBottom noWrap>
+          {recipe.name} (T-05_title)
+        </Typography>
+        <Typography variant="body2" color="textSecondary" gutterBottom>
+          By: <PrimitiveLink to={`/creator/${recipe.creatorName.toLowerCase().replace(/ /g, '-')}`}>{recipe.creatorName}</PrimitiveLink> (T-05_creator)
+        </Typography>
+        <Typography variant="caption" display="block" color="textSecondary" gutterBottom>
+          {recipe.prepTime} | {recipe.calories} cals (T-05_details)
+        </Typography>
+        <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{mt:1}}>
+          <PrimitiveLink to={`/recipe/${recipe.id}`}>View Recipe</PrimitiveLink>
+          {/* Placeholder for T-05_action_favorite */}
+          <Box component="span" sx={{cursor: 'pointer'}} title="Favorite (mock)" onClick={() => alert(`Favorited ${recipe.name}`)}>❤️</Box>
+        </Stack>
+      </Box>
+    </Card>
   );
 
+  // CreatorCard remains a placeholder for now
   const CreatorCard = ({ creator }) => (
     <div style={{ border: '1px solid #ddd', borderRadius: '8px', padding: '15px', margin: '0 10px 20px 10px', width: '180px', textAlign: 'center', boxShadow: '0 2px 5px rgba(0,0,0,0.1)' }}>
-      <img src={creator.profilePic || 'https://via.placeholder.com/80?text=Creator'} alt={creator.name} style={{width: '80px', height: '80px', objectFit: 'cover', borderRadius: '50%', marginBottom:'10px'}}/>
-      <h5 style={{margin: '5px 0'}}><Link to={`/creator/${creator.name.toLowerCase().replace(' ', '-')}`}>{creator.name}</Link></h5>
+      <img src={creator.profilePic || '/assets/placeholders/50x50.png'} alt={creator.name} style={{width: '80px', height: '80px', objectFit: 'cover', borderRadius: '50%', marginBottom:'10px'}}/>
+      <h5 style={{margin: '5px 0'}}><PrimitiveLink to={`/creator/${creator.name.toLowerCase().replace(/ /g, '-')}`}>{creator.name}</PrimitiveLink></h5>
       {/* More creator details if needed */}
     </div>
   );
@@ -151,35 +178,41 @@ const HomePage = () => {
   const FilterChip = ({ category }) => <button style={{margin: '0 5px 10px 5px', padding: '8px 15px', borderRadius:'20px', border:'1px solid #ccc', background:'#f8f8f8', cursor:'pointer'}} onClick={() => alert(`Filtering by ${category.name}`)}>{category.name} (T-06_chip)</button>;
 
   return (
-    <div style={{ padding: '0 20px' }}>
-      <header style={{padding: '20px 0', borderBottom: '1px solid #eee', marginBottom:'20px'}}>
+    <Box p={{ xs: 1, sm: 2, md: 3 }}>
+      <Box component="header" sx={{padding: '20px 0', borderBottom: '1px solid #eee', marginBottom:'20px'}}>
         {/* Placeholder for a more complex Header component from layout */}
-        <h1 style={{textAlign:'center'}}>Cultif Home (T-02)</h1>
-      </header>
+        <Typography variant="h3" component="h1" align="center">Cultif Home (T-02)</Typography>
+      </Box>
       
       <SearchBar />
       
-      <div style={{ marginBottom: '20px', display: 'flex', overflowX: 'auto', paddingBottom: '10px' }} className="filter-chip-container T-02_filters T-06_chip_container">
+      <Box sx={{ marginBottom: '20px', display: 'flex', overflowX: 'auto', paddingBottom: '10px' }} className="filter-chip-container T-02_filters T-06_chip_container">
         {categories.map(cat => <FilterChip key={cat.id} category={cat} />)}
-      </div>
+      </Box>
 
-      <section>
-        <h3 style={{borderBottom:'1px solid #eee', paddingBottom:'10px'}} className="T-02_section_title">Featured Recipes</h3>
-        <div style={{ display: 'flex', overflowX: 'auto', padding: '20px 0' }} className="T-05_card_container">
+      <Box component="section">
+        <Typography variant="h5" component="h3" gutterBottom sx={{borderBottom:'1px solid #eee', paddingBottom:'10px'}} className="T-02_section_title">
+            Featured Recipes
+        </Typography>
+        <Box sx={{ display: 'flex', overflowX: 'auto', padding: '20px 0' }} className="T-05_card_container">
           {featuredRecipes.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} />)}
-        </div>
-      </section>
+        </Box>
+      </Box>
 
-      <section>
-        <h3 style={{borderBottom:'1px solid #eee', paddingBottom:'10px'}} className="T-02_section_title">Popular Creators</h3>
-        <div style={{ display: 'flex', overflowX: 'auto', padding: '20px 0' }} className="T-05_card_container">
+      <Box component="section" sx={{mt: 4}}>
+        <Typography variant="h5" component="h3" gutterBottom sx={{borderBottom:'1px solid #eee', paddingBottom:'10px'}} className="T-02_section_title">
+            Popular Creators
+        </Typography>
+        <Box sx={{ display: 'flex', overflowX: 'auto', padding: '20px 0' }} className="T-05_card_container">
           {popularCreators.map(creator => <CreatorCard key={creator.id} creator={creator} />)}
-        </div>
-      </section>
+        </Box>
+      </Box>
       
       {/* Add more sections as needed */}
-      <p style={{marginTop: '30px', fontSize: '0.8em', textAlign:'center', color:'#aaa'}}>Figma Refs: T-02, T-05, T-06</p>
-    </div>
+      <Typography variant="caption" display="block" color="textSecondary" align="center" sx={{mt: 4, mb: 2}}>
+          Figma Refs: T-02, T-05, T-06
+      </Typography>
+    </Box>
   );
 };
 

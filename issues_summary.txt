@@ -1,0 +1,21 @@
+{
+  "v": 4,
+  "g_updated": 146,
+  "issues_map": {
+    "issue_prop_types_g144": {
+      "status": "RESOLVED",
+      "title": "Build Failure: Missing prop-types Dependency",
+      "severity": "HIGH"
+    },
+    "issue_flexdirection_prop_g145": {
+      "status": "RESOLVED",
+      "title": "React Warning: Unknown flexDirection prop on DOM element",
+      "severity": "MEDIUM"
+    },
+    "issue_placeholder_img_g145": {
+      "status": "RESOLVED",
+      "title": "Network Error: Placeholder Images Not Resolving",
+      "severity": "LOW"
+    }
+  }
+} 

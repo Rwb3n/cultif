@@ -1,9 +1,9 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle1_primitive_stack_g132",
-  "version_tag": "0.1.0",
+  "version_tag": "0.1.3",
   "g_created": 134,
-  "g_last_modified": 134,
+  "g_last_modified": 149,
   "description": "A layout primitive for arranging items in a one-dimensional stack (either vertically or horizontally) with consistent spacing between them.",
   "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEVELOPMENT",
@@ -32,11 +32,15 @@
     { "name": "prop-types", "version": "^15.x.x", "reason": "For runtime prop type validation." }
   ],
   "internal_dependencies": [],
-  "dependents": [],
+  "dependents": [
+    "cycle1_styleguide_page_g131",
+    "cycle0_page_login_g112",
+    "cycle0_page_home_g112"
+  ],
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Placeholder for the Stack primitive. Actual styling, especially for spacing and dividers based on theme, to be implemented."
+    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Placeholder for the Stack primitive. Actual styling, especially for spacing and dividers based on theme, to be implemented. Dependents updated at g139, g148, and g149."
   }
 }
 ANNOTATION_BLOCK_END */

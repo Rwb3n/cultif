@@ -1,23 +1,24 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle0_comp_modal_g112",
-  "version_tag": "0.1.0",
+  "version_tag": "0.1.2",
   "g_created": 124,
-  "g_last_modified": 124,
-  "description": "A reusable modal dialog component for displaying content in an overlay.",
+  "g_last_modified": 144,
+  "description": "A reusable modal dialog component for displaying content in an overlay. Uses Typography for title and Button for close action.",
   "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEVELOPMENT",
   "purpose_statement": "To provide a consistent way to present focused information or require user interaction without navigating away from the current page. References Figma Catalogue: C-03 (Modal/Dialog).",
   "key_logic_points": [
     "Controlled by an `isOpen` prop.",
     "Includes an `onClose` callback for dismissing the modal.",
-    "Can display an optional title.",
+    "Can display an optional title, rendered using the Typography primitive.",
+    "Uses the Button component for the close button.",
     "Content is passed as children.",
     "Includes an overlay to obscure the background content.",
     "Handles accessibility concerns (e.g., focus trapping, ARIA attributes)."
   ],
   "interfaces_provided": [
-    { "name": "Modal", "interface_type": "REACT_COMPONENT", "details": "Props: isOpen, onClose, title, children, size, className, disableBackdropClick, showCloseButton", "notes": "Size could be 'sm', 'md', 'lg', 'full'. Ref C-03_modal_standard, C-03_modal_large." }
+    { "name": "Modal", "interface_type": "REACT_COMPONENT", "details": "Props: isOpen, onClose, title, children, size, className, disableBackdropClick, showCloseButton, footerContent", "notes": "Size could be 'sm', 'md', 'lg', 'full'. Ref C-03_modal_standard, C-03_modal_large." }
   ],
   "requisites": [],
   "external_dependencies": [
@@ -25,23 +26,26 @@
     { "name": "react-dom", "version": "^18.2.0", "reason": "For creating a portal to render the modal outside the main DOM hierarchy." }
   ],
   "internal_dependencies": [
-    "cycle0_comp_button_g112" // Potentially for a close button
+    "cycle0_comp_button_g112", 
+    "cycle1_primitive_typography_g132"
   ],
   "dependents": [
-    "cycle0_page_mealplan_g112", // For recipe picker modal
-    "cycle0_page_subscription_g112" // For paywall/upsell modal
-    // Potentially many other components needing modal dialogs.
+    "cycle0_page_mealplan_g112", 
+    "cycle0_page_subscription_g112", 
+    "cycle1_styleguide_page_g131"
   ],
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g124. Placeholder for a common modal. Styling, portal integration, and full prop/accessibility handling to be implemented. Based on C-03."
+    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g124. Based on C-03. Dependents updated at g140. Title now uses Typography primitive, and close button uses common Button component (g144). Full prop/accessibility handling and styling to be implemented."
   }
 }
 ANNOTATION_BLOCK_END */
 
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import Typography from '../primitives/Typography';
+import Button from './Button'; // Path to common Button component
 
 // It's good practice to have a dedicated DOM element for modals
 // This should ideally be in your public/index.html or created dynamically once.
@@ -163,21 +167,6 @@ const Modal = ({
     marginBottom: '15px',
   };
 
-  const titleStyle = {
-    margin: 0,
-    fontSize: '1.5rem',
-    // Add C-03_modal_typography_title styles
-  };
-
-  const closeButtonStyle = {
-    background: 'transparent',
-    border: 'none',
-    fontSize: '1.5rem',
-    cursor: 'pointer',
-    padding: '0.5rem',
-    lineHeight: '1',
-  };
-  
   const footerStyle = {
     borderTop: '1px solid #eee',
     paddingTop: '15px',
@@ -198,11 +187,16 @@ const Modal = ({
       >
         {(title || showCloseButton) && (
           <div style={headerStyle} className="modal-header">
-            {title && <h2 id="modal-title" style={titleStyle}>{title}</h2>}
+            {title && <Typography variant="h5" component="h2" id="modal-title">{title}</Typography>}
             {showCloseButton && (
-              <button type="button" onClick={onClose} style={closeButtonStyle} aria-label="Close modal">
+              <Button 
+                variant="text" 
+                onClick={onClose} 
+                aria-label="Close modal" 
+                style={{ padding: '0.25rem', fontSize: '1.5rem', minWidth: 'auto', lineHeight: '1' }} // Minimal style for text button
+              >
                 &times;
-              </button>
+              </Button>
             )}
           </div>
         )}

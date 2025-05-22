@@ -1,26 +1,27 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle1_primitive_box_g132",
-  "version_tag": "0.1.0",
+  "version_tag": "0.1.6-deprecated",
   "g_created": 134,
-  "g_last_modified": 134,
-  "description": "A fundamental layout primitive component, typically rendering a div, that provides shorthand access to common CSS utility props for spacing, sizing, colors, and more. It facilitates quick and consistent styling for layout purposes.",
+  "g_last_modified": 152,
+  "description": "DEPRECATED: This component is planned for deprecation. Its functionality (providing shorthand access to common CSS utility props for spacing, sizing, colors, flexbox) will be replaced by direct usage of Tailwind CSS utility classes on standard HTML elements (div, span, etc.). Original description: A fundamental layout primitive component, typically rendering a div, that provides shorthand access to common CSS utility props for spacing, sizing, colors, flexbox, and more. It facilitates quick and consistent styling for layout purposes.",
   "artifact_type": "CODE_MODULE",
-  "status_in_lifecycle": "DEVELOPMENT",
-  "purpose_statement": "To offer a versatile and theme-aware container for applying common styling properties directly as props, reducing the need for custom CSS for simple layout adjustments. Based on the definition in cycle1_ui_primitives_definition_g131.md.",
+  "status_in_lifecycle": "DEPRECATED",
+  "purpose_statement": "DEPRECATED: This component will be replaced by direct Tailwind CSS usage to align with the shadcn/ui and Tailwind-first styling approach for mobile responsiveness. Original purpose: To offer a versatile and theme-aware container for applying common styling properties directly as props, reducing the need for custom CSS for simple layout adjustments. Based on the definition in cycle1_ui_primitives_definition_g131.md.",
   "key_logic_points": [
+    "PLANNED FOR DEPRECATION in favor of Tailwind CSS utilities.",
     "Renders as a `div` by default, but can be changed via the `component` prop.",
     "Accepts props for padding (p, px, py, pt, etc.) and margin (m, mx, my, mt, etc.).",
     "Supports props for width, height, min/maxWidth, min/maxHeight.",
     "Allows setting display, bgcolor (background color), color, border, borderRadius, and boxShadow.",
-    "Intended to work with a theming system for consistent spacing and color values (placeholder for now)."
+    "Supports common flexbox properties like flexDirection, alignItems, justifyContent, flexWrap, flexGrow, flexShrink, flexBasis."
   ],
   "interfaces_provided": [
     { 
       "name": "Box", 
       "interface_type": "REACT_COMPONENT", 
-      "details": "Props: children, component, p, px, py, pt, pr, pb, pl, m, mx, my, mt, mr, mb, ml, width, height, display, bgcolor, color, border, borderRadius, boxShadow, className, sx (for custom styles)", 
-      "notes": "Refer to cycle1_ui_primitives_definition_g131.md for detailed prop descriptions."
+      "details": "Props: children, component, p, px, py, pt, pr, pb, pl, m, mx, my, mt, mr, mb, ml, width, height, display, bgcolor, color, border, borderRadius, boxShadow, flexDirection, alignItems, justifyContent, flexWrap, flexGrow, flexShrink, flexBasis, className, sx (for custom styles)", 
+      "notes": "Refer to cycle1_ui_primitives_definition_g131.md for detailed prop descriptions. THIS COMPONENT IS BEING DEPRECATED."
     }
   ],
   "requisites": [
@@ -32,11 +33,17 @@
     { "name": "prop-types", "version": "^15.x.x", "reason": "For runtime prop type validation." }
   ],
   "internal_dependencies": [],
-  "dependents": [],
-  "linked_issue_ids": [],
+  "dependents": [
+    "cycle1_styleguide_page_g131",
+    "cycle0_comp_card_g112",
+    "cycle0_comp_footer_g112",
+    "cycle0_page_login_g112",
+    "cycle0_page_home_g112"
+  ],
+  "linked_issue_ids": ["issue_flexdirection_prop_g145"],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Placeholder for the Box primitive. Actual style transformation from props (especially theme-aware spacing/colors) to be implemented."
+    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Placeholder for the Box primitive. Actual style transformation from props (especially theme-aware spacing/colors) to be implemented. Dependents updated at g139, g143, g146, g148, and g149. Marked for DEPRECATION at g=152 as per plan_cycle0_mobile_styling_g150 and analysis cycle0_shadcn_analysis_g151.md. To be replaced by Tailwind CSS."
   }
 }
 ANNOTATION_BLOCK_END */
@@ -91,6 +98,13 @@ const Box = React.forwardRef(function Box(props, ref) {
     m, mx, my, mt, mr, mb, ml,
     width, height, minWidth, minHeight, maxWidth, maxHeight,
     display,
+    flexDirection,
+    alignItems,
+    justifyContent,
+    flexWrap,
+    flexGrow,
+    flexShrink,
+    flexBasis,
     bgcolor,
     color,
     border,
@@ -133,6 +147,15 @@ const Box = React.forwardRef(function Box(props, ref) {
 
   // Display prop
   if (display) { boxStyles.display = display; }
+
+  // Flexbox props
+  if (flexDirection) { boxStyles.flexDirection = flexDirection; }
+  if (alignItems) { boxStyles.alignItems = alignItems; }
+  if (justifyContent) { boxStyles.justifyContent = justifyContent; }
+  if (flexWrap) { boxStyles.flexWrap = flexWrap; }
+  if (flexGrow) { boxStyles.flexGrow = flexGrow; }
+  if (flexShrink) { boxStyles.flexShrink = flexShrink; }
+  if (flexBasis) { boxStyles.flexBasis = flexBasis; }
 
   // Color props
   if (bgcolor) { boxStyles.backgroundColor = resolveThemeValue(bgcolor, 'color'); }
@@ -184,6 +207,13 @@ Box.propTypes = {
   maxWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   maxHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   display: PropTypes.string,
+  flexDirection: PropTypes.string,
+  alignItems: PropTypes.string,
+  justifyContent: PropTypes.string,
+  flexWrap: PropTypes.string,
+  flexGrow: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  flexShrink: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  flexBasis: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   bgcolor: PropTypes.string,
   color: PropTypes.string,
   border: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),

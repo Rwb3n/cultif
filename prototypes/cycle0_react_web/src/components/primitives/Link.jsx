@@ -1,9 +1,9 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle1_primitive_link_g132",
-  "version_tag": "0.1.0",
+  "version_tag": "0.1.5",
   "g_created": 134,
-  "g_last_modified": 134,
+  "g_last_modified": 149,
   "description": "A primitive UI component for rendering styled navigation links, wrapping react-router-dom's Link/NavLink or standard <a> tags for consistent appearance and behavior.",
   "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEVELOPMENT",
@@ -32,14 +32,18 @@
     { "name": "prop-types", "version": "^15.x.x", "reason": "For runtime prop type validation." },
     { "name": "react-router-dom", "version": "^6.x.x", "reason": "For client-side routing if `to` prop is used." }
   ],
-  "internal_dependencies": [
-    "cycle1_primitive_typography_g132" // Conceptually, for text styling
+  "internal_dependencies": [],
+  "dependents": [
+    "cycle1_styleguide_page_g131",
+    "cycle0_comp_header_g112",
+    "cycle0_comp_footer_g112",
+    "cycle0_page_login_g112",
+    "cycle0_page_home_g112"
   ],
-  "dependents": [],
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Placeholder for the Link primitive. Integration with Typography, theme-aware styling, and robust NavLink handling to be implemented."
+    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Placeholder for the Link primitive. Integration with Typography, theme-aware styling, and robust NavLink handling to be implemented. Dependents updated at g139, g145, g146, g148, and g149. Typography dependency is conceptual."
   }
 }
 ANNOTATION_BLOCK_END */

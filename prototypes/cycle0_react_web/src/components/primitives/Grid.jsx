@@ -1,9 +1,9 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle1_primitive_grid_g132",
-  "version_tag": "0.1.0",
+  "version_tag": "0.1.1",
   "g_created": 134,
-  "g_last_modified": 134,
+  "g_last_modified": 139,
   "description": "A layout primitive for creating responsive 2D layouts using a 12-column grid system. It consists of Grid containers and Grid items.",
   "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEVELOPMENT",
@@ -32,11 +32,13 @@
     { "name": "prop-types", "version": "^15.x.x", "reason": "For runtime prop type validation." }
   ],
   "internal_dependencies": [],
-  "dependents": [],
+  "dependents": [
+    "cycle1_styleguide_page_g131"
+  ],
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Placeholder for the Grid primitive. Responsive styling based on breakpoints and theme-aware spacing to be implemented."
+    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Placeholder for the Grid primitive. Responsive styling based on breakpoints and theme-aware spacing to be implemented. Dependents updated at g139."
   }
 }
 ANNOTATION_BLOCK_END */

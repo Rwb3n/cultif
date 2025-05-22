@@ -1,9 +1,9 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle1_primitive_typography_g132",
-  "version_tag": "0.1.0",
+  "version_tag": "0.1.8",
   "g_created": 134,
-  "g_last_modified": 134,
+  "g_last_modified": 149,
   "description": "A primitive UI component for rendering text with consistent styling options across the application. It standardizes font sizes, weights, colors, and common text behaviors.",
   "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEVELOPMENT",
@@ -31,11 +31,20 @@
     { "name": "prop-types", "version": "^15.x.x", "reason": "For runtime prop type validation during development." }
   ],
   "internal_dependencies": [], 
-  "dependents": [],
+  "dependents": [
+    "cycle1_styleguide_page_g131",
+    "cycle0_comp_button_g112",
+    "cycle0_comp_card_g112",
+    "cycle0_comp_modal_g112",
+    "cycle0_comp_header_g112",
+    "cycle0_comp_footer_g112",
+    "cycle0_page_login_g112",
+    "cycle0_page_home_g112"
+  ],
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Placeholder for the Typography primitive. Actual styling and theme integration to be implemented."
+    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Placeholder for the Typography primitive. Actual styling and theme integration to be implemented. Dependents updated at g139, g142, g143, g144, g145, g146, g148, and g149."
   }
 }
 ANNOTATION_BLOCK_END */

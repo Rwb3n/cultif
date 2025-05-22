@@ -1,28 +1,31 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle0_comp_button_g112",
-  "version_tag": "0.1.0",
+  "version_tag": "0.2.0-shadcn-planned",
   "g_created": 124,
-  "g_last_modified": 124,
-  "description": "A reusable button component with various styles and functionalities.",
+  "g_last_modified": 152,
+  "description": "PLANNED FOR REPLACEMENT: This custom button component will be replaced by the shadcn/ui Button component. Original description: A reusable button component with various styles and functionalities.",
   "artifact_type": "CODE_MODULE",
-  "status_in_lifecycle": "DEVELOPMENT",
-  "purpose_statement": "To provide a consistent button element across the application, supporting different visual styles (primary, secondary, text) and actions. References Figma Catalogue: C-01 (Button Variants).",
+  "status_in_lifecycle": "REFACTORING_PLANNED",
+  "purpose_statement": "PLANNED FOR REPLACEMENT: To be replaced by shadcn/ui Button for consistency with the new UI library and Tailwind CSS integration, supporting mobile-first design. Original purpose: To provide a consistent button element across the application, supporting different visual styles (primary, secondary, text) and actions. References Figma Catalogue: C-01 (Button Variants).",
   "key_logic_points": [
-    "Accepts props for different button styles (e.g., variant: 'primary', 'secondary', 'text', 'danger').",
-    "Accepts props for size (e.g., 'small', 'medium', 'large').",
-    "Handles onClick events.",
-    "Can display text, an icon, or both.",
-    "Can be disabled."
+    "PLANNED REPLACEMENT with `shadcn/ui Button`.",
+    "Existing props (variant, size, onClick, disabled, iconLeft, iconRight) will be mapped to `shadcn/ui Button` props or Tailwind CSS classes.",
+    "`shadcn/ui Button` offers variants (default, destructive, outline, secondary, ghost, link) and sizes which will be leveraged."
   ],
   "interfaces_provided": [
-    { "name": "Button", "interface_type": "REACT_COMPONENT", "details": "Props: children, onClick, variant, size, disabled, iconLeft, iconRight, type", "notes": "variant can be 'primary', 'secondary', 'outline', 'text', 'danger'. Size can be 'sm', 'md', 'lg'." }
+    { "name": "Button (Custom - to be replaced)", "interface_type": "REACT_COMPONENT", "details": "Props: children, onClick, variant, size, disabled, iconLeft, iconRight, type", "notes": "This component is slated for replacement by `shadcn/ui Button`. Variant can be 'primary', 'secondary', 'outline', 'text', 'danger'. Size can be 'sm', 'md', 'lg'." }
   ],
-  "requisites": [],
+  "requisites": [
+    { "description": "Decision to use shadcn/ui as per plan_cycle0_mobile_styling_g150", "type": "PROJECT_DECISION" }
+  ],
   "external_dependencies": [
-    { "name": "React", "version": "^18.2.0", "reason": "Core React library." }
+    { "name": "React", "version": "^18.2.0", "reason": "Core React library." },
+    { "name": "shadcn/ui Button (target)", "version": "latest", "reason": "Target component for replacement." }
   ],
-  "internal_dependencies": [],
+  "internal_dependencies": [
+    "cycle1_primitive_typography_g132" 
+  ],
   "dependents": [
     "cycle0_page_onboarding_g112",
     "cycle0_page_login_g112",
@@ -31,18 +34,20 @@
     "cycle0_page_mealplan_g112",
     "cycle0_page_userprofile_g112",
     "cycle0_page_recipeupload_g112",
-    "cycle0_page_subscription_g112"
-    // ... and potentially many other components and pages
+    "cycle0_page_subscription_g112",
+    "cycle1_styleguide_page_g131",
+    "cycle0_comp_modal_g112"
   ],
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g124. Placeholder for a common button. Styling and full prop handling to be implemented. Based on C-01."
+    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g124. Uses Typography primitive (g142). Modal uses Button (g144). LoginPage uses Button (g148). Marked for replacement by shadcn/ui Button at g=152 as per plan_cycle0_mobile_styling_g150 and analysis cycle0_shadcn_analysis_g151.md."
   }
 }
 ANNOTATION_BLOCK_END */
 
 import React from 'react';
+import Typography from '../primitives/Typography';
 
 /**
  * Button Component (References Figma Catalogue: C-01 - Button Variants)
@@ -124,7 +129,7 @@ const Button = ({
       {...otherProps}
     >
       {iconLeft && <span className="btn-icon btn-icon-left">{iconLeft}</span>}
-      {children}
+      {children && <Typography>{children}</Typography>}
       {iconRight && <span className="btn-icon btn-icon-right">{iconRight}</span>}
     </button>
   );

@@ -1,9 +1,9 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle1_primitive_input_g132",
-  "version_tag": "0.1.0",
+  "version_tag": "0.1.2",
   "g_created": 134,
-  "g_last_modified": 134,
+  "g_last_modified": 148,
   "description": "A primitive UI component for text-based form inputs, providing consistent styling, states (e.g., error, disabled), and accessibility features.",
   "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEVELOPMENT",
@@ -13,7 +13,7 @@
     "Manages `value` and `onChange` for controlled component behavior.",
     "Provides visual variants (`outlined`, `filled`, `standard`).",
     "Includes `label`, `helperText`, and error state display.",
-    "Allows for `leadingIcon` and `trailingIcon`."
+    "Allows for `leadingIcon` and `trailingIcon` (as ReactNode)."
   ],
   "interfaces_provided": [
     { 
@@ -30,14 +30,15 @@
     { "name": "React", "version": "^18.2.0", "reason": "Core React library." },
     { "name": "prop-types", "version": "^15.x.x", "reason": "For runtime prop type validation." }
   ],
-  "internal_dependencies": [
-    "cycle1_primitive_icon_g132" // Potentially for leading/trailing icons
+  "internal_dependencies": [],
+  "dependents": [
+    "cycle1_styleguide_page_g131",
+    "cycle0_page_login_g112"
   ],
-  "dependents": [],
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Placeholder for the Input primitive. Styling, theme integration, and full interactivity to be implemented."
+    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Placeholder for the Input primitive. Styling, theme integration, and full interactivity to be implemented. Dependents updated at g139 and g148. Note: leadingIcon/trailingIcon are ReactNode, not direct Icon component dependency."
   }
 }
 ANNOTATION_BLOCK_END */

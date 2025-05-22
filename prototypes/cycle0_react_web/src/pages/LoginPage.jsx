@@ -1,17 +1,21 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle0_page_login_g112",
-  "version_tag": "0.1.0",
+  "version_tag": "0.2.0",
   "g_created": 118,
-  "g_last_modified": 118,
-  "description": "Placeholder component for the Login page. This component will manage the display and interaction for user login.",
+  "g_last_modified": 148,
+  "description": "Component for the Login page. Manages user login form and interactions. Uses UI primitives and common components for layout and elements.",
   "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEVELOPMENT",
-  "purpose_statement": "To provide the structure for the user login experience in the web prototype. References Figma Catalogue ID: T-03a.",
+  "purpose_statement": "To provide the structure for the user login experience in the web prototype, utilizing the refined UI component library. References Figma Catalogue ID: T-03a.",
   "key_logic_points": [
-    "Form for email/password input.",
-    "Submission handling (mocked).",
-    "Links for 'Forgot Password' and 'Sign Up'."
+    "Uses Box primitive for overall page layout and form structure.",
+    "Uses Stack primitive for vertical layout of form elements.",
+    "Uses Typography for page title.",
+    "Uses Input primitive for email and password fields.",
+    "Uses Button common component for the login action.",
+    "Uses Link primitive for 'Forgot Password' and 'Sign Up' navigation.",
+    "Form submission handling (mocked) with navigation."
   ],
   "interfaces_provided": [
     { "name": "LoginPage", "interface_type": "REACT_COMPONENT", "details": "The main component for the login screen.", "notes": "" }
@@ -19,25 +23,35 @@
   "requisites": [],
   "external_dependencies": [
     { "name": "React", "version": "^18.2.0", "reason": "Core React library." },
-    { "name": "react-router-dom", "version": "^6.x.x", "reason": "For navigation (Link component)." }
+    { "name": "react-router-dom", "version": "^6.x.x", "reason": "For navigation (useNavigate hook and used by Link primitive)." }
   ],
   "internal_dependencies": [
-    // "cycle0_comp_button_g112",
-    // "cycle0_comp_input_g112" (assuming a generic input component might be created)
+    "cycle1_primitive_box_g132",
+    "cycle1_primitive_typography_g132",
+    "cycle1_primitive_input_g132",
+    "cycle0_comp_button_g112",
+    "cycle1_primitive_link_g132",
+    "cycle1_primitive_stack_g132"
   ],
   "dependents": [
-    "cycle0_router_config_g112" // This page will be a route in AppRouter
+    "cycle0_router_config_g112" 
   ],
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g118. To be populated with specific UI placeholders based on T-03a (Figma)."
+    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g118. Refactored at g148 to use Box, Typography, Input, Button, Link, and Stack components. Based on T-03a (Figma)."
   }
 }
 ANNOTATION_BLOCK_END */
 
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Box from '../components/primitives/Box';
+import Typography from '../components/primitives/Typography';
+import Input from '../components/primitives/Input';
+import Button from '../components/common/Button';
+import PrimitiveLink from '../components/primitives/Link';
+import Stack from '../components/primitives/Stack';
 
 /**
  * LoginPage Component (References Figma Catalogue: T-03a)
@@ -83,63 +97,76 @@ const LoginPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Simulate login
     console.log('Login attempt with:', { email, password });
-    // Mock successful login and navigate to home
-    // In a real app, this would involve an API call and auth context update
     alert('Mock login successful! Navigating to home.');
-    navigate('/home'); // Assuming '/home' is the route for HomePage
+    navigate('/home');
   };
 
   return (
-    <div style={{ padding: '20px', maxWidth: '400px', margin: 'auto', textAlign: 'center' }}>
-      {/* <img src="/path/to/logo.png" alt="Cultif Logo" style={{width: '100px', marginBottom: '20px'}} /> Placeholder for T-03a_logo */}
-      <h2>Login (T-03a)</h2>
-      
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-        <div>
-          {/* <label htmlFor="email">Email:</label> */}
-          <input 
-            type="email" 
-            id="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-            placeholder="Enter your email (e.g., user@example.com)" 
-            required 
-            style={{width: '100%', padding: '10px', boxSizing: 'border-box'}}
-          />
-          {/* Figma Ref: T-03a_input_email */}
-        </div>
-        <div>
-          {/* <label htmlFor="password">Password:</label> */}
-          <input 
-            type="password" 
-            id="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            placeholder="Enter your password" 
-            required 
-            style={{width: '100%', padding: '10px', boxSizing: 'border-box'}}
-          />
-          {/* Figma Ref: T-03a_input_password */}
-        </div>
-        <div style={{textAlign: 'right', fontSize: '0.9em'}}>
-          <Link to="/forgot-password">Forgot Password? (T-03a_link_forgot)</Link>
-        </div>
-        <button type="submit" style={{padding: '10px', backgroundColor: 'blue', color: 'white', border: 'none', cursor: 'pointer'}}>
-          Login (T-03a_button_login)
-        </button>
-      </form>
-      
-      <div style={{ marginTop: '20px' }}>
-        {/* Placeholder for SSO options T-03a_sso_options - out of scope */}
-      </div>
+    <Box 
+      display="flex" 
+      flexDirection="column" 
+      alignItems="center" 
+      justifyContent="center" 
+      p={3} 
+      minHeight="80vh" // Ensure it takes substantial height
+    >
+      <Box sx={{ width: '100%', maxWidth: '400px', textAlign: 'center' }}>
+        {/* <img src="/path/to/logo.png" alt="Cultif Logo" style={{width: '100px', marginBottom: '20px'}} /> Placeholder for T-03a_logo */}
+        <Typography variant="h4" component="h1" gutterBottom>
+          Login (T-03a)
+        </Typography>
+        
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Stack spacing={2}>
+            <Input 
+              type="email" 
+              id="email" 
+              label="Email Address"
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
+              placeholder="user@example.com" 
+              required 
+              fullWidth
+              // Figma Ref: T-03a_input_email
+            />
+            <Input 
+              type="password" 
+              id="password" 
+              label="Password"
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+              placeholder="Enter your password" 
+              required 
+              fullWidth
+              // Figma Ref: T-03a_input_password
+            />
+            <Box textAlign="right">
+              <PrimitiveLink to="/forgot-password" variant="body2">
+                Forgot Password? (T-03a_link_forgot)
+              </PrimitiveLink>
+            </Box>
+            <Button type="submit" variant="primary" size="lg" fullWidth>
+              Login (T-03a_button_login)
+            </Button>
+          </Stack>
+        </Box>
+        
+        <Box mt={2} mb={1}>
+          {/* Placeholder for SSO options T-03a_sso_options - out of scope */}
+        </Box>
 
-      <div style={{ marginTop: '20px' }}>
-        Don\'t have an account? <Link to="/signup">Sign Up (T-03a_link_signup)</Link>
-      </div>
-      <p style={{marginTop: '20px', fontSize: '0.8em'}}>Figma Ref: T-03a</p>
-    </div>
+        <Typography variant="body2">
+          Don\'t have an account?{' '}
+          <PrimitiveLink to="/signup" variant="body2" color="primary">
+            Sign Up (T-03a_link_signup)
+          </PrimitiveLink>
+        </Typography>
+        <Typography variant="caption" display="block" color="textSecondary" sx={{mt: 3}}>
+          Figma Ref: T-03a
+        </Typography>
+      </Box>
+    </Box>
   );
 };
 

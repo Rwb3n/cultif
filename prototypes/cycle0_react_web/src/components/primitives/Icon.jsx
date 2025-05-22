@@ -1,9 +1,9 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle1_primitive_icon_g132",
-  "version_tag": "0.1.0",
+  "version_tag": "0.1.1",
   "g_created": 134,
-  "g_last_modified": 134,
+  "g_last_modified": 139,
   "description": "A primitive UI component for rendering icons consistently. It can support SVG icons, icon fonts, or image-based icons through a unified interface.",
   "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEVELOPMENT",
@@ -32,11 +32,14 @@
     // Potentially: { "name": "react-icons", "version": "^x.x.x", "reason": "If chosen as the icon library." }
   ],
   "internal_dependencies": [],
-  "dependents": [],
+  "dependents": [
+    "cycle1_styleguide_page_g131" 
+    // "cycle1_primitive_input_g132" // Input component uses ReactNode for icons, not this directly.
+  ],
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Placeholder for the Icon primitive. Actual icon rendering logic and integration with an icon set to be implemented."
+    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Placeholder for the Icon primitive. Actual icon rendering logic and integration with an icon set to be implemented. Dependents updated at g139."
   }
 }
 ANNOTATION_BLOCK_END */

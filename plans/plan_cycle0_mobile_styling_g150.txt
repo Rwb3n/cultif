@@ -1,0 +1,222 @@
+{
+  "v": 4,
+  "id": "plan_cycle0_mobile_styling_g150",
+  "status": "ACTIVE",
+  "preceding_plan_id_ref": "plan_cycle1_ui_refinement_g131",
+  "origin_artifact_id": "consolidated_progress_review_g149",
+  "goal": "To adapt the existing Cycle 0 web prototype (React.js) to be mobile-first in its styling and presentation using shadcn/ui and Tailwind CSS. This involves analyzing current components, planning shadcn/ui integration, implementing responsive shadcn/ui components, and ensuring the Style Guide effectively showcases mobile views, ultimately to better inform the subsequent mobile application development.",
+  "scope": [
+    "Installation and configuration of Tailwind CSS and shadcn/ui in the 'prototypes/cycle0_react_web/' project.",
+    "Analysis of all existing common components, layout components, primitive components, and pages for mapping to shadcn/ui components and mobile responsiveness.",
+    "Identification of specific shadcn/ui components to be used and customized for mobile viewports (e.g., layout changes, font size adjustments, touch target considerations, element visibility/stacking for MOBILE ONLY presentation).",
+    "Refactoring existing components to utilize shadcn/ui components and Tailwind CSS utility classes.",
+    "Implementation of responsive styles directly via Tailwind CSS classes on shadcn/ui components or custom wrappers.",
+    "Updating the 'StyleGuidePage.jsx' to demonstrate shadcn/ui components in mobile-sized views.",
+    "Ensuring that embedded annotation blocks in all modified files are updated (version_tag, g_last_modified, relevant key_logic_points related to shadcn/ui and mobile styling).",
+    "Updating 'registry_map.txt' for any new artifacts created or if existing artifact paths/IDs change."
+  ],
+  "exclusions": [
+    "Introduction of new features or functionalities beyond styling adjustments and shadcn/ui component integration.",
+    "Changes to the core logic or data handling of existing components unless directly necessitated by shadcn/ui integration for mobile styling.",
+    "Development of the actual React Native mobile application.",
+    "Desktop-focused styling (primary aim is MOBILE ONLY presentation, desktop will be secondary or rely on responsive defaults of shadcn/ui).",
+    "Comprehensive E2E testing for mobile views (focus is on visual correctness and basic interaction)."
+  ],
+  "g_created": 150,
+  "g_updated": 152,
+  "tasks": [
+    {
+      "id": "pc0ms_task_001",
+      "title": "Analyze for shadcn/ui Integration & Mobile Styling Needs",
+      "description": "Systematically review all relevant components (primitives, common, layout) and pages in the web prototype. Analyze their current structure and identify how they can be mapped to or replaced by shadcn/ui components for a MOBILE ONLY presentation. Document required shadcn/ui components, necessary configurations, and any custom styling needed via Tailwind CSS for mobile viewports (e.g., 360px-480px width). Consider navigation, readability, touch targets, and overall UX on smaller screens.",
+      "intent": "To create a comprehensive plan for integrating shadcn/ui and achieving a mobile-first UI, detailing which components to use/create and how to style them.",
+      "inputs": [
+        { "name": "All Component & Page Files", "source_description": "All .jsx files under 'prototypes/cycle0_react_web/src/components/' and 'prototypes/cycle0_react_web/src/pages/'." , "details": "Includes Header, Footer, Card, Button, all Primitives, HomePage, LoginPage, StyleGuidePage etc."},
+        { "name": "Consolidated Progress Review", "source_description": "Artifact 'consolidated_progress_review_g149'.", "details": "Provides context on stakeholder feedback regarding mobile styling." },
+        { "name": "shadcn/ui Documentation", "source_description": "Official shadcn/ui website and component examples.", "details": "Reference for available components, installation, and usage." },
+        { "name": "Tailwind CSS Documentation", "source_description": "Official Tailwind CSS documentation.", "details": "Reference for utility classes and responsive design."},
+        { "name": "Figma Designs (if mobile views exist)", "source_description": "Relevant Figma files, particularly 'src_figmacat_g85' and 'src_uiscreens_g85'.", "details": "Check if any mobile-specific views or guidelines were part of the initial design artifacts that can inform this task." }
+      ],
+      "outputs": [
+        {
+          "name": "Mobile Styling & shadcn/ui Integration Analysis Report",
+          "artifact_id": "cycle0_shadcn_analysis_g151",
+          "expected_path": "artifacts/analysis/cycle0_shadcn_analysis_g151.md",
+          "description": "A markdown document detailing: 1. Mapping of existing components to shadcn/ui. 2. List of shadcn/ui components to install. 3. Specific mobile styling requirements and Tailwind CSS strategies for each. 4. Notes on any structural refactoring needed.",
+          "embed_annotations_required": "true"
+        }
+      ],
+      "execution_checklist": [],
+      "dependencies": [],
+      "criticality": "HIGH",
+      "status": "DONE",
+      "linked_issue_ids": [],
+      "notes": ["This task is critical for scoping the shadcn/ui integration and mobile styling effort. The output document will be used to populate sub-tasks for pc0ms_task_002 and pc0ms_task_003."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc0ms_task_002",
+      "title": "Plan shadcn/ui Setup & Detailed Implementation Steps",
+      "description": "Based on the 'Mobile Styling & shadcn/ui Integration Analysis Report' (from pc0ms_task_001): 1. Detail steps for Tailwind CSS and shadcn/ui setup. 2. List specific 'npx shadcn-ui@latest add ...' commands for required components. 3. Create/update detailed, actionable sub-tasks (execution_checklist items for pc0ms_task_003) for each component installation, refactoring, and mobile styling task. This includes updating annotations in existing files to reflect planned shadcn/ui integration before actual implementation. Tailwind CSS Setup: i. Install Tailwind CSS and peer dependencies: `npm install -D tailwindcss postcss autoprefixer`. ii. Initialize Tailwind CSS: `npx tailwindcss init -p`. iii. Configure `tailwind.config.js` content paths: `./src/**/*.{js,jsx,ts,tsx}` and `./index.html`. iv. Add Tailwind directives (`@tailwind base; @tailwind components; @tailwind utilities;`) to `src/index.css` (or `global.css`) and ensure it's imported in `main.jsx`. shadcn/ui Setup: i. Initialize shadcn/ui: `npx shadcn-ui@latest init` (select style, base color, confirm paths, set RSC to 'No'). ii. This creates/updates `components.json`, `tailwind.config.js`, `postcss.config.js`, `src/lib/utils.js`, and adds CSS variables to `src/index.css`. Annotation updates for components planned for deprecation/replacement/refactoring have been completed as part of this task.",
+      "intent": "To translate the analysis into a precise, step-by-step technical plan for setting up shadcn/ui and refactoring the prototype, including pre-emptive annotation updates.",
+      "inputs": [
+        { "name": "Mobile Styling & shadcn/ui Integration Analysis Report", "source_description": "Output of pc0ms_task_001 ('cycle0_shadcn_analysis_g151').", "details": "Contains the component mapping and styling strategies." },
+        { "name": "This Plan File", "source_description": "Current plan 'plan_cycle0_mobile_styling_g150.txt'.", "details": "Will be modified to include detailed setup and implementation sub-tasks." }
+      ],
+      "outputs": [
+        {
+          "name": "Updated Plan File (plan_cycle0_mobile_styling_g150.txt)",
+          "artifact_id": "plan_cycle0_mobile_styling_g150", 
+          "expected_path": "plans/plan_cycle0_mobile_styling_g150.txt",
+          "description": "The current plan file, updated with detailed setup instructions for shadcn/ui and granular sub-tasks for component installation, refactoring, and styling. Annotations in target files have been updated. Plan 'v' and 'g_updated' fields are incremented.",
+          "embed_annotations_required": "false" 
+        }
+      ],
+      "execution_checklist": [],
+      "dependencies": ["pc0ms_task_001"],
+      "criticality": "HIGH",
+      "status": "DONE",
+      "linked_issue_ids": [],
+      "notes": ["This task makes the plan highly actionable. It includes updating annotations in existing components to specify planned shadcn/ui integration details even before pc0ms_task_003 executes the code changes. Detailed checklist for pc0ms_task_003 has been populated."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc0ms_task_003",
+      "title": "Implement shadcn/ui & Mobile Styling (Iterative)",
+      "description": "Execute the detailed setup and implementation sub-tasks defined in this updated 'plan_cycle0_mobile_styling_g150.txt'. This involves: 1. Setting up Tailwind CSS and shadcn/ui. 2. Running 'npx shadcn-ui@latest add ...' for specified components. 3. Modifying JSX to use shadcn/ui components. 4. Applying mobile-first styles using Tailwind CSS classes. Work will be iterative, following the execution checklist.",
+      "intent": "To integrate shadcn/ui into the project and refactor existing components to use it, applying mobile-first styles.",
+      "inputs": [
+        { "name": "Updated Plan File", "source_description": "Output of pc0ms_task_002 ('plan_cycle0_mobile_styling_g150.txt' with detailed tasks).", "details": "Provides the specific setup and implementation steps, including shadcn/ui CLI commands." },
+        { "name": "Relevant Component/Page Files", "source_description": "Files identified for refactoring in 'cycle0_shadcn_analysis_g151.md'.", "details": "These are the files that will be modified or replaced." }
+      ],
+      "outputs": [
+        {
+          "name": "Set of shadcn/ui-Integrated & Mobile-Styled Files",
+          "artifact_id": "cycle0_shadcn_styled_artifacts_set_g151", 
+          "expected_path": "prototypes/cycle0_react_web/",
+          "description": "A conceptual output representing all files (components, pages, configs) created or modified during shadcn/ui integration and mobile styling.",
+          "embed_annotations_required": "false"
+        }
+      ],
+      "execution_checklist": [
+        {"item_id": "pc0ms_task_003_check_001", "description": "Execute Tailwind CSS Setup: 1. `npm install -D tailwindcss postcss autoprefixer`. 2. `npx tailwindcss init -p`. 3. Configure `tailwind.config.js` (content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}']). 4. Add directives to `src/index.css` and import in `main.jsx`.", "status": "PENDING", "target_artifact_id": null, "notes": "Based on analysis doc cycle0_shadcn_analysis_g151.md sections 2.1."}, 
+        {"item_id": "pc0ms_task_003_check_002", "description": "Execute shadcn/ui Setup: 1. `npx shadcn-ui@latest init` (Style: Default, Color: Slate, CSS vars: Yes, tailwind.config.js: tailwind.config.js, components: @/components, utils: @/lib/utils, RSC: No). 2. Verify `components.json`, `src/lib/utils.js`, `src/index.css` updates.", "status": "PENDING", "target_artifact_id": null, "notes": "Based on analysis doc cycle0_shadcn_analysis_g151.md section 2.2."}, 
+        {"item_id": "pc0ms_task_003_check_003", "description": "Primitive `Box.jsx`: Deprecate. Plan to replace all usages with direct Tailwind CSS classes on standard HTML elements.", "status": "PENDING", "target_artifact_id": "cycle1_primitive_box_g132", "notes": "Annotation updated. No direct code change here, but informs subsequent refactoring of dependents."}, 
+        {"item_id": "pc0ms_task_003_check_004", "description": "Primitive `Stack.jsx`: Deprecate. Plan to replace usages with Tailwind flexbox utilities.", "status": "PENDING", "target_artifact_id": "cycle1_primitive_stack_g132", "notes": "Annotation to be updated. No direct code change here."}, 
+        {"item_id": "pc0ms_task_003_check_005", "description": "Primitive `Grid.jsx`: Deprecate. Plan to replace usages with Tailwind grid utilities.", "status": "PENDING", "target_artifact_id": "cycle1_primitive_grid_g132", "notes": "Annotation to be updated. No direct code change here."}, 
+        {"item_id": "pc0ms_task_003_check_006", "description": "Primitive `Typography.jsx`: Deprecate. Plan to replace usages with direct Tailwind text utilities on standard HTML text elements.", "status": "PENDING", "target_artifact_id": "cycle1_primitive_typography_g132", "notes": "Annotation to be updated. No direct code change here."}, 
+        {"item_id": "pc0ms_task_003_check_007", "description": "Primitive `Link.jsx`: Refactor. Retain `react-router-dom Link` functionality, style with Tailwind CSS. Consider shadcn/ui Button with `variant='link'` for some cases.", "status": "PENDING", "target_artifact_id": "cycle1_primitive_link_g132", "notes": "Annotation to be updated. Code changes required during implementation."}, 
+        {"item_id": "pc0ms_task_003_check_008", "description": "Primitive `Input.jsx`: Replace. Run `npx shadcn-ui@latest add input`. Refactor usages to use `shadcn/ui Input`.", "status": "PENDING", "target_artifact_id": "cycle1_primitive_input_g132", "notes": "Annotation to be updated. Install and refactor code."}, 
+        {"item_id": "pc0ms_task_003_check_009", "description": "Primitive `Icon.jsx`: Refactor/Replace. Use `lucide-react` directly with Tailwind styling. Install `lucide-react`. Remove custom wrapper if redundant.", "status": "PENDING", "target_artifact_id": "cycle1_primitive_icon_g132", "notes": "Annotation to be updated. Install and refactor code."}, 
+        {"item_id": "pc0ms_task_003_check_010", "description": "Common `Button.jsx`: Replace. Run `npx shadcn-ui@latest add button`. Refactor all usages to use `shadcn/ui Button` and its variants.", "status": "PENDING", "target_artifact_id": "cycle0_comp_button_g112", "notes": "Annotation updated. Install and refactor code."}, 
+        {"item_id": "pc0ms_task_003_check_011", "description": "Common `Card.jsx`: Replace. Run `npx shadcn-ui@latest add card`. Refactor usages to use `shadcn/ui Card` components (Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter).", "status": "PENDING", "target_artifact_id": "cycle0_comp_card_g112", "notes": "Annotation to be updated. Install and refactor code."}, 
+        {"item_id": "pc0ms_task_003_check_012", "description": "Common `Modal.jsx`: Replace. Run `npx shadcn-ui@latest add dialog drawer`. Evaluate and refactor usages to `shadcn/ui Dialog` or `Drawer` as appropriate for mobile UX.", "status": "PENDING", "target_artifact_id": "cycle0_comp_modal_g112", "notes": "Annotation to be updated. Install and refactor code."}, 
+        {"item_id": "pc0ms_task_003_check_013", "description": "Layout `Header.jsx`: Refactor. Use Tailwind CSS for mobile-first layout. Implement hamburger menu icon (e.g. from lucide-react) triggering `shadcn/ui Sheet` (`npx shadcn-ui@latest add sheet`) for navigation.", "status": "PENDING", "target_artifact_id": "cycle0_comp_header_g112", "notes": "Annotation updated. Install sheet, refactor code significantly."}, 
+        {"item_id": "pc0ms_task_003_check_014", "description": "Layout `Footer.jsx`: Refactor. Use Tailwind CSS for simple, mobile-friendly styling.", "status": "PENDING", "target_artifact_id": "cycle0_comp_footer_g112", "notes": "Annotation to be updated. Refactor code."}, 
+        {"item_id": "pc0ms_task_003_check_015", "description": "Page `HomePage.jsx`: Refactor. Use new shadcn/ui-based components and Tailwind for a mobile-first, single-column layout.", "status": "PENDING", "target_artifact_id": "cycle0_page_home_g112", "notes": "Annotation to be updated. Refactor code."}, 
+        {"item_id": "pc0ms_task_003_check_016", "description": "Page `LoginPage.jsx`: Refactor. Use shadcn/ui Input, Button, Label for a mobile-friendly form.", "status": "PENDING", "target_artifact_id": "cycle0_page_login_g112", "notes": "Annotation to be updated. Requires `npx shadcn-ui@latest add label`. Refactor code."}, 
+        {"item_id": "pc0ms_task_003_check_017", "description": "Page `SignupPage.jsx`: Refactor. Use shadcn/ui Input, Button, Label for a mobile-friendly form.", "status": "PENDING", "target_artifact_id": "cycle0_page_signup_g112", "notes": "Annotation to be updated. Refactor code."}, 
+        {"item_id": "pc0ms_task_003_check_018", "description": "Page `OnboardingPage.jsx`: Refactor. Use new components and Tailwind for mobile-first layout.", "status": "PENDING", "target_artifact_id": "cycle0_page_onboarding_g112", "notes": "Annotation to be updated. Refactor code."}, 
+        {"item_id": "pc0ms_task_003_check_019", "description": "Page `StyleGuidePage.jsx`: Refactor significantly to showcase all new shadcn/ui components and their mobile styling. May need mobile viewport simulation.", "status": "PENDING", "target_artifact_id": "cycle1_styleguide_page_g131", "notes": "Annotation to be updated. Refactor code."} 
+      ],
+      "dependencies": ["pc0ms_task_002"],
+      "criticality": "HIGH",
+      "status": "PENDING",
+      "linked_issue_ids": [],
+      "notes": ["This task is the core implementation effort. Annotations in modified files must be updated (g_last_modified, version_tag, key_logic_points related to shadcn/ui)."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc0ms_task_004",
+      "title": "Update Style Guide for Mobile Views",
+      "description": "Modify 'StyleGuidePage.jsx' to effectively showcase the mobile-responsive versions of components. This might involve adding controls to view components within a simulated mobile viewport, or ensuring the style guide page itself is responsive and components within it adapt correctly.",
+      "intent": "To ensure that the Style Guide remains a useful tool for verifying and demonstrating the mobile-friendliness of the UI components.",
+      "inputs": [
+        { "name": "Mobile-Styled Components", "source_description": "Outputs from pc0ms_task_003.", "details": "Components now have mobile styling." },
+        { "name": "StyleGuidePage.jsx", "source_description": "Artifact 'cycle1_styleguide_page_g131'.", "details": "The existing style guide page." }
+      ],
+      "outputs": [
+        {
+          "name": "Updated StyleGuidePage.jsx",
+          "artifact_id": "cycle1_styleguide_page_g131", 
+          "expected_path": "prototypes/cycle0_react_web/src/pages/StyleGuidePage.jsx",
+          "description": "StyleGuidePage.jsx updated to better display or simulate mobile views of components. Annotation block will be updated.",
+          "embed_annotations_required": "true"
+        }
+      ],
+      "execution_checklist": [],
+      "dependencies": ["pc0ms_task_003"],
+      "criticality": "MEDIUM",
+      "status": "PENDING",
+      "linked_issue_ids": [],
+      "notes": ["The goal is to make mobile styling easily verifiable via the Style Guide."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc0ms_task_005",
+      "title": "Update Annotations & Registry Map",
+      "description": "Ensure all modified component and page files have their 'EmbeddedAnnotationBlock' updated, specifically 'g_last_modified', 'version_tag', and any 'key_logic_points' related to mobile responsiveness. Update 'registry_map.txt' if any new artifacts were created (e.g., the analysis report from pc0ms_task_001) or if paths/IDs changed (unlikely).",
+      "intent": "To maintain accurate and up-to-date metadata for all project artifacts.",
+      "inputs": [
+        { "name": "All modified/created files from this plan", "source_description": "Outputs from pc0ms_task_001, pc0ms_task_003, pc0ms_task_004.", "details": "Includes analysis report, styled components, updated StyleGuidePage." }
+      ],
+      "outputs": [
+        { "name": "Set of Updated Annotated Files", "artifact_id": "cycle0_updated_mobile_annotations_set_g150", "expected_path": "prototypes/cycle0_react_web/", "description": "Conceptual: All files with updated annotations.", "embed_annotations_required": "false" },
+        { "name": "Updated registry_map.txt", "artifact_id": "registry_map_g112_cycle0_web_proto", "expected_path": "registry_map.txt", "description": "Registry map updated with new artifacts and correct version/timestamp.", "embed_annotations_required": "false" }
+      ],
+      "execution_checklist": [],
+      "dependencies": ["pc0ms_task_001", "pc0ms_task_003", "pc0ms_task_004"],
+      "criticality": "MEDIUM",
+      "status": "PENDING",
+      "linked_issue_ids": [],
+      "notes": ["This is a standard hygiene task to ensure metadata integrity."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc0ms_task_006",
+      "title": "User & Stakeholder Review (Mobile Styles)",
+      "description": "Present the mobile-styled web prototype to the user and stakeholders for review and feedback. Focus on the visual presentation and usability on mobile screen sizes. Collate feedback.",
+      "intent": "To validate that the mobile styling meets user/stakeholder expectations and to gather any further refinement requests before concluding this phase.",
+      "inputs": [
+        { "name": "Mobile-Styled Web Prototype", "source_description": "The application state after pc0ms_task_004.", "details": "Accessible via dev server, focusing on mobile views." }
+      ],
+      "outputs": [
+        {
+          "name": "Mobile Styling Feedback Summary",
+          "artifact_id": "cycle0_mobile_styling_feedback_g150",
+          "expected_path": "artifacts/feedback/cycle0_mobile_styling_feedback_g150.md",
+          "description": "A markdown document summarizing the feedback received on the mobile-styled web prototype.",
+          "embed_annotations_required": "true"
+        }
+      ],
+      "execution_checklist": [],
+      "dependencies": ["pc0ms_task_004"],
+      "criticality": "HIGH",
+      "status": "PENDING",
+      "linked_issue_ids": [],
+      "notes": ["This is a crucial validation step with the user/stakeholders."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc0ms_task_007",
+      "title": "Final Validation & Plan Completion",
+      "description": "Based on feedback from pc0ms_task_006, make any minor final adjustments (if necessary and within scope). Perform a final validation of all changes. Update this plan's status to COMPLETED_SUCCESS. Update 'state.txt' accordingly.",
+      "intent": "To formally conclude the mobile styling phase, ensuring all objectives are met and the project is ready for the next steps (e.g., proceeding to actual mobile app development planning).",
+      "inputs": [
+        { "name": "Mobile Styling Feedback Summary", "source_description": "Output of pc0ms_task_006.", "details": "Feedback from review." },
+        { "name": "All modified artifacts from this plan", "source_description": "The state of the codebase after addressing feedback.", "details": "Codebase and documentation."}
+      ],
+      "outputs": [
+        { "name": "Completed Plan Document (plan_cycle0_mobile_styling_g150.txt)", "artifact_id": "plan_cycle0_mobile_styling_g150", "expected_path": "plans/plan_cycle0_mobile_styling_g150.txt", "description": "This plan document updated to COMPLETED_SUCCESS status.", "embed_annotations_required": "false" },
+        { "name": "Updated state.txt", "artifact_id": null, "expected_path": "state.txt", "description": "state.txt updated to reflect plan completion and readiness for the next phase.", "embed_annotations_required": "false" }
+      ],
+      "execution_checklist": [],
+      "dependencies": ["pc0ms_task_005", "pc0ms_task_006"],
+      "criticality": "MEDIUM",
+      "status": "PENDING",
+      "linked_issue_ids": [],
+      "notes": ["This task finalizes the mobile styling effort for the web prototype."],
+      "sub_tasks": []
+    }
+  ]
+} 

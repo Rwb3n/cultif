@@ -1,0 +1,22 @@
+{
+  "v": 2,
+  "id": "issue_flexdirection_prop_g145",
+  "title": "React Warning: Unknown flexDirection prop on DOM element",
+  "description": "React throws a warning because the `flexDirection` prop is being passed directly to a DOM element within the `Box.jsx` component (line 163). This usually happens when a component meant to style or wrap (like Box) passes through all its props to the underlying DOM element, including those not recognized by HTML elements (like `flexDirection` which is a CSS style property, not an HTML attribute). The warning was observed when `Box.jsx` is used inside `Card.jsx` on `HomePage.jsx`.",
+  "type": "LINT_ERROR",
+  "severity": "MEDIUM",
+  "status": "RESOLVED",
+  "g_reported": 145,
+  "g_status_updated": 146,
+  "g_resolved": 146,
+  "reported_by": "USER_CONSOLE_LOG",
+  "plan_id_ref": "plan_cycle1_ui_refinement_g131",
+  "task_id_ref": "pc1uir_task_008",
+  "artifact_id_ref": "cycle1_primitive_box_g132",
+  "artifact_filepath_ref": "prototypes/cycle0_react_web/src/components/primitives/Box.jsx",
+  "resolution_summary": "Added `flexDirection` and other common flexbox props (alignItems, justifyContent, flexWrap, flexGrow, flexShrink, flexBasis) to the Box component's destructuring, style application logic, and PropTypes. This ensures these props are handled as style properties and not passed down as unknown HTML attributes. The component's annotation block was also updated. User confirmed warning is no longer present in console logs at g=146.",
+  "comments": [
+    { "g_ts": 145, "author": "USER_CONSOLE_LOG", "comment_text": "Box.jsx:163 React does not recognize the `flexDirection` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `flexdirection` instead. If you accidentally passed it from a parent component, remove it from the DOM element." },
+    { "g_ts": 146, "author": "AI_OS", "comment_text": "Applied fix to Box.jsx to correctly handle flexbox props. User confirmed issue resolved." }
+  ]
+} 
