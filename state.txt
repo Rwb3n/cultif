@@ -1,10 +1,10 @@
 {
-  "v": 2,
-  "g": 119,
-  "ph": "CONSTRUCT",
-  "st": "BUSY",
-  "cp_id": "plan_cycle0_webreact_prototype_g112",
-  "ct_id": "pc0wp_task_002",
+  "v": 7,
+  "g": 130,
+  "ph": "IDLE",
+  "st": "READY",
+  "cp_id": null,
+  "ct_id": null,
   "rt": {},
   "active_issue_ids": [],
   "last_error": null
