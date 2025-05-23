@@ -1,0 +1,30 @@
+{
+  "v": 2,
+  "id": "issue_tailwind_init_fail_g153",
+  "title": "Tailwind CSS Initialization Failure due to NPX/NPM Environment Issue",
+  "description": "The command 'npx tailwindcss init -p' consistently fails with 'npm error could not determine executable to run'. This occurs even after clearing npm cache, and attempting global and local installations of tailwindcss, postcss, and autoprefixer. Listing 'prototypes/cycle0_react_web/node_modules/.bin' shows that the 'tailwindcss' executable symlink is not being created by npm install. This prevents the execution of checklist item pc0ms_task_003_check_001 of plan plan_cycle0_mobile_styling_g150.",
+  "type": "BLOCKER",
+  "severity": "CRITICAL",
+  "status": "RESOLVED",
+  "g_reported": 153,
+  "g_status_updated": 154,
+  "g_resolved": 154,
+  "reported_by": "AI_CONSTRUCT",
+  "plan_id_ref": "plan_cycle0_mobile_styling_g150",
+  "task_id_ref": "pc0ms_task_003",
+  "artifact_id_ref": null,
+  "artifact_filepath_ref": "prototypes/cycle0_react_web/tailwind.config.js",
+  "resolution_summary": "User manually installed 'tailwindcss @tailwindcss/cli', which made the 'tailwindcss' executable available. The 'init' command for Tailwind CSS v4 is not used; instead, 'tailwind.config.js' was created manually as per plan. Tailwind directives were added to 'index.css'. Checklist item pc0ms_task_003_check_001 is now complete.",
+  "comments": [
+    {
+      "g_ts": 153,
+      "author": "Hybrid_AI_OS",
+      "comment_text": "Initial report. NPX cannot find/execute tailwindcss CLI. The '.bin' symlink for 'tailwindcss' is missing in 'node_modules'. Manual intervention or environment correction likely required to proceed with Tailwind CSS setup."
+    },
+    {
+      "g_ts": 154,
+      "author": "Hybrid_AI_OS",
+      "comment_text": "User confirmed manual installation of '@tailwindcss/cli' resolved the missing executable. Proceeded with manual creation of 'tailwind.config.js' and adding CSS directives, as Tailwind v4 does not use 'init -p'."
+    }
+  ]
+} 

@@ -1,0 +1,58 @@
+{
+  "_annotationBlock": {
+    "artifact_id": "tsconfig_base_g157",
+    "version_tag": "1.0.0",
+    "g_created": 158,
+    "g_last_modified": 158,
+    "description": "The main TypeScript configuration file for the project, enabling TSX, path aliases, and other compiler features. Aligns with Vite setup guide for React+TS.",
+    "artifact_type": "CONFIG_FILE",
+    "status_in_lifecycle": "DEVELOPMENT",
+    "purpose_statement": "To define root TypeScript compiler options and project references for the cycle0_react_web prototype migration to TypeScript.",
+    "key_logic_points": [
+      "Sets ESNext for target and module.",
+      "Configures JSX for react-jsx.",
+      "Enables strict type checking options (can be adjusted).",
+      "Defines baseUrl and paths for '@/*' alias to './src/*'.",
+      "References tsconfig.app.json and tsconfig.node.json as per Vite structure."
+    ],
+    "interfaces_provided": [],
+    "requisites": [
+      {"description": "TypeScript installed in the project.", "type": "DEPENDENCY"}
+    ],
+    "external_dependencies": [
+      {"name": "typescript", "version": "^latest", "reason": "Core TypeScript compilation."}
+    ],
+    "internal_dependencies": ["tsconfig_app_g157", "tsconfig_node_g157"],
+    "dependents": [],
+    "linked_issue_ids": [],
+    "quality_notes": {
+      "unit_tests": "N/A",
+      "manual_review_comment": null
+    }
+  },
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+} 

@@ -1,15 +1,22 @@
 {
-  "v": 8,
-  "g_updated": 151,
+  "v": 10,
+  "g_updated": 159,
   "artifact_registry_tree": {
     "os_control": {
         "registry_map_g112_cycle0_web_proto": "registry_map.txt"
     },
     "plans": {
-        "plan_cycle0_mobile_styling_g150": "plans/plan_cycle0_mobile_styling_g150.txt"
+        "plan_cycle0_mobile_styling_g150": "plans/plan_cycle0_mobile_styling_g150.txt",
+        "plan_jsx_to_tsx_g157": "plans/plan_jsx_to_tsx_g157.txt"
     },
     "analysis": {
         "cycle0_shadcn_analysis_g151": "artifacts/analysis/cycle0_shadcn_analysis_g151.md"
+    },
+    "logs": {
+        "build_test_log_g157": "artifacts/logs/build_test_log_g157.md"
+    },
+    "reports": {
+        "plan_jsx_to_tsx_g157_completion_report_g159": "artifacts/reports/plan_jsx_to_tsx_g157_completion_report_g159.md"
     },
     "reviews": {
         "cycle0_prototype_review_g130": "artifacts/reviews/cycle0_prototype_review_g130.md",
@@ -24,43 +31,49 @@
     "prototypes": {
       "cycle0_react_web": {
         "cycle0_prototype_readme_g112": "prototypes/cycle0_react_web/README.md",
+        "config": {
+          "tsconfig_base_g157": "prototypes/cycle0_react_web/tsconfig.json",
+          "tsconfig_app_g157": "prototypes/cycle0_react_web/tsconfig.app.json",
+          "tsconfig_node_g157": "prototypes/cycle0_react_web/tsconfig.node.json",
+          "vite_config_ts_g157": "prototypes/cycle0_react_web/vite.config.ts"
+        },
         "src": {
-          "cycle0_prototype_app_entry_g112": "prototypes/cycle0_react_web/src/App.jsx",
+          "cycle0_prototype_app_entry_g112": "prototypes/cycle0_react_web/src/App.tsx",
           "components": {
             "common": {
-              "cycle0_comp_button_g112": "prototypes/cycle0_react_web/src/components/common/Button.jsx",
-              "cycle0_comp_card_g112": "prototypes/cycle0_react_web/src/components/common/Card.jsx",
-              "cycle0_comp_modal_g112": "prototypes/cycle0_react_web/src/components/common/Modal.jsx"
+              "cycle0_comp_button_g112": "prototypes/cycle0_react_web/src/components/common/Button.tsx",
+              "cycle0_comp_card_g112": "prototypes/cycle0_react_web/src/components/common/Card.tsx",
+              "cycle0_comp_modal_g112": "prototypes/cycle0_react_web/src/components/common/Modal.tsx"
             },
             "layout": {
-              "cycle0_comp_header_g112": "prototypes/cycle0_react_web/src/components/layout/Header.jsx",
-              "cycle0_comp_footer_g112": "prototypes/cycle0_react_web/src/components/layout/Footer.jsx"
+              "cycle0_comp_header_g112": "prototypes/cycle0_react_web/src/components/layout/Header.tsx",
+              "cycle0_comp_footer_g112": "prototypes/cycle0_react_web/src/components/layout/Footer.tsx"
             },
             "primitives": {
-              "cycle1_primitive_typography_g132": "prototypes/cycle0_react_web/src/components/primitives/Typography.jsx",
-              "cycle1_primitive_icon_g132": "prototypes/cycle0_react_web/src/components/primitives/Icon.jsx",
-              "cycle1_primitive_input_g132": "prototypes/cycle0_react_web/src/components/primitives/Input.jsx",
-              "cycle1_primitive_box_g132": "prototypes/cycle0_react_web/src/components/primitives/Box.jsx",
-              "cycle1_primitive_stack_g132": "prototypes/cycle0_react_web/src/components/primitives/Stack.jsx",
-              "cycle1_primitive_grid_g132": "prototypes/cycle0_react_web/src/components/primitives/Grid.jsx",
-              "cycle1_primitive_link_g132": "prototypes/cycle0_react_web/src/components/primitives/Link.jsx"
+              "cycle1_primitive_typography_g132": "prototypes/cycle0_react_web/src/components/primitives/Typography.tsx",
+              "cycle1_primitive_icon_g132": "prototypes/cycle0_react_web/src/components/primitives/Icon.tsx",
+              "cycle1_primitive_input_g132": "prototypes/cycle0_react_web/src/components/primitives/Input.tsx",
+              "cycle1_primitive_box_g132": "prototypes/cycle0_react_web/src/components/primitives/Box.tsx",
+              "cycle1_primitive_stack_g132": "prototypes/cycle0_react_web/src/components/primitives/Stack.tsx",
+              "cycle1_primitive_grid_g132": "prototypes/cycle0_react_web/src/components/primitives/Grid.tsx",
+              "cycle1_primitive_link_g132": "prototypes/cycle0_react_web/src/components/primitives/Link.tsx"
             }
           },
           "navigation": {
-            "cycle0_router_config_g112": "prototypes/cycle0_react_web/src/navigation/AppRouter.jsx"
+            "cycle0_router_config_g112": "prototypes/cycle0_react_web/src/navigation/AppRouter.tsx"
           },
           "pages": {
-            "cycle0_page_onboarding_g112": "prototypes/cycle0_react_web/src/pages/OnboardingPage.jsx",
-            "cycle0_page_login_g112": "prototypes/cycle0_react_web/src/pages/LoginPage.jsx",
-            "cycle0_page_signup_g112": "prototypes/cycle0_react_web/src/pages/SignupPage.jsx",
-            "cycle0_page_home_g112": "prototypes/cycle0_react_web/src/pages/HomePage.jsx",
-            "cycle0_page_recipedetail_g112": "prototypes/cycle0_react_web/src/pages/RecipeDetailPage.jsx",
-            "cycle0_page_mealplan_g112": "prototypes/cycle0_react_web/src/pages/MealPlanPage.jsx",
-            "cycle0_page_userprofile_g112": "prototypes/cycle0_react_web/src/pages/UserProfilePage.jsx",
-            "cycle0_page_creatorprofile_g112": "prototypes/cycle0_react_web/src/pages/CreatorProfilePage.jsx",
-            "cycle0_page_recipeupload_g112": "prototypes/cycle0_react_web/src/pages/RecipeUploadPage.jsx",
-            "cycle0_page_subscription_g112": "prototypes/cycle0_react_web/src/pages/SubscriptionPage.jsx",
-            "cycle1_styleguide_page_g131": "prototypes/cycle0_react_web/src/pages/StyleGuidePage.jsx"
+            "cycle0_page_onboarding_g112": "prototypes/cycle0_react_web/src/pages/OnboardingPage.tsx",
+            "cycle0_page_login_g112": "prototypes/cycle0_react_web/src/pages/LoginPage.tsx",
+            "cycle0_page_signup_g112": "prototypes/cycle0_react_web/src/pages/SignupPage.tsx",
+            "cycle0_page_home_g112": "prototypes/cycle0_react_web/src/pages/HomePage.tsx",
+            "cycle0_page_recipedetail_g112": "prototypes/cycle0_react_web/src/pages/RecipeDetailPage.tsx",
+            "cycle0_page_mealplan_g112": "prototypes/cycle0_react_web/src/pages/MealPlanPage.tsx",
+            "cycle0_page_userprofile_g112": "prototypes/cycle0_react_web/src/pages/UserProfilePage.tsx",
+            "cycle0_page_creatorprofile_g112": "prototypes/cycle0_react_web/src/pages/CreatorProfilePage.tsx",
+            "cycle0_page_recipeupload_g112": "prototypes/cycle0_react_web/src/pages/RecipeUploadPage.tsx",
+            "cycle0_page_subscription_g112": "prototypes/cycle0_react_web/src/pages/SubscriptionPage.tsx",
+            "cycle1_styleguide_page_g131": "prototypes/cycle0_react_web/src/pages/StyleGuidePage.tsx"
           },
           "services": {
             "mockData": {

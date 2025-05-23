@@ -1,10 +1,10 @@
 {
-  "v": 4,
+  "v": 9,
   "id": "plan_cycle0_mobile_styling_g150",
-  "status": "ACTIVE",
+  "status": "BLOCKED",
   "preceding_plan_id_ref": "plan_cycle1_ui_refinement_g131",
   "origin_artifact_id": "consolidated_progress_review_g149",
-  "goal": "To adapt the existing Cycle 0 web prototype (React.js) to be mobile-first in its styling and presentation using shadcn/ui and Tailwind CSS. This involves analyzing current components, planning shadcn/ui integration, implementing responsive shadcn/ui components, and ensuring the Style Guide effectively showcases mobile views, ultimately to better inform the subsequent mobile application development.",
+  "goal": "To adapt the existing Cycle 0 web prototype (React.js) to be mobile-first in its styling and presentation using shadcn/ui and Tailwind CSS. This involves analyzing current components, planning shadcn/ui integration, implementing responsive shadcn/ui components, and ensuring the Style Guide effectively showcases mobile views, ultimately to better inform the subsequent mobile application development. THIS PLAN IS CURRENTLY BLOCKED PENDING MIGRATION OF THE UNDERLYING PROJECT TO TYPESCRIPT (see new plan).",
   "scope": [
     "Installation and configuration of Tailwind CSS and shadcn/ui in the 'prototypes/cycle0_react_web/' project.",
     "Analysis of all existing common components, layout components, primitive components, and pages for mapping to shadcn/ui components and mobile responsiveness.",
@@ -23,7 +23,7 @@
     "Comprehensive E2E testing for mobile views (focus is on visual correctness and basic interaction)."
   ],
   "g_created": 150,
-  "g_updated": 152,
+  "g_updated": 156,
   "tasks": [
     {
       "id": "pc0ms_task_001",
@@ -99,8 +99,8 @@
         }
       ],
       "execution_checklist": [
-        {"item_id": "pc0ms_task_003_check_001", "description": "Execute Tailwind CSS Setup: 1. `npm install -D tailwindcss postcss autoprefixer`. 2. `npx tailwindcss init -p`. 3. Configure `tailwind.config.js` (content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}']). 4. Add directives to `src/index.css` and import in `main.jsx`.", "status": "PENDING", "target_artifact_id": null, "notes": "Based on analysis doc cycle0_shadcn_analysis_g151.md sections 2.1."}, 
-        {"item_id": "pc0ms_task_003_check_002", "description": "Execute shadcn/ui Setup: 1. `npx shadcn-ui@latest init` (Style: Default, Color: Slate, CSS vars: Yes, tailwind.config.js: tailwind.config.js, components: @/components, utils: @/lib/utils, RSC: No). 2. Verify `components.json`, `src/lib/utils.js`, `src/index.css` updates.", "status": "PENDING", "target_artifact_id": null, "notes": "Based on analysis doc cycle0_shadcn_analysis_g151.md section 2.2."}, 
+        {"item_id": "pc0ms_task_003_check_001", "description": "Execute Tailwind CSS Setup: 1. `npm install -D tailwindcss postcss autoprefixer`. 2. `npx tailwindcss init -p`. 3. Configure `tailwind.config.js` (content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}']). 4. Add directives to `src/index.css` and import in `main.jsx`.", "status": "DONE", "target_artifact_id": null, "notes": "Based on analysis doc cycle0_shadcn_analysis_g151.md sections 2.1. Tailwind CSS v4 does not use 'init -p'; tailwind.config.js created manually. Vite guide step for index.css also applied."},
+        {"item_id": "pc0ms_task_003_check_002", "description": "Execute shadcn/ui Setup: 1. `npx shadcn-ui@latest init` (Style: Default, Color: Slate, CSS vars: Yes, tailwind.config.js: tailwind.config.js, components: @/components, utils: @/lib/utils, RSC: No). 2. Verify `components.json`, `src/lib/utils.js`, `src/index.css` updates.", "status": "PENDING", "target_artifact_id": null, "notes": "Based on analysis doc cycle0_shadcn_analysis_g151.md section 2.2. BLOCKED by issue_shadcn_init_interactive_g155 (interactive init). Project also needs to be migrated to TypeScript before this step can fully proceed per new Vite guide."},
         {"item_id": "pc0ms_task_003_check_003", "description": "Primitive `Box.jsx`: Deprecate. Plan to replace all usages with direct Tailwind CSS classes on standard HTML elements.", "status": "PENDING", "target_artifact_id": "cycle1_primitive_box_g132", "notes": "Annotation updated. No direct code change here, but informs subsequent refactoring of dependents."}, 
         {"item_id": "pc0ms_task_003_check_004", "description": "Primitive `Stack.jsx`: Deprecate. Plan to replace usages with Tailwind flexbox utilities.", "status": "PENDING", "target_artifact_id": "cycle1_primitive_stack_g132", "notes": "Annotation to be updated. No direct code change here."}, 
         {"item_id": "pc0ms_task_003_check_005", "description": "Primitive `Grid.jsx`: Deprecate. Plan to replace usages with Tailwind grid utilities.", "status": "PENDING", "target_artifact_id": "cycle1_primitive_grid_g132", "notes": "Annotation to be updated. No direct code change here."}, 
@@ -121,9 +121,9 @@
       ],
       "dependencies": ["pc0ms_task_002"],
       "criticality": "HIGH",
-      "status": "PENDING",
-      "linked_issue_ids": [],
-      "notes": ["This task is the core implementation effort. Annotations in modified files must be updated (g_last_modified, version_tag, key_logic_points related to shadcn/ui)."],
+      "status": "BLOCKED",
+      "linked_issue_ids": ["issue_shadcn_init_interactive_g155"],
+      "notes": ["This task is the core implementation effort. Annotations in modified files must be updated (g_last_modified, version_tag, key_logic_points related to shadcn/ui).", "Tailwind CSS setup (check_001) completed. index.css updated per Vite guide.", "BLOCKED by issue_shadcn_init_interactive_g155 (shadcn/ui init requires interactive run). Project also needs migration to TypeScript (see new plan) before this task can be fully unblocked and follow the Vite+TS shadcn/ui setup guide."],
       "sub_tasks": []
     },
     {

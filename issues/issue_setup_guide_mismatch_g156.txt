@@ -1,0 +1,30 @@
+{
+  "v": 2,
+  "id": "issue_setup_guide_mismatch_g156",
+  "title": "Project Type Mismatch with Provided shadcn/ui Setup Guide",
+  "description": "The user provided a setup guide for shadcn/ui with Vite and Tailwind CSS v4 that assumes a TypeScript project (requiring edits to tsconfig.json, tsconfig.app.json, and vite.config.ts). However, the current project 'prototypes/cycle0_react_web' appears to be a JavaScript project (using .jsx files, and tsconfig.json is missing). This prevents proceeding with the guide's steps for tsconfig and vite.config.ts modifications. Checklist item pc0ms_task_003_check_002 (shadcn/ui setup) is blocked.",
+  "type": "BLOCKER",
+  "severity": "HIGH",
+  "status": "RESOLVED",
+  "g_reported": 156,
+  "g_status_updated": 156,
+  "g_resolved": 156,
+  "reported_by": "AI_CONSTRUCT",
+  "plan_id_ref": "plan_cycle0_mobile_styling_g150",
+  "task_id_ref": "pc0ms_task_003",
+  "artifact_id_ref": null,
+  "artifact_filepath_ref": "prototypes/cycle0_react_web/",
+  "resolution_summary": "User has decided to pivot the project from JavaScript to TypeScript to align with the provided Vite + Tailwind CSS v4 + shadcn/ui setup guide. A new plan will be created for this migration.",
+  "comments": [
+    {
+      "g_ts": 156,
+      "author": "Hybrid_AI_OS",
+      "comment_text": "Initial report. The project is JavaScript-based, but the provided setup guide is for TypeScript. tsconfig.json is missing."
+    },
+    {
+      "g_ts": 156,
+      "author": "Hybrid_AI_OS",
+      "comment_text": "User directive: Pivot project to TypeScript. This resolves the mismatch."
+    }
+  ]
+} 

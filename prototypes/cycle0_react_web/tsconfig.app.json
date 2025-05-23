@@ -1,0 +1,44 @@
+{
+  "_annotationBlock": {
+    "artifact_id": "tsconfig_app_g157",
+    "version_tag": "1.0.0",
+    "g_created": 158,
+    "g_last_modified": 158,
+    "description": "Application-specific TypeScript configuration for the Vite build, referenced by the main tsconfig.json. Defines include/exclude patterns and app-specific compiler options.",
+    "artifact_type": "CONFIG_FILE",
+    "status_in_lifecycle": "DEVELOPMENT",
+    "purpose_statement": "To provide TypeScript compiler settings specific to the application build within the Vite environment for cycle0_react_web.",
+    "key_logic_points": [
+      "Extends or complements the main tsconfig.json for application code.",
+      "Sets 'composite: true' and 'noEmit: true' as Vite handles emitting.",
+      "Specifies 'include' to process files in the 'src' directory.",
+      "Reiterates 'baseUrl' and 'paths' for '@/*' alias to ensure IDE compatibility and proper resolution during builds."
+    ],
+    "interfaces_provided": [],
+    "requisites": [
+      {"description": "tsconfig.json (tsconfig_base_g157) must exist and be configured.", "type": "DEPENDENCY"}
+    ],
+    "external_dependencies": [
+      {"name": "typescript", "version": "^latest", "reason": "Core TypeScript compilation."},
+      {"name": "vite", "version": "^latest", "reason": "Build tool that utilizes this configuration."}
+    ],
+    "internal_dependencies": ["tsconfig_base_g157"],
+    "dependents": ["tsconfig_base_g157"],
+    "linked_issue_ids": [],
+    "quality_notes": {
+      "unit_tests": "N/A",
+      "manual_review_comment": null
+    }
+  },
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "noEmit": true,
+    "baseUrl": ".", // Reiterated for clarity and some IDEs
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+} 

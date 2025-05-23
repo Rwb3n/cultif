@@ -1,0 +1,40 @@
+{
+  "_annotationBlock": {
+    "artifact_id": "tsconfig_node_g157",
+    "version_tag": "1.0.0",
+    "g_created": 158,
+    "g_last_modified": 158,
+    "description": "TypeScript configuration for Node.js-specific files in the project, such as vite.config.ts. Referenced by the main tsconfig.json.",
+    "artifact_type": "CONFIG_FILE",
+    "status_in_lifecycle": "DEVELOPMENT",
+    "purpose_statement": "To provide TypeScript compiler settings for Node.js execution contexts within the cycle0_react_web project, particularly for build tooling.",
+    "key_logic_points": [
+      "Extends or complements the main tsconfig.json for Node.js environments.",
+      "Sets 'composite: true'.",
+      "Configures module system for Node.js (ESNext, moduleResolution bundler).",
+      "Includes files like vite.config.ts to enable type checking for them."
+    ],
+    "interfaces_provided": [],
+    "requisites": [
+      {"description": "tsconfig.json (tsconfig_base_g157) must exist.", "type": "DEPENDENCY"}
+    ],
+    "external_dependencies": [
+      {"name": "typescript", "version": "^latest", "reason": "Core TypeScript compilation."}
+    ],
+    "internal_dependencies": ["tsconfig_base_g157"],
+    "dependents": ["tsconfig_base_g157", "vite_config_ts_g157"],
+    "linked_issue_ids": [],
+    "quality_notes": {
+      "unit_tests": "N/A",
+      "manual_review_comment": null
+    }
+  },
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["vite.config.ts"] 
+} 

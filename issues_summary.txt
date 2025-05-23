@@ -1,6 +1,6 @@
 {
-  "v": 4,
-  "g_updated": 146,
+  "v": 9,
+  "g_updated": 156,
   "issues_map": {
     "issue_prop_types_g144": {
       "status": "RESOLVED",
@@ -16,6 +16,21 @@
       "status": "RESOLVED",
       "title": "Network Error: Placeholder Images Not Resolving",
       "severity": "LOW"
+    },
+    "issue_tailwind_init_fail_g153": {
+      "status": "RESOLVED",
+      "title": "Tailwind CSS Initialization Failure due to NPX/NPM Environment Issue",
+      "severity": "CRITICAL"
+    },
+    "issue_shadcn_init_interactive_g155": {
+      "status": "OPEN",
+      "title": "shadcn/ui Initialization Requires Interactive Input",
+      "severity": "MEDIUM"
+    },
+    "issue_setup_guide_mismatch_g156": {
+      "status": "RESOLVED",
+      "title": "Project Type Mismatch with Provided shadcn/ui Setup Guide",
+      "severity": "HIGH"
     }
   }
 } 

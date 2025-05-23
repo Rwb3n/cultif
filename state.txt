@@ -1,11 +1,11 @@
 {
-  "v": 32,
-  "g": 152,
+  "v": 41,
+  "g": 159,
   "ph": "CONSTRUCT",
-  "st": "READY",
-  "cp_id": "plan_cycle0_mobile_styling_g150",
+  "st": "BLOCK_INPUT",
+  "cp_id": null,
   "ct_id": null,
   "rt": {},
-  "active_issue_ids": [],
-  "last_error": null
+  "active_issue_ids": ["issue_shadcn_init_interactive_g155"],
+  "last_error": "JSX to TSX migration complete (plan_jsx_to_tsx_g157). Report generated. shadcn/ui init still requires interactive input (issue_shadcn_init_interactive_g155) for plan_cycle0_mobile_styling_g150."
 } 
