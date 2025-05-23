@@ -1,154 +1,110 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle1_primitive_icon_g132",
-  "version_tag": "0.1.1",
+  "version_tag": "0.1.2-deprecated-tsx",
   "g_created": 134,
-  "g_last_modified": 139,
-  "description": "A primitive UI component for rendering icons consistently. It can support SVG icons, icon fonts, or image-based icons through a unified interface.",
+  "g_last_modified": 160,
+  "description": "DEPRECATED (TSX): This component is planned for deprecation. `lucide-react` icons should be used directly with Tailwind CSS for styling. Original description: A primitive UI component for rendering icons consistently. Now migrated to TSX.",
   "artifact_type": "CODE_MODULE",
-  "status_in_lifecycle": "DEVELOPMENT",
-  "purpose_statement": "To provide a standardized way to display icons across the application, abstracting the underlying icon implementation and ensuring consistent styling (size, color). Based on the definition in cycle1_ui_primitives_definition_g131.md.",
+  "status_in_lifecycle": "DEPRECATED",
+  "purpose_statement": "DEPRECATED (TSX): This component will be replaced by direct usage of `lucide-react` icons. Original purpose: To provide a standardized way to display icons across the application... Now in TSX format.",
   "key_logic_points": [
-    "Accepts an `iconName` prop to specify which icon to display.",
-    "Supports `size` and `color` props for styling.",
-    "Includes `titleAccess` for accessibility.",
-    "The actual icon rendering (SVG, font, etc.) is an internal implementation detail that can be evolved (e.g., using a library like react-icons or a custom sprite)."
+    "PLANNED FOR DEPRECATION in favor of direct `lucide-react` usage.",
+    "Migrated to TSX format as part of plan_jsx_to_tsx_g157.",
+    "Original intent was to accept `iconName`, `size`, `color` props.",
+    "This wrapper is now considered redundant."
   ],
   "interfaces_provided": [
     { 
       "name": "Icon", 
       "interface_type": "REACT_COMPONENT", 
-      "details": "Props: iconName, size, color, titleAccess, className", 
-      "notes": "Refer to cycle1_ui_primitives_definition_g131.md for detailed prop descriptions."
+      "details": "Props: iconName, size, color, titleAccess, className, style", 
+      "notes": "THIS COMPONENT IS BEING DEPRECATED. Use `lucide-react` icons directly."
     }
   ],
   "requisites": [
-    { "description": "Definition from cycle1_ui_primitives_definition_g131.md", "type": "DESIGN_SPECIFICATION" },
-    { "description": "An icon set (SVG, font, or library) needs to be chosen and integrated.", "type": "IMPLEMENTATION_DEPENDENCY" }
+    { "description": "Definition from cycle1_ui_primitives_definition_g131.md (now historical)", "type": "DESIGN_SPECIFICATION" },
+    { "description": "`lucide-react` should be used directly.", "type": "REPLACEMENT_STRATEGY" }
   ],
   "external_dependencies": [
-    { "name": "React", "version": "^18.2.0", "reason": "Core React library." },
-    { "name": "prop-types", "version": "^15.x.x", "reason": "For runtime prop type validation." }
-    // Potentially: { "name": "react-icons", "version": "^x.x.x", "reason": "If chosen as the icon library." }
+    { "name": "React", "version": "^19.1.0", "reason": "Core React library for building user interfaces." },
+    { "name": "@types/react", "version": "^19.1.5", "reason": "TypeScript definitions for React." }
   ],
   "internal_dependencies": [],
   "dependents": [
     "cycle1_styleguide_page_g131" 
-    // "cycle1_primitive_input_g132" // Input component uses ReactNode for icons, not this directly.
   ],
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Placeholder for the Icon primitive. Actual icon rendering logic and integration with an icon set to be implemented. Dependents updated at g139."
+    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Marked for DEPRECATION and migrated to TSX at g=160 as per plan_cycle0_mobile_styling_g150. To be replaced by direct lucide-react usage."
   }
 }
 ANNOTATION_BLOCK_END */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 
-// Placeholder: Icon mapping or library integration
-// This is where you would map iconName to actual SVGs or font characters.
-// Example with a hypothetical icon library:
-// import { FaBeer, FaSearch, FaTimes, FaStar, FaArrowDown } from 'react-icons/fa';
-// const iconMap = {
-//   beer: FaBeer,
-//   search: FaSearch,
-//   close: FaTimes,
-//   'star-filled': FaStar,
-//   'arrow-down': FaArrowDown,
-//   // ... add more icons as needed
-// };
+interface IconProps {
+  iconName?: string; // Kept for basic structure, but usage is deprecated
+  size?: 'small' | 'medium' | 'large' | number;
+  color?: string;
+  titleAccess?: string;
+  className?: string;
+  style?: React.CSSProperties;
+  // Allow any other props to be passed through
+  [key: string]: any;
+}
 
 /**
- * Icon Component (Primitive)
+ * Icon Component (Primitive - DEPRECATED)
  *
- * Purpose: Standardized icon rendering.
+ * Purpose: Standardized icon rendering. THIS COMPONENT IS DEPRECATED.
+ * Use `lucide-react` icons directly with Tailwind CSS for styling.
  * Based on definitions in `cycle1_ui_primitives_definition_g131.md`.
- *
- * Props:
- *   iconName: String identifier for the icon.
- *   size: Size of the icon ('small', 'medium', 'large', or number).
- *   color: Icon color ('primary', 'secondary', 'action', etc., or CSS color).
- *   titleAccess: Accessibility title.
- *   className: Additional CSS classes.
  */
-const Icon = React.forwardRef(function Icon(props, ref) {
+const Icon = React.forwardRef<HTMLSpanElement, IconProps>(function Icon(props, ref) {
   const {
     iconName,
     size = 'medium',
     color,
     titleAccess,
     className = '',
+    style: styleProp, // Renamed to avoid conflict
     ...otherProps
   } = props;
 
-  // const SpecificIconComponent = iconMap[iconName];
-
-  // Placeholder for style generation logic
-  const styles = {
+  const styles: React.CSSProperties = {
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    // Size mapping (simplified)
     ...(size === 'small' && { fontSize: '1rem', width: '1rem', height: '1rem' }),
     ...(size === 'medium' && { fontSize: '1.5rem', width: '1.5rem', height: '1.5rem' }),
     ...(size === 'large' && { fontSize: '2rem', width: '2rem', height: '2rem' }),
     ...(typeof size === 'number' && { fontSize: `${size}px`, width: `${size}px`, height: `${size}px` }),
-    
-    // Color mapping (simplified - theme integration needed)
-    ...(color === 'primary' && { color: 'blue' }),
-    ...(color === 'secondary' && { color: 'grey' }),
-    ...(color === 'action' && { color: '#333' }),
-    ...(color && !['primary', 'secondary', 'action'].includes(color) && { color: color }), // Direct CSS color
+    ...(color && { color: color }), // Simplified, actual color would come from Tailwind or direct CSS
   };
 
-  // Combine with any explicitly passed style prop
-  const combinedStyles = { ...styles, ...otherProps.style };
-  const iconClasses = `primitive-icon icon-${iconName} ${className}`.trim();
+  const combinedStyles = { ...styles, ...styleProp };
+  const iconClasses = `primitive-icon icon-${iconName || 'deprecated'} ${className}`.trim();
 
-  // if (!SpecificIconComponent) {
-  //   // Fallback for unknown icons, or render a placeholder
-  //   console.warn(`Icon: iconName "${iconName}" not found.`);
-  //   return <span ref={ref} className={iconClasses} style={combinedStyles} title={titleAccess || iconName} {...otherProps}>[?]</span>;
-  // }
+  console.warn(
+    `Icon component (primitive-icon icon-${iconName || 'deprecated'}) is deprecated. ` +
+    `Use lucide-react icons directly with Tailwind CSS.`
+  );
 
-  // Render the specific icon component from the library or SVG
-  // return (
-  //   <SpecificIconComponent 
-  //     ref={ref} 
-  //     className={iconClasses} 
-  //     style={combinedStyles} 
-  //     title={titleAccess} // Some icon libraries might take title directly, others need a <title> child for SVGs
-  //     aria-hidden={titleAccess ? undefined : true} // Hide from screen readers if title is not provided
-  //     {...otherProps} 
-  //   />
-  // );
-
-  // Basic placeholder rendering if no icon system is integrated yet:
   return (
     <span 
       ref={ref} 
       className={iconClasses} 
       style={combinedStyles} 
       title={titleAccess || iconName}
-      aria-label={titleAccess || iconName}
+      aria-label={titleAccess || iconName || 'deprecated icon'}
       role="img"
       {...otherProps}
     >
-      {/* Placeholder visual representation - replace with actual icon rendering */}
-      {`[${iconName || 'icon'}]`}
+      {`[${iconName || 'DEPRECATED'}]`}
     </span>
   );
 });
-
-Icon.propTypes = {
-  iconName: PropTypes.string.isRequired,
-  size: PropTypes.oneOfType([PropTypes.oneOf(['small', 'medium', 'large']), PropTypes.number]),
-  color: PropTypes.string,
-  titleAccess: PropTypes.string,
-  className: PropTypes.string,
-  style: PropTypes.object,
-};
 
 export default Icon; 

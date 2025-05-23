@@ -1,28 +1,28 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle0_comp_card_g112",
-  "version_tag": "0.1.3",
+  "version_tag": "0.1.4-deprecated-tsx",
   "g_created": 124,
-  "g_last_modified": 149,
-  "description": "A reusable card component for displaying content in a structured, visually distinct block. Uses Box primitive for layout and Typography for title.",
+  "g_last_modified": 160,
+  "description": "DEPRECATED (TSX): This custom card component is now deprecated and has been replaced by the shadcn/ui Card component and its sub-components (CardHeader, CardTitle, CardDescription, CardContent, CardFooter). Original description: A reusable card component for displaying content in a structured, visually distinct block. Uses Box primitive for layout and Typography for title.",
   "artifact_type": "CODE_MODULE",
-  "status_in_lifecycle": "DEVELOPMENT",
-  "purpose_statement": "To provide a flexible container for various types of content such as recipe summaries, user profiles, or promotional items, ensuring consistent styling. References Figma Catalogue: C-02 (Card Variants).",
+  "status_in_lifecycle": "DEPRECATED",
+  "purpose_statement": "DEPRECATED (TSX): Replaced by shadcn/ui Card for consistency with the new UI library and Tailwind CSS integration. Original purpose: To provide a flexible container for various types of content such as recipe summaries, user profiles, or promotional items, ensuring consistent styling. References Figma Catalogue: C-02 (Card Variants).",
   "key_logic_points": [
-    "Utilizes the Box primitive for its main container and structure.",
-    "Can optionally display a title using the Typography primitive.",
-    "Content area is flexible to accommodate diverse children elements."
+    "DEPRECATED and REPLACED by `shadcn/ui Card` and its sub-components.",
+    "Original dependencies on Box and Typography primitives are historical as those are also deprecated."
   ],
   "interfaces_provided": [
-    { "name": "Card", "interface_type": "REACT_COMPONENT", "details": "Props: children, title, sx (passed to Box), titleVariant (passed to Typography)", "notes": "Content is passed as children. Title is optional." }
+    { "name": "Card (Custom - DEPRECATED)", "interface_type": "REACT_COMPONENT", "details": "Props: children, title, sx (passed to Box), titleVariant (passed to Typography)", "notes": "This component is DEPRECATED. Use `shadcn/ui Card` components." }
   ],
   "requisites": [],
   "external_dependencies": [
-    { "name": "React", "version": "^18.2.0", "reason": "Core React library." }
+    { "name": "React", "version": "^19.1.0", "reason": "Core React library for building user interfaces." },
+    { "name": "@types/react", "version": "^19.1.5", "reason": "TypeScript definitions for React." }
   ],
   "internal_dependencies": [
-    "cycle1_primitive_box_g132",
-    "cycle1_primitive_typography_g132"
+    "cycle1_primitive_box_g132", // Historical dependency, Box is deprecated
+    "cycle1_primitive_typography_g132" // Historical dependency, Typography is deprecated
   ],
   "dependents": [
     "cycle1_styleguide_page_g131",
@@ -31,17 +31,30 @@
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g124. Refactored (g143) to use Box for container and Typography for title. Dependents updated at g140, g143 and g149."
+    "manual_review_comment": "Marked as DEPRECATED at g=160 as it has been replaced by shadcn/ui Card (artifact shadcn_ui_card_g160). Original comment: Initial scaffold by Hybrid_AI_OS g124. Refactored (g143) to use Box for container and Typography for title. Dependents updated at g140, g143 and g149."
   }
 }
 ANNOTATION_BLOCK_END */
 
 import React from 'react';
-import Box from '../primitives/Box';
-import Typography from '../primitives/Typography';
+import Box from '../primitives/Box'; // Box is deprecated
+import Typography from '../primitives/Typography'; // Typography is deprecated
+
+interface CardProps {
+  children?: React.ReactNode;
+  title?: React.ReactNode | string;
+  imageUrl?: string | null;
+  imageAlt?: string;
+  imagePosition?: 'top' | 'left' | 'right';
+  footerContent?: React.ReactNode;
+  variant?: 'standard' | 'elevated' | 'flat';
+  className?: string;
+  onClick?: (() => void) | null;
+  [key: string]: any; // For otherProps (e.g. sx for Box)
+}
 
 /**
- * Card Component (References Figma Catalogue: C-02 - Card Variants)
+ * Card Component (DEPRECATED - Replaced by shadcn/ui Card)
  *
  * Purpose: A flexible and reusable container for displaying content snippets in a visually organized manner.
  *          Commonly used for recipe previews, user summaries, subscription tiers, etc.
@@ -75,7 +88,7 @@ import Typography from '../primitives/Typography';
  * [ ] Ensure content overflow is handled gracefully.
  * [ ] Add interactive states (hover, focus) if applicable (Ref C-02_card_interactive_states).
  */
-const Card = ({
+const Card: React.FC<CardProps> = ({
   children,
   title = null,
   imageUrl = null,
@@ -87,21 +100,27 @@ const Card = ({
   onClick = null,
   ...otherProps
 }) => {
+  console.warn(
+    `Custom Card component (artifact cycle0_comp_card_g112) is deprecated. ` +
+    `Use the shadcn/ui Card components (artifact shadcn_ui_card_g160) instead.`
+  );
 
   const cardClasses = `card placeholder-card card-image-${imagePosition} ${onClick ? 'card-clickable' : ''} ${className}`.trim();
 
-  // Mapping Card variant to Box props
-  let boxProps = {
+  let boxProps: any = { // Type as any for simplicity as Box is deprecated
     borderRadius: "8px",
     overflow: "hidden",
     bgcolor: "white",
     display: "flex",
     flexDirection: imagePosition === 'left' || imagePosition === 'right' ? 'row' : 'column',
-    sx: { cursor: onClick ? 'pointer' : 'default' }
+    sx: { cursor: onClick ? 'pointer' : 'default' },
+    ...(otherProps.sx || {}) // Spread sx from otherProps if present
   };
+  // Remove sx from otherProps if it was passed, to avoid applying it twice to Box
+  const { sx, ...restOtherProps } = otherProps;
 
   if (variant === 'elevated') {
-    boxProps.boxShadow = 1; // Assuming Box primitive maps 1 to a standard elevation shadow
+    boxProps.boxShadow = 1;
     boxProps.border = 'none';
   } else if (variant === 'flat') {
     boxProps.boxShadow = 0;
@@ -111,7 +130,7 @@ const Card = ({
     boxProps.border = '1px solid #ddd';
   }
 
-  const imageStyle = {
+  const imageStyle: React.CSSProperties = {
     width: imagePosition === 'left' || imagePosition === 'right' ? '120px' : '100%',
     height: imagePosition === 'top' ? '180px' : (imagePosition === 'left' || imagePosition === 'right' ? '100%': 'auto'),
     objectFit: 'cover',
@@ -135,7 +154,7 @@ const Card = ({
       onClick={onClick} 
       // tabIndex={onClick ? 0 : -1} // Box might not need explicit tabIndex if not inherently interactive
       role={onClick ? 'button' : 'article'}
-      {...otherProps}
+      {...restOtherProps} // Use restOtherProps here
     >
       {imagePosition === 'top' && ImageComponent}
       {imagePosition === 'left' && ImageComponent}

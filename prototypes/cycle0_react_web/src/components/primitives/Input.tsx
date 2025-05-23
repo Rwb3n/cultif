@@ -1,34 +1,36 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle1_primitive_input_g132",
-  "version_tag": "0.1.2",
+  "version_tag": "0.1.3-deprecated-tsx",
   "g_created": 134,
-  "g_last_modified": 148,
-  "description": "A primitive UI component for text-based form inputs, providing consistent styling, states (e.g., error, disabled), and accessibility features.",
+  "g_last_modified": 160,
+  "description": "DEPRECATED (TSX): This component is planned for deprecation. It will be replaced by the shadcn/ui Input component. Original description: A primitive UI component for text-based form inputs, providing consistent styling, states (e.g., error, disabled), and accessibility features. Now migrated to TSX.",
   "artifact_type": "CODE_MODULE",
-  "status_in_lifecycle": "DEVELOPMENT",
-  "purpose_statement": "To serve as a foundational building block for various types of input fields (text, email, password, search, number) ensuring a consistent look and feel and reducing boilerplate. Based on the definition in cycle1_ui_primitives_definition_g131.md.",
+  "status_in_lifecycle": "DEPRECATED",
+  "purpose_statement": "DEPRECATED (TSX): This component will be replaced by the shadcn/ui Input component to align with the project's UI strategy. Original purpose: To serve as a foundational building block for various types of input fields... Now in TSX format.",
   "key_logic_points": [
+    "PLANNED FOR DEPRECATION in favor of shadcn/ui Input component.",
+    "Migrated to TSX format as part of plan_jsx_to_tsx_g157.",
     "Supports common input types (`text`, `password`, `email`, `search`, `number`).",
     "Manages `value` and `onChange` for controlled component behavior.",
-    "Provides visual variants (`outlined`, `filled`, `standard`).",
-    "Includes `label`, `helperText`, and error state display.",
-    "Allows for `leadingIcon` and `trailingIcon` (as ReactNode)."
+    "Provides visual variants (`outlined`, `filled`, `standard`) - basic styling implemented.",
+    "Includes `label`, `helperText`, and error state display - basic styling implemented.",
+    "Allows for `leadingIcon` and `trailingIcon` (as ReactNode) - basic styling implemented."
   ],
   "interfaces_provided": [
     { 
       "name": "Input", 
       "interface_type": "REACT_COMPONENT", 
-      "details": "Props: id, value, onChange, type, placeholder, label, fullWidth, disabled, error, helperText, leadingIcon, trailingIcon, variant, size, className, inputProps", 
-      "notes": "Refer to cycle1_ui_primitives_definition_g131.md for detailed prop descriptions."
+      "details": "Props: id, value, onChange, type, placeholder, label, fullWidth, disabled, error, helperText, leadingIcon, trailingIcon, variant, size, className, inputProps, style", 
+      "notes": "Refer to cycle1_ui_primitives_definition_g131.md for detailed prop descriptions. THIS COMPONENT IS BEING DEPRECATED."
     }
   ],
   "requisites": [
     { "description": "Definition from cycle1_ui_primitives_definition_g131.md", "type": "DESIGN_SPECIFICATION" }
   ],
   "external_dependencies": [
-    { "name": "React", "version": "^18.2.0", "reason": "Core React library." },
-    { "name": "prop-types", "version": "^15.x.x", "reason": "For runtime prop type validation." }
+    { "name": "React", "version": "^19.1.0", "reason": "Core React library for building user interfaces." },
+    { "name": "@types/react", "version": "^19.1.5", "reason": "TypeScript definitions for React." }
   ],
   "internal_dependencies": [],
   "dependents": [
@@ -38,26 +40,42 @@
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Placeholder for the Input primitive. Styling, theme integration, and full interactivity to be implemented. Dependents updated at g139 and g148. Note: leadingIcon/trailingIcon are ReactNode, not direct Icon component dependency."
+    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Marked for DEPRECATION and migrated to TSX at g=160 as per plan_cycle0_mobile_styling_g150. To be replaced by shadcn/ui Input."
   }
 }
 ANNOTATION_BLOCK_END */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-// import Icon from './Icon'; // Assuming Icon primitive is available for leading/trailing icons
+
+interface InputProps {
+  id?: string;
+  value?: string | number;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  type?: 'text' | 'password' | 'email' | 'search' | 'number' | 'tel' | 'url';
+  placeholder?: string;
+  label?: React.ReactNode;
+  fullWidth?: boolean;
+  disabled?: boolean;
+  error?: boolean;
+  helperText?: React.ReactNode;
+  leadingIcon?: React.ReactNode;
+  trailingIcon?: React.ReactNode;
+  variant?: 'outlined' | 'filled' | 'standard';
+  size?: 'small' | 'medium';
+  className?: string;
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+  style?: React.CSSProperties;
+  // Allow any other props to be passed through
+  [key: string]: any;
+}
 
 /**
- * Input Component (Primitive)
+ * Input Component (Primitive - DEPRECATED)
  *
  * Purpose: Standardized base for text-based form input fields.
  * Based on definitions in `cycle1_ui_primitives_definition_g131.md`.
- *
- * Props (refer to definition doc for full details):
- *   id, value, onChange, type, placeholder, label, fullWidth, disabled, error,
- *   helperText, leadingIcon, trailingIcon, variant, size, className, inputProps.
  */
-const Input = React.forwardRef(function Input(props, ref) {
+const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(props, ref) {
   const {
     id,
     value,
@@ -71,12 +89,12 @@ const Input = React.forwardRef(function Input(props, ref) {
     helperText,
     leadingIcon,
     trailingIcon,
-    variant = 'outlined', // 'outlined', 'filled', 'standard'
-    size = 'medium',      // 'small', 'medium'
+    variant = 'outlined',
+    size = 'medium',
     className = '',
     inputProps = {},
-    style, // Extract style prop to merge it correctly
-    ...otherProps // otherProps will be spread on the wrapper div
+    style,
+    ...otherProps
   } = props;
 
   const wrapperClasses = `primitive-input-wrapper 
@@ -89,55 +107,49 @@ const Input = React.forwardRef(function Input(props, ref) {
     ${trailingIcon ? 'input-with-trailing-icon' : ''} 
     ${className}`.trim().replace(/\s+/g, ' ');
 
-  // Placeholder styles - theme integration needed for actual styling
-  const wrapperStyle = {
+  const wrapperStyle: React.CSSProperties = {
     display: fullWidth ? 'block' : 'inline-block',
     position: 'relative',
-    // Add more wrapper styles based on variant, size etc.
     ...(variant === 'outlined' && { border: '1px solid gray', borderRadius: '4px' }),
     ...(error && variant === 'outlined' && { borderColor: 'red' }),
     ...(disabled && { opacity: 0.6, cursor: 'not-allowed' }),
     padding: size === 'small' ? '6px 8px' : '10px 12px',
     backgroundColor: variant === 'filled' ? '#f0f0f0' : 'transparent',
     ...(variant === 'standard' && { borderBottom: '1px solid gray' }),
-    ...style, // Merge explicitly passed style prop
+    ...style,
   };
 
-  const inputStyle = {
+  const inputStyle: React.CSSProperties = {
     border: 'none',
     outline: 'none',
     width: '100%',
-    padding: 0, // Padding is handled by wrapper for icon placement
+    padding: 0,
     font: 'inherit',
     backgroundColor: 'transparent',
-    // Add more input specific styles
   };
 
-  const labelStyle = {
+  const labelStyle: React.CSSProperties = {
     display: 'block',
     marginBottom: '4px',
     fontSize: '0.875rem',
-    // Add more label styles
   };
 
-  const helperTextStyle = {
+  const helperTextStyle: React.CSSProperties = {
     fontSize: '0.75rem',
     marginTop: '4px',
     color: error ? 'red' : 'gray',
-    // Add more helper text styles
   };
   
-  const iconContainerStyle = {
+  const iconContainerStyle: React.CSSProperties = {
     display: 'flex',
     alignItems: 'center',
-    // Styles for icon containers if using them
   };
 
   return (
     <div className={wrapperClasses} style={wrapperStyle} {...otherProps}>
       {label && <label htmlFor={id} style={labelStyle}>{label}</label>}
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        {leadingIcon && <span style={{ marginRight: '8px', ...iconContainerStyle }}>{leadingIcon /* <Icon iconName={...} /> */}</span>}
+        {leadingIcon && <span style={{ marginRight: '8px', ...iconContainerStyle }}>{leadingIcon}</span>}
         <input
           ref={ref}
           id={id}
@@ -147,33 +159,13 @@ const Input = React.forwardRef(function Input(props, ref) {
           placeholder={placeholder}
           disabled={disabled}
           style={inputStyle}
-          {...inputProps} // Spread inputProps onto the native input element
+          {...inputProps}
         />
-        {trailingIcon && <span style={{ marginLeft: '8px', ...iconContainerStyle }}>{trailingIcon /* <Icon iconName={...} /> */}</span>}
+        {trailingIcon && <span style={{ marginLeft: '8px', ...iconContainerStyle }}>{trailingIcon}</span>}
       </div>
       {helperText && <div style={helperTextStyle}>{helperText}</div>}
     </div>
   );
 });
-
-Input.propTypes = {
-  id: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  onChange: PropTypes.func,
-  type: PropTypes.oneOf(['text', 'password', 'email', 'search', 'number', 'tel', 'url']),
-  placeholder: PropTypes.string,
-  label: PropTypes.node,
-  fullWidth: PropTypes.bool,
-  disabled: PropTypes.bool,
-  error: PropTypes.bool,
-  helperText: PropTypes.node,
-  leadingIcon: PropTypes.node,
-  trailingIcon: PropTypes.node,
-  variant: PropTypes.oneOf(['outlined', 'filled', 'standard']),
-  size: PropTypes.oneOf(['small', 'medium']),
-  className: PropTypes.string,
-  inputProps: PropTypes.object,
-  style: PropTypes.object,
-};
 
 export default Input; 

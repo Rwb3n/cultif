@@ -1,38 +1,40 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle0_comp_header_g112",
-  "version_tag": "0.2.0-shadcn-planned",
+  "version_tag": "0.3.0-mobile-refactored-tsx",
   "g_created": 124,
-  "g_last_modified": 152,
-  "description": "PLANNED FOR REFACTORING: This header component will be refactored extensively using Tailwind CSS for mobile-first styling. For mobile, it will likely feature a logo and a hamburger menu icon triggering a shadcn/ui Sheet or Drawer for navigation. Desktop navigation might use shadcn/ui NavigationMenu if a distinct desktop view is prioritized later. Original description: A reusable header component for the application layout. Uses Typography for logo, Link primitive for navigation, and Button for auth actions. Placeholder images updated to local versions.",
+  "g_last_modified": 160,
+  "description": "REFACTORED (TSX): Header component refactored for mobile-first presentation using Tailwind CSS. Mobile view features a logo and a hamburger menu icon triggering a shadcn/ui Sheet for navigation and user actions. Desktop view displays navigation and user actions inline. Uses lucide-react for icons and shadcn/ui components.",
   "artifact_type": "CODE_MODULE",
-  "status_in_lifecycle": "REFACTORING_PLANNED",
-  "purpose_statement": "PLANNED FOR REFACTORING: To provide a consistent, mobile-first top navigation bar. Will be refactored using Tailwind CSS and potentially shadcn/ui components (Sheet/Drawer for mobile menu, NavigationMenu for desktop). Original purpose: To provide a consistent top navigation bar across most pages of the application. References Figma Catalogue: C-04 (Global Header/Navigation).",
+  "status_in_lifecycle": "DEVELOPMENT",
+  "purpose_statement": "To provide a consistent, responsive top navigation bar. Utilizes Tailwind CSS for styling, shadcn/ui Sheet for mobile navigation, and lucide-react for icons, ensuring a mobile-first user experience.",
   "key_logic_points": [
-    "PLANNED REFACTORING with Tailwind CSS for mobile-first responsive design.",
-    "Mobile view: Logo + Hamburger menu icon (triggering `shadcn/ui Sheet` or `Drawer`).",
-    "Navigation links will be moved into the Sheet/Drawer for mobile.",
-    "User authentication actions (Login/Signup/Logout) will use `shadcn/ui Button` and be styled for mobile, possibly within the Sheet/Drawer or as primary actions if space allows.",
-    "Desktop view (secondary focus): May use `shadcn/ui NavigationMenu` or a simpler flex layout."
+    "Refactored with Tailwind CSS for mobile-first responsive design (flexbox, responsive prefixes like 'md:').",
+    "Mobile view: Logo + Hamburger menu icon (`lucide-react/Menu`) triggers `shadcn/ui Sheet`.",
+    "Navigation links and user actions (Login/Signup or User Profile/Logout) are placed within the `SheetContent` on mobile.",
+    "Desktop view (`md:`): Navigation links and user actions are displayed inline in the header.",
+    "Uses `shadcn/ui Button` for authentication actions and potentially for dropdown triggers.",
+    "Uses refactored `Link` component (Tailwind-styled `react-router-dom` Link) for navigation."
   ],
   "interfaces_provided": [
-    { "name": "Header (to be refactored)", "interface_type": "REACT_COMPONENT", "details": "Props: navLinks, user, onLogout, className", "notes": "This component is slated for significant refactoring for mobile-first presentation using Tailwind CSS and shadcn/ui. NavLinks will likely be managed differently for mobile (e.g., inside a drawer). User object contains user info or null. Ref C-04_header_standard_layout." }
+    { "name": "Header", "interface_type": "REACT_COMPONENT", "details": "Props: navLinks, user, onLogout, className", "notes": "Navigation and user actions are responsive. `navLinks` is an array of {label, path}." }
   ],
   "requisites": [
-    { "description": "Decision to use shadcn/ui and Tailwind CSS as per plan_cycle0_mobile_styling_g150", "type": "PROJECT_DECISION" },
-    { "description": "Analysis for mobile header structure from cycle0_shadcn_analysis_g151.md", "type": "ANALYSIS_INPUT" }
+    { "description": "Decision to use shadcn/ui and Tailwind CSS as per plan_cycle0_mobile_styling_g150", "type": "PROJECT_DECISION" }
   ],
   "external_dependencies": [
-    { "name": "React", "version": "^18.2.0", "reason": "Core React library." },
-    { "name": "react-router-dom", "version": "^6.x.x", "reason": "Still used by the Link primitive for internal routing. Link functionality will be preserved using react-router-dom Link, styled with Tailwind."}, 
-    { "name": "Tailwind CSS (target)", "version": "latest", "reason": "Primary styling library for refactoring."}, 
-    { "name": "shadcn/ui Sheet/Drawer (potential)", "version": "latest", "reason": "For mobile navigation menu."},
-    { "name": "lucide-react (potential)", "version": "latest", "reason": "For icons like hamburger menu."}
+    { "name": "React", "version": "^19.1.0", "reason": "Core React library for building user interfaces." },
+    { "name": "@types/react", "version": "^19.1.5", "reason": "TypeScript definitions for React." },
+    { "name": "react-router-dom", "version": "^7.6.0", "reason": "For internal routing via Link component."},
+    { "name": "lucide-react", "version": "latest", "reason": "For icons (e.g., Menu icon)."},
+    { "name": "class-variance-authority", "version": "latest", "reason": "Dependency for shadcn/ui components."},
+    { "name": "clsx", "version": "latest", "reason": "Utility for constructing className strings, often used with shadcn/ui."}
   ],
   "internal_dependencies": [
-    "cycle0_comp_button_g112",
-    "cycle1_primitive_link_g132",
-    "cycle1_primitive_typography_g132"
+    "cycle1_primitive_link_g132", // Refactored Link primitive
+    "shadcn_ui_button_g160",    // shadcn/ui Button
+    "shadcn_ui_sheet_g160"     // shadcn/ui Sheet
+    // Typography primitive (cycle1_primitive_typography_g132) is being phased out; direct Tailwind text utilities used instead.
   ],
   "dependents": [
     "cycle0_prototype_app_entry_g112",
@@ -41,182 +43,161 @@
   "linked_issue_ids": ["issue_placeholder_img_g145"],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g124. Based on C-04. Temp Style Guide link g137. Dependents g140. Refactored to use Typography and Link primitives (g145). Button component is used for logout. Login/Signup are Link primitives styled as buttons. Styling needs refinement. Marked for major refactoring with Tailwind CSS and shadcn/ui components at g=152 as per plan_cycle0_mobile_styling_g150 and analysis cycle0_shadcn_analysis_g151.md."
+    "manual_review_comment": "Refactored at g=160 for mobile-first design with Tailwind CSS and shadcn/ui Sheet, as per plan_cycle0_mobile_styling_g150. Original scaffold g124. Dependencies on old Button and Typography primitives removed/updated."
   }
 }
 ANNOTATION_BLOCK_END */
 
 import React, { useState } from 'react';
-// Link and NavLink from react-router-dom are now primarily used by the PrimitiveLink component
-import PrimitiveLink from '../primitives/Link';
-import Typography from '../primitives/Typography';
-import Button from '../common/Button'; // Retained for logout button for now
+import { Link as RouterDomLink } from 'react-router-dom'; // For type consistency if needed, but PrimitiveLink wraps it.
+import PrimitiveLink from '../primitives/Link'; // Uses Tailwind, wraps react-router-dom Link
+import { Button } from '@/components/ui/button'; // shadcn/ui Button
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import { Menu, LogOut, UserCircle, Settings, LogIn, UserPlus } from 'lucide-react';
 
-/**
- * Header Component (References Figma Catalogue: C-04 - Global Header/Navigation)
- *
- * Purpose: Provides the main navigation and branding at the top of the application.
- *
- * Props:
- *   navLinks: Array of objects, e.g., [{ label: 'Home', path: '/' }, { label: 'Recipes', path: '/recipes' }]. (Ref C-04_navigation_links)
- *   user: Object, represents the currently logged-in user (e.g., { name: 'Alice', avatarUrl: '...' }) or null/undefined if not logged in.
- *   onLogout: Function, callback to handle user logout.
- *   className: String, optional additional CSS classes for custom styling.
- *
- * Structure (Based on C-04_header_standard_layout):
- * - Main `<header>` container.
- * - Logo/Site Title area (C-04_logo_area).
- * - Primary Navigation Links area (C-04_primary_nav).
- * - (Optional) Search bar placeholder (C-04_search_bar_placeholder).
- * - User actions area (C-04_user_actions_area):
- *   - If user is logged in: Display user avatar/name, dropdown with profile/logout links.
- *   - If user is not logged in: Display Login and Signup buttons.
- *
- * Checklist for future implementation:
- * [ ] Implement base styling for the header layout (flexbox/grid for alignment).
- * [ ] Style the logo/site title.
- * [ ] Style navigation links (active state using NavLink, hover states) - Ref C-04_navlink_styles.
- * [ ] Implement the search bar placeholder (visual only for now).
- * [ ] Implement user actions area:
- *     [ ] Conditional rendering based on `user` prop.
- *     [ ] Styling for Login/Signup buttons (using the Button component).
- *     [ ] Styling for user avatar and name display.
- *     [ ] (Optional) Dropdown menu for logged-in user (profile, settings, logout) - Ref C-04_user_dropdown.
- * [ ] Ensure responsiveness for different screen sizes (e.g., hamburger menu for mobile) - Ref C-04_header_responsive_states.
- */
-const Header = ({
+// Define a type for navLink items
+interface NavLinkItem {
+  label: string;
+  path: string;
+  end?: boolean; // Optional: for NavLink's `end` prop
+}
+
+// Define a type for the user object
+interface User {
+  name: string;
+  avatarUrl?: string;
+}
+
+interface HeaderProps {
+  navLinks?: NavLinkItem[];
+  user?: User | null;
+  onLogout?: () => void;
+  className?: string;
+}
+
+const Header: React.FC<HeaderProps> = ({
   navLinks = [],
-  user = null, // Example: { name: 'Test User', avatarUrl: '/assets/placeholders/40x40.png'}
-  onLogout = () => alert('Mock Logout'),
+  user = null,
+  onLogout = () => alert('Mock Logout Clicked'),
   className = '',
 }) => {
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  // User dropdown state for desktop - kept separate for clarity
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
-  // Basic placeholder styles - these should be in a CSS file or module
-  const headerStyle = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '1rem 2rem',
-    backgroundColor: '#f8f9fa',
-    borderBottom: '1px solid #e7e7e7',
-    // Add more styles from C-04_header_base
-  };
+  const commonNavLinks = (isMobile: boolean) => (
+    <>
+      {navLinks.map((link) => (
+        <PrimitiveLink
+          key={link.path}
+          to={link.path}
+          className={`text-sm font-medium ${isMobile ? 'block py-2 px-3 hover:bg-accent rounded-md' : 'hover:text-primary transition-colors'}`}
+          onClick={() => isMobile && setIsSheetOpen(false)}
+          end={link.end}
+        >
+          {link.label}
+        </PrimitiveLink>
+      ))}
+      <PrimitiveLink
+        to="/style-guide"
+        className={`text-sm font-medium ${isMobile ? 'block py-2 px-3 hover:bg-accent rounded-md' : 'hover:text-primary transition-colors'}`}
+        onClick={() => isMobile && setIsSheetOpen(false)}
+      >
+        (Dev) Style Guide
+      </PrimitiveLink>
+    </>
+  );
 
-  const logoStyle = {
-    // fontSize: '1.5rem', // Typography will handle this via variant
-    // fontWeight: 'bold', // Typography will handle this
-    textDecoration: 'none',
-    color: '#333',
-  };
-
-  const navStyle = {
-    display: 'flex',
-    gap: '1.5rem',
-  };
-
-  // PrimitiveLink handles active state styling internally if using NavLink mode
-  // We can pass a function to className prop of PrimitiveLink if it supports it for NavLink active state
-  const navPrimitiveLinkActiveStyle = "header-nav-link-active"; // Example class for active NavLink
-
-  const userActionsStyle = {
-    position: 'relative',
-    // Add C-04_user_actions_area_style
-  };
-
-  const userAvatarStyle = {
-    width: '40px',
-    height: '40px',
-    borderRadius: '50%',
-    cursor: 'pointer',
-    objectFit: 'cover',
-    border: '2px solid #ddd'
-  };
-  
-  const userMenuStyle = {
-    position: 'absolute',
-    top: '50px',
-    right: 0,
-    backgroundColor: 'white',
-    border: '1px solid #ccc',
-    borderRadius: '4px',
-    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-    padding: '0.5rem 0',
-    zIndex: 10,
-    minWidth: '150px',
-    // Add C-04_user_dropdown_style
-  };
-
-  const userMenuItemStyle = {
-    display: 'block',
-    padding: '0.5rem 1rem',
-    textDecoration: 'none',
-    color: '#333',
-    // hover effect to be added via CSS
-  };
-
-  const authButtonStyle = {
-    marginLeft: '0.5rem',
-    padding: '0.5rem 1rem',
-    // These would ideally use the common Button component with variants
-    // Button variant='outline' or variant='primary'
-  };
+  const userActions = (isMobile: boolean) => (
+    <div className={`${isMobile ? 'pt-4 mt-4 border-t border-border' : 'relative'}`}>
+      {user ? (
+        <div className={`${isMobile ? 'space-y-2' : 'flex items-center gap-2'}`}>
+          {isMobile ? (
+            <>
+              <div className="flex items-center gap-2 px-3 py-2">
+                <img src={user.avatarUrl || '/assets/placeholders/40x40.png'} alt={user.name} className="w-8 h-8 rounded-full" />
+                <span className="text-sm font-medium">{user.name}</span>
+              </div>
+              <PrimitiveLink to="/profile" onClick={() => setIsSheetOpen(false)} className="flex items-center gap-2 px-3 py-2 text-sm hover:bg-accent rounded-md"><UserCircle className="w-4 h-4" /> Profile (T-11)</PrimitiveLink>
+              <PrimitiveLink to="/settings" onClick={() => setIsSheetOpen(false)} className="flex items-center gap-2 px-3 py-2 text-sm hover:bg-accent rounded-md"><Settings className="w-4 h-4" /> Settings</PrimitiveLink>
+              <Button variant="ghost" onClick={() => { onLogout(); setIsSheetOpen(false); }} className="w-full justify-start px-3 py-2 text-sm hover:bg-accent rounded-md"><LogOut className="w-4 h-4 mr-2" /> Logout</Button>
+            </>
+          ) : (
+            // Desktop User Dropdown/Actions
+            <div className="relative">
+              <Button variant="ghost" onClick={() => setIsUserMenuOpen(!isUserMenuOpen)} className="flex items-center gap-2">
+                <img src={user.avatarUrl || '/assets/placeholders/40x40.png'} alt={user.name} className="w-8 h-8 rounded-full" />
+                <span className="text-sm font-medium hidden md:inline">{user.name}</span>
+                {/* Simple caret, replace with lucide if desired */}
+                <svg className={`w-4 h-4 transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+              </Button>
+              {isUserMenuOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-background border rounded-md shadow-lg py-1 z-50">
+                  <PrimitiveLink to="/profile" onClick={() => setIsUserMenuOpen(false)} className="flex items-center gap-2 px-4 py-2 text-sm text-foreground hover:bg-accent"><UserCircle className="w-4 h-4" /> Profile</PrimitiveLink>
+                  <PrimitiveLink to="/settings" onClick={() => setIsUserMenuOpen(false)} className="flex items-center gap-2 px-4 py-2 text-sm text-foreground hover:bg-accent"><Settings className="w-4 h-4" /> Settings</PrimitiveLink>
+                  <Button variant="ghost" onClick={() => { onLogout(); setIsUserMenuOpen(false); }} className="w-full justify-start items-center gap-2 px-4 py-2 text-sm text-foreground hover:bg-accent"><LogOut className="w-4 h-4" /> Logout</Button>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className={`flex ${isMobile ? 'flex-col space-y-2' : 'items-center gap-2'}`}>
+          <Button asChild variant={isMobile ? "default" : "outline"} className={isMobile ? 'w-full' : ''} onClick={() => isMobile && setIsSheetOpen(false)}>
+            <PrimitiveLink to="/login"><LogIn className={`w-4 h-4 ${isMobile ? 'mr-2' : 'md:mr-2'}`} /> Login (T-03a)</PrimitiveLink>
+          </Button>
+          <Button asChild variant="default" className={isMobile ? 'w-full' : ''} onClick={() => isMobile && setIsSheetOpen(false)}>
+            <PrimitiveLink to="/signup"><UserPlus className={`w-4 h-4 ${isMobile ? 'mr-2' : 'md:mr-2'}`} /> Sign Up (T-03b)</PrimitiveLink>
+          </Button>
+        </div>
+      )}
+    </div>
+  );
 
   return (
-    <header style={headerStyle} className={`app-header ${className}`.trim()}>
-      <PrimitiveLink to="/" style={logoStyle} className="header-logo" component={Typography} variant="h5" color="inherit">
-        Cultif
-      </PrimitiveLink>
-
-      <nav style={navStyle} className="header-nav">
-        {navLinks.map((link) => (
-          <PrimitiveLink 
-            key={link.path} 
-            to={link.path} 
-            variant="nav" // Assuming Link primitive has a 'nav' variant
-            className={({ isActive }) => 
-              `header-nav-link ${isActive ? navPrimitiveLinkActiveStyle : ''}`
-            }
-            // end // Pass `end` prop if necessary for exact matching
-          >
-            {link.label}
-          </PrimitiveLink>
-        ))}
-        <PrimitiveLink 
-          to="/style-guide" 
-          variant="nav" 
-          className={({ isActive }) => 
-            `header-nav-link ${isActive ? navPrimitiveLinkActiveStyle : ''}`
-          }
-        >
-          (Dev) Style Guide
+    <header className={`bg-background border-b sticky top-0 z-40 ${className}`.trim()}>
+      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+        {/* Logo */}
+        <PrimitiveLink to="/" className="text-xl font-bold text-primary hover:text-primary/90 transition-colors">
+          Cultif
         </PrimitiveLink>
-      </nav>
-      
-      {/* (Optional) C-04_search_bar_placeholder - visual only for now */}
-      {/* <div className="search-placeholder" style={{ padding: '0.5rem', border: '1px solid #ccc', borderRadius: '4px'}}>Search...</div> */}
 
-      {/* C-04_user_actions_area */}
-      <div style={userActionsStyle} className="header-user-actions">
-        {user ? (
-          <div onClick={() => setIsUserMenuOpen(!isUserMenuOpen)} style={{display:'flex', alignItems:'center', cursor:'pointer'}}>
-            <img src={user.avatarUrl || '/assets/placeholders/40x40.png'} alt={user.name} style={userAvatarStyle} />
-            <Typography variant="body2" style={{marginLeft:'10px', fontWeight:'500'}}>{user.name}</Typography>
-            <Typography variant="caption" style={{marginLeft:'5px'}}>&#9662;</Typography> 
-            {isUserMenuOpen && (
-              <div style={userMenuStyle} className="user-dropdown-menu">
-                <PrimitiveLink to="/profile" variant="subtle" style={userMenuItemStyle} onClick={() => setIsUserMenuOpen(false)}>Profile (T-11)</PrimitiveLink>
-                <PrimitiveLink to="/settings" variant="subtle" style={userMenuItemStyle} onClick={() => setIsUserMenuOpen(false)}>Settings</PrimitiveLink>
-                <Button variant="text" onClick={() => { onLogout(); setIsUserMenuOpen(false); }} style={{...userMenuItemStyle, width:'100%', textAlign:'left', padding: '0.5rem 1rem', justifyContent: 'flex-start'}}>Logout</Button>
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-6">
+          {commonNavLinks(false)}
+        </nav>
+
+        {/* Desktop User Actions */}
+        <div className="hidden md:flex items-center">
+          {userActions(false)}
+        </div>
+        
+        {/* Mobile Menu Trigger */}
+        <div className="md:hidden">
+          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Toggle Menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[300px] sm:w-[400px] p-0">
+              <SheetHeader className="p-6 pb-0">
+                <SheetTitle>
+                  <PrimitiveLink to="/" className="text-xl font-bold text-primary" onClick={() => setIsSheetOpen(false)}>
+                    Cultif
+                  </PrimitiveLink>
+                </SheetTitle>
+              </SheetHeader>
+              <nav className="flex flex-col p-6 space-y-1">
+                {commonNavLinks(true)}
+              </nav>
+              <div className="p-6">
+                {userActions(true)}
               </div>
-            )}
-          </div>
-        ) : (
-          <div>
-            <PrimitiveLink to="/login" variant="buttonLike" style={{...authButtonStyle, textDecoration: 'none', color:'#007bff', border:'1px solid #007bff'}}>Login (T-03a)</PrimitiveLink>
-            <PrimitiveLink to="/signup" variant="buttonLike" style={{...authButtonStyle, textDecoration: 'none', color:'white', backgroundColor:'#007bff', border:'1px solid #007bff'}}>Sign Up (T-03b)</PrimitiveLink>
-          </div>
-        )}
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   );

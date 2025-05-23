@@ -1,29 +1,28 @@
 {
-  "v": 9,
+  "v": 5,
   "id": "plan_cycle0_mobile_styling_g150",
-  "status": "BLOCKED",
-  "preceding_plan_id_ref": "plan_cycle1_ui_refinement_g131",
-  "origin_artifact_id": "consolidated_progress_review_g149",
-  "goal": "To adapt the existing Cycle 0 web prototype (React.js) to be mobile-first in its styling and presentation using shadcn/ui and Tailwind CSS. This involves analyzing current components, planning shadcn/ui integration, implementing responsive shadcn/ui components, and ensuring the Style Guide effectively showcases mobile views, ultimately to better inform the subsequent mobile application development. THIS PLAN IS CURRENTLY BLOCKED PENDING MIGRATION OF THE UNDERLYING PROJECT TO TYPESCRIPT (see new plan).",
+  "status": "COMPLETED_SUCCESS",
+  "preceding_plan_id_ref": "plan_cycle0_tsx_conversion_g157",
+  "origin_artifact_id": "docs_codebase_analysis_cycle0_shadcn_g151",
+  "goal": "Integrate Tailwind CSS and shadcn/ui into the React web prototype, refactor existing components and pages for mobile-first responsiveness, and deprecate old UI primitives.",
   "scope": [
-    "Installation and configuration of Tailwind CSS and shadcn/ui in the 'prototypes/cycle0_react_web/' project.",
-    "Analysis of all existing common components, layout components, primitive components, and pages for mapping to shadcn/ui components and mobile responsiveness.",
-    "Identification of specific shadcn/ui components to be used and customized for mobile viewports (e.g., layout changes, font size adjustments, touch target considerations, element visibility/stacking for MOBILE ONLY presentation).",
-    "Refactoring existing components to utilize shadcn/ui components and Tailwind CSS utility classes.",
-    "Implementation of responsive styles directly via Tailwind CSS classes on shadcn/ui components or custom wrappers.",
-    "Updating the 'StyleGuidePage.jsx' to demonstrate shadcn/ui components in mobile-sized views.",
-    "Ensuring that embedded annotation blocks in all modified files are updated (version_tag, g_last_modified, relevant key_logic_points related to shadcn/ui and mobile styling).",
-    "Updating 'registry_map.txt' for any new artifacts created or if existing artifact paths/IDs change."
+    "Setup Tailwind CSS and shadcn/ui in the prototype project.",
+    "Identify and deprecate existing custom UI primitive components (Box, Stack, Grid, Typography, Icon, Input, Link).",
+    "Identify and refactor/replace existing common components (Button, Card, Modal) with shadcn/ui equivalents or Tailwind-styled versions.",
+    "Refactor existing page components (HomePage, LoginPage, SignupPage, OnboardingPage, StyleGuidePage) to use shadcn/ui and Tailwind CSS, ensuring mobile-friendliness.",
+    "Refactor layout components (Header, Footer, MainLayout) for mobile responsiveness using Tailwind and shadcn/ui where appropriate.",
+    "Update StyleGuidePage to showcase new shadcn/ui components and Tailwind utilities.",
+    "Ensure all file annotations (version_tag, g_last_modified, dependencies, description, etc.) are updated for modified files.",
+    "Update registry_map.txt to include new shadcn/ui components as artifacts."
   ],
   "exclusions": [
-    "Introduction of new features or functionalities beyond styling adjustments and shadcn/ui component integration.",
-    "Changes to the core logic or data handling of existing components unless directly necessitated by shadcn/ui integration for mobile styling.",
-    "Development of the actual React Native mobile application.",
-    "Desktop-focused styling (primary aim is MOBILE ONLY presentation, desktop will be secondary or rely on responsive defaults of shadcn/ui).",
-    "Comprehensive E2E testing for mobile views (focus is on visual correctness and basic interaction)."
+    "Full end-to-end testing of all application functionality (focus is on UI component replacement and styling).",
+    "Implementation of new features not related to UI refactoring.",
+    "Backend modifications.",
+    "Creation of entirely new pages beyond the StyleGuide update."
   ],
   "g_created": 150,
-  "g_updated": 156,
+  "g_updated": 160,
   "tasks": [
     {
       "id": "pc0ms_task_001",
@@ -83,47 +82,71 @@
     {
       "id": "pc0ms_task_003",
       "title": "Implement shadcn/ui & Mobile Styling (Iterative)",
-      "description": "Execute the detailed setup and implementation sub-tasks defined in this updated 'plan_cycle0_mobile_styling_g150.txt'. This involves: 1. Setting up Tailwind CSS and shadcn/ui. 2. Running 'npx shadcn-ui@latest add ...' for specified components. 3. Modifying JSX to use shadcn/ui components. 4. Applying mobile-first styles using Tailwind CSS classes. Work will be iterative, following the execution checklist.",
-      "intent": "To integrate shadcn/ui into the project and refactor existing components to use it, applying mobile-first styles.",
+      "description": "Iteratively refactor existing prototype pages and layout components to use shadcn/ui components and Tailwind CSS for mobile-first styling. This task involves multiple sub-steps managed by a checklist. Each step will target specific components/pages, introduce relevant shadcn/ui elements (e.g., `pnpm dlx shadcn-ui@latest add button card input ...`), refactor code, update annotations, and update registry_map.txt.",
+      "intent": "To modernize the prototype's UI, make it mobile-responsive, and establish a consistent design language using shadcn/ui and Tailwind CSS, replacing deprecated custom primitives.",
       "inputs": [
-        { "name": "Updated Plan File", "source_description": "Output of pc0ms_task_002 ('plan_cycle0_mobile_styling_g150.txt' with detailed tasks).", "details": "Provides the specific setup and implementation steps, including shadcn/ui CLI commands." },
-        { "name": "Relevant Component/Page Files", "source_description": "Files identified for refactoring in 'cycle0_shadcn_analysis_g151.md'.", "details": "These are the files that will be modified or replaced." }
+        {"name": "Existing Page Components", "source_description": "Current *.tsx files for pages (HomePage, LoginPage, etc.) and layout (Header, Footer).", "details": "These files use deprecated primitive components and inline/CSS-in-JS styling."},
+        {"name": "Existing Layout Components", "source_description": "Current Header.tsx, Footer.tsx, etc.", "details": "These also use deprecated primitives."},
+        {"name": "shadcn/ui library", "source_description": "Via `pnpm dlx shadcn-ui@latest add ...` command.", "details": "Provides UI components like Button, Card, Input, Dialog, Drawer, Sheet, Checkbox, Label."},
+        {"name": "Tailwind CSS", "source_description": "Already configured in the project.", "details": "Provides utility classes for styling."},
+        {"name": "registry_map.txt", "source_description": "File: registry_map.txt", "details": "To be updated with new shadcn/ui component artifacts."}
       ],
       "outputs": [
         {
-          "name": "Set of shadcn/ui-Integrated & Mobile-Styled Files",
-          "artifact_id": "cycle0_shadcn_styled_artifacts_set_g151", 
-          "expected_path": "prototypes/cycle0_react_web/",
-          "description": "A conceptual output representing all files (components, pages, configs) created or modified during shadcn/ui integration and mobile styling.",
+          "name": "Refactored Page Components (e.g., HomePage.tsx, LoginPage.tsx)", 
+          "artifact_id": "multiple", 
+          "expected_path": "prototypes/cycle0_react_web/src/pages/", 
+          "description": "Pages refactored with shadcn/ui and Tailwind. Annotations updated (version_tag, g_last_modified, description, dependencies).",
+          "embed_annotations_required": "true"
+        },
+        {
+          "name": "Refactored Layout Components (e.g., Header.tsx, Footer.tsx)", 
+          "artifact_id": "multiple", 
+          "expected_path": "prototypes/cycle0_react_web/src/components/layout/", 
+          "description": "Layout components refactored with shadcn/ui and Tailwind. Annotations updated.",
+          "embed_annotations_required": "true"
+        },
+        {
+          "name": "New shadcn/ui component files", 
+          "artifact_id": "multiple", 
+          "expected_path": "prototypes/cycle0_react_web/src/components/ui/", 
+          "description": "Files for newly added shadcn/ui components (e.g., button.tsx, card.tsx). These have their own internal shadcn/ui structure, not our standard annotation block.",
+          "embed_annotations_required": "false"
+        },
+        {
+          "name": "Updated registry_map.txt", 
+          "artifact_id": "registry_map_g1", 
+          "expected_path": "registry_map.txt", 
+          "description": "Updated with new artifact IDs for shadcn/ui components.",
           "embed_annotations_required": "false"
         }
       ],
       "execution_checklist": [
-        {"item_id": "pc0ms_task_003_check_001", "description": "Execute Tailwind CSS Setup: 1. `npm install -D tailwindcss postcss autoprefixer`. 2. `npx tailwindcss init -p`. 3. Configure `tailwind.config.js` (content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}']). 4. Add directives to `src/index.css` and import in `main.jsx`.", "status": "DONE", "target_artifact_id": null, "notes": "Based on analysis doc cycle0_shadcn_analysis_g151.md sections 2.1. Tailwind CSS v4 does not use 'init -p'; tailwind.config.js created manually. Vite guide step for index.css also applied."},
-        {"item_id": "pc0ms_task_003_check_002", "description": "Execute shadcn/ui Setup: 1. `npx shadcn-ui@latest init` (Style: Default, Color: Slate, CSS vars: Yes, tailwind.config.js: tailwind.config.js, components: @/components, utils: @/lib/utils, RSC: No). 2. Verify `components.json`, `src/lib/utils.js`, `src/index.css` updates.", "status": "PENDING", "target_artifact_id": null, "notes": "Based on analysis doc cycle0_shadcn_analysis_g151.md section 2.2. BLOCKED by issue_shadcn_init_interactive_g155 (interactive init). Project also needs to be migrated to TypeScript before this step can fully proceed per new Vite guide."},
-        {"item_id": "pc0ms_task_003_check_003", "description": "Primitive `Box.jsx`: Deprecate. Plan to replace all usages with direct Tailwind CSS classes on standard HTML elements.", "status": "PENDING", "target_artifact_id": "cycle1_primitive_box_g132", "notes": "Annotation updated. No direct code change here, but informs subsequent refactoring of dependents."}, 
-        {"item_id": "pc0ms_task_003_check_004", "description": "Primitive `Stack.jsx`: Deprecate. Plan to replace usages with Tailwind flexbox utilities.", "status": "PENDING", "target_artifact_id": "cycle1_primitive_stack_g132", "notes": "Annotation to be updated. No direct code change here."}, 
-        {"item_id": "pc0ms_task_003_check_005", "description": "Primitive `Grid.jsx`: Deprecate. Plan to replace usages with Tailwind grid utilities.", "status": "PENDING", "target_artifact_id": "cycle1_primitive_grid_g132", "notes": "Annotation to be updated. No direct code change here."}, 
-        {"item_id": "pc0ms_task_003_check_006", "description": "Primitive `Typography.jsx`: Deprecate. Plan to replace usages with direct Tailwind text utilities on standard HTML text elements.", "status": "PENDING", "target_artifact_id": "cycle1_primitive_typography_g132", "notes": "Annotation to be updated. No direct code change here."}, 
-        {"item_id": "pc0ms_task_003_check_007", "description": "Primitive `Link.jsx`: Refactor. Retain `react-router-dom Link` functionality, style with Tailwind CSS. Consider shadcn/ui Button with `variant='link'` for some cases.", "status": "PENDING", "target_artifact_id": "cycle1_primitive_link_g132", "notes": "Annotation to be updated. Code changes required during implementation."}, 
-        {"item_id": "pc0ms_task_003_check_008", "description": "Primitive `Input.jsx`: Replace. Run `npx shadcn-ui@latest add input`. Refactor usages to use `shadcn/ui Input`.", "status": "PENDING", "target_artifact_id": "cycle1_primitive_input_g132", "notes": "Annotation to be updated. Install and refactor code."}, 
-        {"item_id": "pc0ms_task_003_check_009", "description": "Primitive `Icon.jsx`: Refactor/Replace. Use `lucide-react` directly with Tailwind styling. Install `lucide-react`. Remove custom wrapper if redundant.", "status": "PENDING", "target_artifact_id": "cycle1_primitive_icon_g132", "notes": "Annotation to be updated. Install and refactor code."}, 
-        {"item_id": "pc0ms_task_003_check_010", "description": "Common `Button.jsx`: Replace. Run `npx shadcn-ui@latest add button`. Refactor all usages to use `shadcn/ui Button` and its variants.", "status": "PENDING", "target_artifact_id": "cycle0_comp_button_g112", "notes": "Annotation updated. Install and refactor code."}, 
-        {"item_id": "pc0ms_task_003_check_011", "description": "Common `Card.jsx`: Replace. Run `npx shadcn-ui@latest add card`. Refactor usages to use `shadcn/ui Card` components (Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter).", "status": "PENDING", "target_artifact_id": "cycle0_comp_card_g112", "notes": "Annotation to be updated. Install and refactor code."}, 
-        {"item_id": "pc0ms_task_003_check_012", "description": "Common `Modal.jsx`: Replace. Run `npx shadcn-ui@latest add dialog drawer`. Evaluate and refactor usages to `shadcn/ui Dialog` or `Drawer` as appropriate for mobile UX.", "status": "PENDING", "target_artifact_id": "cycle0_comp_modal_g112", "notes": "Annotation to be updated. Install and refactor code."}, 
-        {"item_id": "pc0ms_task_003_check_013", "description": "Layout `Header.jsx`: Refactor. Use Tailwind CSS for mobile-first layout. Implement hamburger menu icon (e.g. from lucide-react) triggering `shadcn/ui Sheet` (`npx shadcn-ui@latest add sheet`) for navigation.", "status": "PENDING", "target_artifact_id": "cycle0_comp_header_g112", "notes": "Annotation updated. Install sheet, refactor code significantly."}, 
-        {"item_id": "pc0ms_task_003_check_014", "description": "Layout `Footer.jsx`: Refactor. Use Tailwind CSS for simple, mobile-friendly styling.", "status": "PENDING", "target_artifact_id": "cycle0_comp_footer_g112", "notes": "Annotation to be updated. Refactor code."}, 
-        {"item_id": "pc0ms_task_003_check_015", "description": "Page `HomePage.jsx`: Refactor. Use new shadcn/ui-based components and Tailwind for a mobile-first, single-column layout.", "status": "PENDING", "target_artifact_id": "cycle0_page_home_g112", "notes": "Annotation to be updated. Refactor code."}, 
-        {"item_id": "pc0ms_task_003_check_016", "description": "Page `LoginPage.jsx`: Refactor. Use shadcn/ui Input, Button, Label for a mobile-friendly form.", "status": "PENDING", "target_artifact_id": "cycle0_page_login_g112", "notes": "Annotation to be updated. Requires `npx shadcn-ui@latest add label`. Refactor code."}, 
-        {"item_id": "pc0ms_task_003_check_017", "description": "Page `SignupPage.jsx`: Refactor. Use shadcn/ui Input, Button, Label for a mobile-friendly form.", "status": "PENDING", "target_artifact_id": "cycle0_page_signup_g112", "notes": "Annotation to be updated. Refactor code."}, 
-        {"item_id": "pc0ms_task_003_check_018", "description": "Page `OnboardingPage.jsx`: Refactor. Use new components and Tailwind for mobile-first layout.", "status": "PENDING", "target_artifact_id": "cycle0_page_onboarding_g112", "notes": "Annotation to be updated. Refactor code."}, 
-        {"item_id": "pc0ms_task_003_check_019", "description": "Page `StyleGuidePage.jsx`: Refactor significantly to showcase all new shadcn/ui components and their mobile styling. May need mobile viewport simulation.", "status": "PENDING", "target_artifact_id": "cycle1_styleguide_page_g131", "notes": "Annotation to be updated. Refactor code."} 
+        {"item_id": "pc0ms_task_003_check_001", "description": "`Button.tsx`: Refactor common Button to use `shadcn/ui Button` (`pnpm dlx shadcn-ui@latest add button`). Update annotation, registry.", "status": "DONE", "target_artifact_id": "cycle0_comp_button_g112", "notes": "Refactored to cycle0_comp_button_shadcn_g159. Old button artifact cycle0_comp_button_g112 marked DEPRECATED. New shadcn/ui Button artifact is shadcn_ui_button_g160. Updated registry_map.txt."},
+        {"item_id": "pc0ms_task_003_check_002", "description": "`Input.tsx`: Refactor primitive Input to use `shadcn/ui Input` (`pnpm dlx shadcn-ui@latest add input`). Update annotation, registry.", "status": "DONE", "target_artifact_id": "cycle1_primitive_input_g132", "notes": "Refactored to cycle1_primitive_input_shadcn_g159. Old input artifact cycle1_primitive_input_g132 marked DEPRECATED. New shadcn/ui Input artifact is shadcn_ui_input_g160. Updated registry_map.txt."},
+        {"item_id": "pc0ms_task_003_check_003", "description": "`Card.tsx`: Refactor common Card to use `shadcn/ui Card` (`pnpm dlx shadcn-ui@latest add card`). Update annotation, registry.", "status": "DONE", "target_artifact_id": "cycle0_comp_card_g112", "notes": "Refactored to cycle0_comp_card_shadcn_g159. Old card artifact cycle0_comp_card_g112 marked DEPRECATED. New shadcn/ui Card artifact is shadcn_ui_card_g160. Updated registry_map.txt."},
+        {"item_id": "pc0ms_task_003_check_004", "description": "Primitives `Box.tsx`, `Stack.tsx`, `Grid.tsx`: Mark as DEPRECATED. Update annotations. These will be replaced by Tailwind CSS utility classes directly in consuming components.", "status": "DONE", "target_artifact_id": "multiple", "notes": "cycle1_primitive_box_g132, cycle1_primitive_stack_g132, cycle1_primitive_grid_g132 annotations updated to DEPRECATED (version 0.1.1-deprecated, g_last_modified=160). No direct shadcn/ui replacement; Tailwind to be used instead."},   
+        {"item_id": "pc0ms_task_003_check_005", "description": "Primitive `Typography.tsx`: Mark as DEPRECATED. Update annotation. Replace by Tailwind CSS utility classes directly.", "status": "DONE", "target_artifact_id": "cycle1_primitive_typography_g132", "notes": "cycle1_primitive_typography_g132 annotation updated to DEPRECATED (version 0.1.1-deprecated, g_last_modified=160). Tailwind typography utilities to be used instead."}, 
+        {"item_id": "pc0ms_task_003_check_006", "description": "Primitive `Icon.tsx`: Mark as DEPRECATED. Update annotation. Replace by direct usage of `lucide-react` icons and Tailwind for styling.", "status": "DONE", "target_artifact_id": "cycle1_primitive_icon_g132", "notes": "cycle1_primitive_icon_g132 annotation updated to DEPRECATED (version 0.1.1-deprecated, g_last_modified=160). Lucide-react icons with Tailwind to be used instead."},     
+        {"item_id": "pc0ms_task_003_check_007", "description": "Primitive `Link.tsx`: Refactor. Keep as a primitive but use Tailwind for styling, ensure it correctly wraps `react-router-dom Link`. Update annotation.", "status": "DONE", "target_artifact_id": "cycle1_primitive_link_g132", "notes": "Link.tsx (cycle1_primitive_link_g132) refactored to use Tailwind CSS for styling (version 0.2.0-tailwind-refactor-tsx, g_last_modified=160)."},
+        {"item_id": "pc0ms_task_003_check_008", "description": "`tailwind.config.js`: Verify `primary`, `secondary`, `destructive`, `accent` colors are defined and match shadcn/ui conventions for dark/light mode if possible.", "status": "DONE", "target_artifact_id": "cycle0_tailwind_config_g112", "notes": "tailwind.config.js reviewed and seems aligned with shadcn/ui color conventions (primary, secondary, destructive, accent, card, background, foreground, muted, popover etc. are present for both light and dark themes). (v0.1.0, g_last_modified=103, no change made in this step)."},
+        {"item_id": "pc0ms_task_003_check_009", "description": "`global.css` (or equivalent): Ensure base Tailwind styles and any shadcn/ui theme variables are correctly set up.", "status": "DONE", "target_artifact_id": "cycle0_global_css_g112", "notes": "global.css reviewed. It imports Tailwind base, components, utilities. Defines root and dark-root variables for background, foreground, card, primary, secondary, destructive, accent etc. which aligns with shadcn/ui theming. (v0.1.0, g_last_modified=103, no change made in this step)."},
+        {"item_id": "pc0ms_task_003_check_010", "description": "Layout `MainLayout.tsx`: Refactor. Use Tailwind CSS for overall page structure (e.g., flex column for header, content, footer). Remove old primitive usage.", "status": "DONE", "target_artifact_id": "cycle0_comp_mainlayout_g112", "notes": "MainLayout.tsx (cycle0_comp_mainlayout_g112) refactored to use Tailwind CSS for flex column layout (version 0.2.0-tailwind-refactor-tsx, g_last_modified=160). Dependencies on Box primitive removed."},
+        {"item_id": "pc0ms_task_003_check_011", "description": "Component `NotificationBell.tsx`: Refactor. Use shadcn/ui Dropdown Menu or Popover, lucide-react icon, Tailwind for styling.", "status": "DONE", "target_artifact_id": "cycle0_comp_notificationbell_g112", "notes": "NotificationBell.tsx (cycle0_comp_notificationbell_g112) refactored with shadcn/ui DropdownMenu, lucide-react Bell icon and Tailwind (version 0.2.0-shadcn-tailwind-refactor-tsx, g_last_modified=160). `shadcn/ui Dropdown Menu` (artifact shadcn_ui_dropdownmenu_g160) added to project and registry_map.txt."},
+        {"item_id": "pc0ms_task_003_check_012", "description": "Common `Modal.tsx`: Replace. Run `pnpm dlx shadcn@latest add dialog drawer`. Evaluate and refactor usages to `shadcn/ui Dialog` or `Drawer` as appropriate for mobile UX.", "status": "DONE", "target_artifact_id": "cycle0_comp_modal_g112", "notes": "Old common Modal.tsx (cycle0_comp_modal_g112) annotation updated to DEPRECATED (version 0.1.3-deprecated-tsx, g_last_modified=160). New shadcn/ui Dialog (artifact shadcn_ui_dialog_g160) and Drawer (artifact shadcn_ui_drawer_g160) components added and registered. Refactoring of usages will be part of individual page/component refactors (e.g. Login page for Dialog, Header for Drawer/Sheet)."},
+        {"item_id": "pc0ms_task_003_check_013", "description": "Layout `Header.tsx`: Refactor. Use Tailwind CSS for mobile-first layout. Implement hamburger menu icon (e.g. from lucide-react) triggering `shadcn/ui Sheet` (`pnpm dlx shadcn@latest add sheet`) for navigation.", "status": "DONE", "target_artifact_id": "cycle0_comp_header_g112", "notes": "Header.tsx (cycle0_comp_header_g112) refactored for mobile-first layout using Tailwind CSS and shadcn/ui Sheet (version 0.3.0-mobile-refactored-tsx, g_last_modified=160). New shadcn/ui Sheet component (artifact shadcn_ui_sheet_g160) added and registered."},
+        {"item_id": "pc0ms_task_003_check_014", "description": "Layout `Footer.tsx`: Refactor. Use Tailwind CSS for simple, mobile-friendly styling.", "status": "DONE", "target_artifact_id": "cycle0_comp_footer_g112", "notes": "Footer.tsx (cycle0_comp_footer_g112) refactored to use Tailwind CSS (version 0.2.0-tailwind-refactor-tsx, g_last_modified=160). Dependencies on Box and Typography primitives removed."},
+        {"item_id": "pc0ms_task_003_check_015", "description": "Page `HomePage.tsx`: Refactor. Use new shadcn/ui-based components and Tailwind for a mobile-first, single-column layout.", "status": "DONE", "target_artifact_id": "cycle0_page_home_g112", "notes": "HomePage.tsx (cycle0_page_home_g112) refactored to use shadcn/ui components (Card, Button, Input) and Tailwind CSS for a mobile-first layout (version 0.2.0-tailwind-refactor-tsx, g_last_modified=160). Dependencies on old primitives removed."},
+        {"item_id": "pc0ms_task_003_check_016", "description": "Page `LoginPage.tsx`: Refactor. Use shadcn/ui Input, Button, Label for a mobile-friendly form.", "status": "DONE", "target_artifact_id": "cycle0_page_login_g112", "notes": "LoginPage.tsx (cycle0_page_login_g112) refactored to use shadcn/ui Input, Button, Label and Tailwind CSS (version 0.3.0-shadcn-tailwind-refactor-tsx, g_last_modified=160). `shadcn/ui Label` (artifact shadcn_ui_label_g160) added. Dependencies on old primitives removed."},
+        {"item_id": "pc0ms_task_003_check_017", "description": "Page `SignupPage.tsx`: Refactor. Use shadcn/ui Input, Button, Label for a mobile-friendly form.", "status": "DONE", "target_artifact_id": "cycle0_page_signup_g112", "notes": "SignupPage.tsx (cycle0_page_signup_g112) refactored to use shadcn/ui Input, Button, Label, Checkbox and Tailwind CSS (version 0.2.0-shadcn-tailwind-refactor-tsx, g_last_modified=160). `shadcn/ui Checkbox` (artifact shadcn_ui_checkbox_g160) added. Dependencies on old primitives removed."},
+        {"item_id": "pc0ms_task_003_check_018", "description": "Page `OnboardingPage.tsx`: Refactor. Use new components and Tailwind for mobile-first layout.", "status": "DONE", "target_artifact_id": "cycle0_page_onboarding_g112", "notes": "OnboardingPage.tsx (cycle0_page_onboarding_g112) refactored to use Tailwind CSS and shadcn/ui Button (version 0.2.0-tailwind-refactor-tsx, g_last_modified=160)."},
+        {"item_id": "pc0ms_task_003_check_019", "description": "Page `StyleGuidePage.tsx`: Refactor significantly to showcase all new shadcn/ui components and their mobile styling. May need mobile viewport simulation.", "status": "DONE", "target_artifact_id": "cycle1_styleguide_page_g131", "notes": "StyleGuidePage.tsx (cycle1_styleguide_page_g131) refactored incrementally (Chunks 1-4) to showcase Tailwind CSS utilities and all current shadcn/ui components (Button, Input, Label, Card, Checkbox, Dialog, Drawer, Sheet), and the refactored Link. Final version is 0.2.3-tailwind-shadcn-chunk4, g_last_modified=160."}
       ],
       "dependencies": ["pc0ms_task_002"],
       "criticality": "HIGH",
-      "status": "BLOCKED",
-      "linked_issue_ids": ["issue_shadcn_init_interactive_g155"],
-      "notes": ["This task is the core implementation effort. Annotations in modified files must be updated (g_last_modified, version_tag, key_logic_points related to shadcn/ui).", "Tailwind CSS setup (check_001) completed. index.css updated per Vite guide.", "BLOCKED by issue_shadcn_init_interactive_g155 (shadcn/ui init requires interactive run). Project also needs migration to TypeScript (see new plan) before this task can be fully unblocked and follow the Vite+TS shadcn/ui setup guide."],
+      "status": "DONE",
+      "linked_issue_ids": [],
+      "notes": ["Task completed. All checklist items DONE. Prototype UI has been significantly refactored to use shadcn/ui and Tailwind CSS for a mobile-first experience. Deprecated primitives have been handled.", "VALIDATION (g=161): Schema checks on sample files (HomePage, Header, StyleGuidePage) passed. Old primitive import checks on sample files passed. Registry map corrected for missing dropdown-menu. Overall validation of task outcome is successful."],
       "sub_tasks": []
     },
     {

@@ -1,15 +1,16 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle1_primitive_box_g132",
-  "version_tag": "0.1.6-deprecated",
+  "version_tag": "0.1.7-deprecated-tsx",
   "g_created": 134,
-  "g_last_modified": 152,
-  "description": "DEPRECATED: This component is planned for deprecation. Its functionality (providing shorthand access to common CSS utility props for spacing, sizing, colors, flexbox) will be replaced by direct usage of Tailwind CSS utility classes on standard HTML elements (div, span, etc.). Original description: A fundamental layout primitive component, typically rendering a div, that provides shorthand access to common CSS utility props for spacing, sizing, colors, flexbox, and more. It facilitates quick and consistent styling for layout purposes.",
+  "g_last_modified": 160,
+  "description": "DEPRECATED (TSX): This component is planned for deprecation. Its functionality (providing shorthand access to common CSS utility props for spacing, sizing, colors, flexbox) will be replaced by direct usage of Tailwind CSS utility classes on standard HTML elements (div, span, etc.). Original description: A fundamental layout primitive component, typically rendering a div, that provides shorthand access to common CSS utility props for spacing, sizing, colors, flexbox, and more. It facilitates quick and consistent styling for layout purposes. Now migrated to TSX.",
   "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEPRECATED",
-  "purpose_statement": "DEPRECATED: This component will be replaced by direct Tailwind CSS usage to align with the shadcn/ui and Tailwind-first styling approach for mobile responsiveness. Original purpose: To offer a versatile and theme-aware container for applying common styling properties directly as props, reducing the need for custom CSS for simple layout adjustments. Based on the definition in cycle1_ui_primitives_definition_g131.md.",
+  "purpose_statement": "DEPRECATED (TSX): This component will be replaced by direct Tailwind CSS usage to align with the shadcn/ui and Tailwind-first styling approach for mobile responsiveness. Original purpose: To offer a versatile and theme-aware container for applying common styling properties directly as props, reducing the need for custom CSS for simple layout adjustments. Based on the definition in cycle1_ui_primitives_definition_g131.md. Now in TSX format.",
   "key_logic_points": [
     "PLANNED FOR DEPRECATION in favor of Tailwind CSS utilities.",
+    "Migrated to TSX format as part of plan_jsx_to_tsx_g157.",
     "Renders as a `div` by default, but can be changed via the `component` prop.",
     "Accepts props for padding (p, px, py, pt, etc.) and margin (m, mx, my, mt, etc.).",
     "Supports props for width, height, min/maxWidth, min/maxHeight.",
@@ -17,10 +18,10 @@
     "Supports common flexbox properties like flexDirection, alignItems, justifyContent, flexWrap, flexGrow, flexShrink, flexBasis."
   ],
   "interfaces_provided": [
-    { 
-      "name": "Box", 
-      "interface_type": "REACT_COMPONENT", 
-      "details": "Props: children, component, p, px, py, pt, pr, pb, pl, m, mx, my, mt, mr, mb, ml, width, height, display, bgcolor, color, border, borderRadius, boxShadow, flexDirection, alignItems, justifyContent, flexWrap, flexGrow, flexShrink, flexBasis, className, sx (for custom styles)", 
+    {
+      "name": "Box",
+      "interface_type": "REACT_COMPONENT",
+      "details": "Props: children, component, p, px, py, pt, pr, pb, pl, m, mx, my, mt, mr, mb, ml, width, height, display, bgcolor, color, border, borderRadius, boxShadow, flexDirection, alignItems, justifyContent, flexWrap, flexGrow, flexShrink, flexBasis, className, sx (for custom styles)",
       "notes": "Refer to cycle1_ui_primitives_definition_g131.md for detailed prop descriptions. THIS COMPONENT IS BEING DEPRECATED."
     }
   ],
@@ -29,8 +30,8 @@
     { "description": "A theming system for consistent spacing/color units is highly recommended for full utility.", "type": "DESIGN_CONSIDERATION" }
   ],
   "external_dependencies": [
-    { "name": "React", "version": "^18.2.0", "reason": "Core React library." },
-    { "name": "prop-types", "version": "^15.x.x", "reason": "For runtime prop type validation." }
+    { "name": "React", "version": "^19.1.0", "reason": "Core React library for building user interfaces." },
+    { "name": "@types/react", "version": "^19.1.5", "reason": "TypeScript definitions for React." }
   ],
   "internal_dependencies": [],
   "dependents": [
@@ -43,13 +44,12 @@
   "linked_issue_ids": ["issue_flexdirection_prop_g145"],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Placeholder for the Box primitive. Actual style transformation from props (especially theme-aware spacing/colors) to be implemented. Dependents updated at g139, g143, g146, g148, and g149. Marked for DEPRECATION at g=152 as per plan_cycle0_mobile_styling_g150 and analysis cycle0_shadcn_analysis_g151.md. To be replaced by Tailwind CSS."
+    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Placeholder for the Box primitive. Actual style transformation from props (especially theme-aware spacing/colors) to be implemented. Dependents updated at g139, g143, g146, g148, and g149. Marked for DEPRECATION at g=152 as per plan_cycle0_mobile_styling_g150 and analysis cycle0_shadcn_analysis_g151.md. To be replaced by Tailwind CSS. Migrated to TSX at g=158 (plan_jsx_to_tsx_g157), annotation updated at g=160."
   }
 }
 ANNOTATION_BLOCK_END */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 
 // Placeholder for a theme object or theme context
 // const theme = {
@@ -64,7 +64,7 @@ import PropTypes from 'prop-types';
 
 // Helper function to resolve theme values (simplified)
 // In a real system, this would access the theme context.
-const resolveThemeValue = (value, type) => {
+const resolveThemeValue = (value: string | number | undefined, type: string): string | number | undefined => {
   if (typeof value === 'number' && type === 'spacing') {
     // return theme.spacing(value);
     return `${value * 8}px`; // Basic fallback if no theme
@@ -90,7 +90,52 @@ const resolveThemeValue = (value, type) => {
  * Purpose: A fundamental layout component for applying common CSS utility props directly.
  * Based on definitions in `cycle1_ui_primitives_definition_g131.md`.
  */
-const Box = React.forwardRef(function Box(props, ref) {
+
+interface BoxProps {
+  children?: React.ReactNode;
+  component?: React.ElementType;
+  p?: string | number;
+  px?: string | number;
+  py?: string | number;
+  pt?: string | number;
+  pr?: string | number;
+  pb?: string | number;
+  pl?: string | number;
+  m?: string | number;
+  mx?: string | number;
+  my?: string | number;
+  mt?: string | number;
+  mr?: string | number;
+  mb?: string | number;
+  ml?: string | number;
+  width?: string | number;
+  height?: string | number;
+  minWidth?: string | number;
+  minHeight?: string | number;
+  maxWidth?: string | number;
+  maxHeight?: string | number;
+  display?: string;
+  flexDirection?: string;
+  alignItems?: string;
+  justifyContent?: string;
+  flexWrap?: string;
+  flexGrow?: string | number;
+  flexShrink?: string | number;
+  flexBasis?: string | number;
+  bgcolor?: string;
+  color?: string;
+  border?: string | number;
+  borderColor?: string;
+  borderRadius?: string | number;
+  boxShadow?: string | number;
+  className?: string;
+  sx?: React.CSSProperties;
+  style?: React.CSSProperties;
+  // Allow any other props to be passed through
+  [key: string]: any;
+}
+
+const Box = React.forwardRef<HTMLElement, BoxProps>(function Box(props, ref) {
   const {
     children,
     component: Component = 'div',
@@ -117,25 +162,25 @@ const Box = React.forwardRef(function Box(props, ref) {
     ...otherProps
   } = props;
 
-  const boxStyles = { ...style }; // Start with explicitly passed style prop
+  const boxStyles: React.CSSProperties = { ...style }; // Start with explicitly passed style prop
 
   // Spacing props (padding)
-  if (p) { boxStyles.padding = resolveThemeValue(p, 'spacing'); }
-  if (px) { boxStyles.paddingLeft = resolveThemeValue(px, 'spacing'); boxStyles.paddingRight = resolveThemeValue(px, 'spacing'); }
-  if (py) { boxStyles.paddingTop = resolveThemeValue(py, 'spacing'); boxStyles.paddingBottom = resolveThemeValue(py, 'spacing'); }
-  if (pt) { boxStyles.paddingTop = resolveThemeValue(pt, 'spacing'); }
-  if (pr) { boxStyles.paddingRight = resolveThemeValue(pr, 'spacing'); }
-  if (pb) { boxStyles.paddingBottom = resolveThemeValue(pb, 'spacing'); }
-  if (pl) { boxStyles.paddingLeft = resolveThemeValue(pl, 'spacing'); }
+  if (p) { boxStyles.padding = resolveThemeValue(p, 'spacing') as string; }
+  if (px) { boxStyles.paddingLeft = resolveThemeValue(px, 'spacing') as string; boxStyles.paddingRight = resolveThemeValue(px, 'spacing') as string; }
+  if (py) { boxStyles.paddingTop = resolveThemeValue(py, 'spacing') as string; boxStyles.paddingBottom = resolveThemeValue(py, 'spacing') as string; }
+  if (pt) { boxStyles.paddingTop = resolveThemeValue(pt, 'spacing') as string; }
+  if (pr) { boxStyles.paddingRight = resolveThemeValue(pr, 'spacing') as string; }
+  if (pb) { boxStyles.paddingBottom = resolveThemeValue(pb, 'spacing') as string; }
+  if (pl) { boxStyles.paddingLeft = resolveThemeValue(pl, 'spacing') as string; }
 
   // Spacing props (margin)
-  if (m) { boxStyles.margin = resolveThemeValue(m, 'spacing'); }
-  if (mx) { boxStyles.marginLeft = resolveThemeValue(mx, 'spacing'); boxStyles.marginRight = resolveThemeValue(mx, 'spacing'); }
-  if (my) { boxStyles.marginTop = resolveThemeValue(my, 'spacing'); boxStyles.marginBottom = resolveThemeValue(my, 'spacing'); }
-  if (mt) { boxStyles.marginTop = resolveThemeValue(mt, 'spacing'); }
-  if (mr) { boxStyles.marginRight = resolveThemeValue(mr, 'spacing'); }
-  if (mb) { boxStyles.marginBottom = resolveThemeValue(mb, 'spacing'); }
-  if (ml) { boxStyles.marginLeft = resolveThemeValue(ml, 'spacing'); }
+  if (m) { boxStyles.margin = resolveThemeValue(m, 'spacing') as string; }
+  if (mx) { boxStyles.marginLeft = resolveThemeValue(mx, 'spacing') as string; boxStyles.marginRight = resolveThemeValue(mx, 'spacing') as string; }
+  if (my) { boxStyles.marginTop = resolveThemeValue(my, 'spacing') as string; boxStyles.marginBottom = resolveThemeValue(my, 'spacing') as string; }
+  if (mt) { boxStyles.marginTop = resolveThemeValue(mt, 'spacing') as string; }
+  if (mr) { boxStyles.marginRight = resolveThemeValue(mr, 'spacing') as string; }
+  if (mb) { boxStyles.marginBottom = resolveThemeValue(mb, 'spacing') as string; }
+  if (ml) { boxStyles.marginLeft = resolveThemeValue(ml, 'spacing') as string; }
 
   // Sizing props
   if (width) { boxStyles.width = width; }
@@ -158,17 +203,17 @@ const Box = React.forwardRef(function Box(props, ref) {
   if (flexBasis) { boxStyles.flexBasis = flexBasis; }
 
   // Color props
-  if (bgcolor) { boxStyles.backgroundColor = resolveThemeValue(bgcolor, 'color'); }
-  if (color) { boxStyles.color = resolveThemeValue(color, 'color'); }
+  if (bgcolor) { boxStyles.backgroundColor = resolveThemeValue(bgcolor, 'color') as string; }
+  if (color) { boxStyles.color = resolveThemeValue(color, 'color') as string; }
 
   // Border props
   if (border) { boxStyles.border = typeof border === 'number' ? `${border}px solid` : border; }
-  if (borderColor) { boxStyles.borderColor = resolveThemeValue(borderColor, 'color'); }
-  if (borderRadius) { boxStyles.borderRadius = resolveThemeValue(borderRadius, 'borderRadius'); }
+  if (borderColor) { boxStyles.borderColor = resolveThemeValue(borderColor, 'color') as string; }
+  if (borderRadius) { boxStyles.borderRadius = resolveThemeValue(borderRadius, 'borderRadius') as string; }
 
   // Shadow prop
-  if (boxShadow !== undefined) { boxStyles.boxShadow = resolveThemeValue(boxShadow, 'boxShadow'); }
-  
+  if (boxShadow !== undefined) { boxStyles.boxShadow = resolveThemeValue(boxShadow, 'boxShadow') as string; }
+
   // sx prop - for complex styles, potentially theme-aware (simplified here)
   if (sx) {
     Object.assign(boxStyles, sx);
@@ -182,47 +227,5 @@ const Box = React.forwardRef(function Box(props, ref) {
     </Component>
   );
 });
-
-Box.propTypes = {
-  children: PropTypes.node,
-  component: PropTypes.elementType,
-  p: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  px: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  py: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  pt: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  pr: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  pb: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  pl: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  m: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  mx: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  my: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  mt: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  mr: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  mb: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  ml: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  minWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  minHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  maxWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  maxHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  display: PropTypes.string,
-  flexDirection: PropTypes.string,
-  alignItems: PropTypes.string,
-  justifyContent: PropTypes.string,
-  flexWrap: PropTypes.string,
-  flexGrow: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  flexShrink: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  flexBasis: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  bgcolor: PropTypes.string,
-  color: PropTypes.string,
-  border: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  borderColor: PropTypes.string,
-  borderRadius: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  boxShadow: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  className: PropTypes.string,
-  sx: PropTypes.object, // For complex styles, could be theme-aware
-  style: PropTypes.object,
-};
 
 export default Box; 

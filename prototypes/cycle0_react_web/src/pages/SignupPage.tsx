@@ -1,44 +1,58 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle0_page_signup_g112",
-  "version_tag": "0.1.0",
+  "version_tag": "0.2.0-shadcn-tailwind-refactor-tsx",
   "g_created": 119,
-  "g_last_modified": 119,
-  "description": "Placeholder component for the User Signup page. This component will manage the display and interaction for new user registration.",
+  "g_last_modified": 160,
+  "description": "REFACTORED (TSX): Component for the User Signup page, refactored to use shadcn/ui components (Input, Button, Label, Checkbox) and Tailwind CSS for a mobile-friendly form layout. Manages new user registration form and interactions.",
   "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEVELOPMENT",
-  "purpose_statement": "To provide the structure for the new user registration experience in the web prototype. References Figma Catalogue ID: T-03b.",
+  "purpose_statement": "To provide the structure for the new user registration experience, styled with Tailwind CSS and using shadcn/ui components. References Figma Catalogue ID: T-03b.",
   "key_logic_points": [
-    "Form for full name, email, password, and confirm password input.",
-    "Submission handling (mocked).",
-    "Link to 'Login' page if user already has an account.",
-    "Checkbox for agreeing to Terms & Conditions."
+    "Layout refactored using Tailwind CSS for a mobile-first, centered form.",
+    "Uses `shadcn/ui Input` for name, email, and password fields.",
+    "Uses `shadcn/ui Label` for form field labels.",
+    "Uses `shadcn/ui Button` for the signup action.",
+    "Uses `shadcn/ui Checkbox` for Terms & Conditions agreement.",
+    "Uses refactored `PrimitiveLink` (Tailwind-styled) for navigation to Login and Terms pages.",
+    "Form submission handling (mocked) with validation and navigation."
   ],
   "interfaces_provided": [
     { "name": "SignupPage", "interface_type": "REACT_COMPONENT", "details": "The main component for the user signup screen.", "notes": "" }
   ],
-  "requisites": [],
+  "requisites": [
+    {"description": "shadcn/ui Checkbox component needs to be installed if not already present (`pnpm dlx shadcn@latest add checkbox`).", "type":"COMPONENT_DEPENDENCY"}
+  ],
   "external_dependencies": [
-    { "name": "React", "version": "^18.2.0", "reason": "Core React library." },
-    { "name": "react-router-dom", "version": "^6.x.x", "reason": "For navigation (Link component)." }
+    { "name": "React", "version": "^19.1.0", "reason": "Core React library for building user interfaces." },
+    { "name": "@types/react", "version": "^19.1.5", "reason": "TypeScript definitions for React." },
+    { "name": "react-router-dom", "version": "^7.6.0", "reason": "For navigation (useNavigate hook and PrimitiveLink)." }
   ],
   "internal_dependencies": [
-    // "cycle0_comp_button_g112",
-    // "cycle0_comp_input_g112"
+    "cycle1_primitive_link_g132", // Refactored Link primitive
+    "shadcn_ui_input_g160",
+    "shadcn_ui_button_g160",
+    "shadcn_ui_label_g160",
+    "shadcn_ui_checkbox_g160" // Assuming Checkbox will be added with this ID
   ],
   "dependents": [
-    "cycle0_router_config_g112" // This page will be a route in AppRouter
+    "cycle0_router_config_g112"
   ],
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g119. To be populated with specific UI placeholders based on T-03b (Figma)."
+    "manual_review_comment": "Refactored at g=160 to use shadcn/ui components and Tailwind CSS. Original scaffold g119. Assumes shadcn/ui Checkbox is available or will be added."
   }
 }
 ANNOTATION_BLOCK_END */
 
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox"; // Assumes checkbox is added
+import PrimitiveLink from '../components/primitives/Link'; // Refactored Link, Tailwind-styled
 
 /**
  * SignupPage Component (References Figma Catalogue: T-03b)
@@ -83,7 +97,7 @@ import { Link, useNavigate } from 'react-router-dom';
  * - T-03b_sso_options: (Optional) Social login buttons - Out of scope
  * - T-03b_link_login: "Already have an account? Login" link
  */
-const SignupPage = () => {
+const SignupPage: React.FC = () => {
   const navigate = useNavigate();
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -91,8 +105,12 @@ const SignupPage = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [termsAccepted, setTermsAccepted] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!fullName || !email || !password || !confirmPassword) {
+      alert("Please fill in all fields.");
+      return;
+    }
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
@@ -101,85 +119,109 @@ const SignupPage = () => {
       alert("Please accept the Terms & Conditions to continue.");
       return;
     }
-    // Simulate signup
     console.log('Signup attempt with:', { fullName, email, password, termsAccepted });
     alert('Mock signup successful! Navigating to home.');
-    navigate('/home'); // Or to a profile setup, email verification placeholder etc.
+    navigate('/home');
   };
 
   return (
-    <div style={{ padding: '20px', maxWidth: '400px', margin: 'auto', textAlign: 'center' }}>
-      {/* <img src="/path/to/logo.png" alt="Cultif Logo" style={{width: '100px', marginBottom: '20px'}} /> Placeholder for T-03b_logo */}
-      <h2>Create Account (T-03b)</h2>
-      
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-10rem)] px-4 py-8 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md space-y-8">
         <div>
-          <input 
-            type="text" 
-            value={fullName} 
-            onChange={(e) => setFullName(e.target.value)} 
-            placeholder="Full Name (e.g., John Doe)" 
-            required 
-            style={{width: '100%', padding: '10px', boxSizing: 'border-box'}}
-          />
-          {/* Figma Ref: T-03b_input_fullname */}
+          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
+            Create Account (T-03b)
+          </h2>
+          <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+            Or{' '}
+            <PrimitiveLink to="/login" variant="subtle" className="font-medium text-primary hover:text-primary/90">
+              login to your account (T-03b_link_login)
+            </PrimitiveLink>
+          </p>
         </div>
-        <div>
-          <input 
-            type="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-            placeholder="Email (e.g., user@example.com)" 
-            required 
-            style={{width: '100%', padding: '10px', boxSizing: 'border-box'}}
-          />
-          {/* Figma Ref: T-03b_input_email */}
-        </div>
-        <div>
-          <input 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            placeholder="Password" 
-            required 
-            style={{width: '100%', padding: '10px', boxSizing: 'border-box'}}
-          />
-          {/* Figma Ref: T-03b_input_password */}
-        </div>
-        <div>
-          <input 
-            type="password" 
-            value={confirmPassword} 
-            onChange={(e) => setConfirmPassword(e.target.value)} 
-            placeholder="Confirm Password" 
-            required 
-            style={{width: '100%', padding: '10px', boxSizing: 'border-box'}}
-          />
-          {/* Figma Ref: T-03b_input_confirmpassword */}
-        </div>
-        <div style={{textAlign: 'left', fontSize: '0.9em'}}>
-          <input 
-            type="checkbox" 
-            id="terms" 
-            checked={termsAccepted} 
-            onChange={(e) => setTermsAccepted(e.target.checked)} 
-            required
-          />
-          <label htmlFor="terms" style={{marginLeft: '5px'}}>I agree to the <Link to="/terms" target="_blank">Terms & Conditions</Link> (T-03b_checkbox_terms)</label>
-        </div>
-        <button type="submit" style={{padding: '10px', backgroundColor: 'green', color: 'white', border: 'none', cursor: 'pointer'}}>
-          Create Account (T-03b_button_signup)
-        </button>
-      </form>
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          <div className="space-y-4 rounded-md shadow-sm">
+            <div>
+              <Label htmlFor="full-name">Full Name</Label>
+              <Input
+                id="full-name"
+                name="fullName"
+                type="text"
+                autoComplete="name"
+                required
+                className="mt-1"
+                placeholder="John Doe"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+              />
+            </div>
+            <div>
+              <Label htmlFor="email-address">Email address</Label>
+              <Input
+                id="email-address"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                className="mt-1"
+                placeholder="user@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div>
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                autoComplete="new-password"
+                required
+                className="mt-1"
+                placeholder="Create a password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div>
+              <Label htmlFor="confirm-password">Confirm Password</Label>
+              <Input
+                id="confirm-password"
+                name="confirmPassword"
+                type="password"
+                autoComplete="new-password"
+                required
+                className="mt-1"
+                placeholder="Confirm your password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </div>
+          </div>
 
-      <div style={{ marginTop: '20px' }}>
-        {/* Placeholder for SSO options T-03b_sso_options - out of scope */}
-      </div>
+          <div className="flex items-center space-x-2">
+            <Checkbox 
+              id="terms" 
+              checked={termsAccepted} 
+              onCheckedChange={(checked) => setTermsAccepted(checked as boolean)} 
+            />
+            <Label htmlFor="terms" className="text-sm font-normal text-gray-700 dark:text-gray-300">
+              I agree to the <PrimitiveLink to="/terms" target="_blank" variant="subtle" className="underline hover:text-primary">Terms & Conditions</PrimitiveLink> (T-03b_checkbox_terms)
+            </Label>
+          </div>
 
-      <div style={{ marginTop: '20px' }}>
-        Already have an account? <Link to="/login">Login (T-03b_link_login)</Link>
+          <div>
+            <Button type="submit" className="group relative flex w-full justify-center">
+              Create Account (T-03b_button_signup)
+            </Button>
+          </div>
+        </form>
+        
+        <div className="mt-6 text-center">
+          <p className="text-xs text-gray-500 dark:text-gray-400">
+            Figma Ref: T-03b
+          </p>
+        </div>
       </div>
-      <p style={{marginTop: '20px', fontSize: '0.8em'}}>Figma Ref: T-03b</p>
     </div>
   );
 };

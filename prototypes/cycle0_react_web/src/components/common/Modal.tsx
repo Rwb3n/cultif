@@ -1,33 +1,30 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle0_comp_modal_g112",
-  "version_tag": "0.1.2",
+  "version_tag": "0.1.3-deprecated-tsx",
   "g_created": 124,
-  "g_last_modified": 144,
-  "description": "A reusable modal dialog component for displaying content in an overlay. Uses Typography for title and Button for close action.",
+  "g_last_modified": 160,
+  "description": "DEPRECATED (TSX): This custom modal component is now deprecated. It will be replaced by shadcn/ui Dialog or Drawer components. Original description: A reusable modal dialog component for displaying content in an overlay. Uses Typography for title and Button for close action.",
   "artifact_type": "CODE_MODULE",
-  "status_in_lifecycle": "DEVELOPMENT",
-  "purpose_statement": "To provide a consistent way to present focused information or require user interaction without navigating away from the current page. References Figma Catalogue: C-03 (Modal/Dialog).",
+  "status_in_lifecycle": "DEPRECATED",
+  "purpose_statement": "DEPRECATED (TSX): Replaced by shadcn/ui Dialog or Drawer for consistency with the new UI library and Tailwind CSS integration, supporting mobile-first UX. Original purpose: To provide a consistent way to present focused information or require user interaction without navigating away from the current page. References Figma Catalogue: C-03 (Modal/Dialog).",
   "key_logic_points": [
-    "Controlled by an `isOpen` prop.",
-    "Includes an `onClose` callback for dismissing the modal.",
-    "Can display an optional title, rendered using the Typography primitive.",
-    "Uses the Button component for the close button.",
-    "Content is passed as children.",
-    "Includes an overlay to obscure the background content.",
-    "Handles accessibility concerns (e.g., focus trapping, ARIA attributes)."
+    "DEPRECATED and REPLACED by `shadcn/ui Dialog` or `shadcn/ui Drawer`.",
+    "Original dependencies on Typography and custom Button are historical as those are also deprecated."
   ],
   "interfaces_provided": [
-    { "name": "Modal", "interface_type": "REACT_COMPONENT", "details": "Props: isOpen, onClose, title, children, size, className, disableBackdropClick, showCloseButton, footerContent", "notes": "Size could be 'sm', 'md', 'lg', 'full'. Ref C-03_modal_standard, C-03_modal_large." }
+    { "name": "Modal (Custom - DEPRECATED)", "interface_type": "REACT_COMPONENT", "details": "Props: isOpen, onClose, title, children, size, className, disableBackdropClick, showCloseButton, footerContent", "notes": "This component is DEPRECATED. Use `shadcn/ui Dialog` or `Drawer`." }
   ],
   "requisites": [],
   "external_dependencies": [
-    { "name": "React", "version": "^18.2.0", "reason": "Core React library." },
-    { "name": "react-dom", "version": "^18.2.0", "reason": "For creating a portal to render the modal outside the main DOM hierarchy." }
+    { "name": "React", "version": "^19.1.0", "reason": "Core React library for building user interfaces." },
+    { "name": "@types/react", "version": "^19.1.5", "reason": "TypeScript definitions for React." },
+    { "name": "react-dom", "version": "^18.2.0", "reason": "For creating a portal (historical)." },
+    { "name": "@types/react-dom", "version": "^18.3.0", "reason": "TypeScript definitions for react-dom." }
   ],
   "internal_dependencies": [
-    "cycle0_comp_button_g112", 
-    "cycle1_primitive_typography_g132"
+    "cycle0_comp_button_g112", // Historical dependency, Button is deprecated
+    "cycle1_primitive_typography_g132" // Historical dependency, Typography is deprecated
   ],
   "dependents": [
     "cycle0_page_mealplan_g112", 
@@ -37,22 +34,34 @@
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g124. Based on C-03. Dependents updated at g140. Title now uses Typography primitive, and close button uses common Button component (g144). Full prop/accessibility handling and styling to be implemented."
+    "manual_review_comment": "Marked as DEPRECATED at g=160. To be replaced by shadcn/ui Dialog (artifact shadcn_ui_dialog_g160) or Drawer (artifact shadcn_ui_drawer_g160). Original comment: Initial scaffold by Hybrid_AI_OS g124. Based on C-03. Dependents updated at g140. Title now uses Typography primitive, and close button uses common Button component (g144). Full prop/accessibility handling and styling to be implemented."
   }
 }
 ANNOTATION_BLOCK_END */
 
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import Typography from '../primitives/Typography';
-import Button from './Button'; // Path to common Button component
+import Typography from '../primitives/Typography'; // Typography is deprecated
+import Button from './Button'; // Custom Button is deprecated
 
 // It's good practice to have a dedicated DOM element for modals
 // This should ideally be in your public/index.html or created dynamically once.
 const modalRoot = document.getElementById('modal-root') || document.body;
 
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title?: React.ReactNode | string | null;
+  children?: React.ReactNode;
+  size?: 'sm' | 'md' | 'lg' | 'full';
+  className?: string;
+  disableBackdropClick?: boolean;
+  showCloseButton?: boolean;
+  footerContent?: React.ReactNode | null;
+}
+
 /**
- * Modal Component (References Figma Catalogue: C-03 - Modal/Dialog)
+ * Modal Component (DEPRECATED - Replaced by shadcn/ui Dialog/Drawer)
  *
  * Purpose: Displays content in a layer above the main page, typically for focused tasks, dialogs, or information.
  *
@@ -87,7 +96,7 @@ const modalRoot = document.getElementById('modal-root') || document.body;
  * [ ] Add ARIA attributes for accessibility (e.g., `aria-modal`, `aria-labelledby`, `aria-describedby`).
  * [ ] Add transitions/animations for opening and closing (Ref C-03_modal_transitions).
  */
-const Modal = ({
+const Modal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
   title = null,
@@ -98,22 +107,26 @@ const Modal = ({
   showCloseButton = true,
   footerContent = null,
 }) => {
+  console.warn(
+    `Custom Modal component (artifact cycle0_comp_modal_g112) is deprecated. ` +
+    `Use shadcn/ui Dialog (artifact shadcn_ui_dialog_g160) or Drawer (artifact shadcn_ui_drawer_g160) instead.`
+  );
 
   useEffect(() => {
-    const handleEsc = (event) => {
+    const handleEsc = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         onClose();
       }
     };
     if (isOpen) {
-      document.addEventListener('keydown', handleEsc);
+      document.addEventListener('keydown', handleEsc as EventListener);
       // Prevent background scroll when modal is open
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
     return () => {
-      document.removeEventListener('keydown', handleEsc);
+      document.removeEventListener('keydown', handleEsc as EventListener);
       document.body.style.overflow = 'unset'; // Ensure body scroll is reset
     };
   }, [isOpen, onClose]);
@@ -132,7 +145,7 @@ const Modal = ({
   const modalClasses = `modal-content placeholder-modal modal-${size} ${className}`.trim();
 
   // Basic placeholder styles - these should be in a CSS file
-  const overlayStyle = {
+  const overlayStyle: React.CSSProperties = {
     position: 'fixed',
     top: 0,
     left: 0,
@@ -145,7 +158,7 @@ const Modal = ({
     zIndex: 1000, // Ensure it's above other content
   };
 
-  const contentStyle = {
+  const contentStyle: React.CSSProperties = {
     backgroundColor: 'white',
     padding: '20px',
     borderRadius: '8px',
@@ -158,7 +171,7 @@ const Modal = ({
     maxWidth: '95vw',
   };
 
-  const headerStyle = {
+  const headerStyle: React.CSSProperties = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -167,7 +180,7 @@ const Modal = ({
     marginBottom: '15px',
   };
 
-  const footerStyle = {
+  const footerStyle: React.CSSProperties = {
     borderTop: '1px solid #eee',
     paddingTop: '15px',
     marginTop: '20px',

@@ -1,285 +1,409 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle1_styleguide_page_g131",
-  "version_tag": "0.1.2",
+  "version_tag": "0.2.3-tailwind-shadcn-chunk4",
   "g_created": 134,
-  "g_last_modified": 147,
-  "description": "A React component page that serves as a UI visual library. It imports and renders examples of all defined primitive and common UI components, showcasing their variations and usage.",
-  "artifact_type": "CODE_MODULE", 
+  "g_last_modified": 160,
+  "description": "REFACTORED (TSX) - Chunk 4: Adds shadcn/ui Dialog, Drawer, and Sheet to the StyleGuidePage. Completes the showcase of all currently used shadcn/ui components.",
+  "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEVELOPMENT",
-  "purpose_statement": "To provide a centralized, interactive reference for all UI components in the Cultif application, facilitating stakeholder review, developer consistency, and a visual source of truth for the component set. This page will be accessible via a dedicated route.",
+  "purpose_statement": "To provide a centralized, interactive reference for the current UI toolkit, demonstrating modal-like components and side panels.",
   "key_logic_points": [
-    "Imports all primitive components (Typography, Icon, Input, Box, Stack, Grid, Link).",
-    "Imports existing common components (e.g., Button, Card, Modal, Header, Footer).",
-    "Renders sections for each component, showcasing various props and states.",
-    "Designed to be easily navigable and clear for visual inspection of components."
+    "Demonstrates Tailwind CSS utility classes for typography and layout.",
+    "Showcases shadcn/ui Button, Input, Label, Card, Checkbox components.",
+    "Showcases the refactored Link primitive.",
+    "Showcases shadcn/ui Dialog component.",
+    "Showcases shadcn/ui Drawer component, emphasizing mobile-first usage.",
+    "Showcases shadcn/ui Sheet component for side panels.",
+    "Page layout and structure uses Tailwind CSS.",
+    "Imports updated for newly added components and icons."
   ],
   "interfaces_provided": [
     { 
       "name": "StyleGuidePage", 
       "interface_type": "REACT_PAGE_COMPONENT", 
       "details": "Renders a collection of UI components for demonstration purposes.", 
-      "notes": "Accessible via a route defined in AppRouter.jsx."
+      "notes": "Accessible via a route defined in AppRouter.tsx."
     }
   ],
-  "requisites": [
-    { "description": "All primitive components from pc1uir_task_002 must be scaffolded.", "type": "INTERNAL_DEPENDENCY" },
-    { "description": "Paths to existing common components need to be verified and components imported.", "type": "INTERNAL_DEPENDENCY" }
-  ],
+  "requisites": [],
   "external_dependencies": [
-    { "name": "React", "version": "^18.2.0", "reason": "Core React library." }
+    { "name": "React", "version": "^19.1.0", "reason": "Core React library for building user interfaces." },
+    { "name": "@types/react", "version": "^19.1.5", "reason": "TypeScript definitions for React." },
+    { "name": "lucide-react", "version": "latest", "reason": "For icons used in shadcn/ui components and examples."}
   ],
   "internal_dependencies": [
-    "cycle1_primitive_typography_g132",
-    "cycle1_primitive_icon_g132",
-    "cycle1_primitive_input_g132",
-    "cycle1_primitive_box_g132",
-    "cycle1_primitive_stack_g132",
-    "cycle1_primitive_grid_g132",
     "cycle1_primitive_link_g132",
-    "cycle0_comp_button_g112",
-    "cycle0_comp_card_g112",
-    "cycle0_comp_modal_g112",
-    "cycle0_comp_header_g112",
-    "cycle0_comp_footer_g112"
+    "shadcn_ui_button_g160",
+    "shadcn_ui_input_g160",
+    "shadcn_ui_label_g160",
+    "shadcn_ui_card_g160",
+    "shadcn_ui_checkbox_g160",
+    "shadcn_ui_dialog_g160",
+    "shadcn_ui_drawer_g160",
+    "shadcn_ui_sheet_g160"
   ],
   "dependents": [
-    "cycle0_router_config_g112" // AppRouter will link to this page
+    "cycle0_router_config_g112"
   ],
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g134. Common components imported at g135. Internal dependencies list updated at g147 based on visible imports; full verification pending complete file view. Assumes all listed dependencies correctly list StyleGuidePage as a dependent."
+    "manual_review_comment": "Chunk 4 of refactor at g=160. Adds Dialog, Drawer, Sheet. Completes shadcn/ui component showcase for now. Original scaffold g134."
   }
 }
 ANNOTATION_BLOCK_END */
 
-import React from 'react';
+import React, { useState } from 'react';
+import PrimitiveLink from '../components/primitives/Link'; // Refactored, Tailwind-styled Link
 
-// Primitive Components (assuming they are in ../components/primitives/)
-import Typography from '../components/primitives/Typography';
-import Icon from '../components/primitives/Icon';
-import Input from '../components/primitives/Input';
-import Box from '../components/primitives/Box';
-import Stack from '../components/primitives/Stack';
-import Grid from '../components/primitives/Grid';
-import Link from '../components/primitives/Link';
+// shadcn/ui components
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from "@/components/ui/dialog";
+import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
-// Common Components
-import Button from '../components/common/Button'; 
-import Card from '../components/common/Card';     
-import Modal from '../components/common/Modal';    
+// Icons from lucide-react for examples
+import { Mail, PlusCircle, User, Bell, Search, CheckCircle2, Edit3, CalendarDays, Settings } from 'lucide-react';
 
-// Layout Components
-import Header from '../components/layout/Header';   
-import Footer from '../components/layout/Footer';   
+// Other shadcn/ui components will be imported in later chunks as sections are added
 
-const StyleGuidePage = () => {
-  // Placeholder: Structure for showcasing components
-  // Each component should have its own section with examples of different variants and props.
+const StyleGuidePage: React.FC = () => {
+  const [textInputValue, setTextInputValue] = useState('');
+  const [checkboxChecked, setCheckboxChecked] = useState<boolean | 'indeterminate'>(false);
 
-  const sectionStyle = {
-    marginBottom: '40px',
-    padding: '20px',
-    border: '1px solid #eee',
-    borderRadius: '8px',
-  };
+  const SectionWrapper: React.FC<{ title: string; id: string; children: React.ReactNode }> = ({ title, id, children }) => (
+    <section id={id} className="mb-12 p-4 md:p-6 border border-slate-200 dark:border-slate-700 rounded-lg shadow-sm bg-white dark:bg-slate-800">
+      <h2 className="text-2xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 mb-6 pb-2 border-b border-slate-200 dark:border-slate-700">{title}</h2>
+      <div className="space-y-6">
+        {children}
+      </div>
+    </section>
+  );
 
-  const subSectionStyle = {
-    marginTop: '20px',
-    paddingTop: '10px',
-    borderTop: '1px dashed #ddd',
-  };
+  const ComponentShowcase: React.FC<{ title: string; children: React.ReactNode, description?: string }> = ({ title, children, description }) => (
+    <div className="p-4 border border-slate-200 dark:border-slate-700 rounded-md bg-slate-50 dark:bg-slate-800/50">
+      <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-1">{title}</h3>
+      {description && <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">{description}</p>}
+      <div className="space-y-4 md:space-y-0 md:space-x-4 flex flex-col md:flex-row md:flex-wrap items-start md:items-baseline">
+        {children}
+      </div>
+    </div>
+  );
 
   return (
-    <Box p={3} className="style-guide-page">
-      <Typography variant="h1" component="h1" gutterBottom>
-        Cultif UI Component Visual Library
-      </Typography>
+    <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 min-h-screen">
+      <header className="mb-10 text-center">
+        <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl text-blue-600 dark:text-blue-400">
+          Cultif UI Component Visual Library
+        </h1>
+        <p className="mt-3 text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+          Showcasing shadcn/ui components, Tailwind CSS utilities, and custom elements, styled for a mobile-first experience.
+        </p>
+      </header>
 
-      <Typography variant="body1" paragraph>
-        This page showcases the various UI components available in the Cultif application.
-        It includes primitive components, common reusable components, and layout structures.
-      </Typography>
+      {/* Tailwind Typography Utilities */}
+      <SectionWrapper title="Tailwind CSS Typography" id="tailwind-typography">
+        <ComponentShowcase title="Headings">
+          <h1 className="text-4xl font-bold">H1: text-4xl font-bold</h1>
+          <h2 className="text-3xl font-semibold">H2: text-3xl font-semibold</h2>
+          <h3 className="text-2xl font-medium">H3: text-2xl font-medium</h3>
+          <h4 className="text-xl">H4: text-xl</h4>
+          <h5 className="text-lg">H5: text-lg</h5>
+          <h6 className="text-base">H6: text-base (default)</h6>
+        </ComponentShowcase>
+        <ComponentShowcase title="Paragraph & Text Styles">
+          <p className="text-base leading-relaxed">This is a standard paragraph (text-base) using Tailwind CSS. <strong className="font-semibold">Bold text.</strong> <em className="italic">Italic text.</em></p>
+          <p className="text-sm text-slate-500 dark:text-slate-400">Small, muted text (text-sm text-slate-500).</p>
+          <p className="text-lg text-blue-600 dark:text-blue-400">Primary color text (text-lg text-blue-600).</p>
+          <p className="text-red-600 dark:text-red-400">Destructive color text (text-red-600).</p>
+          <p className="truncate w-64">This long text will be truncated if it exceeds 256px width (truncate w-64).</p>
+        </ComponentShowcase>
+      </SectionWrapper>
 
-      {/* Section for Primitive Components */}
-      <Box sx={sectionStyle} className="primitives-section">
-        <Typography variant="h2" component="h2" gutterBottom>Primitive Components</Typography>
-        
-        {/* Typography Primitive Examples */}
-        <Box sx={subSectionStyle} className="typography-examples">
-          <Typography variant="h3" component="h3" gutterBottom>Typography</Typography>
-          <Stack spacing={2}>
-            <Typography variant="h1">Heading 1</Typography>
-            <Typography variant="h2">Heading 2</Typography>
-            <Typography variant="h3">Heading 3</Typography>
-            <Typography variant="h4">Heading 4</Typography>
-            <Typography variant="h5">Heading 5</Typography>
-            <Typography variant="h6">Heading 6</Typography>
-            <Typography variant="subtitle1">Subtitle 1: Lorem ipsum dolor sit amet.</Typography>
-            <Typography variant="subtitle2">Subtitle 2: Consectetur adipiscing elit.</Typography>
-            <Typography variant="body1">Body 1: The quick brown fox jumps over the lazy dog. This is standard paragraph text.</Typography>
-            <Typography variant="body2">Body 2: A slightly different paragraph style, perhaps for less emphasis.</Typography>
-            <Typography variant="button" fontWeight="bold">Button Text Style</Typography>
-            <Typography variant="caption">Caption Text: Used for small print or annotations.</Typography>
-            <Typography variant="overline">OVERLINE TEXT</Typography>
-            <Typography variant="body1" color="primary">Primary Color Text</Typography>
-            <Typography variant="body1" color="textSecondary">Secondary Text Color</Typography>
-            <Typography variant="body1" truncate={true}>This is a very long line of text that will be truncated with an ellipsis if it exceeds the available width of its container.</Typography>
-          </Stack>
-        </Box>
+      {/* Tailwind Layout Utilities */}
+      <SectionWrapper title="Tailwind CSS Layout Utilities" id="tailwind-layout">
+        <ComponentShowcase title="Flexbox" description="Demonstrates flex behavior with spacing.">
+          <div className="flex space-x-2 p-2 bg-slate-100 dark:bg-slate-700/50 rounded-md w-full">
+            <div className="p-2 bg-blue-500 text-white rounded">Item 1</div>
+            <div className="p-2 bg-green-500 text-white rounded">Item 2</div>
+            <div className="p-2 bg-purple-500 text-white rounded">Item 3</div>
+          </div>
+          <div className="mt-2 flex justify-between p-2 bg-slate-100 dark:bg-slate-700/50 rounded-md w-full">
+            <div className="p-2 bg-blue-500 text-white rounded">Justify Between 1</div>
+            <div className="p-2 bg-blue-500 text-white rounded">Justify Between 2</div>
+          </div>
+        </ComponentShowcase>
+        <ComponentShowcase title="Grid" description="Responsive grid layout.">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-2 bg-slate-100 dark:bg-slate-700/50 rounded-md w-full">
+            <div className="p-4 bg-blue-500 text-white rounded-md text-center">Grid Item 1</div>
+            <div className="p-4 bg-green-500 text-white rounded-md text-center">Grid Item 2</div>
+            <div className="p-4 bg-purple-500 text-white rounded-md text-center">Grid Item 3</div>
+            <div className="p-4 bg-blue-600 text-white rounded-md text-center sm:col-span-2">Grid Item 4 (sm:col-span-2)</div>
+            <div className="p-4 bg-green-600 text-white rounded-md text-center">Grid Item 5</div>
+          </div>
+        </ComponentShowcase>
+        <ComponentShowcase title="Spacing & Sizing" description="Padding, Margin, Width, Height examples.">
+          <div className="p-4 bg-slate-100 dark:bg-slate-700/50 rounded-md">Padding (p-4)</div>
+          <div className="m-4 bg-slate-100 dark:bg-slate-700/50 rounded-md p-2">Margin (m-4)</div>
+          <div className="w-1/2 p-2 bg-slate-100 dark:bg-slate-700/50 rounded-md">Width 50% (w-1/2)</div>
+          <div className="h-20 p-2 bg-slate-100 dark:bg-slate-700/50 rounded-md flex items-center justify-center">Height 5rem (h-20)</div>
+        </ComponentShowcase>
+         <ComponentShowcase title="Borders & Shadows" description="Border styles, rounded corners, and shadow effects.">
+          <div className="p-4 border border-blue-500 rounded-lg">Border Primary (border-blue-500)</div>
+          <div className="p-4 border-2 border-dashed border-red-500 rounded-md">Dashed Destructive Border (border-red-500)</div>
+          <div className="p-4 rounded-xl shadow-lg bg-white dark:bg-slate-800">Shadow Large (shadow-lg)</div>
+        </ComponentShowcase>
+      </SectionWrapper>
 
-        {/* Icon Primitive Examples */}
-        <Box sx={subSectionStyle} className="icon-examples">
-          <Typography variant="h3" component="h3" gutterBottom>Icon</Typography>
-          <Stack direction="row" spacing={2} alignItems="center">
-            <Icon iconName="search" titleAccess="Search Icon" />
-            <Icon iconName="close" size="small" color="action" titleAccess="Close Icon" />
-            <Icon iconName="star-filled" size="large" color="gold" titleAccess="Star Icon" />
-            <Icon iconName="arrow-down" size={24} color="primary" titleAccess="Arrow Down Icon" />
-            <Icon iconName="settings" size="medium" color="#757575" titleAccess="Settings Icon (custom color)"/>
-          </Stack>
-        </Box>
+      {/* shadcn/ui Button */}
+      <SectionWrapper title="Button (shadcn/ui)" id="button">
+        <ComponentShowcase title="Variants">
+          <Button>Default</Button>
+          <Button variant="destructive">Destructive</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button variant="link">Link</Button>
+        </ComponentShowcase>
+        <ComponentShowcase title="Sizes">
+          <Button size="sm">Small</Button>
+          <Button size="default">Default</Button>
+          <Button size="lg">Large</Button>
+          <Button size="icon"><User className="h-4 w-4" /></Button>
+        </ComponentShowcase>
+        <ComponentShowcase title="With Icon">
+          <Button><Mail className="mr-2 h-4 w-4" /> Login with Email</Button>
+          <Button variant="outline"><PlusCircle className="mr-2 h-4 w-4" /> Create New</Button>
+        </ComponentShowcase>
+        <ComponentShowcase title="Disabled State">
+            <Button disabled>Disabled Default</Button>
+            <Button variant="outline" disabled><Bell className="mr-2 h-4 w-4" /> Disabled Outline</Button>
+        </ComponentShowcase>
+      </SectionWrapper>
 
-        {/* Input Primitive Examples */}
-        <Box sx={subSectionStyle} className="input-examples">
-          <Typography variant="h3" component="h3" gutterBottom>Input</Typography>
-          <Stack spacing={3} sx={{ maxWidth: '400px'}}>
-            <Input label="Email Address" type="email" placeholder="name@example.com" fullWidth />
-            <Input label="Password" type="password" placeholder="Enter your password" variant="filled" fullWidth />
-            <Input 
-              label="Search Query"
-              type="search" 
-              placeholder="Search..." 
-              variant="standard"
-              leadingIcon={<Icon iconName="search" size="small"/>} 
-              helperText="Type your query and press Enter."
-              fullWidth 
-            />
-            <Input label="Disabled Input" placeholder="Cannot edit" disabled fullWidth />
-            <Input label="Error State" placeholder="Invalid input" error helperText="This field has an error." fullWidth />
-          </Stack>
-        </Box>
+      {/* shadcn/ui Input & Label */}
+      <SectionWrapper title="Input & Label (shadcn/ui)" id="input-label">
+        <ComponentShowcase title="Basic Input with Label">
+          <div className="grid w-full max-w-sm items-center gap-1.5">
+            <Label htmlFor="email">Email</Label>
+            <Input type="email" id="email" placeholder="Email" value={textInputValue} onChange={(e) => setTextInputValue(e.target.value)} />
+          </div>
+        </ComponentShowcase>
+        <ComponentShowcase title="Input with Placeholder & Icon">
+            <div className="relative w-full max-w-sm">
+                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-slate-500 dark:text-slate-400" />
+                 <Input type="search" placeholder="Search..." className="pl-8" />
+            </div>
+        </ComponentShowcase>
+        <ComponentShowcase title="Disabled Input">
+          <Input type="text" placeholder="Disabled input" disabled className="max-w-sm"/>
+        </ComponentShowcase>
+         <ComponentShowcase title="Input for File" description="Note: Styling may vary by browser.">
+          <div className="grid w-full max-w-sm items-center gap-1.5">
+            <Label htmlFor="picture">Picture</Label>
+            <Input id="picture" type="file" />
+          </div>
+        </ComponentShowcase>
+      </SectionWrapper>
+      
+      {/* Refactored Link Primitive */}
+      <SectionWrapper title="Link (Refactored Primitive)" id="link">
+        <ComponentShowcase title="Link Usages">
+          <PrimitiveLink to="/style-guide#button" className="text-blue-600 hover:underline dark:text-blue-400">
+            Link to Button Section
+          </PrimitiveLink>
+          <PrimitiveLink to="/some-other-page" variant="default" className="text-lg font-semibold text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300">
+            Styled Destructive Link
+          </PrimitiveLink>
+          <Button asChild variant="link">
+            <PrimitiveLink to="/style-guide#tailwind-layout">Go to Layout section (Button as Link)</PrimitiveLink>
+          </Button>
+        </ComponentShowcase>
+      </SectionWrapper>
 
-        {/* Box Primitive Examples */}
-        <Box sx={subSectionStyle} className="box-examples">
-          <Typography variant="h3" component="h3" gutterBottom>Box</Typography>
-          <Stack spacing={2} direction="row" wrap="wrap">
-            <Box p={2} bgcolor="#e3f2fd" color="#1e88e5">Padding=2, Primary Light BG</Box>
-            <Box m={1} border="1px solid red" p={1}>Margin=1, Red Border, Padding=1</Box>
-            <Box width={1/2} bgcolor="#f5f5f5" p={2}>Width=50% (1/2)</Box>
-            <Box height="100px" display="flex" alignItems="center" justifyContent="center" bgcolor="#fff3e0">Fixed Height, Flex Centered</Box>
-            <Box boxShadow={1} p={2}>Box with Shadow (level 1)</Box>
-          </Stack>
-        </Box>
-
-        {/* Stack Primitive Examples */}
-        <Box sx={subSectionStyle} className="stack-examples">
-          <Typography variant="h3" component="h3" gutterBottom>Stack</Typography>
-          <Typography variant="body2">Vertical Stack (default):</Typography>
-          <Stack spacing={1} sx={{border: '1px solid lightblue', p:1}}>
-            <Box bgcolor="#ffebee" p={1}>Item 1</Box>
-            <Box bgcolor="#e8f5e9" p={1}>Item 2</Box>
-            <Box bgcolor="#e3f2fd" p={1}>Item 3</Box>
-          </Stack>
-          <Typography variant="body2" sx={{mt: 2}}>Horizontal Stack with Dividers:</Typography>
-          <Stack direction="row" spacing={2} dividers sx={{border: '1px solid lightgreen', p:1}}>
-            <Box bgcolor="#fffde7" p={1}>Item A</Box>
-            <Box bgcolor="#fce4ec" p={1}>Item B</Box>
-            <Box bgcolor="#f3e5f5" p={1}>Item C</Box>
-          </Stack>
-        </Box>
-
-        {/* Grid Primitive Examples */}
-        <Box sx={subSectionStyle} className="grid-examples">
-          <Typography variant="h3" component="h3" gutterBottom>Grid</Typography>
-          <Grid container spacing={2} sx={{border: '1px solid orange', p:1}}>
-            <Grid item xs={12} sm={6} md={4}><Box bgcolor="#eceff1" p={2}>Item xs=12 sm=6 md=4</Box></Grid>
-            <Grid item xs={12} sm={6} md={4}><Box bgcolor="#cfd8dc" p={2}>Item xs=12 sm=6 md=4</Box></Grid>
-            <Grid item xs={12} sm={12} md={4}><Box bgcolor="#b0bec5" p={2}>Item xs=12 sm=12 md=4</Box></Grid>
-          </Grid>
-          <Grid container spacing={1} direction="column" sx={{border: '1px solid purple', p:1, mt:2}}>
-            <Grid item><Box bgcolor="#d1c4e9" p={1}>Column Item 1</Box></Grid>
-            <Grid item><Box bgcolor="#b39ddb" p={1}>Column Item 2</Box></Grid>
-          </Grid>
-        </Box>
-
-        {/* Link Primitive Examples */}
-        <Box sx={subSectionStyle} className="link-examples">
-          <Typography variant="h3" component="h3" gutterBottom>Link</Typography>
-          <Stack direction="row" spacing={3} alignItems="center">
-            <Link to="/some-internal-page">Internal Link (to)</Link>
-            <Link href="https://example.com" target="_blank">External Link (href)</Link>
-            <Link to="/nav-link-example" variant="nav" activeClassName="active-nav-style">NavLink Style</Link>
-            <Link component="button" onClick={() => alert('Custom component link clicked!')} variant="buttonLike">
-              Custom Component as Link
-            </Link>
-          </Stack>
-          {/* To test NavLink active style, you might need a dummy route and navigation for /nav-link-example */}
-        </Box>
-
-      </Box>
-
-      {/* Section for Common Components (TODO) */}
-      <Box sx={sectionStyle} className="common-components-section">
-        <Typography variant="h2" component="h2" gutterBottom>Common Components</Typography>
-        
-        {/* Button Examples */}
-        <Box sx={subSectionStyle} className="button-examples">
-          <Typography variant="h3" component="h3" gutterBottom>Button</Typography>
-          <Stack direction="row" spacing={2} alignItems="center">
-            {/* Placeholder: Add Button examples once its props are known/standardized */}
-            <Button>Default Button</Button>
-            {/* <Button variant="contained">Contained</Button> */}
-            {/* <Button variant="outlined">Outlined</Button> */}
-            {/* <Button color="primary">Primary</Button> */}
-          </Stack>
-        </Box>
-
-        {/* Card Examples */}
-        <Box sx={subSectionStyle} className="card-examples">
-          <Typography variant="h3" component="h3" gutterBottom>Card</Typography>
-          {/* Placeholder: Add Card examples once its structure and props are known */}
-          <Card>
-            <Typography variant="h5">Sample Card Title</Typography>
-            <Typography variant="body2">This is some sample content within a card.</Typography>
+      {/* shadcn/ui Card */}
+      <SectionWrapper title="Card (shadcn/ui)" id="card">
+        <ComponentShowcase title="Basic Card">
+          <Card className="w-full sm:w-[350px]">
+            <CardHeader>
+              <CardTitle>Card Title</CardTitle>
+              <CardDescription>Card Description: A brief summary.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>This is the main content area of the card. You can put any elements here.</p>
+            </CardContent>
+            <CardFooter className="flex justify-between">
+              <Button variant="outline">Cancel</Button>
+              <Button>Deploy</Button>
+            </CardFooter>
           </Card>
-        </Box>
+        </ComponentShowcase>
+        <ComponentShowcase title="Card with Image Placeholder" description="Image placement is custom using Tailwind.">
+            <Card className="w-full sm:w-[300px] overflow-hidden">
+                <div className="w-full h-32 bg-slate-200 dark:bg-slate-700 flex items-center justify-center">
+                    <span className="text-slate-500 dark:text-slate-400">Image Placeholder (300x180)</span>
+                </div>
+                <CardHeader>
+                    <CardTitle>Image Card</CardTitle>
+                    <CardDescription>Description below image.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <p className="text-sm">More content here.</p>
+                </CardContent>
+                 <CardFooter>
+                    <Button className="w-full"><CheckCircle2 className="mr-2 h-4 w-4" /> Approve</Button>
+                </CardFooter>
+            </Card>
+        </ComponentShowcase>
+      </SectionWrapper>
 
-        {/* Modal Examples */}
-        <Box sx={subSectionStyle} className="modal-examples">
-          <Typography variant="h3" component="h3" gutterBottom>Modal</Typography>
-          {/* Placeholder: Triggering and displaying a Modal usually requires state management */}
-          {/* <Button onClick={() => setModalOpen(true)}>Open Modal</Button> */}
-          {/* <Modal open={isModalOpen} onClose={() => setModalOpen(false)} title="Sample Modal">
-            <Typography variant="body1">This is the content of the modal.</Typography>
-          </Modal> */}
-          <Typography variant="body2">Modal examples will require state management to demonstrate.</Typography>
-        </Box>
+      {/* shadcn/ui Checkbox */}
+      <SectionWrapper title="Checkbox (shadcn/ui)" id="checkbox">
+        <ComponentShowcase title="Basic Checkbox">
+          <div className="flex items-center space-x-2">
+            <Checkbox id="terms1" checked={checkboxChecked} onCheckedChange={setCheckboxChecked} />
+            <Label htmlFor="terms1" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+              Accept terms and conditions
+            </Label>
+          </div>
+        </ComponentShowcase>
+        <ComponentShowcase title="Checkbox States">
+          <div className="flex items-center space-x-2">
+            <Checkbox id="terms-checked" defaultChecked /> <Label htmlFor="terms-checked">Checked</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Checkbox id="terms-disabled" disabled /> <Label htmlFor="terms-disabled">Disabled</Label>
+          </div>
+           <div className="flex items-center space-x-2">
+            <Checkbox id="terms-disabled-checked" defaultChecked disabled /> <Label htmlFor="terms-disabled-checked">Disabled & Checked</Label>
+          </div>
+        </ComponentShowcase>
+      </SectionWrapper>
 
-      </Box>
+      {/* shadcn/ui Dialog */}
+      <SectionWrapper title="Dialog (shadcn/ui)" id="dialog">
+        <ComponentShowcase title="Basic Dialog">
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline">Edit Profile <Edit3 className="ml-2 h-4 w-4"/></Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Edit Profile</DialogTitle>
+                <DialogDescription>
+                  Make changes to your profile here. Click save when you're done.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="name" className="text-right">Name</Label>
+                  <Input id="name" defaultValue="Pedro Duarte" className="col-span-3" />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="username" className="text-right">Username</Label>
+                  <Input id="username" defaultValue="@peduarte" className="col-span-3" />
+                </div>
+              </div>
+              <DialogFooter>
+                <DialogClose asChild>
+                    <Button type="button" variant="secondary">Close</Button>
+                </DialogClose>
+                <Button type="submit">Save changes</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </ComponentShowcase>
+      </SectionWrapper>
 
-      {/* Section for Layout Components (TODO) */}
-      <Box sx={sectionStyle} className="layout-components-section">
-        <Typography variant="h2" component="h2" gutterBottom>Layout Components</Typography>
+      {/* shadcn/ui Drawer (Mobile-First Focus) */}
+      <SectionWrapper title="Drawer (shadcn/ui)" id="drawer">
+        <ComponentShowcase title="Basic Drawer" description="Typically used for mobile or side-panel actions.">
+          <Drawer>
+            <DrawerTrigger asChild>
+              <Button variant="outline">Open Drawer</Button>
+            </DrawerTrigger>
+            <DrawerContent>
+              <DrawerHeader className="text-left">
+                <DrawerTitle>Mobile Menu</DrawerTitle>
+                <DrawerDescription>Select an option from the menu below.</DrawerDescription>
+              </DrawerHeader>
+              <nav className="p-4 space-y-2">
+                <Button variant="link" className="w-full justify-start"><User className="mr-2 h-4 w-4"/> Profile</Button>
+                <Button variant="link" className="w-full justify-start"><Settings className="mr-2 h-4 w-4"/> Settings</Button>
+                <Button variant="link" className="w-full justify-start"><Bell className="mr-2 h-4 w-4"/> Notifications</Button>
+              </nav>
+              <DrawerFooter className="pt-2">
+                <DrawerClose asChild>
+                  <Button variant="outline">Cancel</Button>
+                </DrawerClose>
+              </DrawerFooter>
+            </DrawerContent>
+          </Drawer>
+        </ComponentShowcase>
+      </SectionWrapper>
 
-        {/* Header Example */}
-        <Box sx={subSectionStyle} className="header-example">
-          <Typography variant="h3" component="h3" gutterBottom>Header</Typography>
-          {/* Placeholder: Header might require app context or props */}
-          <Header />
-        </Box>
+      {/* shadcn/ui Sheet (Side Panel) */}
+      <SectionWrapper title="Sheet (shadcn/ui)" id="sheet">
+        <ComponentShowcase title="Sheet (Right Side)">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline">Open Sheet (Right)</Button>
+            </SheetTrigger>
+            <SheetContent side="right">
+              <SheetHeader>
+                <SheetTitle>Event Details</SheetTitle>
+                <SheetDescription>
+                  Information about the selected calendar event.
+                </SheetDescription>
+              </SheetHeader>
+              <div className="py-4 space-y-3">
+                <p><strong className="font-medium">Event:</strong> Team Meeting</p>
+                <p><strong className="font-medium">Date:</strong> Tomorrow, 10:00 AM</p>
+                <p><strong className="font-medium">Location:</strong> Conference Room B</p>
+              </div>
+              <SheetFooter>
+                <SheetClose asChild>
+                  <Button type="button" variant="secondary">Close</Button>
+                </SheetClose>
+                <Button><CalendarDays className="mr-2 h-4 w-4" /> Add to Calendar</Button>
+              </SheetFooter>
+            </SheetContent>
+          </Sheet>
+        </ComponentShowcase>
+         <ComponentShowcase title="Sheet (Left Side)">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="secondary">Filters (Left)</Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-[300px] sm:w-[400px]">
+              <SheetHeader>
+                <SheetTitle>Filter Options</SheetTitle>
+              </SheetHeader>
+              <div className="py-4 space-y-4">
+                <div><Label htmlFor="filter-cat">Category</Label><Input id="filter-cat" placeholder="e.g. Electronics"/></div>
+                <div><Label htmlFor="filter-price">Max Price</Label><Input id="filter-price" type="number" placeholder="e.g. $500"/></div>
+                <div className="flex items-center space-x-2"><Checkbox id="filter-stock"/><Label htmlFor="filter-stock">In Stock Only</Label></div>
+              </div>
+              <SheetFooter>
+                 <SheetClose asChild><Button type="button" variant="outline">Clear</Button></SheetClose>
+                <Button>Apply Filters</Button>
+              </SheetFooter>
+            </SheetContent>
+          </Sheet>
+        </ComponentShowcase>
+      </SectionWrapper>
 
-        {/* Footer Example */}
-        <Box sx={subSectionStyle} className="footer-example">
-          <Typography variant="h3" component="h3" gutterBottom>Footer</Typography>
-          {/* Placeholder: Footer might require app context or props */}
-          <Footer />
-        </Box>
-
-      </Box>
-
-    </Box>
+      <footer className="mt-12 py-6 border-t border-slate-200 dark:border-slate-700 text-center">
+        <p className="text-sm text-slate-500 dark:text-slate-400">
+          Cultif UI Component Visual Library - All current shadcn/ui components showcased. (Chunk 4 - Final)
+        </p>
+      </footer>
+    </div>
   );
 };
 

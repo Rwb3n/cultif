@@ -1,25 +1,30 @@
 {
-  "v": 1,
+  "v": 2,
   "id": "issue_shadcn_init_interactive_g155",
   "title": "shadcn/ui Initialization Requires Interactive Input",
   "description": "The non-interactive 'npx shadcn-ui@latest init ... --yes' command is failing repeatedly due to PowerShell argument parsing issues or PSReadLine exceptions, even with various quoting strategies for path arguments. To proceed, shadcn/ui initialization needs to be run interactively ('npx shadcn-ui@latest init') so the user can answer the configuration prompts directly. This blocks checklist item pc0ms_task_003_check_002 of plan plan_cycle0_mobile_styling_g150.",
   "type": "BLOCKER",
   "severity": "MEDIUM",
-  "status": "OPEN",
+  "status": "RESOLVED",
   "g_reported": 155,
-  "g_status_updated": 155,
-  "g_resolved": null,
+  "g_status_updated": 160,
+  "g_resolved": 160,
   "reported_by": "AI_CONSTRUCT",
   "plan_id_ref": "plan_cycle0_mobile_styling_g150",
   "task_id_ref": "pc0ms_task_003",
   "artifact_id_ref": null,
   "artifact_filepath_ref": "prototypes/cycle0_react_web/components.json",
-  "resolution_summary": null,
+  "resolution_summary": "User successfully ran 'pnpm dlx shadcn-ui@latest init' interactively. This created components.json, updated src/index.css, and created src/lib/utils.ts, unblocking the shadcn/ui setup process.",
   "comments": [
     {
       "g_ts": 155,
       "author": "Hybrid_AI_OS",
-      "comment_text": "Initial report. Non-interactive shadcn/ui init failed. Proposing interactive execution by the user."
+      "comment_text": "Initial report. Non-interactive shadcn-ui init failed due to terminal/argument parsing issues. Requires interactive execution."
+    },
+    {
+      "g_ts": 160,
+      "author": "Hybrid_AI_OS",
+      "comment_text": "User confirmed successful interactive execution of 'pnpm dlx shadcn-ui@latest init'. Issue resolved."
     }
   ]
 } 

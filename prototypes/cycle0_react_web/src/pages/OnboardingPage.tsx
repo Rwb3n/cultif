@@ -1,142 +1,131 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle0_page_onboarding_g112",
-  "version_tag": "0.1.0",
+  "version_tag": "0.2.0-tailwind-refactor-tsx",
   "g_created": 117,
-  "g_last_modified": 117,
-  "description": "Placeholder component for the Onboarding flow (multi-step). This component will manage the display of individual onboarding screens or steps.",
+  "g_last_modified": 160,
+  "description": "REFACTORED (TSX): Component for the Onboarding flow (multi-step), refactored to use Tailwind CSS for styling and layout, and shadcn/ui Button for navigation. Manages the display of individual onboarding screens or steps.",
   "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEVELOPMENT",
-  "purpose_statement": "To provide the structure for the user onboarding experience in the web prototype. References Figma Catalogue ID: T-01.",
+  "purpose_statement": "To provide a responsive and consistently styled user onboarding experience using Tailwind CSS and shadcn/ui components. References Figma Catalogue ID: T-01.",
   "key_logic_points": [
-    "Will likely manage state for the current onboarding step.",
-    "Will render different content based on the current step.",
-    "Will include navigation to proceed to the next step or skip/complete onboarding."
+    "Layout refactored using Tailwind CSS for a mobile-first, centered presentation of onboarding steps.",
+    "Uses `shadcn/ui Button` for 'Next', 'Back', 'Skip', and 'Get Started' actions.",
+    "Manages state for the current onboarding step.",
+    "Renders different content (title, description, image placeholder) based on the current step.",
+    "Includes simple dot indicators for steps, styled with Tailwind."
   ],
   "interfaces_provided": [
-    { "name": "OnboardingPage", "interface_type": "REACT_COMPONENT", "details": "The main component for the onboarding sequence.", "notes": "" }
+    { "name": "OnboardingPage", "interface_type": "REACT_COMPONENT", "details": "The main component for the onboarding sequence.", "notes": "Uses mock data for steps." }
   ],
   "requisites": [],
   "external_dependencies": [
-    { "name": "React", "version": "^18.2.0", "reason": "Core React library." }
-    // { "name": "react-router-dom", "version": "^6.x.x", "reason": "For navigation (e.g., Link, useNavigate)." } // If navigation elements are directly used
+    { "name": "React", "version": "^19.1.0", "reason": "Core React library for building user interfaces." },
+    { "name": "@types/react", "version": "^19.1.5", "reason": "TypeScript definitions for React." },
+    { "name": "react-router-dom", "version": "^7.6.0", "reason": "For navigation (useNavigate hook)." }
   ],
   "internal_dependencies": [
-    // E.g., "cycle0_comp_button_g112" if a common button is used for navigation
-    // Placeholder for individual onboarding step components if this acts as a container
+    "shadcn_ui_button_g160"
   ],
   "dependents": [
-    "cycle0_router_config_g112" // This page will be a route in AppRouter
+    "cycle0_router_config_g112"
   ],
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g117. To be populated with specific onboarding steps and UI placeholders based on T-01 (Figma)."
+    "manual_review_comment": "Refactored at g=160 to use Tailwind CSS and shadcn/ui Button. Original scaffold g117. Image placeholders are still text."
   }
 }
 ANNOTATION_BLOCK_END */
 
-import React from 'react';
-// import { useNavigate } from 'react-router-dom'; // Example import for navigation
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button } from "@/components/ui/button";
 
-// Placeholder for child components representing individual onboarding screens/steps
-// import OnboardingStep1 from '../components/onboarding/OnboardingStep1';
-// import OnboardingStep2 from '../components/onboarding/OnboardingStep2';
-// import OnboardingStep3 from '../components/onboarding/OnboardingStep3';
+interface OnboardingStepData {
+  id: number;
+  title: string;
+  description: string;
+  imagePlaceholder: string; // Placeholder text for image, e.g., 'Illustration of friendly robot'
+  imageRef?: string; // Figma image ref like T-01a_img
+}
 
-// Mock data for onboarding steps (example)
-const onboardingSteps = [
-  { id: 1, title: 'Welcome to Cultif!', description: 'Discover amazing recipes from talented creators.', image: 'placeholder_step1.png' }, // Ref T-01a
-  { id: 2, title: 'Personalize Your Experience', description: 'Tell us your preferences to get tailored content.', image: 'placeholder_step2.png' }, // Ref T-01b
-  { id: 3, title: 'Start Exploring', description: 'Your culinary adventure begins now.', image: 'placeholder_step3.png' }, // Ref T-01c
+const onboardingSteps: OnboardingStepData[] = [
+  { id: 1, title: 'Welcome to Cultif!', description: 'Discover amazing recipes from talented creators.', imagePlaceholder: '[Illustration: Welcome Screen]', imageRef: 'T-01a_img' },
+  { id: 2, title: 'Personalize Your Experience', description: 'Tell us your preferences to get tailored content.', imagePlaceholder: '[Illustration: Preference Selection]', imageRef: 'T-01b_img' },
+  { id: 3, title: 'Start Exploring', description: 'Your culinary adventure begins now.', imagePlaceholder: '[Illustration: Food Discovery]', imageRef: 'T-01c_img' },
 ];
 
-/**
- * OnboardingPage Component (References Figma Catalogue: T-01)
- * 
- * Purpose: Manages and displays the multi-step user onboarding process.
- * 
- * Structure:
- * - Main container div.
- * - Current step display area (image, title, description).
- * - Navigation controls (Next/Skip/Done buttons).
- * - Step indicator (dots/progress bar).
- * 
- * Placeholders & Checklist:
- * [ ] Implement state for current onboarding step (e.g., `currentStep`)
- * [ ] Render content for the current step based on `onboardingSteps` mock data or child components.
- *     [ ] Image placeholder (src from mock data) - Ref T-01a_img, T-01b_img etc.
- *     [ ] Title placeholder (text from mock data) - Ref T-01a_title, T-01b_title etc.
- *     [ ] Description placeholder (text from mock data) - Ref T-01a_desc, T-01b_desc etc.
- * [ ] Implement 'Next' button functionality.
- *     - On click: increment `currentStep`.
- *     - If last step: navigate to Home page or Auth page (e.g., Login).
- * [ ] Implement 'Skip' button functionality (optional).
- *     - On click: navigate to Home page or Auth page.
- * [ ] Implement step indicators (e.g., dots representing total steps and current step).
- * [ ] Basic styling for layout and elements.
- * 
- * Figma References (T-01 Components):
- * - T-01a: Onboarding Screen 1 (Image, Title, Text, Next Button, Skip Button)
- * - T-01b: Onboarding Screen 2 (Image, Title, Text, Next Button, Back Button)
- * - T-01c: Onboarding Screen 3 (Image, Title, Text, Get Started Button)
- * - General: Progress indicators (dots)
- */
-const OnboardingPage = () => {
-  // const navigate = useNavigate(); // Example for navigation
-  const [currentStep, setCurrentStep] = React.useState(0); // 0-indexed
+const OnboardingPage: React.FC = () => {
+  const navigate = useNavigate();
+  const [currentStep, setCurrentStep] = useState(0);
 
   const handleNext = () => {
     if (currentStep < onboardingSteps.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      // Navigate to next part of the app, e.g., Home or Login
-      console.log('Onboarding complete, navigate to /home or /login');
-      // navigate('/login'); // Example navigation
+      console.log('Onboarding complete, navigating to /home');
+      navigate('/home');
+    }
+  };
+
+  const handleBack = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
     }
   };
 
   const handleSkip = () => {
-    console.log('Skipped onboarding, navigate to /home or /login');
-    // navigate('/login'); // Example navigation
+    console.log('Skipped onboarding, navigating to /home');
+    navigate('/home');
   };
 
-  // Basic rendering, to be replaced with actual UI elements
   const stepData = onboardingSteps[currentStep];
 
   return (
-    <div style={{ padding: '20px', textAlign: 'center' }}>
-      <h2>{stepData.title} (Step {currentStep + 1})</h2>
-      {/* Image placeholder: <img src={`/src/assets/images/${stepData.image}`} alt={stepData.title} style={{maxWidth: '300px', maxHeight: '200px'}} /> */}
-      <p>Image Placeholder for: {stepData.image}</p>
-      <p>{stepData.description}</p>
-      
-      <div style={{ marginTop: '20px' }}>
-        {/* Step Indicators Placeholder */}
-        {onboardingSteps.map((_, index) => (
-          <span key={index} style={{ 
-            display: 'inline-block', 
-            width: '10px', 
-            height: '10px', 
-            borderRadius: '50%', 
-            backgroundColor: index === currentStep ? 'blue' : 'grey', 
-            margin: '0 5px' 
-          }}></span>
-        ))}
-      </div>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-slate-50 to-stone-100 dark:from-slate-900 dark:to-stone-800 p-4 sm:p-6 lg:p-8">
+      <div className="w-full max-w-md text-center space-y-6 bg-white dark:bg-slate-950 p-6 sm:p-8 rounded-xl shadow-2xl">
+        {/* Image Placeholder - visually represented */}
+        <div className="w-full h-48 sm:h-60 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center mb-6">
+          <p className="text-slate-500 dark:text-slate-400 text-sm">{stepData.imagePlaceholder} ({stepData.imageRef})</p>
+        </div>
 
-      <div style={{ marginTop: '30px' }}>
-        {currentStep > 0 && (
-          <button onClick={() => setCurrentStep(currentStep - 1)} style={{ marginRight: '10px' }}>Back</button>
-        )}
-        <button onClick={handleNext} style={{ marginRight: '10px' }}>
-          {currentStep === onboardingSteps.length - 1 ? 'Get Started' : 'Next'}
-        </button>
-        {currentStep < onboardingSteps.length - 1 && (
-            <button onClick={handleSkip}>Skip</button>
-        )}
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-slate-100">{stepData.title}</h1>
+        <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base">
+          {stepData.description}
+        </p>
+        
+        {/* Step Indicators */}
+        <div className="flex justify-center space-x-2 pt-2">
+          {onboardingSteps.map((_, index) => (
+            <div 
+              key={index} 
+              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentStep ? 'bg-primary w-6' : 'bg-slate-300 dark:bg-slate-600'}`}
+            />
+          ))}
+        </div>
+
+        {/* Navigation Buttons */}
+        <div className="pt-6 space-y-3">
+          <Button onClick={handleNext} className="w-full py-3 text-base">
+            {currentStep === onboardingSteps.length - 1 ? 'Get Started' : 'Next'}
+          </Button>
+          <div className="flex space-x-3">
+            {currentStep > 0 && (
+              <Button onClick={handleBack} variant="outline" className="w-full py-3 text-base">Back</Button>
+            )}
+            {currentStep < onboardingSteps.length - 1 && (
+                <Button onClick={handleSkip} variant={currentStep === 0 ? "outline" : "ghost"} className="w-full py-3 text-base">
+                  Skip
+                </Button>
+            )}
+          </div>
+        </div>
+
+        <p className="pt-4 text-xs text-slate-400 dark:text-slate-500">
+          Figma Ref: T-01 (Step {currentStep + 1} of {onboardingSteps.length})
+        </p>
       </div>
-      <p style={{marginTop: '20px', fontSize: '0.8em'}}>Figma Ref: T-01</p>
     </div>
   );
 };

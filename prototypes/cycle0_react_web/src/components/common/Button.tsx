@@ -1,30 +1,29 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle0_comp_button_g112",
-  "version_tag": "0.2.0-shadcn-planned",
+  "version_tag": "0.2.1-deprecated-tsx",
   "g_created": 124,
-  "g_last_modified": 152,
-  "description": "PLANNED FOR REPLACEMENT: This custom button component will be replaced by the shadcn/ui Button component. Original description: A reusable button component with various styles and functionalities.",
+  "g_last_modified": 160,
+  "description": "DEPRECATED (TSX): This custom button component is now deprecated and has been replaced by the shadcn/ui Button component. Original description: A reusable button component with various styles and functionalities.",
   "artifact_type": "CODE_MODULE",
-  "status_in_lifecycle": "REFACTORING_PLANNED",
-  "purpose_statement": "PLANNED FOR REPLACEMENT: To be replaced by shadcn/ui Button for consistency with the new UI library and Tailwind CSS integration, supporting mobile-first design. Original purpose: To provide a consistent button element across the application, supporting different visual styles (primary, secondary, text) and actions. References Figma Catalogue: C-01 (Button Variants).",
+  "status_in_lifecycle": "DEPRECATED",
+  "purpose_statement": "DEPRECATED (TSX): Replaced by shadcn/ui Button for consistency with the new UI library and Tailwind CSS integration, supporting mobile-first design. Original purpose: To provide a consistent button element across the application, supporting different visual styles (primary, secondary, text) and actions. References Figma Catalogue: C-01 (Button Variants).",
   "key_logic_points": [
-    "PLANNED REPLACEMENT with `shadcn/ui Button`.",
-    "Existing props (variant, size, onClick, disabled, iconLeft, iconRight) will be mapped to `shadcn/ui Button` props or Tailwind CSS classes.",
-    "`shadcn/ui Button` offers variants (default, destructive, outline, secondary, ghost, link) and sizes which will be leveraged."
+    "DEPRECATED and REPLACED by `shadcn/ui Button`.",
+    "Original props (variant, size, onClick, disabled, iconLeft, iconRight) are now handled by `shadcn/ui Button` and Tailwind CSS."
   ],
   "interfaces_provided": [
-    { "name": "Button (Custom - to be replaced)", "interface_type": "REACT_COMPONENT", "details": "Props: children, onClick, variant, size, disabled, iconLeft, iconRight, type", "notes": "This component is slated for replacement by `shadcn/ui Button`. Variant can be 'primary', 'secondary', 'outline', 'text', 'danger'. Size can be 'sm', 'md', 'lg'." }
+    { "name": "Button (Custom - DEPRECATED)", "interface_type": "REACT_COMPONENT", "details": "Props: children, onClick, variant, size, disabled, iconLeft, iconRight, type", "notes": "This component is DEPRECATED and replaced by `shadcn/ui Button`." }
   ],
   "requisites": [
     { "description": "Decision to use shadcn/ui as per plan_cycle0_mobile_styling_g150", "type": "PROJECT_DECISION" }
   ],
   "external_dependencies": [
-    { "name": "React", "version": "^18.2.0", "reason": "Core React library." },
-    { "name": "shadcn/ui Button (target)", "version": "latest", "reason": "Target component for replacement." }
+    { "name": "React", "version": "^19.1.0", "reason": "Core React library for building user interfaces." },
+    { "name": "@types/react", "version": "^19.1.5", "reason": "TypeScript definitions for React." }
   ],
   "internal_dependencies": [
-    "cycle1_primitive_typography_g132" 
+    "cycle1_primitive_typography_g132" // Historical dependency, Typography itself is also deprecated
   ],
   "dependents": [
     "cycle0_page_onboarding_g112",
@@ -41,13 +40,13 @@
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g124. Uses Typography primitive (g142). Modal uses Button (g144). LoginPage uses Button (g148). Marked for replacement by shadcn/ui Button at g=152 as per plan_cycle0_mobile_styling_g150 and analysis cycle0_shadcn_analysis_g151.md."
+    "manual_review_comment": "Marked as DEPRECATED at g=160 as it has been replaced by shadcn/ui Button (artifact shadcn_ui_button_g160). Original comment: Initial scaffold by Hybrid_AI_OS g124. Uses Typography primitive (g142). Modal uses Button (g144). LoginPage uses Button (g148). Marked for replacement by shadcn/ui Button at g=152 as per plan_cycle0_mobile_styling_g150 and analysis cycle0_shadcn_analysis_g151.md."
   }
 }
 ANNOTATION_BLOCK_END */
 
 import React from 'react';
-import Typography from '../primitives/Typography';
+import Typography from '../primitives/Typography'; // Typography itself is deprecated
 
 interface ButtonProps {
   children?: React.ReactNode;
@@ -63,7 +62,8 @@ interface ButtonProps {
 }
 
 /**
- * Button Component (References Figma Catalogue: C-01 - Button Variants)
+ * Button Component (DEPRECATED - Replaced by shadcn/ui Button)
+ * (References Figma Catalogue: C-01 - Button Variants)
  *
  * Purpose: A versatile and reusable button component for various actions throughout the application.
  *
@@ -107,13 +107,17 @@ const Button: React.FC<ButtonProps> = ({
   className = '',
   ...otherProps
 }) => {
+  console.warn(
+    `Custom Button component (artifact cycle0_comp_button_g112) is deprecated. ` +
+    `Use the shadcn/ui Button (artifact shadcn_ui_button_g160) instead.`
+  );
 
   // Placeholder for dynamic class generation based on props
   // E.g., `btn btn-${variant} btn-${size} ${disabled ? 'btn-disabled' : ''} ${className}`
   const buttonClasses = `btn placeholder-btn btn-${variant} btn-${size} ${disabled ? 'disabled' : ''} ${className}`.trim();
 
   // Basic placeholder styles - to be replaced with actual CSS or styled-components
-  const style = {
+  const style: React.CSSProperties = {
     padding: size === 'sm' ? '6px 12px' : size === 'lg' ? '10px 20px' : '8px 16px',
     fontSize: size === 'sm' ? '0.875rem' : size === 'lg' ? '1.25rem' : '1rem',
     cursor: disabled ? 'not-allowed' : 'pointer',

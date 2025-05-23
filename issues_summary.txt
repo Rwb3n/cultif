@@ -1,6 +1,6 @@
 {
-  "v": 9,
-  "g_updated": 156,
+  "v": 10,
+  "g_updated": 160,
   "issues_map": {
     "issue_prop_types_g144": {
       "status": "RESOLVED",
@@ -23,7 +23,7 @@
       "severity": "CRITICAL"
     },
     "issue_shadcn_init_interactive_g155": {
-      "status": "OPEN",
+      "status": "RESOLVED",
       "title": "shadcn/ui Initialization Requires Interactive Input",
       "severity": "MEDIUM"
     },
