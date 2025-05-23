@@ -1,22 +1,19 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle1_styleguide_page_g131",
-  "version_tag": "0.2.3-tailwind-shadcn-chunk4",
+  "version_tag": "0.3.0-ux-aligned-g170",
   "g_created": 134,
-  "g_last_modified": 160,
-  "description": "REFACTORED (TSX) - Chunk 4: Adds shadcn/ui Dialog, Drawer, and Sheet to the StyleGuidePage. Completes the showcase of all currently used shadcn/ui components.",
+  "g_last_modified": 170,
+  "description": "REFACTORED (TSX) for UX Alignment: Removed custom inline header and footer. Page now relies on the global Header and Footer provided by App.tsx for consistency with the new navigation paradigms.",
   "artifact_type": "CODE_MODULE", 
   "status_in_lifecycle": "DEVELOPMENT",
-  "purpose_statement": "To provide a centralized, interactive reference for the current UI toolkit, demonstrating modal-like components and side panels.",
+  "purpose_statement": "To provide a centralized, interactive reference for the UI toolkit, presented within the application's standard page layout.",
   "key_logic_points": [
     "Demonstrates Tailwind CSS utility classes for typography and layout.",
-    "Showcases shadcn/ui Button, Input, Label, Card, Checkbox components.",
+    "Showcases shadcn/ui components (Button, Input, Label, Card, Checkbox, Dialog, Drawer, Sheet).",
     "Showcases the refactored Link primitive.",
-    "Showcases shadcn/ui Dialog component.",
-    "Showcases shadcn/ui Drawer component, emphasizing mobile-first usage.",
-    "Showcases shadcn/ui Sheet component for side panels.",
-    "Page layout and structure uses Tailwind CSS.",
-    "Imports updated for newly added components and icons."
+    "Relies on global Header/Footer from App.tsx for page structure.",
+    "Page layout and structure uses Tailwind CSS."
   ],
   "interfaces_provided": [
     { 
@@ -41,7 +38,8 @@
     "shadcn_ui_checkbox_g160",
     "shadcn_ui_dialog_g160",
     "shadcn_ui_drawer_g160",
-    "shadcn_ui_sheet_g160"
+    "shadcn_ui_sheet_g160",
+    "cycle0_prototype_app_entry_g112" // For global Header/Footer
   ],
   "dependents": [
     "cycle0_router_config_g112"
@@ -49,7 +47,7 @@
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Chunk 4 of refactor at g=160. Adds Dialog, Drawer, Sheet. Completes shadcn/ui component showcase for now. Original scaffold g134."
+    "manual_review_comment": "Aligned with UX plan at g170: Removed internal header/footer. Previous: Chunk 4 of refactor at g=160 adding Dialog, Drawer, Sheet."
   }
 }
 ANNOTATION_BLOCK_END */
@@ -97,14 +95,14 @@ const StyleGuidePage: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 min-h-screen">
-      <header className="mb-10 text-center">
+      {/* <header className="mb-10 text-center">
         <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl text-blue-600 dark:text-blue-400">
         Cultif UI Component Visual Library
         </h1>
         <p className="mt-3 text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
           Showcasing shadcn/ui components, Tailwind CSS utilities, and custom elements, styled for a mobile-first experience.
         </p>
-      </header>
+      </header> */}
 
       {/* Tailwind Typography Utilities */}
       <SectionWrapper title="Tailwind CSS Typography" id="tailwind-typography">
@@ -397,12 +395,6 @@ const StyleGuidePage: React.FC = () => {
           </Sheet>
         </ComponentShowcase>
       </SectionWrapper>
-
-      <footer className="mt-12 py-6 border-t border-slate-200 dark:border-slate-700 text-center">
-        <p className="text-sm text-slate-500 dark:text-slate-400">
-          Cultif UI Component Visual Library - All current shadcn/ui components showcased. (Chunk 4 - Final)
-        </p>
-      </footer>
     </div>
   );
 };

@@ -87,30 +87,30 @@ const Header: React.FC<HeaderProps> = ({
 
   const commonNavLinks = (isMobile: boolean) => (
     <>
-      {navLinks.map((link) => (
-        <PrimitiveLink
-          key={link.path}
-          to={link.path}
+        {navLinks.map((link) => (
+          <PrimitiveLink 
+            key={link.path} 
+            to={link.path} 
           className={`text-sm font-medium ${isMobile ? 'block py-2 px-3 hover:bg-accent rounded-md' : 'hover:text-primary transition-colors'}`}
           onClick={() => isMobile && setIsSheetOpen(false)}
           end={link.end}
-        >
-          {link.label}
-        </PrimitiveLink>
-      ))}
-      <PrimitiveLink
-        to="/style-guide"
+          >
+            {link.label}
+          </PrimitiveLink>
+        ))}
+        <PrimitiveLink 
+          to="/style-guide" 
         className={`text-sm font-medium ${isMobile ? 'block py-2 px-3 hover:bg-accent rounded-md' : 'hover:text-primary transition-colors'}`}
         onClick={() => isMobile && setIsSheetOpen(false)}
-      >
-        (Dev) Style Guide
-      </PrimitiveLink>
+        >
+          (Dev) Style Guide
+        </PrimitiveLink>
     </>
   );
 
   const userActions = (isMobile: boolean) => (
     <div className={`${isMobile ? 'pt-4 mt-4 border-t border-border' : 'relative'}`}>
-      {user ? (
+        {user ? (
         <div className={`${isMobile ? 'space-y-2' : 'flex items-center gap-2'}`}>
           {isMobile ? (
             <>
@@ -131,17 +131,17 @@ const Header: React.FC<HeaderProps> = ({
                 {/* Simple caret, replace with lucide if desired */}
                 <svg className={`w-4 h-4 transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
               </Button>
-              {isUserMenuOpen && (
+            {isUserMenuOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-background border rounded-md shadow-lg py-1 z-50">
                   <PrimitiveLink to="/profile" onClick={() => setIsUserMenuOpen(false)} className="flex items-center gap-2 px-4 py-2 text-sm text-foreground hover:bg-accent"><UserCircle className="w-4 h-4" /> Profile</PrimitiveLink>
                   <PrimitiveLink to="/settings" onClick={() => setIsUserMenuOpen(false)} className="flex items-center gap-2 px-4 py-2 text-sm text-foreground hover:bg-accent"><Settings className="w-4 h-4" /> Settings</PrimitiveLink>
                   <Button variant="ghost" onClick={() => { onLogout(); setIsUserMenuOpen(false); }} className="w-full justify-start items-center gap-2 px-4 py-2 text-sm text-foreground hover:bg-accent"><LogOut className="w-4 h-4" /> Logout</Button>
                 </div>
               )}
-            </div>
-          )}
-        </div>
-      ) : (
+              </div>
+            )}
+          </div>
+        ) : (
         <div className={`flex ${isMobile ? 'flex-col space-y-2' : 'items-center gap-2'}`}>
           <Button asChild variant={isMobile ? "default" : "outline"} className={isMobile ? 'w-full' : ''} onClick={() => isMobile && setIsSheetOpen(false)}>
             <PrimitiveLink to="/login"><LogIn className={`w-4 h-4 ${isMobile ? 'mr-2' : 'md:mr-2'}`} /> Login (T-03a)</PrimitiveLink>
@@ -149,8 +149,8 @@ const Header: React.FC<HeaderProps> = ({
           <Button asChild variant="default" className={isMobile ? 'w-full' : ''} onClick={() => isMobile && setIsSheetOpen(false)}>
             <PrimitiveLink to="/signup"><UserPlus className={`w-4 h-4 ${isMobile ? 'mr-2' : 'md:mr-2'}`} /> Sign Up (T-03b)</PrimitiveLink>
           </Button>
-        </div>
-      )}
+          </div>
+        )}
     </div>
   );
 

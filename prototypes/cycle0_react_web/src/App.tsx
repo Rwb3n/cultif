@@ -1,27 +1,27 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle0_prototype_app_entry_g112",
-  "version_tag": "0.2.1-ts",
+  "version_tag": "0.3.1-ux-aligned-g170",
   "g_created": 116,
-  "g_last_modified": 158,
-  "description": "Main application entry point for the Cycle 0 Web Prototype, now migrated to TypeScript (.tsx). This component sets up the main layout and integrates the application router.",
+  "g_last_modified": 170,
+  "description": "Main application entry point. Updated `exactNoMainHeaderFooterPaths` to include /login and /signup, ensuring these auth pages do not display the global Header/Footer.",
   "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEVELOPMENT",
-  "purpose_statement": "To serve as the root component for the web prototype, housing global layout and routing capabilities, using TypeScript.",
+  "purpose_statement": "To serve as the root component, managing global layout (Header/Footer visibility) and routing, adapting to different page layout needs (app-like vs. global nav vs. auth flow).",
   "key_logic_points": [
-    "Initial React component structure in TSX.",
     "Integrates AppRouter for page navigation.",
-    "Includes Header and Footer as common layout components.",
-    "Uses BrowserRouter to enable routing.",
-    "Migrated from JSX to TSX as part of plan_jsx_to_tsx_g157."
+    "Conditionally renders main Header and Footer.",
+    "Uses `exactNoMainHeaderFooterPaths` for pages like /home, /onboarding, /login, /signup.",
+    "Uses `startsWithNoMainHeaderFooterPaths` for dynamic routes like /creator/:creatorId that require app-specific navigation.",
+    "Adjusts main content padding based on Header/Footer visibility."
   ],
   "interfaces_provided": [
     { "name": "App", "interface_type": "REACT_COMPONENT", "details": "The root React component.", "notes": "" }
   ],
   "requisites": [],
   "external_dependencies": [
-    { "name": "React", "version": "^18.2.0", "reason": "Core React library." },
-    { "name": "react-router-dom", "version": "^6.x.x", "reason": "For BrowserRouter and routing capabilities." }
+    { "name": "React", "version": "^19.1.0", "reason": "Core React library." },
+    { "name": "react-router-dom", "version": "^7.6.0", "reason": "For BrowserRouter, useLocation, and routing capabilities." }
   ],
   "internal_dependencies": [
     "cycle0_router_config_g112",
@@ -32,7 +32,7 @@
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Integrated AppRouter, Header, and Footer. Basic layout structure established. g124."
+    "manual_review_comment": "Corrected Header/Footer visibility logic for /login and /signup pages at g170. Previous version 0.3.0-ux-aligned-g170."
   }
 }
 ANNOTATION_BLOCK_END */
@@ -70,15 +70,24 @@ function AppContent() { // Renamed App to AppContent to use useLocation hook
 
   // Paths that should not show the main Header and Footer from App.tsx
   // because they either are part of auth flow or have their own specific app-like layout
-  const noMainHeaderFooterPaths = [
+  const exactNoMainHeaderFooterPaths = [
     '/onboarding',
+    '/login',
+    '/signup',
     '/home',
     '/meal-plan',
     '/profile',
     // '/search' // Add '/search' when its page and specific layout are defined
   ];
 
-  const showMainHeaderFooter = !noMainHeaderFooterPaths.includes(location.pathname);
+  const startsWithNoMainHeaderFooterPaths = [
+    '/creator/', // For /creator/:creatorId routes
+    // Add other base paths for dynamic routes here if they need app-like nav
+  ];
+
+  const showMainHeaderFooter = 
+    !exactNoMainHeaderFooterPaths.includes(location.pathname) && 
+    !startsWithNoMainHeaderFooterPaths.some(path => location.pathname.startsWith(path));
 
   // const [count, setCount] = useState(0) // Default Vite state, can be removed
 

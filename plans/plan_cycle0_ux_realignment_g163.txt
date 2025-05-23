@@ -16,7 +16,8 @@
     "Create new reusable navigation components (e.g., BottomStickyNav, TopLogoBar, TopMealCategoryNav).",
     "Review and adjust other existing pages (e.g., StyleGuidePage.tsx, RecipeDetailPage.tsx) for consistency with new navigation and layout paradigms (e.g., removal of old Header/Footer, potential addition of BottomStickyNav).",
     "Ensure all modified files have updated annotation blocks (version_tag, g_last_modified, description, dependencies, etc.).",
-    "Update registry_map.txt to include any new components and reflect changes to existing ones."
+    "Update registry_map.txt to include any new components and reflect changes to existing ones.",
+    "Clarify and implement global layout strategy in App.tsx to conditionally display the main Header/Footer vs. page-specific navigation elements (TopLogoBar, BottomStickyNav) based on route."
   ],
   "exclusions": [
     "Backend logic changes or new API integrations.",
@@ -27,7 +28,7 @@
     "Advanced or highly polished animations; initial animations will be placeholders to demonstrate intent."
   ],
   "g_created": 163,
-  "g_updated": 168,
+  "g_updated": 171,
   "tasks": [
     {
       "id": "pc0uxr_task_000_anim_setup",
@@ -88,7 +89,11 @@
       "criticality": "HIGH",
       "status": "DONE",
       "linked_issue_ids": [],
-      "notes": ["Focus on visual presentation and basic Framer Motion animations as described. Logo asset assumed available or placeholder used.", "Refactoring complete, page now features full-screen layout and entry animations for logo and content card."],
+      "notes": [
+        "Focus on visual presentation and basic Framer Motion animations as described. Logo asset assumed available or placeholder used.", 
+        "Refactoring complete, page now features full-screen layout and entry animations for logo and content card.",
+        "g_169: Confirmed that App.tsx logic correctly hides the main Header and Footer on the /onboarding route, ensuring this page remains isolated from global navigation elements."
+        ],
       "sub_tasks": []
     },
     {
@@ -179,7 +184,11 @@
       "criticality": "HIGH",
       "status": "DONE",
       "linked_issue_ids": [],
-      "notes": ["These components will be integrated into HomePage.tsx in a subsequent task.", "All three navigation components created and registered successfully."],
+      "notes": [
+        "These components will be integrated into HomePage.tsx in a subsequent task.", 
+        "All three navigation components created and registered successfully.",
+        "g_169: BottomStickyNav.tsx was adjusted by removing 'max-w-screen-md mx-auto' from its inner div to ensure the navigation items correctly span the full width, crucial for mobile-first appearance and resolving visibility issues on smaller breakpoints."
+        ],
       "sub_tasks": []
     },
     {
@@ -216,7 +225,11 @@
       "criticality": "HIGH",
       "status": "DONE",
       "linked_issue_ids": [],
-      "notes": ["Ensure placeholder images for categories are distinct and visually appealing.", "HomePage successfully rebuilt with new navigation components and category display style. Old footer removed."],
+      "notes": [
+        "Ensure placeholder images for categories are distinct and visually appealing.", 
+        "HomePage successfully rebuilt with new navigation components and category display style. Old footer removed.",
+        "g_169: Clarified layout strategy for App.tsx: the main Header/Footer are conditionally rendered and hidden on routes like /home, /onboarding, /meal-plan, /profile. This allows HomePage (and similar pages) to use TopLogoBar as its primary header and BottomStickyNav as its footer, fitting the desired <TopNav(s)><PageContent><BottomStickyNav> structure without conflicts from the global Header/Footer."
+        ],
       "sub_tasks": []
     },
     {
@@ -274,9 +287,9 @@
       "execution_checklist": [],
       "dependencies": ["pc0uxr_task_003"],
       "criticality": "MEDIUM",
-      "status": "PENDING",
+      "status": "DONE",
       "linked_issue_ids": [],
-      "notes": ["Date and day selection should be interactive, updating the displayed meal cards (using mock data)."],
+      "notes": ["Date and day selection should be interactive, updating the displayed meal cards (using mock data).", "g169: Refactored to three-row layout with TopLogoBar, BottomStickyNav, date display, selectable week days, and meal cards for selected day using mock data and date-fns. Tailwind CSS and shadcn/ui components used.", "g170: Added TODO for auto-centering today's date and infinite scroll on date navigator."],
       "sub_tasks": []
     },
     {
@@ -286,7 +299,8 @@
       "intent": "To ensure UI consistency across the prototype after major navigation and layout changes.",
       "inputs": [
         { "name": "All other existing .tsx page files", "source_description": "Various pages in prototypes/cycle0_react_web/src/pages/", "details": "e.g., cycle1_styleguide_page_g131, cycle0_page_recipedetail_g112" },
-        { "name": "BottomStickyNav.tsx", "source_description": "Output from pc0uxr_task_003.", "details": "Artifact ID: cycle0_comp_bottomstickynav_g163" }
+        { "name": "BottomStickyNav.tsx", "source_description": "Output from pc0uxr_task_003.", "details": "Artifact ID: cycle0_comp_bottomstickynav_g163" },
+        { "name": "App.tsx", "source_description": "Main application component controlling global layout", "details": "Artifact ID: cycle0_prototype_app_entry_g112"}
       ],
       "outputs": [
         { 
@@ -295,14 +309,26 @@
           "expected_path": "prototypes/cycle0_react_web/src/pages/", 
           "description": "Conceptual: All miscellaneous pages updated for UI consistency. Annotations updated.", 
           "embed_annotations_required": "true" 
+        },
+        {
+          "name": "Updated App.tsx",
+          "artifact_id": "cycle0_prototype_app_entry_g112",
+          "expected_path": "prototypes/cycle0_react_web/src/App.tsx",
+          "description": "App.tsx updated with refined logic for Header/Footer visibility across different routes.",
+          "embed_annotations_required": "true"
         }
       ],
-      "execution_checklist": [],
+      "execution_checklist": [
+        {"item_id": "miscpage_check_001", "description": "Review StyleGuidePage.tsx, remove internal header/footer, ensure global Header/Footer from App.tsx apply. Update annotations.", "status": "DONE", "target_artifact_id": "cycle1_styleguide_page_g131", "notes": "g170: Completed. Page now relies on global Header/Footer."},
+        {"item_id": "miscpage_check_002", "description": "Review RecipeDetailPage.tsx, ensure global Header/Footer from App.tsx apply. Convert styles to Tailwind, use shadcn/ui components. Update annotations.", "status": "DONE", "target_artifact_id": "cycle0_page_recipedetail_g112", "notes": "g170: Styling converted to Tailwind/shadcn. g171: Info bar updated to two rows (Time/Servings, Macros), 'Back to Home' link removed."},
+        {"item_id": "miscpage_check_003", "description": "Review CreatorProfilePage.tsx, integrate TopLogoBar/BottomStickyNav, convert styles to Tailwind/shadcn. Update annotations. Ensure App.tsx correctly hides global Header/Footer.", "status": "DONE", "target_artifact_id": "cycle0_page_creatorprofile_g112", "notes": "g170: Completed. Page uses app-like nav. Shadcn Avatar & Tabs added."},
+        {"item_id": "miscpage_check_004", "description": "Update App.tsx to correctly manage Header/Footer visibility for dynamic routes (e.g. /creator/:id) and specific static routes (e.g. /login, /signup).", "status": "DONE", "target_artifact_id": "cycle0_prototype_app_entry_g112", "notes": "g170: Logic updated for /creator/:id using startsWith. g170: /login and /signup added to exactNoMainHeaderFooterPaths."}
+      ],
       "dependencies": ["pc0uxr_task_004"],
       "criticality": "LOW",
       "status": "PENDING",
       "linked_issue_ids": [],
-      "notes": ["The focus is on removing old nav and adding new nav where logical, not full page redesigns unless explicitly stated."],
+      "notes": ["The focus is on removing old nav and adding new nav where logical, not full page redesigns unless explicitly stated.", "g170: Reviewed StyleGuidePage, RecipeDetailPage, CreatorProfilePage. Updated App.tsx logic for Header/Footer visibility.", "g171: Further refined RecipeDetailPage layout based on feedback."],
       "sub_tasks": []
     },
     {

@@ -1,57 +1,76 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle0_page_creatorprofile_g112",
-  "version_tag": "0.1.0",
+  "version_tag": "0.2.0-ux-aligned-g170",
   "g_created": 123, 
-  "g_last_modified": 123,
-  "description": "Placeholder component for the Creator Profile page. This page will display information about a content creator, their recipes, and ways to follow/support them.",
+  "g_last_modified": 170,
+  "description": "REFACTORED (TSX) for UX Alignment: Creator Profile page now uses TopLogoBar and BottomStickyNav. Styling converted to Tailwind CSS, and uses shadcn/ui components (Card, Button, Avatar, Tabs, Badge).",
   "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEVELOPMENT",
-  "purpose_statement": "To showcase a content creator's profile, their culinary contributions, and allow users to engage with their content. References Figma Catalogue ID: T-12.",
+  "purpose_statement": "To showcase a content creator\'s profile within the app-like navigation structure, using Tailwind CSS and shadcn/ui components for a consistent look and feel. References Figma Catalogue ID: T-12.",
   "key_logic_points": [
-    "Display creator's avatar, name, bio, and social links.",
-    "Show statistics like number of recipes, followers, etc. (mocked).",
-    "Tabbed or sectioned view for 'Recipes', 'About', 'Community Posts' (mocked).",
-    "'Recipes' section: Display a gallery/list of recipes published by the creator.",
-    "'Follow' or 'Subscribe' button (mock interaction).",
-    "(Future) Integration with creator-specific content like articles or videos."
+    "Integrates TopLogoBar and BottomStickyNav.",
+    "Uses Tailwind CSS for all styling.",
+    "Displays creator\'s avatar (shadcn/ui Avatar), name, bio, stats (shadcn/ui Badge), and social links.",
+    "Uses shadcn/ui Tabs for 'Recipes' and 'About' sections.",
+    "Displays creator\'s recipes as a grid of shadcn/ui Cards.",
+    "'Follow' button uses shadcn/ui Button.",
+    "Handles loading and not-found states."
   ],
   "interfaces_provided": [
-    { "name": "CreatorProfilePage", "interface_type": "REACT_COMPONENT", "details": "Component for displaying a content creator's profile.", "notes": "" }
+    { "name": "CreatorProfilePage", "interface_type": "REACT_COMPONENT", "details": "Component for displaying a content creator\'s profile.", "notes": "" }
   ],
-  "requisites": [],
+  "requisites": [
+    { "description": "TopLogoBar, BottomStickyNav components must be available.", "type": "INTERNAL_DEPENDENCY" },
+    { "description": "shadcn/ui Avatar, Button, Card, Tabs, Badge components.", "type": "LIBRARY_DEPENDENCY" }
+  ],
   "external_dependencies": [
-    { "name": "React", "version": "^18.2.0", "reason": "Core React library." },
-    { "name": "react-router-dom", "version": "^6.x.x", "reason": "For navigation (Link, useParams to get creator ID)." }
+    { "name": "React", "version": "^19.1.0", "reason": "Core React library." },
+    { "name": "react-router-dom", "version": "^7.6.0", "reason": "For navigation (Link, useParams, useNavigate)." },
+    { "name": "lucide-react", "version": "latest", "reason": "For icons."}
   ],
   "internal_dependencies": [
-    // "cycle0_mock_data_creators_g112",
-    // "cycle0_mock_data_recipes_g112",
-    // "cycle0_comp_button_g112",
-    // "cycle0_comp_card_g112" // For recipe display
+    "cycle0_comp_toplogobar_g163",
+    "cycle0_comp_bottomstickynav_g163",
+    "cycle1_primitive_link_g132",
+    "shadcn_ui_avatar_g170", // Assuming g170 as it will be added
+    "shadcn_ui_button_g160",
+    "shadcn_ui_card_g160",
+    "shadcn_ui_tabs_g170",   // Assuming g170 as it will be added
+    "shadcn_ui_badge_g160"
   ],
   "dependents": [
-    "cycle0_router_config_g112" // This page will be a route in AppRouter
+    "cycle0_router_config_g112"
   ],
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g123. To be populated with specific UI placeholders and mock data integration based on T-12 (Figma)."
+    "manual_review_comment": "Refactored at g170 to use app-like navigation (TopLogoBar, BottomStickyNav), Tailwind CSS, and shadcn/ui components. Previous version 0.1.0 g_last_modified=123."
   }
 }
 ANNOTATION_BLOCK_END */
 
 import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link as PrimitiveRouterLink, useParams, useNavigate } from 'react-router-dom'; // Renamed Link to avoid conflict
+
+import TopLogoBar from '../components/layout/TopLogoBar';
+import BottomStickyNav from '../components/layout/BottomStickyNav';
+import PrimitiveLinkComponent from '../components/primitives/Link'; // Explicit name for PrimitiveLink
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { User, Users, BookOpen, Link as LinkIcon, Instagram, Youtube, Globe } from 'lucide-react';
 
 // Mock creator data (replace with actual fetch logic or context based on creatorId)
-const mockCreators = {
+const mockCreators: Record<string, any> = {
   c1: {
     id: 'c1',
     name: 'Chef Gourmet Master',
     username: 'chefmaster',
-    avatarUrl: 'https://via.placeholder.com/150?text=Creator+C1',
-    bio: 'Passionate chef sharing delicious and easy-to-make recipes from around the world. Join my culinary journey!',
+    avatarUrl: 'https://via.placeholder.com/150?text=C1', // Placeholder, ensure valid or use fallback
+    bio: 'Passionate chef sharing delicious and easy-to-make recipes from around the world. Join my culinary journey! Cooking is an art, and I love to paint with flavors.',
     followers: 12500,
     recipesCount: 75,
     socialLinks: {
@@ -60,17 +79,18 @@ const mockCreators = {
       website: '#',
     },
     recipes: [
-      { id: 'r1', name: 'Spicy Chicken Pasta', imageUrl: 'https://via.placeholder.com/100x100?text=Pasta' },
-      { id: 'r6', name: 'Gourmet Beef Steak', imageUrl: 'https://via.placeholder.com/100x100?text=Steak' },
-      { id: 'r7', name: 'Chocolate Lava Cake', imageUrl: 'https://via.placeholder.com/100x100?text=Cake' },
+      { id: 'r1', name: 'Spicy Chicken Pasta', imageUrl: 'https://via.placeholder.com/300x200?text=Pasta' },
+      { id: 'r6', name: 'Gourmet Beef Steak', imageUrl: 'https://via.placeholder.com/300x200?text=Steak' },
+      { id: 'r7', name: 'Chocolate Lava Cake', imageUrl: 'https://via.placeholder.com/300x200?text=Cake' },
+      { id: 'r8', name: 'Another Delicious Dish', imageUrl: 'https://via.placeholder.com/300x200?text=Dish4' },
     ]
   },
   c2: {
     id: 'c2',
     name: 'Healthy Bites Ella',
     username: 'healthyella',
-    avatarUrl: 'https://via.placeholder.com/150?text=Creator+C2',
-    bio: 'Your go-to source for nutritious and tasty meal prep ideas. Eating healthy can be fun!',
+    avatarUrl: 'https://via.placeholder.com/150?text=C2',
+    bio: 'Your go-to source for nutritious and tasty meal prep ideas. Eating healthy can be fun and absolutely delicious! Discover simple recipes that fuel your body.',
     followers: 8200,
     recipesCount: 40,
     socialLinks: {
@@ -78,60 +98,25 @@ const mockCreators = {
       pinterest: '#',
     },
     recipes: [
-      { id: 'r2', name: 'Vegan Buddha Bowl', imageUrl: 'https://via.placeholder.com/100x100?text=Bowl' },
-      { id: 'r3', name: 'Berry Smoothie', imageUrl: 'https://via.placeholder.com/100x100?text=Smoothie' },
+      { id: 'r2', name: 'Vegan Buddha Bowl', imageUrl: 'https://via.placeholder.com/300x200?text=Bowl' },
+      { id: 'r3', name: 'Berry Smoothie', imageUrl: 'https://via.placeholder.com/300x200?text=Smoothie' },
     ]
   }
 };
 
-/**
- * CreatorProfilePage Component (References Figma Catalogue: T-12)
- * 
- * Purpose: Displays a specific content creator's profile, including their bio, recipes, and other relevant information.
- * 
- * Structure (T-12 - Creator Profile View):
- * - Main container.
- * - Creator Header (T-12_creator_header): Avatar (T-12_creator_avatar), Name (T-12_creator_name), Follow Button (T-12_follow_button), Stats (T-12_creator_stats - followers, recipes).
- * - Creator Bio (T-12_creator_bio).
- * - Social Media Links (T-12_social_links).
- * - Tab Navigation (T-12_creator_tabs): For "Recipes", "About", "Posts" (or similar sections).
- * - Tab Content Area (T-12_creator_tab_content):
- *   - Recipes (T-12_recipes_gallery): Grid/list of creator's published recipes (T-12_recipe_card_medium).
- *   - About (T-12_about_section): More detailed information about the creator.
- *   - Posts (T-12_posts_feed): Community posts or updates from the creator (mocked).
- * 
- * Placeholders & Checklist:
- * [ ] Implement state for `creatorData` and active `tab`.
- * [ ] Use `useParams` to get `creatorId` from the route.
- * [ ] (Mock) Fetch creator data based on `creatorId` (useEffect).
- * [ ] Display Creator Header: Avatar, Name, Follow button (mock), Stats - Ref T-12_creator_header, T-12_creator_avatar, T-12_creator_name, T-12_follow_button, T-12_creator_stats.
- * [ ] Display Creator Bio - Ref T-12_creator_bio.
- * [ ] Display Social Media Links - Ref T-12_social_links.
- * [ ] Implement Tab Navigation (e.g., "Recipes", "About") - Ref T-12_creator_tabs.
- * [ ] Based on active tab, render content:
- *     [ ] Recipes: Display list/grid of `creatorData.recipes` - Ref T-12_recipes_gallery, T-12_recipe_card_medium.
- *         [ ] Each recipe links to its detail page.
- *     [ ] About: Display more detailed bio or information - Ref T-12_about_section.
- * [ ] Basic styling for layout, tabs, and content sections.
- * [ ] Handle case where creatorId is not found.
- * [ ] Back navigation link.
- */
-const CreatorProfilePage = () => {
-  const { creatorId } = useParams(); // Get creatorId from URL path
-  const [creatorData, setCreatorData] = useState(null);
-  const [activeTab, setActiveTab] = useState('recipes'); // e.g., recipes, about
+const CreatorProfilePage: React.FC = () => {
+  const { creatorId } = useParams<{ creatorId: string }>();
+  const [creatorData, setCreatorData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
-    // Simulate fetching creator data
-    // In a real app, this would be an API call: fetchCreatorById(creatorId)
-    const foundCreator = mockCreators[creatorId];
+    const foundCreator = creatorId ? mockCreators[creatorId] : null;
     if (foundCreator) {
       setCreatorData(foundCreator);
     } else {
-      setCreatorData(null); // Or handle as a 404 not found
+      setCreatorData(null);
     }
     setLoading(false);
   }, [creatorId]);
@@ -141,112 +126,133 @@ const CreatorProfilePage = () => {
   };
 
   if (loading) {
-    return <div style={{padding: '20px'}}>Loading creator profile... (T-12)</div>;
-  }
-
-  if (!creatorData) {
     return (
-      <div style={{padding: '20px', textAlign: 'center'}}>
-        <h2>Creator Not Found (T-12)</h2>
-        <p>The creator profile you are looking for does not exist.</p>
-        <Link to="/home">Go to Home</Link>
+      <div className="flex flex-col items-center justify-center min-h-screen p-4">
+        <TopLogoBar />
+        <main className="flex-grow flex items-center justify-center">
+          Loading creator profile... (T-12)
+        </main>
+        <BottomStickyNav />
       </div>
     );
   }
 
-  const renderTabContent = () => {
-    switch (activeTab) {
-      case 'recipes':
+  if (!creatorData) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <TopLogoBar />
+        <main className="flex-grow flex flex-col items-center justify-center p-4 text-center">
+          <h2 className="text-2xl font-semibold mb-2">Creator Not Found (T-12)</h2>
+          <p className="text-slate-600 dark:text-slate-400 mb-4">The creator profile you are looking for does not exist.</p>
+          <Button onClick={() => navigate('/home')}>Go to Home</Button>
+        </main>
+        <BottomStickyNav />
+      </div>
+    );
+  }
+
         return (
-          <div className="T-12_recipes_gallery">
-            <h3 style={{borderBottom:'1px solid #eee', paddingBottom:'10px', marginTop: '20px'}}>Recipes by {creatorData.name}</h3>
-            {creatorData.recipes && creatorData.recipes.length > 0 ? (
-              <div style={{display:'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap:'20px'}}>
-                {creatorData.recipes.map(recipe => (
-                  <Link key={recipe.id} to={`/recipe/${recipe.id}`} style={{textDecoration:'none', color:'inherit'}} className="T-12_recipe_card_medium">
-                    <div style={{border:'1px solid #ddd', borderRadius:'8px', padding:'15px', textAlign:'center'}}>
-                      <img src={recipe.imageUrl} alt={recipe.name} style={{width:'100%', height:'150px', objectFit:'cover', borderRadius:'4px'}}/>
-                      <h4 style={{margin:'10px 0 5px'}}>{recipe.name}</h4>
+    <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-slate-900">
+      <TopLogoBar />
+      <main className="flex-grow overflow-y-auto pt-4 pb-24 px-4 sm:px-6 lg:px-8">
+        {/* Creator Header */}
+        <div className="md:flex md:items-start md:space-x-6 mb-8 p-4 bg-white dark:bg-slate-800 shadow-md rounded-lg">
+          <Avatar className="w-24 h-24 md:w-32 md:h-32 mx-auto md:mx-0 mb-4 md:mb-0 shrink-0">
+            <AvatarImage src={creatorData.avatarUrl} alt={`${creatorData.name}'s avatar`} />
+            <AvatarFallback className="text-3xl md:text-4xl">
+              {creatorData.name?.split(' ').map((n:string) => n[0]).join('').toUpperCase() || 'C'}
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex-grow text-center md:text-left">
+            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100 mb-1">{creatorData.name}</h1>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mb-3">@{creatorData.username}</p>
+            <div className="flex justify-center md:justify-start space-x-4 mb-4">
+              <div className="text-center">
+                <p className="text-lg font-semibold text-slate-800 dark:text-slate-200">{creatorData.recipesCount}</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">Recipes</p>
                     </div>
-                  </Link>
-                ))}
+              <div className="text-center">
+                <p className="text-lg font-semibold text-slate-800 dark:text-slate-200">{creatorData.followers}</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">Followers</p>
               </div>
-            ) : <p>No recipes published by this creator yet.</p>}
           </div>
-        );
-      case 'about':
-        return (
-          <div className="T-12_about_section">
-            <h3 style={{borderBottom:'1px solid #eee', paddingBottom:'10px', marginTop: '20px'}}>About {creatorData.name}</h3>
-            <p>{creatorData.bio}</p>
-            {/* Placeholder for more detailed about information */}
+            <Button onClick={handleFollow} size="sm" className="w-full md:w-auto">
+              <User className="mr-2 h-4 w-4" /> Follow
+            </Button>
           </div>
-        );
-      default:
-        return null;
-    }
-  };
-
-  return (
-    <div style={{ padding: '20px', maxWidth: '1000px', margin: 'auto' }}>
-      <button onClick={() => navigate(-1)} style={{marginBottom:'15px'}}>&larr; Back</button>
-
-      {/* T-12_creator_header */}
-      <header style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '20px', paddingBottom:'20px', borderBottom:'1px solid #eee' }} className="T-12_creator_header">
-        <img src={creatorData.avatarUrl} alt={`${creatorData.name}'s avatar`} style={{ width: '120px', height: '120px', borderRadius: '50%', marginRight: '25px' }} className="T-12_creator_avatar" />
-        <div style={{flexGrow: 1}}>
-          <h1 style={{ margin: '0 0 10px 0' }} className="T-12_creator_name">{creatorData.name}</h1>
-          <p className="T-12_creator_username" style={{margin: '0 0 10px', color: '#555'}}>@{creatorData.username}</p>
-          <div className="T-12_creator_stats" style={{display: 'flex', gap: '20px', marginBottom:'15px', fontSize:'0.9em'}}>
-            <span><strong>{creatorData.recipesCount}</strong> Recipes</span>
-            <span><strong>{creatorData.followers}</strong> Followers</span>
-            {/* Add more stats if available */}
-          </div>
-          <button onClick={handleFollow} style={{padding:'10px 15px', background:'#007bff', color:'white', border:'none', borderRadius:'5px'}} className="T-12_follow_button">Follow</button>
         </div>
-      </header>
-      
-      {/* T-12_creator_bio (short bio, full in about tab) */}
-      <div className="T-12_creator_bio" style={{marginBottom: '20px'}}>
-        <p>{creatorData.bio.substring(0, 150)}{creatorData.bio.length > 150 && '...'}</p>
+
+        {/* Social Links & Short Bio */}
+        <Card className="mb-8 dark:bg-slate-800 shadow">
+            <CardContent className="p-4">
+                <p className="text-sm text-slate-700 dark:text-slate-300 mb-4 leading-relaxed">
+                    {creatorData.bio.substring(0, 200)}{creatorData.bio.length > 200 && '...'}
+                </p>
+                <div className="flex flex-wrap gap-x-4 gap-y-2">
+                    {creatorData.socialLinks?.instagram && 
+                        <PrimitiveLinkComponent href={creatorData.socialLinks.instagram} target="_blank" className="text-sm flex items-center text-pink-600 hover:text-pink-700 dark:text-pink-500 dark:hover:text-pink-400">
+                            <Instagram className="mr-1.5 h-4 w-4" /> Instagram
+                        </PrimitiveLinkComponent>}
+                    {creatorData.socialLinks?.youtube && 
+                        <PrimitiveLinkComponent href={creatorData.socialLinks.youtube} target="_blank" className="text-sm flex items-center text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-400">
+                            <Youtube className="mr-1.5 h-4 w-4" /> YouTube
+                        </PrimitiveLinkComponent>}
+                    {creatorData.socialLinks?.website && 
+                        <PrimitiveLinkComponent href={creatorData.socialLinks.website} target="_blank" className="text-sm flex items-center text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400">
+                            <Globe className="mr-1.5 h-4 w-4" /> Website
+                        </PrimitiveLinkComponent>}
+                    {creatorData.socialLinks?.pinterest && 
+                        <PrimitiveLinkComponent href={creatorData.socialLinks.pinterest} target="_blank" className="text-sm flex items-center text-red-700 hover:text-red-800 dark:text-red-600 dark:hover:text-red-500">
+                            <LinkIcon className="mr-1.5 h-4 w-4" /> Pinterest {/* Using generic LinkIcon as Pinterest not in lucide */} 
+                        </PrimitiveLinkComponent>}
       </div>
+            </CardContent>
+        </Card>
 
-      {/* T-12_social_links */}
-      <div className="T-12_social_links" style={{marginBottom:'20px'}}>
-        {creatorData.socialLinks?.instagram && <a href={creatorData.socialLinks.instagram} target="_blank" rel="noopener noreferrer" style={{marginRight:'10px'}}>Instagram</a>}
-        {creatorData.socialLinks?.youtube && <a href={creatorData.socialLinks.youtube} target="_blank" rel="noopener noreferrer" style={{marginRight:'10px'}}>YouTube</a>}
-        {creatorData.socialLinks?.website && <a href={creatorData.socialLinks.website} target="_blank" rel="noopener noreferrer" style={{marginRight:'10px'}}>Website</a>}
-        {creatorData.socialLinks?.pinterest && <a href={creatorData.socialLinks.pinterest} target="_blank" rel="noopener noreferrer">Pinterest</a>}
+        <Tabs defaultValue="recipes" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 mb-4">
+            <TabsTrigger value="recipes">Recipes</TabsTrigger>
+            <TabsTrigger value="about">About</TabsTrigger>
+          </TabsList>
+          <TabsContent value="recipes">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              {creatorData.recipes && creatorData.recipes.length > 0 ? (
+                creatorData.recipes.map((recipe: any) => (
+                  <PrimitiveRouterLink key={recipe.id} to={`/recipe/${recipe.id}`} className="group">
+                    <Card className="overflow-hidden h-full flex flex-col hover:shadow-lg transition-shadow dark:bg-slate-800">
+                      <img 
+                        src={recipe.imageUrl} 
+                        alt={recipe.name} 
+                        className="w-full h-40 object-cover group-hover:opacity-90 transition-opacity"
+                      />
+                      <CardHeader className="p-3 flex-grow">
+                        <CardTitle className="text-md font-semibold leading-tight group-hover:text-primary dark:group-hover:text-primary-foreground">{recipe.name}</CardTitle>
+                      </CardHeader>
+                    </Card>
+                  </PrimitiveRouterLink>
+                ))
+              ) : (
+                <p className="col-span-full text-center text-slate-500 dark:text-slate-400 py-8">No recipes published by this creator yet.</p>
+              )}
       </div>
-
-      {/* T-12_creator_tabs */}
-      <nav style={{ marginBottom: '20px', borderBottom: '1px solid #ccc' }} className="T-12_creator_tabs">
-        <button onClick={() => setActiveTab('recipes')} style={tabStyle(activeTab === 'recipes')}>Recipes</button>
-        <button onClick={() => setActiveTab('about')} style={tabStyle(activeTab === 'about')}>About</button>
-        {/* Add more tabs like 'Posts' if needed */}
-      </nav>
-
-      {/* T-12_creator_tab_content */}
-      <div className="T-12_creator_tab_content">
-        {renderTabContent()}
-      </div>
-
-      <p style={{marginTop: '30px', fontSize: '0.8em', textAlign:'center', color:'#aaa'}}>Figma Ref: T-12</p>
+          </TabsContent>
+          <TabsContent value="about">
+            <Card className="dark:bg-slate-800">
+              <CardHeader>
+                <CardTitle className="text-xl">About {creatorData.name}</CardTitle>
+              </CardHeader>
+              <CardContent className="prose prose-sm dark:prose-invert max-w-none">
+                <p>{creatorData.bio}</p>
+                {/* Add more detailed about information if available */}
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+        <p className="mt-8 text-xs text-center text-slate-400 dark:text-slate-500">Figma Ref: T-12</p>
+      </main>
+      <BottomStickyNav />
     </div>
   );
 };
-
-// Reusable tab style function (can be moved to a common styles file)
-const tabStyle = (isActive) => ({
-  padding: '10px 15px',
-  marginRight: '5px',
-  border: 'none',
-  borderBottom: isActive ? '3px solid #007bff' : '3px solid transparent',
-  cursor: 'pointer',
-  background: 'none',
-  fontSize: '1em',
-  fontWeight: isActive ? 'bold' : 'normal',
-  color: isActive ? '#007bff' : '#333'
-});
 
 export default CreatorProfilePage; 
