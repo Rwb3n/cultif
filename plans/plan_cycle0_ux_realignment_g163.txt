@@ -1,0 +1,328 @@
+{
+  "v": 2,
+  "id": "plan_cycle0_ux_realignment_g163",
+  "status": "APPROVED",
+  "preceding_plan_id_ref": "plan_cycle0_mobile_styling_g150",
+  "origin_artifact_id": "project_review_and_feedback_analysis_g162",
+  "goal": "Realign the web prototype's UI/UX to match the detailed stakeholder feedback (g162), focusing on an app-like interface, specific page layouts (Onboarding, Auth, Home, Profile, Meal Plan), new navigation patterns (top and bottom sticky navs), and initial placeholder animations.",
+  "scope": [
+    "Install and configure Framer Motion for animations.",
+    "Refactor OnboardingPage.tsx for a full-screen, animated (using Framer Motion for placeholders), no-nav/footer layout with a single content card.",
+    "Refactor LoginPage.tsx and SignupPage.tsx for full-screen, no-nav/footer layouts, with content fitting screen height without scrolling.",
+    "Rebuild HomePage.tsx to include: a new top logo bar (logo, notification icon, messages icon), a new horizontally scrollable circular icon-based top navigation for meal categories, and a new bottom sticky navigation bar (Home, Search, Publish, My Plan, Profile).",
+    "Update category display on HomePage.tsx from chips to horizontally scrollable square items with images.",
+    "Implement ProfilePage.tsx to display user's recipes/meal plans in a 3xN grid with vertical infinite scroll.",
+    "Implement MealPlanPage.tsx with a three-row layout: current date, selectable weekly days, and a column of meal cards for the selected day (displaying name, macros, purpose, link to recipe).",
+    "Create new reusable navigation components (e.g., BottomStickyNav, TopLogoBar, TopMealCategoryNav).",
+    "Review and adjust other existing pages (e.g., StyleGuidePage.tsx, RecipeDetailPage.tsx) for consistency with new navigation and layout paradigms (e.g., removal of old Header/Footer, potential addition of BottomStickyNav).",
+    "Ensure all modified files have updated annotation blocks (version_tag, g_last_modified, description, dependencies, etc.).",
+    "Update registry_map.txt to include any new components and reflect changes to existing ones."
+  ],
+  "exclusions": [
+    "Backend logic changes or new API integrations.",
+    "Implementation of actual infinite scrolling data fetching for ProfilePage (will be visual scaffold only).",
+    "Full implementation of notification, direct messaging, or content publishing functionalities (icons and navigation elements will be placeholders).",
+    "Creation of new pages beyond those explicitly mentioned for refactoring.",
+    "Complex state management for newly introduced interactive elements if not achievable with basic React state/context (defer to later cycle if major state lib needed).",
+    "Advanced or highly polished animations; initial animations will be placeholders to demonstrate intent."
+  ],
+  "g_created": 163,
+  "g_updated": 168,
+  "tasks": [
+    {
+      "id": "pc0uxr_task_000_anim_setup",
+      "title": "Install and Configure Animation Library (Framer Motion)",
+      "description": "Install 'framer-motion' library using pnpm. Briefly review its documentation for basic fade and layout animations. No specific configuration file is usually needed for Framer Motion with Vite/React, but ensure it can be imported and used in components.",
+      "intent": "To make an animation library available for implementing UI animation effects in the prototype.",
+      "inputs": [
+        { "name": "Project package.json", "source_description": "prototypes/cycle0_react_web/package.json", "details": "To add framer-motion dependency."}
+      ],
+      "outputs": [
+        {
+          "name": "Updated package.json and pnpm-lock.yaml",
+          "artifact_id": "cycle0_package_json_g163_framer", 
+          "expected_path": "prototypes/cycle0_react_web/package.json",
+          "description": "package.json updated with framer-motion. pnpm-lock.yaml reflects the change.",
+          "embed_annotations_required": "false"
+        }
+      ],
+      "execution_checklist": [
+        {"item_id": "anim_check_001", "description": "Run 'pnpm install framer-motion' in 'prototypes/cycle0_react_web' directory.", "status": "DONE", "target_artifact_id": null, "notes": "Successfully installed framer-motion v12.12.1."},
+        {"item_id": "anim_check_002", "description": "Verify 'framer-motion' is added to dependencies in package.json.", "status": "DONE", "target_artifact_id": "cycle0_package_json_g163_framer", "notes": "Verified in package.json."}
+      ],
+      "dependencies": [],
+      "criticality": "HIGH",
+      "status": "DONE",
+      "linked_issue_ids": [],
+      "notes": ["This task enables animation capabilities for subsequent UI tasks.", "framer-motion v12.12.1 installed successfully."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc0uxr_task_001",
+      "title": "Refactor Onboarding Page (OnboardingPage.tsx) with Animations",
+      "description": "Implement full-screen layout with single-color background. Using Framer Motion, add placeholder fade-in logo animation, followed by logo fade-out and onboarding card fade-in. Remove existing Header and Footer. Ensure the main onboarding card is the direct content element (not nested) and fits screen height without vertical scrolling. Update annotations.",
+      "intent": "To align OnboardingPage.tsx with the new full-screen, animated (placeholder), and simplified layout as per stakeholder feedback.",
+      "inputs": [
+        { "name": "OnboardingPage.tsx", "source_description": "Current OnboardingPage.tsx file.", "details": "Artifact ID: cycle0_page_onboarding_g112" },
+        { "name": "Stakeholder Feedback from project_review_and_feedback_analysis_g162", "source_description": "Feedback details for Onboarding page.", "details": "Artifact ID: project_review_and_feedback_analysis_g162" },
+        { "name": "Framer Motion library", "source_description": "Installed in pc0uxr_task_000_anim_setup.", "details": "For animation implementation."}
+      ],
+      "outputs": [
+        {
+          "name": "Updated OnboardingPage.tsx",
+          "artifact_id": "cycle0_page_onboarding_g112", 
+          "expected_path": "prototypes/cycle0_react_web/src/pages/OnboardingPage.tsx",
+          "description": "OnboardingPage.tsx refactored with new full-screen layout, placeholder Framer Motion animations, and no scrolling. Annotations updated.",
+          "embed_annotations_required": "true"
+        }
+      ],
+      "execution_checklist": [
+        {"item_id": "onboard_check_001", "description": "Implement full-screen single-color background.", "status": "DONE", "target_artifact_id": "cycle0_page_onboarding_g112", "notes": "Set root div to min-h-screen and bg-green-600."},
+        {"item_id": "onboard_check_002", "description": "Implement Framer Motion logo fade-in/out animation sequence.", "status": "DONE", "target_artifact_id": "cycle0_page_onboarding_g112", "notes": "Used AnimatePresence and motion.div for sequential logo animations."},
+        {"item_id": "onboard_check_003", "description": "Implement Framer Motion onboarding card fade-in animation.", "status": "DONE", "target_artifact_id": "cycle0_page_onboarding_g112", "notes": "Card fades in after logo sequence."},
+        {"item_id": "onboard_check_004", "description": "Ensure no Header/Footer are present.", "status": "DONE", "target_artifact_id": "cycle0_page_onboarding_g112", "notes": "Page is standalone, no global nav imported/used."},
+        {"item_id": "onboard_check_005", "description": "Ensure main card is direct content element and fits screen height without page scroll.", "status": "DONE", "target_artifact_id": "cycle0_page_onboarding_g112", "notes": "Outer div removed, card uses flex and height constraints."},
+        {"item_id": "onboard_check_006", "description": "Update annotation block in OnboardingPage.tsx.", "status": "DONE", "target_artifact_id": "cycle0_page_onboarding_g112", "notes": "Annotation updated to version 0.3.0-ux-realignment-g164."}
+      ],
+      "dependencies": ["pc0uxr_task_000_anim_setup"],
+      "criticality": "HIGH",
+      "status": "DONE",
+      "linked_issue_ids": [],
+      "notes": ["Focus on visual presentation and basic Framer Motion animations as described. Logo asset assumed available or placeholder used.", "Refactoring complete, page now features full-screen layout and entry animations for logo and content card."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc0uxr_task_002",
+      "title": "Refactor Authentication Pages (LoginPage.tsx, SignupPage.tsx)",
+      "description": "For both LoginPage.tsx and SignupPage.tsx: Remove existing Header and Footer. Modify layout so content (form area) fits to screen height without vertical scrolling. Ensure consistent styling between the two pages. Update annotations.",
+      "intent": "To align authentication pages with the new full-screen, no-scroll layout, providing a focused user experience.",
+      "inputs": [
+        { "name": "LoginPage.tsx", "source_description": "Current LoginPage.tsx file.", "details": "Artifact ID: cycle0_page_login_g112" },
+        { "name": "SignupPage.tsx", "source_description": "Current SignupPage.tsx file.", "details": "Artifact ID: cycle0_page_signup_g112" },
+        { "name": "Stakeholder Feedback from project_review_and_feedback_analysis_g162", "source_description": "Feedback details for Auth pages.", "details": "Artifact ID: project_review_and_feedback_analysis_g162" }
+      ],
+      "outputs": [
+        {
+          "name": "Updated LoginPage.tsx",
+          "artifact_id": "cycle0_page_login_g112",
+          "expected_path": "prototypes/cycle0_react_web/src/pages/LoginPage.tsx",
+          "description": "LoginPage.tsx refactored with new full-screen, no-scroll layout. Annotations updated.",
+          "embed_annotations_required": "true"
+        },
+        {
+          "name": "Updated SignupPage.tsx",
+          "artifact_id": "cycle0_page_signup_g112",
+          "expected_path": "prototypes/cycle0_react_web/src/pages/SignupPage.tsx",
+          "description": "SignupPage.tsx refactored with new full-screen, no-scroll layout. Annotations updated.",
+          "embed_annotations_required": "true"
+        }
+      ],
+      "execution_checklist": [
+        {"item_id": "auth_check_001", "description": "Refactor LoginPage.tsx for full-screen, no-scroll layout.", "status": "DONE", "target_artifact_id": "cycle0_page_login_g112", "notes": "LoginPage.tsx updated with min-h-screen and layout adjustments."},
+        {"item_id": "auth_check_002", "description": "Update annotations in LoginPage.tsx.", "status": "DONE", "target_artifact_id": "cycle0_page_login_g112", "notes": "Annotation version 0.4.0-ux-realignment-g165."},
+        {"item_id": "auth_check_003", "description": "Refactor SignupPage.tsx for full-screen, no-scroll layout.", "status": "DONE", "target_artifact_id": "cycle0_page_signup_g112", "notes": "SignupPage.tsx updated with min-h-screen and layout adjustments."},
+        {"item_id": "auth_check_004", "description": "Update annotations in SignupPage.tsx.", "status": "DONE", "target_artifact_id": "cycle0_page_signup_g112", "notes": "Annotation version 0.3.0-ux-realignment-g165."}
+      ],
+      "dependencies": ["pc0uxr_task_001"],
+      "criticality": "HIGH",
+      "status": "DONE",
+      "linked_issue_ids": [],
+      "notes": ["Ensure forms remain accessible and usable despite no-scroll constraint, potentially using flexbox for centering and scaling.", "Both LoginPage and SignupPage refactored for full-screen, no-scroll layouts. Annotations updated."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc0uxr_task_003",
+      "title": "Create New Navigation Components",
+      "description": "Create reusable React components for: 1. TopLogoBar (Cultif logo, Heart icon, Message icon). 2. TopMealCategoryNav (horizontally scrollable circular icons for Breakfast, Dinner, Dessert, Create Meal Plan). 3. BottomStickyNav (Home, Search, Publish, My Plan, Profile icons). Scaffold with basic styling and placeholders for icons (lucide-react). Annotate new component files.",
+      "intent": "To create the foundational UI components for the new app-like navigation structure.",
+      "inputs": [
+         { "name": "Stakeholder Feedback from project_review_and_feedback_analysis_g162", "source_description": "Feedback details for new navigation elements on Home page.", "details": "Artifact ID: project_review_and_feedback_analysis_g162" },
+         { "name": "Existing shadcn/ui components and lucide-react icons", "source_description": "Codebase.", "details": "To be used for constructing new nav components."}
+      ],
+      "outputs": [
+        {
+          "name": "TopLogoBar.tsx",
+          "artifact_id": "cycle0_comp_toplogobar_g163",
+          "expected_path": "prototypes/cycle0_react_web/src/components/layout/TopLogoBar.tsx",
+          "description": "New component for top logo and action icons. Annotations included.",
+          "embed_annotations_required": "true"
+        },
+        {
+          "name": "TopMealCategoryNav.tsx",
+          "artifact_id": "cycle0_comp_topmealcategorynav_g163",
+          "expected_path": "prototypes/cycle0_react_web/src/components/layout/TopMealCategoryNav.tsx",
+          "description": "New component for horizontally scrollable meal category icons. Annotations included.",
+          "embed_annotations_required": "true"
+        },
+        {
+          "name": "BottomStickyNav.tsx",
+          "artifact_id": "cycle0_comp_bottomstickynav_g163",
+          "expected_path": "prototypes/cycle0_react_web/src/components/layout/BottomStickyNav.tsx",
+          "description": "New component for bottom sticky navigation bar. Annotations included.",
+          "embed_annotations_required": "true"
+        },
+        {
+          "name": "Updated registry_map.txt",
+          "artifact_id": "registry_map_g1", 
+          "expected_path": "registry_map.txt",
+          "description": "Registry map updated with the new navigation component artifacts.",
+          "embed_annotations_required": "false"
+        }
+      ],
+      "execution_checklist": [
+        {"item_id": "navcomp_check_001", "description": "Create TopLogoBar.tsx with annotations.", "status": "DONE", "target_artifact_id": "cycle0_comp_toplogobar_g163", "notes": "Component created with logo and action icons."},
+        {"item_id": "navcomp_check_002", "description": "Create TopMealCategoryNav.tsx with annotations.", "status": "DONE", "target_artifact_id": "cycle0_comp_topmealcategorynav_g163", "notes": "Component created with scrollable category icons."},
+        {"item_id": "navcomp_check_003", "description": "Create BottomStickyNav.tsx with annotations.", "status": "DONE", "target_artifact_id": "cycle0_comp_bottomstickynav_g163", "notes": "Component created with sticky bottom navigation icons."},
+        {"item_id": "navcomp_check_004", "description": "Update registry_map.txt with new components.", "status": "DONE", "target_artifact_id": "registry_map_g1", "notes": "Registry updated with all three new navigation components."}
+      ],
+      "dependencies": [],
+      "criticality": "HIGH",
+      "status": "DONE",
+      "linked_issue_ids": [],
+      "notes": ["These components will be integrated into HomePage.tsx in a subsequent task.", "All three navigation components created and registered successfully."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc0uxr_task_004",
+      "title": "Rebuild Home Page (HomePage.tsx)",
+      "description": "Integrate TopLogoBar, TopMealCategoryNav, and BottomStickyNav into HomePage.tsx. Remove old Header/Footer. Refactor category display from chips to horizontally scrollable square items with placeholder images. Ensure main content area adapts to new navigation elements. Update HomePage.tsx annotations.",
+      "intent": "To transform HomePage.tsx into the new app-like layout with distinct navigation zones and updated category presentation.",
+      "inputs": [
+        { "name": "HomePage.tsx", "source_description": "Current HomePage.tsx file.", "details": "Artifact ID: cycle0_page_home_g112" },
+        { "name": "TopLogoBar.tsx", "source_description": "Output from pc0uxr_task_003.", "details": "Artifact ID: cycle0_comp_toplogobar_g163" },
+        { "name": "TopMealCategoryNav.tsx", "source_description": "Output from pc0uxr_task_003.", "details": "Artifact ID: cycle0_comp_topmealcategorynav_g163" },
+        { "name": "BottomStickyNav.tsx", "source_description": "Output from pc0uxr_task_003.", "details": "Artifact ID: cycle0_comp_bottomstickynav_g163" },
+        { "name": "Stakeholder Feedback from project_review_and_feedback_analysis_g162", "source_description": "Feedback details for Home page layout and navigation.", "details": "Artifact ID: project_review_and_feedback_analysis_g162" }
+      ],
+      "outputs": [
+        {
+          "name": "Updated HomePage.tsx",
+          "artifact_id": "cycle0_page_home_g112",
+          "expected_path": "prototypes/cycle0_react_web/src/pages/HomePage.tsx",
+          "description": "HomePage.tsx rebuilt with new navigation components and category display. Annotations updated.",
+          "embed_annotations_required": "true"
+        }
+      ],
+      "execution_checklist": [
+        {"item_id": "home_check_001", "description": "Integrate TopLogoBar component.", "status": "DONE", "target_artifact_id": "cycle0_page_home_g112", "notes": "TopLogoBar added at the top of the page structure."},
+        {"item_id": "home_check_002", "description": "Integrate TopMealCategoryNav component.", "status": "DONE", "target_artifact_id": "cycle0_page_home_g112", "notes": "TopMealCategoryNav added below TopLogoBar."},
+        {"item_id": "home_check_003", "description": "Integrate BottomStickyNav component.", "status": "DONE", "target_artifact_id": "cycle0_page_home_g112", "notes": "BottomStickyNav added at the bottom, fixed position."},
+        {"item_id": "home_check_004", "description": "Remove old Header/Footer elements.", "status": "DONE", "target_artifact_id": "cycle0_page_home_g112", "notes": "Previous inline footer removed; page uses new nav components."},
+        {"item_id": "home_check_005", "description": "Refactor category display to square items with images.", "status": "DONE", "target_artifact_id": "cycle0_page_home_g112", "notes": "New CategoryCardComponent created and used for category display."},
+        {"item_id": "home_check_006", "description": "Ensure main content area is scrollable between top/bottom navs.", "status": "DONE", "target_artifact_id": "cycle0_page_home_g112", "notes": "Main content wrapped in a flex-grow, overflow-y-auto container with padding for bottom nav."},
+        {"item_id": "home_check_007", "description": "Update HomePage.tsx annotation block.", "status": "DONE", "target_artifact_id": "cycle0_page_home_g112", "notes": "Annotation updated to version 0.3.0-ux-realignment-g167."}
+      ],
+      "dependencies": ["pc0uxr_task_003"],
+      "criticality": "HIGH",
+      "status": "DONE",
+      "linked_issue_ids": [],
+      "notes": ["Ensure placeholder images for categories are distinct and visually appealing.", "HomePage successfully rebuilt with new navigation components and category display style. Old footer removed."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc0uxr_task_005",
+      "title": "Implement Profile Page Layout (UserProfilePage.tsx)",
+      "description": "Refactor UserProfilePage.tsx (or create if placeholder) to display user's recipes/meal plans in a 3xN grid (3 items horizontally, vertical scroll). Use placeholder cards for grid items. Integrate BottomStickyNav if applicable. Update annotations.",
+      "intent": "To implement the specified grid layout for content on the user profile page.",
+      "inputs": [
+        { "name": "UserProfilePage.tsx", "source_description": "Current UserProfilePage.tsx file (may be basic placeholder).", "details": "Artifact ID: cycle0_page_userprofile_g112" },
+        { "name": "BottomStickyNav.tsx", "source_description": "Output from pc0uxr_task_003.", "details": "Artifact ID: cycle0_comp_bottomstickynav_g163" },
+        { "name": "Stakeholder Feedback from project_review_and_feedback_analysis_g162", "source_description": "Feedback details for Profile page grid layout.", "details": "Artifact ID: project_review_and_feedback_analysis_g162" }
+      ],
+      "outputs": [
+        {
+          "name": "Updated UserProfilePage.tsx",
+          "artifact_id": "cycle0_page_userprofile_g112",
+          "expected_path": "prototypes/cycle0_react_web/src/pages/UserProfilePage.tsx",
+          "description": "UserProfilePage.tsx updated with 3xN grid layout. Annotations updated.",
+          "embed_annotations_required": "true"
+        }
+      ],
+      "execution_checklist": [
+        {"item_id": "profile_check_001", "description": "Display user recipes/meal plans in a 3xN grid.", "status": "DONE", "target_artifact_id": "cycle0_page_userprofile_g112", "notes": "Implemented a responsive grid (2 to 5 columns) using mock data and placeholder cards."},
+        {"item_id": "profile_check_002", "description": "Integrate BottomStickyNav component.", "status": "DONE", "target_artifact_id": "cycle0_page_userprofile_g112", "notes": "BottomStickyNav added to the page layout."},
+        {"item_id": "profile_check_003", "description": "Remove old placeholder elements (header, tabs, settings).", "status": "DONE", "target_artifact_id": "cycle0_page_userprofile_g112", "notes": "Page simplified to focus on content grid and new navigation. Added a simple placeholder title header."},
+        {"item_id": "profile_check_004", "description": "Ensure content is scrollable above BottomStickyNav.", "status": "DONE", "target_artifact_id": "cycle0_page_userprofile_g112", "notes": "Main content area has overflow-y-auto and padding for bottom nav."},
+        {"item_id": "profile_check_005", "description": "Update UserProfilePage.tsx annotation block.", "status": "DONE", "target_artifact_id": "cycle0_page_userprofile_g112", "notes": "Annotation updated to version 0.2.0-ux-realignment-g168."}
+      ],
+      "dependencies": ["pc0uxr_task_003"],
+      "criticality": "MEDIUM",
+      "status": "DONE",
+      "linked_issue_ids": [],
+      "notes": ["Focus on the visual grid structure; infinite scroll data fetching is out of scope.", "UserProfilePage refactored with content grid and BottomStickyNav. Simplified from previous placeholder structure."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc0uxr_task_006",
+      "title": "Implement Meal Plan Page Layout (MealPlanPage.tsx)",
+      "description": "Refactor MealPlanPage.tsx (or create if placeholder) for the three-row layout: Row 1 (Current Date), Row 2 (Selectable This Week days), Row 3 (Column of meal cards for selected day). Meal cards should show name, macros (placeholder), purpose, and a 'recipe ->' chip. Integrate BottomStickyNav if applicable. Update annotations.",
+      "intent": "To implement the specified interactive daily meal plan view.",
+      "inputs": [
+        { "name": "MealPlanPage.tsx", "source_description": "Current MealPlanPage.tsx file (may be basic placeholder).", "details": "Artifact ID: cycle0_page_mealplan_g112" },
+        { "name": "BottomStickyNav.tsx", "source_description": "Output from pc0uxr_task_003.", "details": "Artifact ID: cycle0_comp_bottomstickynav_g163" },
+        { "name": "Stakeholder Feedback from project_review_and_feedback_analysis_g162", "source_description": "Feedback details for Meal Plan page layout.", "details": "Artifact ID: project_review_and_feedback_analysis_g162" }
+      ],
+      "outputs": [
+        {
+          "name": "Updated MealPlanPage.tsx",
+          "artifact_id": "cycle0_page_mealplan_g112",
+          "expected_path": "prototypes/cycle0_react_web/src/pages/MealPlanPage.tsx",
+          "description": "MealPlanPage.tsx updated with the new three-row layout and interactive elements. Annotations updated.",
+          "embed_annotations_required": "true"
+        }
+      ],
+      "execution_checklist": [],
+      "dependencies": ["pc0uxr_task_003"],
+      "criticality": "MEDIUM",
+      "status": "PENDING",
+      "linked_issue_ids": [],
+      "notes": ["Date and day selection should be interactive, updating the displayed meal cards (using mock data)."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc0uxr_task_007",
+      "title": "Review & Align Other Existing Pages",
+      "description": "Review other existing pages (e.g., StyleGuidePage.tsx, RecipeDetailPage.tsx, CreatorProfilePage.tsx etc.) and update them for consistency with new navigation paradigms. This primarily involves removing the old Header/Footer and potentially adding the BottomStickyNav where appropriate. Update annotations for all modified files.",
+      "intent": "To ensure UI consistency across the prototype after major navigation and layout changes.",
+      "inputs": [
+        { "name": "All other existing .tsx page files", "source_description": "Various pages in prototypes/cycle0_react_web/src/pages/", "details": "e.g., cycle1_styleguide_page_g131, cycle0_page_recipedetail_g112" },
+        { "name": "BottomStickyNav.tsx", "source_description": "Output from pc0uxr_task_003.", "details": "Artifact ID: cycle0_comp_bottomstickynav_g163" }
+      ],
+      "outputs": [
+        { 
+          "name": "Set of Updated Page Files", 
+          "artifact_id": "cycle0_updated_misc_pages_g163", 
+          "expected_path": "prototypes/cycle0_react_web/src/pages/", 
+          "description": "Conceptual: All miscellaneous pages updated for UI consistency. Annotations updated.", 
+          "embed_annotations_required": "true" 
+        }
+      ],
+      "execution_checklist": [],
+      "dependencies": ["pc0uxr_task_004"],
+      "criticality": "LOW",
+      "status": "PENDING",
+      "linked_issue_ids": [],
+      "notes": ["The focus is on removing old nav and adding new nav where logical, not full page redesigns unless explicitly stated."],
+      "sub_tasks": []
+    },
+    {
+      "id": "pc0uxr_task_008",
+      "title": "Final Annotation Updates & Registry Map Update",
+      "description": "Perform a final pass on all created/modified files in this plan to ensure their 'EmbeddedAnnotationBlock' is accurate and up-to-date (version_tag, g_last_modified, dependencies, description). Update 'registry_map.txt' with correct artifact IDs, paths, version, and g_updated timestamp.",
+      "intent": "To ensure metadata integrity and accurate artifact tracking for the plan's outputs.",
+      "inputs": [
+        { "name": "All files modified/created in this plan", "source_description": "Outputs from tasks pc0uxr_task_001 through pc0uxr_task_007.", "details": "All .tsx files, registry_map.txt" }
+      ],
+      "outputs": [
+        { "name": "Finalized Updated registry_map.txt", "artifact_id": "registry_map_g1", "expected_path": "registry_map.txt", "description": "Registry map fully updated and versioned for this plan.", "embed_annotations_required": "false" }
+      ],
+      "execution_checklist": [],
+      "dependencies": ["pc0uxr_task_001", "pc0uxr_task_002", "pc0uxr_task_003", "pc0uxr_task_004", "pc0uxr_task_005", "pc0uxr_task_006", "pc0uxr_task_007"],
+      "criticality": "MEDIUM",
+      "status": "PENDING",
+      "linked_issue_ids": [],
+      "notes": ["This is the final wrap-up task to ensure all artifacts are correctly documented and registered."],
+      "sub_tasks": []
+    }
+  ]
+} 

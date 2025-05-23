@@ -43,7 +43,7 @@ ANNOTATION_BLOCK_END */
 import './App.css' // Default Vite import, can be kept or replaced
 
 // Import routing and layout components
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, useLocation } from 'react-router-dom';
 import AppRouter from './navigation/AppRouter';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
@@ -65,7 +65,21 @@ const mockUser = {
 // To simulate a logged-out state, set mockUser to null:
 // const mockUser = null;
 
-function App() {
+function AppContent() { // Renamed App to AppContent to use useLocation hook
+  const location = useLocation();
+
+  // Paths that should not show the main Header and Footer from App.tsx
+  // because they either are part of auth flow or have their own specific app-like layout
+  const noMainHeaderFooterPaths = [
+    '/onboarding',
+    '/home',
+    '/meal-plan',
+    '/profile',
+    // '/search' // Add '/search' when its page and specific layout are defined
+  ];
+
+  const showMainHeaderFooter = !noMainHeaderFooterPaths.includes(location.pathname);
+
   // const [count, setCount] = useState(0) // Default Vite state, can be removed
 
   const handleLogout = () => {
@@ -75,17 +89,29 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
-      <Header navLinks={mockNavLinks} user={mockUser} onLogout={handleLogout} />
-      <main style={{ paddingTop: '20px', paddingBottom: '20px', minHeight: 'calc(100vh - 120px)' /* Rough estimate for header/footer */ }}>
+    <> {/* Changed from BrowserRouter to Fragment, BrowserRouter will wrap AppContent */}
+      {showMainHeaderFooter && <Header navLinks={mockNavLinks} user={mockUser} onLogout={handleLogout} />}
+      <main style={{ 
+        paddingTop: showMainHeaderFooter ? '20px' : '0', // Adjust padding based on main header visibility
+        paddingBottom: showMainHeaderFooter ? '20px' : '0', // Adjust padding based on main footer visibility
+        minHeight: showMainHeaderFooter ? 'calc(100vh - 120px)' : '100vh' /* Rough estimate for main header/footer or full height */ 
+      }}>
         <AppRouter />
       </main>
-      <Footer 
+      {showMainHeaderFooter && <Footer 
         footerLinks={[{label: 'About', path: '/about-placeholder'}, {label: 'Contact', path: '/contact-placeholder'}] /* Example */} 
         socialLinks={[{name: 'X', url:'#', icon: 'X'}, {name:'Insta', url:'#', icon:'IG'}]} /* Example */
-      />
-    </BrowserRouter>
+      />}
+    </>
   )
+}
+
+function App() { // New App component to wrap AppContent with BrowserRouter
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
+  );
 }
 
 export default App 

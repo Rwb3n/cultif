@@ -1,226 +1,137 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle0_page_userprofile_g112",
-  "version_tag": "0.1.0",
+  "version_tag": "0.2.0-ux-realignment-g168",
   "g_created": 122,
-  "g_last_modified": 122,
-  "description": "Placeholder component for the User Profile page. This page will display user information, saved recipes, meal plans, and settings.",
+  "g_last_modified": 168,
+  "description": "REFACTORED (TSX) for UX Realignment: User Profile page adapted to display user content (recipes/meal plans) in a 3-column grid. Integrates BottomStickyNav. Removes previous placeholder header, tabs, and settings. Focuses on grid layout for user-generated/saved content.",
   "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEVELOPMENT",
-  "purpose_statement": "To provide a user-specific area for managing their account, preferences, and content within the web prototype. References Figma Catalogue ID: T-11.",
+  "purpose_statement": "To provide a visually organized display of the user's recipes and meal plans in a grid format, accessible via the new app navigation structure, as per stakeholder feedback g162.",
   "key_logic_points": [
-    "Display user avatar and basic information (name, username).",
-    "Tabs for different sections: My Recipes, My Meal Plans, Settings.",
-    "'My Recipes' tab: Display a list/grid of recipes created or favorited by the user (mocked).",
-    "'My Meal Plans' tab: Display a list/summary of saved meal plans (mocked).",
-    "'Settings' tab: Placeholders for account settings (e.g., change password, email, dietary preferences - mock interactions).",
-    "Logout button."
+    "Displays mock user recipes in a responsive 3-column grid (sm:grid-cols-2 md:grid-cols-3).",
+    "Uses `shadcn/ui Card` for recipe item display (placeholder).",
+    "Integrates the `BottomStickyNav` component for app navigation.",
+    "Removes previous placeholder profile header, tab navigation, and settings section to simplify focus on content grid.",
+    "Page content is scrollable above the `BottomStickyNav`.",
+    "Uses Tailwind CSS for styling."
   ],
   "interfaces_provided": [
-    { "name": "UserProfilePage", "interface_type": "REACT_COMPONENT", "details": "Component for displaying and managing user profile information.", "notes": "" }
+    { "name": "UserProfilePage", "interface_type": "REACT_COMPONENT", "details": "Displays user's content in a grid.", "notes": "Mock data used. Infinite scroll not implemented." }
   ],
-  "requisites": [],
+  "requisites": [
+    { "description": "BottomStickyNav component must be available.", "type": "INTERNAL_DEPENDENCY" },
+    { "description": "shadcn/ui Card component for item display.", "type": "COMPONENT_DEPENDENCY" }
+  ],
   "external_dependencies": [
-    { "name": "React", "version": "^18.2.0", "reason": "Core React library." },
-    { "name": "react-router-dom", "version": "^6.x.x", "reason": "For navigation (Link) and potentially nested routes for tabs." }
+    { "name": "React", "version": "^19.1.0", "reason": "Core React library." },
+    { "name": "react-router-dom", "version": "^7.6.0", "reason": "For <Link> component." },
+    { "name": "lucide-react", "version": "^0.417.0", "reason": "For placeholder image icon."}
   ],
   "internal_dependencies": [
-    // "cycle0_mock_data_users_g112"
-    // "cycle0_mock_data_recipes_g112"
-    // "cycle0_comp_button_g112"
-    // "cycle0_comp_card_g112" (for recipe display)
+    "cycle0_comp_bottomstickynav_g163",
+    "shadcn_ui_card_g160"
   ],
   "dependents": [
-    "cycle0_router_config_g112" // This page will be a route in AppRouter
+    "cycle0_router_config_g112"
   ],
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial scaffold by Hybrid_AI_OS g122. To be populated with specific UI placeholders and mock data integration based on T-11 (Figma)."
+    "manual_review_comment": "Refactored at g=168 to implement 3xN grid and BottomStickyNav as per plan pc0uxr_task_005. Simplified from previous placeholder. Previous version 0.1.0 g_last_modified=122."
   }
 }
 ANNOTATION_BLOCK_END */
 
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import BottomStickyNav from '../components/layout/BottomStickyNav';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Image as ImageIcon } from 'lucide-react';
 
-// Mock user data (replace with actual fetch logic or context)
-const mockUser = {
-  id: 'u1',
-  name: 'Alice Wonderland',
-  username: 'alicew',
-  avatarUrl: 'https://via.placeholder.com/150?text=User+Avatar',
-  email: 'alice@example.com',
-  bio: 'Loves to cook and explore new recipes. Focused on healthy eating.',
-  favoriteRecipes: [
-    { id: 'r1', name: 'Spicy Chicken Pasta', imageUrl: 'https://via.placeholder.com/100x100?text=Pasta' },
-    { id: 'r3', name: 'Berry Smoothie', imageUrl: 'https://via.placeholder.com/100x100?text=Smoothie' },
-  ],
-  myMealPlans: [
-    { id: 'mp1', name: 'Current Week Plan', summary: 'A mix of quick dinners and healthy lunches.' },
-    { id: 'mp2', name: 'High Protein Plan', summary: 'Focused on protein intake for workouts.' },
-  ],
-  settings: {
-    dietaryPreferences: ['Vegetarian', 'Low-Carb'],
-    notifications: true,
-  }
-};
+interface UserContentItem {
+  id: string;
+  name: string;
+  imageUrl?: string;
+  type: 'recipe' | 'mealPlan'; // To distinguish content type if needed later
+}
 
-/**
- * UserProfilePage Component (References Figma Catalogue: T-11)
- * 
- * Purpose: Displays the logged-in user's profile information, including their created/saved content and settings.
- * 
- * Structure (T-11 - User Profile Dashboard):
- * - Main container.
- * - Profile Header (T-11_header): User Avatar (T-11_avatar), Name (T-11_username), Edit Profile Button (T-11_edit_button).
- * - Tab Navigation (T-11_tabs): For sections like "My Recipes", "My Meal Plans", "Favorites", "Settings".
- * - Tab Content Area (T-11_tab_content):
- *   - My Recipes (T-11_my_recipes_section): Grid/list of user's recipes (T-11_recipe_card_small).
- *   - My Meal Plans (T-11_my_mealplans_section): List of user's meal plans (T-11_mealplan_summary_item).
- *   - Settings (T-11_settings_section): Form fields for profile settings, preferences (T-11_settings_form).
- * - Logout Button (T-11_logout_button).
- * 
- * Placeholders & Checklist:
- * [ ] Implement state for the current `user` data and active `tab`.
- * [ ] (Mock) Fetch user data (useEffect).
- * [ ] Display Profile Header: Avatar, Name, and an "Edit Profile" button (mock action) - Ref T-11_header, T-11_avatar, T-11_username, T-11_edit_button.
- * [ ] Implement Tab Navigation for "My Recipes", "My Meal Plans", "Settings" - Ref T-11_tabs.
- * [ ] Based on active tab, render content:
- *     [ ] My Recipes: Display list/grid of `user.favoriteRecipes` (mocked) - Ref T-11_my_recipes_section, T-11_recipe_card_small.
- *         [ ] Each recipe could link to its detail page.
- *     [ ] My Meal Plans: Display list of `user.myMealPlans` (mocked) - Ref T-11_my_mealplans_section, T-11_mealplan_summary_item.
- *         [ ] Each plan could link to the meal plan page.
- *     [ ] Settings: Display placeholders for editable fields (name, email, bio, dietary preferences) - Ref T-11_settings_section, T-11_settings_form.
- *         [ ] Mock "Save Settings" button.
- * [ ] Implement Logout Button (mock action, e.g., navigate to login) - Ref T-11_logout_button.
- * [ ] Basic styling for layout, tabs, and content sections.
- * [ ] Back navigation link if applicable (e.g., if accessed from somewhere other than main nav).
- */
-const UserProfilePage = () => {
-  const [user, setUser] = useState(null);
-  const [activeTab, setActiveTab] = useState('recipes'); // recipes, mealPlans, settings
-  const navigate = useNavigate();
+// Mock user data - simplified for grid display
+const mockUserContent: UserContentItem[] = [
+  { id: 'r1', name: 'Spicy Chicken Pasta', imageUrl: '/assets/placeholders/200x200.png', type: 'recipe' },
+  { id: 'mp1', name: 'Current Week Plan', imageUrl: '/assets/placeholders/200x200.png', type: 'mealPlan' },
+  { id: 'r2', name: 'Vegan Buddha Bowl', imageUrl: '/assets/placeholders/200x200.png', type: 'recipe' },
+  { id: 'r3', name: 'Berry Smoothie', type: 'recipe' }, // No image example
+  { id: 'mp2', name: 'High Protein Plan', imageUrl: '/assets/placeholders/200x200.png', type: 'mealPlan' },
+  { id: 'r4', name: 'Avocado Toast Deluxe', imageUrl: '/assets/placeholders/200x200.png', type: 'recipe' },
+  { id: 'r5', name: 'Quick Salad Lunch', imageUrl: '/assets/placeholders/200x200.png', type: 'recipe' },
+  { id: 'mp3', name: 'Weekend Feast Plan', type: 'mealPlan' },
+  { id: 'r6', name: 'Morning Oats', imageUrl: '/assets/placeholders/200x200.png', type: 'recipe' },
+];
+
+const UserProfilePage: React.FC = () => {
+  const [userContent, setUserContent] = useState<UserContentItem[]>([]);
 
   useEffect(() => {
     // Simulate fetching user data
-    setUser(mockUser);
+    setUserContent(mockUserContent);
   }, []);
 
-  const handleLogout = () => {
-    alert('Mock: Logging out...');
-    // navigate('/login'); // Assuming a login route exists
-  };
-
-  if (!user) {
-    return <div style={{padding: '20px'}}>Loading user profile... (T-11)</div>;
+  if (userContent.length === 0) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <main className="flex-grow flex items-center justify-center p-4">
+          <p>Loading profile content...</p>
+        </main>
+        <BottomStickyNav />
+      </div>
+    );
   }
 
-  const renderTabContent = () => {
-    switch (activeTab) {
-      case 'recipes':
-        return (
-          <div className="T-11_my_recipes_section">
-            <h3 style={{borderBottom:'1px solid #eee', paddingBottom:'10px'}}>My Favorite Recipes</h3>
-            {user.favoriteRecipes.length > 0 ? (
-              <div style={{display:'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap:'15px'}}>
-                {user.favoriteRecipes.map(recipe => (
-                  <Link key={recipe.id} to={`/recipe/${recipe.id}`} style={{textDecoration:'none', color:'inherit'}} className="T-11_recipe_card_small">
-                    <div style={{border:'1px solid #ddd', borderRadius:'4px', padding:'10px', textAlign:'center'}}>
-                      <img src={recipe.imageUrl} alt={recipe.name} style={{width:'100%', height:'100px', objectFit:'cover', borderRadius:'4px'}}/>
-                      <p style={{margin:'5px 0 0'}}>{recipe.name}</p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            ) : <p>No favorite recipes yet.</p>}
-          </div>
-        );
-      case 'mealPlans':
-        return (
-          <div className="T-11_my_mealplans_section">
-            <h3 style={{borderBottom:'1px solid #eee', paddingBottom:'10px'}}>My Meal Plans</h3>
-            {user.myMealPlans.length > 0 ? (
-              <ul style={{listStyle:'none', padding:0}}>
-                {user.myMealPlans.map(plan => (
-                  <li key={plan.id} style={{border:'1px solid #ddd', borderRadius:'4px', padding:'10px', marginBottom:'10px'}} className="T-11_mealplan_summary_item">
-                    <Link to={`/meal-plan/${plan.id}`} style={{textDecoration:'none', color:'inherit', fontWeight:'bold'}}>{plan.name}</Link>
-                    <p style={{fontSize:'0.9em', color:'#555'}}>{plan.summary}</p>
-                  </li>
-                ))}
-              </ul>
-            ) : <p>No saved meal plans yet.</p>}
-          </div>
-        );
-      case 'settings':
-        return (
-          <div className="T-11_settings_section">
-            <h3 style={{borderBottom:'1px solid #eee', paddingBottom:'10px'}}>Settings</h3>
-            <form className="T-11_settings_form" onSubmit={(e) => e.preventDefault()}>
-              <div style={{marginBottom:'15px'}}>
-                <label htmlFor="name" style={{display:'block', marginBottom:'5px'}}>Name:</label>
-                <input type="text" id="name" defaultValue={user.name} style={{width:'100%', padding:'8px', boxSizing:'border-box'}} />
-              </div>
-              <div style={{marginBottom:'15px'}}>
-                <label htmlFor="email" style={{display:'block', marginBottom:'5px'}}>Email:</label>
-                <input type="email" id="email" defaultValue={user.email} style={{width:'100%', padding:'8px', boxSizing:'border-box'}} />
-              </div>
-              <div style={{marginBottom:'15px'}}>
-                <label htmlFor="bio" style={{display:'block', marginBottom:'5px'}}>Bio:</label>
-                <textarea id="bio" defaultValue={user.bio} rows={3} style={{width:'100%', padding:'8px', boxSizing:'border-box'}} />
-              </div>
-              <div style={{marginBottom:'15px'}}>
-                <p>Dietary Preferences (mock): {user.settings.dietaryPreferences.join(', ')}</p>
-              </div>
-              <button type="submit" onClick={() => alert('Mock: Settings Saved!')} style={{padding:'10px 15px'}}>Save Settings</button>
-            </form>
-          </div>
-        );
-      default:
-        return null;
-    }
-  };
+  const ContentCard: React.FC<{ item: UserContentItem }> = ({ item }) => (
+    <Link to={item.type === 'recipe' ? `/recipe/${item.id}` : `/meal-plan/${item.id}`} className="block group">
+      <Card className="overflow-hidden h-full flex flex-col">
+        <CardHeader className="p-0 aspect-square flex items-center justify-center bg-muted">
+          {item.imageUrl ? (
+            <img 
+              src={item.imageUrl} 
+              alt={item.name} 
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          ) : (
+            <ImageIcon className="w-1/2 h-1/2 text-muted-foreground" />
+          )}
+        </CardHeader>
+        <CardContent className="p-3 flex-grow">
+          <CardTitle className="text-sm font-medium leading-tight truncate group-hover:text-primary transition-colors">
+            {item.name}
+          </CardTitle>
+        </CardContent>
+      </Card>
+    </Link>
+  );
 
   return (
-    <div style={{ padding: '20px', maxWidth: '900px', margin: 'auto' }}>
-      <Link to="/home" style={{display:'block', marginBottom:'15px'}}>&larr; Back to Home</Link>
-
-      {/* T-11_header */}
-      <header style={{ display: 'flex', alignItems: 'center', marginBottom: '30px', paddingBottom:'20px', borderBottom:'1px solid #eee' }} className="T-11_header">
-        <img src={user.avatarUrl} alt={`${user.name}'s avatar`} style={{ width: '100px', height: '100px', borderRadius: '50%', marginRight: '20px' }} className="T-11_avatar" />
-        <div>
-          <h1 style={{ margin: '0 0 5px 0' }} className="T-11_username">{user.name} (@{user.username})</h1>
-          <button onClick={() => alert('Mock: Edit Profile clicked!')} style={{padding:'8px 12px'}} className="T-11_edit_button">Edit Profile</button>
-        </div>
-        <button onClick={handleLogout} style={{ marginLeft: 'auto', padding:'8px 12px', background:'#f44336', color:'white', border:'none', borderRadius:'4px'}} className="T-11_logout_button">Logout</button>
+    <div className="flex flex-col min-h-screen bg-background">
+      <header className="p-4 border-b sticky top-0 bg-background z-40"> 
+        <h1 className="text-xl font-semibold text-center">My Profile</h1>
       </header>
 
-      {/* T-11_tabs */}
-      <nav style={{ marginBottom: '20px' }} className="T-11_tabs">
-        <button onClick={() => setActiveTab('recipes')} style={tabStyle(activeTab === 'recipes')}>My Recipes</button>
-        <button onClick={() => setActiveTab('mealPlans')} style={tabStyle(activeTab === 'mealPlans')}>My Meal Plans</button>
-        <button onClick={() => setActiveTab('settings')} style={tabStyle(activeTab === 'settings')}>Settings</button>
-      </nav>
+      <main className="flex-grow overflow-y-auto p-4 pb-20"> {/* pb-20 for BottomStickyNav */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
+          {userContent.map(item => (
+            <ContentCard key={`${item.type}-${item.id}`} item={item} />
+          ))}
+        </div>
+        {/* Placeholder for infinite scroll trigger or pagination */}
+        {userContent.length >= 9 && (
+           <p className="text-center text-muted-foreground mt-8 text-sm">Scroll for more (visual only)</p>
+        )}
+      </main>
 
-      {/* T-11_tab_content */}
-      <div className="T-11_tab_content">
-        {renderTabContent()}
-      </div>
-
-      <p style={{marginTop: '30px', fontSize: '0.8em', textAlign:'center', color:'#aaa'}}>Figma Ref: T-11</p>
+      <BottomStickyNav />
     </div>
   );
 };
-
-const tabStyle = (isActive) => ({
-  padding: '10px 15px',
-  marginRight: '10px',
-  border: 'none',
-  borderBottom: isActive ? '3px solid #007bff' : '3px solid transparent',
-  cursor: 'pointer',
-  background: 'none',
-  fontSize: '1em',
-  fontWeight: isActive ? 'bold' : 'normal'
-});
 
 export default UserProfilePage; 

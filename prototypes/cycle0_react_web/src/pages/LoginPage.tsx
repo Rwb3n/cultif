@@ -1,33 +1,34 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle0_page_login_g112",
-  "version_tag": "0.3.0-shadcn-tailwind-refactor-tsx",
+  "version_tag": "0.4.0-ux-realignment-g165",
   "g_created": 118,
-  "g_last_modified": 160,
-  "description": "REFACTORED (TSX): Component for the Login page, refactored to use shadcn/ui components (Input, Button, Label) and Tailwind CSS for a mobile-friendly form layout. Manages user login form and interactions.",
+  "g_last_modified": 165,
+  "description": "REFACTORED (TSX) for UX Realignment: Login page adapted for a full-screen experience with no vertical scrolling. The form content is centered and designed to fit within the viewport. No global navigation or footer is used.",
   "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEVELOPMENT",
-  "purpose_statement": "To provide the structure for the user login experience, styled with Tailwind CSS and using shadcn/ui components. References Figma Catalogue ID: T-03a.",
+  "purpose_statement": "To provide a focused, full-screen user login experience, minimizing distractions and ensuring content fits the screen height without scrolling, as per stakeholder feedback g162. Continues to use shadcn/ui and Tailwind CSS.",
   "key_logic_points": [
-    "Layout refactored using Tailwind CSS for a mobile-first, centered form.",
-    "Uses `shadcn/ui Input` for email and password fields.",
-    "Uses `shadcn/ui Label` for form field labels.",
-    "Uses `shadcn/ui Button` for the login action.",
-    "Uses refactored `PrimitiveLink` (Tailwind-styled) for 'Forgot Password' and 'Sign Up' navigation.",
-    "Dependencies on old primitives (Box, Typography, custom Input, common Button, Stack) removed.",
-    "Form submission handling (mocked) with navigation."
+    "Full-screen layout achieved using Tailwind CSS (min-h-screen, flex, items-center, justify-center).",
+    "Content container (max-w-md) ensures the form is presented in a centered, constrained width area.",
+    "The page is designed so that the primary content (form) should fit typical screen heights without needing page scroll.",
+    "No Header or Footer components are rendered on this page.",
+    "Uses `shadcn/ui Input`, `Button`, `Label` for form elements.",
+    "Uses `PrimitiveLink` for navigation links (e.g., to Signup, Forgot Password)."
   ],
   "interfaces_provided": [
     { "name": "LoginPage", "interface_type": "REACT_COMPONENT", "details": "The main component for the login screen.", "notes": "" }
   ],
-  "requisites": [],
+  "requisites": [
+    { "description": "Stakeholder feedback from project_review_and_feedback_analysis_g162 detailing UX requirements for auth pages.", "type": "REQUIREMENT_SOURCE"}
+  ],
   "external_dependencies": [
     { "name": "React", "version": "^19.1.0", "reason": "Core React library for building user interfaces." },
     { "name": "@types/react", "version": "^19.1.5", "reason": "TypeScript definitions for React." },
     { "name": "react-router-dom", "version": "^7.6.0", "reason": "For navigation (useNavigate hook and PrimitiveLink)." }
   ],
   "internal_dependencies": [
-    "cycle1_primitive_link_g132", // Refactored Link primitive
+    "cycle1_primitive_link_g132",
     "shadcn_ui_input_g160",
     "shadcn_ui_button_g160",
     "shadcn_ui_label_g160"
@@ -38,7 +39,7 @@
   "linked_issue_ids": [],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Refactored at g=160 to use shadcn/ui components and Tailwind CSS. Original scaffold g118. Dependencies on old primitives removed."
+    "manual_review_comment": "Refactored at g=165 for full-screen, no-scroll layout as per project_review_and_feedback_analysis_g162. Previous version 0.3.0-shadcn-tailwind-refactor-tsx g_last_modified=160."
   }
 }
 ANNOTATION_BLOCK_END */
@@ -48,7 +49,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import PrimitiveLink from '../components/primitives/Link'; // Refactored Link, Tailwind-styled
+import PrimitiveLink from '../components/primitives/Link';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -58,18 +59,17 @@ const LoginPage: React.FC = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log('Login attempt with:', { email, password });
-    // Basic validation example
     if (!email || !password) {
       alert('Please enter both email and password.');
       return;
     }
     alert('Mock login successful! Navigating to home.');
-    navigate('/home'); // Navigate to home or dashboard
+    navigate('/home');
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-10rem)] px-4 py-8 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md space-y-8">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-slate-50 dark:bg-slate-900 p-4 sm:p-6 lg:p-8">
+      <div className="w-full max-w-md space-y-6">
         <div>
           {/* <img className="mx-auto h-12 w-auto" src="/path/to/logo.png" alt="Cultif Logo" /> Placeholder for T-03a_logo */}
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
@@ -83,7 +83,7 @@ const LoginPage: React.FC = () => {
           </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="space-y-4 rounded-md shadow-sm">
+          <div className="space-y-4 rounded-md">
             <div>
               <Label htmlFor="email-address" className="sr-only">Email address</Label>
               <Input

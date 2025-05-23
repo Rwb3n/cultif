@@ -1,35 +1,41 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "cycle0_page_home_g112",
-  "version_tag": "0.2.0-tailwind-refactor-tsx",
+  "version_tag": "0.3.0-ux-realignment-g167",
   "g_created": 120,
-  "g_last_modified": 160,
-  "description": "REFACTORED (TSX): Home page refactored to use shadcn/ui components (Card, Button, Input) and Tailwind CSS for a mobile-first, single-column friendly layout. Displays featured recipes and creator spotlights. Dependencies on old primitive components (Box, Typography, custom Card, Stack) removed.",
+  "g_last_modified": 167,
+  "description": "REFACTORED (TSX) for UX Realignment: Home page rebuilt with new app-like navigation (TopLogoBar, TopMealCategoryNav, BottomStickyNav). Category display changed from chips to scrollable square items with placeholder images. Search bar remains. Old footer removed.",
   "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEVELOPMENT",
-  "purpose_statement": "To provide the main landing and discovery page for users, styled with Tailwind CSS and using shadcn/ui components for a modern, responsive UI. References Figma Catalogue IDs: T-02, T-05, T-06.",
+  "purpose_statement": "To serve as the main discovery hub, incorporating new navigation paradigms and category display as per stakeholder feedback g162, providing an app-like experience.",
   "key_logic_points": [
-    "Layout refactored using Tailwind CSS (flexbox, grid, responsive classes) for a mobile-first approach.",
-    "Uses `shadcn/ui Card` for displaying recipes and creators.",
-    "Uses `shadcn/ui Button` for filter chips and card actions.",
-    "Uses `shadcn/ui Input` for the search bar.",
-    "Dependencies on deprecated custom primitives (Box, Typography, common/Card, Stack) have been removed.",
-    "Content sections (Featured Recipes, Popular Creators) are now responsive."
+    "Integrates TopLogoBar, TopMealCategoryNav, and BottomStickyNav components.",
+    "Removes previous inline footer; old Header/Footer components were not in use.",
+    "Category display changed from `Button` (chips) to a new `CategoryCardComponent` (scrollable square items with placeholder images).",
+    "The main content area is designed to scroll vertically between the top navigation elements and the bottom sticky navigation.",
+    "Retains search bar, featured recipes, and popular creators sections with existing shadcn/ui Card components.",
+    "Uses mock data for all dynamic content."
   ],
   "interfaces_provided": [
-    { "name": "HomePage", "interface_type": "REACT_COMPONENT", "details": "The main component for the home/discovery screen.", "notes": "Uses mock data for now." }
+    { "name": "HomePage", "interface_type": "REACT_COMPONENT", "details": "The main component for the home/discovery screen.", "notes": "" }
   ],
-  "requisites": [],
+  "requisites": [
+    { "description": "TopLogoBar, TopMealCategoryNav, BottomStickyNav components must be available.", "type": "INTERNAL_DEPENDENCY" },
+    { "description": "lucide-react for icons.", "type": "LIBRARY_DEPENDENCY" }
+  ],
   "external_dependencies": [
-    { "name": "React", "version": "^19.1.0", "reason": "Core React library for building user interfaces." },
-    { "name": "@types/react", "version": "^19.1.5", "reason": "TypeScript definitions for React." },
-    { "name": "lucide-react", "version": "latest", "reason": "For icons (e.g., Heart icon)."}
+    { "name": "React", "version": "^19.1.0", "reason": "Core React library." },
+    { "name": "@types/react", "version": "^19.1.5", "reason": "TypeScript definitions." },
+    { "name": "lucide-react", "version": "^0.417.0", "reason": "For icons (Search, Heart, placeholder category images)." }
   ],
   "internal_dependencies": [
-    "cycle1_primitive_link_g132", // Refactored Link primitive, used within Button asChild
+    "cycle1_primitive_link_g132",
     "shadcn_ui_card_g160",
     "shadcn_ui_button_g160",
-    "shadcn_ui_input_g160"
+    "shadcn_ui_input_g160",
+    "cycle0_comp_toplogobar_g163",
+    "cycle0_comp_topmealcategorynav_g163",
+    "cycle0_comp_bottomstickynav_g163"
   ],
   "dependents": [
     "cycle0_router_config_g112"
@@ -37,19 +43,22 @@
   "linked_issue_ids": ["issue_placeholder_img_g145"],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Refactored at g=160 to use Tailwind CSS and shadcn/ui components. Original scaffold g120. Dependencies on old primitives removed. Mock data is still used."
+    "manual_review_comment": "Refactored at g=167 to integrate new navigation components and category display as per plan pc0uxr_task_004. Previous version 0.2.0-tailwind-refactor-tsx g_last_modified=160."
   }
 }
 ANNOTATION_BLOCK_END */
 
 import React, { useEffect, useState } from 'react';
-import PrimitiveLink from '../components/primitives/Link'; // Refactored Link, Tailwind-styled
+import PrimitiveLink from '../components/primitives/Link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Heart, Search } from 'lucide-react';
+import { Heart, Search, Image as ImageIcon } from 'lucide-react'; // Added ImageIcon for category placeholders
 
-// Mock data types (can be expanded)
+import TopLogoBar from '../components/layout/TopLogoBar';
+import TopMealCategoryNav from '../components/layout/TopMealCategoryNav';
+import BottomStickyNav from '../components/layout/BottomStickyNav';
+
 interface Recipe {
   id: string;
   name: string;
@@ -65,15 +74,16 @@ interface Creator {
   profilePic?: string;
 }
 
-interface Category {
+interface CategoryUIData {
   id: string;
   name: string;
+  imageUrl?: string; // For square image items
 }
 
 const HomePage: React.FC = () => {
   const [featuredRecipes, setFeaturedRecipes] = useState<Recipe[]>([]);
   const [popularCreators, setPopularCreators] = useState<Creator[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categoriesUIData, setCategoriesUIData] = useState<CategoryUIData[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
@@ -88,9 +98,13 @@ const HomePage: React.FC = () => {
       { id: 'c2', name: 'Green Goddess', profilePic: '/assets/placeholders/100x100.png' },
       { id: 'c3', name: 'FitFoodie', profilePic: '/assets/placeholders/100x100.png' },
     ]);
-    setCategories([
-      { id: 'cat1', name: 'Italian' }, { id: 'cat2', name: 'Vegan' }, { id: 'cat3', name: 'Quick & Easy' }, 
-      { id: 'cat4', name: 'Desserts' }, { id: 'cat5', name: 'Breakfast' }, { id: 'cat6', name: 'Healthy' }
+    setCategoriesUIData([
+      { id: 'cat1', name: 'Italian', imageUrl: '/assets/placeholders/150x150_italian.png' }, 
+      { id: 'cat2', name: 'Vegan', imageUrl: '/assets/placeholders/150x150_vegan.png' }, 
+      { id: 'cat3', name: 'Quick & Easy', imageUrl: '/assets/placeholders/150x150_quick.png' }, 
+      { id: 'cat4', name: 'Desserts', imageUrl: '/assets/placeholders/150x150_desserts.png' }, 
+      { id: 'cat5', name: 'Breakfast', imageUrl: '/assets/placeholders/150x150_breakfast.png' }, 
+      { id: 'cat6', name: 'Healthy', imageUrl: '/assets/placeholders/150x150_healthy.png' }
     ]);
   }, []);
 
@@ -100,7 +114,7 @@ const HomePage: React.FC = () => {
       <Input 
         type="search" 
         placeholder="Search recipes, ingredients, creators... (T-02_search)" 
-        className="pl-10 w-full py-3 text-base" 
+        className="pl-10 w-full py-3 text-base"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
@@ -153,55 +167,69 @@ const HomePage: React.FC = () => {
     </Card>
   );
 
-  const FilterChipComponent: React.FC<{ category: Category }> = ({ category }) => (
-    <Button variant="outline" size="sm" className="flex-shrink-0" onClick={() => alert(`Filtering by ${category.name}`)}>
-      {category.name}
-    </Button>
+  const CategoryCardComponent: React.FC<{ category: CategoryUIData }> = ({ category }) => (
+    <button 
+      onClick={() => alert(`Selected category: ${category.name}`)} 
+      className="flex-shrink-0 w-32 h-32 sm:w-36 sm:h-36 rounded-lg overflow-hidden relative group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
+    >
+      {category.imageUrl ? (
+        <img src={category.imageUrl} alt={category.name} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+      ) : (
+        <div className="w-full h-full bg-muted flex items-center justify-center">
+          <ImageIcon className="w-12 h-12 text-muted-foreground" />
+        </div>
+      )}
+      <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors" />
+      <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent">
+        <p className="text-white text-sm font-semibold truncate">{category.name}</p>
+      </div>
+    </button>
   );
 
   return (
-    <div className="container mx-auto px-4 py-6 sm:px-6 lg:px-8">
-      {/* Search Bar */}
-      <SearchBar />
+    <div className="flex flex-col min-h-screen">
+      <TopLogoBar />
+      <TopMealCategoryNav />
       
-      {/* Filter Chips */}
-      <div className="mb-6 md:mb-8">
-        <h3 className="text-sm font-medium text-muted-foreground mb-2">Categories (T-02_filters)</h3>
-        <div className="flex space-x-2 overflow-x-auto pb-2 no-scrollbar">
-          {categories.map(cat => <FilterChipComponent key={cat.id} category={cat} />)}
-        </div>
-      </div>
-
-      {/* Featured Recipes Section */}
-      <section className="mb-8 md:mb-12">
-        <h2 className="text-2xl font-bold tracking-tight mb-4 md:mb-6">Featured Recipes (T-02_section_title)</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-          {featuredRecipes.slice(0,4).map(recipe => <RecipeCardComponent key={recipe.id} recipe={recipe} />)}
-        </div>
-         {/* Show more button or link if there are more than fit */}
-         {featuredRecipes.length > 4 && (
-          <div className="mt-6 text-center">
-            <Button variant="outline" asChild>
-              <PrimitiveLink to="/recipes/featured">View All Featured</PrimitiveLink>
-            </Button>
+      <main className="flex-grow overflow-y-auto pt-4 pb-20"> {/* pb-20 to avoid overlap with BottomStickyNav (h-16 + padding) */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Search Bar */}
+          <SearchBar />
+          
+          {/* Categories - New square items with images */}
+          <div className="mb-6 md:mb-8">
+            <h3 className="text-lg font-semibold text-foreground mb-3">Categories</h3>
+            <div className="flex space-x-4 overflow-x-auto pb-3 no-scrollbar">
+              {categoriesUIData.map(cat => <CategoryCardComponent key={cat.id} category={cat} />)}
+            </div>
           </div>
-        )}
-      </section>
 
-      {/* Popular Creators Section */}
-      <section className="mb-8 md:mb-12">
-        <h2 className="text-2xl font-bold tracking-tight mb-4 md:mb-6">Popular Creators (T-02_section_title)</h2>
-        <div className="flex space-x-4 md:space-x-6 overflow-x-auto pb-4 no-scrollbar">
-          {popularCreators.map(creator => <CreatorCardComponent key={creator.id} creator={creator} />)}
+          {/* Featured Recipes Section */}
+          <section className="mb-8 md:mb-12">
+            <h2 className="text-2xl font-bold tracking-tight mb-4 md:mb-6">Featured Recipes</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+              {featuredRecipes.slice(0,4).map(recipe => <RecipeCardComponent key={recipe.id} recipe={recipe} />)}
+            </div>
+            {featuredRecipes.length > 4 && (
+              <div className="mt-6 text-center">
+                <Button variant="outline" asChild>
+                  <PrimitiveLink to="/recipes/featured">View All Featured</PrimitiveLink>
+                </Button>
+              </div>
+            )}
+          </section>
+
+          {/* Popular Creators Section */}
+          <section className="mb-8 md:mb-12">
+            <h2 className="text-2xl font-bold tracking-tight mb-4 md:mb-6">Popular Creators</h2>
+            <div className="flex space-x-4 md:space-x-6 overflow-x-auto pb-4 no-scrollbar">
+              {popularCreators.map(creator => <CreatorCardComponent key={creator.id} creator={creator} />)}
+            </div>
+          </section>
         </div>
-      </section>
+      </main>
       
-      {/* Footer with Figma Refs - Informational only */}
-      <footer className="mt-12 py-4 border-t border-border text-center">
-        <p className="text-xs text-muted-foreground">
-          Figma Refs: T-02, T-05, T-06
-        </p>
-      </footer>
+      <BottomStickyNav />
     </div>
   );
 };

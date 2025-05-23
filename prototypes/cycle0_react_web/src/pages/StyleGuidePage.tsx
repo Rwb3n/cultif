@@ -5,7 +5,7 @@
   "g_created": 134,
   "g_last_modified": 160,
   "description": "REFACTORED (TSX) - Chunk 4: Adds shadcn/ui Dialog, Drawer, and Sheet to the StyleGuidePage. Completes the showcase of all currently used shadcn/ui components.",
-  "artifact_type": "CODE_MODULE",
+  "artifact_type": "CODE_MODULE", 
   "status_in_lifecycle": "DEVELOPMENT",
   "purpose_statement": "To provide a centralized, interactive reference for the current UI toolkit, demonstrating modal-like components and side panels.",
   "key_logic_points": [
@@ -99,7 +99,7 @@ const StyleGuidePage: React.FC = () => {
     <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 min-h-screen">
       <header className="mb-10 text-center">
         <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl text-blue-600 dark:text-blue-400">
-          Cultif UI Component Visual Library
+        Cultif UI Component Visual Library
         </h1>
         <p className="mt-3 text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
           Showcasing shadcn/ui components, Tailwind CSS utilities, and custom elements, styled for a mobile-first experience.
