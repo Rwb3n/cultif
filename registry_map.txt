@@ -1,9 +1,9 @@
 {
-  "v": 21,
-  "g_updated": 166,
+  "v": 24,
+  "g_updated": 180,
   "artifact_registry_tree": {
     "os_control": {
-        "registry_map_g112_cycle0_web_proto": "registry_map.txt"
+        "registry_map_g1": "registry_map.txt"
     },
     "plans": {
         "plan_cycle0_mobile_styling_g150": "plans/plan_cycle0_mobile_styling_g150.txt",
@@ -18,12 +18,14 @@
     },
     "reports": {
         "plan_jsx_to_tsx_g157_completion_report_g159": "artifacts/reports/plan_jsx_to_tsx_g157_completion_report_g159.md",
-        "plan_cycle0_mobile_styling_g150_validation_report_g162": "artifacts/reports/plan_cycle0_mobile_styling_g150_validation_report_g162.md"
+        "plan_cycle0_mobile_styling_g150_validation_report_g162": "artifacts/reports/plan_cycle0_mobile_styling_g150_validation_report_g162.md",
+        "plan_cycle0_ux_realignment_g163_validation_report_g178": "artifacts/reports/plan_cycle0_ux_realignment_g163_validation_report_g178.md"
     },
     "reviews": {
         "cycle0_prototype_review_g130": "artifacts/reviews/cycle0_prototype_review_g130.md",
         "consolidated_progress_review_g149": "artifacts/reviews/consolidated_progress_review_g149.md",
-        "project_review_and_feedback_analysis_g162": "artifacts/reviews/project_review_and_feedback_analysis_g162.md"
+        "project_review_and_feedback_analysis_g162": "artifacts/reviews/project_review_and_feedback_analysis_g162.md",
+        "consolidated_ux_realignment_review_g180": "artifacts/reviews/consolidated_ux_realignment_review_g180.md"
     },
     "testing": {
         "cycle1_user_test_results_g143": "artifacts/testing/cycle1_user_test_results_g143.md"
@@ -34,6 +36,7 @@
     "prototypes": {
       "cycle0_react_web": {
         "cycle0_prototype_readme_g112": "prototypes/cycle0_react_web/README.md",
+        "cycle0_package_json_g163_framer": "prototypes/cycle0_react_web/package.json",
         "config": {
           "tsconfig_base_g157": "prototypes/cycle0_react_web/tsconfig.json",
           "tsconfig_app_g157": "prototypes/cycle0_react_web/tsconfig.app.json",
@@ -90,7 +93,8 @@
             "cycle0_page_creatorprofile_g112": "prototypes/cycle0_react_web/src/pages/CreatorProfilePage.tsx",
             "cycle0_page_recipeupload_g112": "prototypes/cycle0_react_web/src/pages/RecipeUploadPage.tsx",
             "cycle0_page_subscription_g112": "prototypes/cycle0_react_web/src/pages/SubscriptionPage.tsx",
-            "cycle1_styleguide_page_g131": "prototypes/cycle0_react_web/src/pages/StyleGuidePage.tsx"
+            "cycle1_styleguide_page_g131": "prototypes/cycle0_react_web/src/pages/StyleGuidePage.tsx",
+            "cycle0_updated_misc_pages_g163": "prototypes/cycle0_react_web/src/pages/"
           },
           "services": {
             "mockData": {

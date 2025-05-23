@@ -1,7 +1,7 @@
 {
   "v": 2,
   "id": "plan_cycle0_ux_realignment_g163",
-  "status": "APPROVED",
+  "status": "COMPLETED_SUCCESS",
   "preceding_plan_id_ref": "plan_cycle0_mobile_styling_g150",
   "origin_artifact_id": "project_review_and_feedback_analysis_g162",
   "goal": "Realign the web prototype's UI/UX to match the detailed stakeholder feedback (g162), focusing on an app-like interface, specific page layouts (Onboarding, Auth, Home, Profile, Meal Plan), new navigation patterns (top and bottom sticky navs), and initial placeholder animations.",
@@ -28,7 +28,7 @@
     "Advanced or highly polished animations; initial animations will be placeholders to demonstrate intent."
   ],
   "g_created": 163,
-  "g_updated": 173,
+  "g_updated": 177,
   "tasks": [
     {
       "id": "pc0uxr_task_000_anim_setup",
@@ -327,7 +327,7 @@
       ],
       "dependencies": ["pc0uxr_task_004"],
       "criticality": "LOW",
-      "status": "IN_PROGRESS_SUBTASKS",
+      "status": "DONE",
       "linked_issue_ids": ["issue_ux_cleanup_g173"],
       "notes": ["The focus is on removing old nav and adding new nav where logical, not full page redesigns unless explicitly stated.", "g170: Reviewed StyleGuidePage, RecipeDetailPage, CreatorProfilePage. Updated App.tsx logic for Header/Footer visibility.", "g171: Further refined RecipeDetailPage layout based on feedback.", "g172: Additional refinements to RecipeDetailPage (Macros row with Calories, removed Nutrition section).", "g173: RecipeDetailPage now uses app-specific navigation (TopLogoBar/BottomStickyNav) as App.tsx logic for /recipe/ paths was updated. Subsequently, the global Header and Footer were removed entirely from App.tsx, simplifying its role to routing only. This makes page-specific navigation the standard."],
       "sub_tasks": []
@@ -346,7 +346,7 @@
       "execution_checklist": [],
       "dependencies": ["pc0uxr_task_001", "pc0uxr_task_002", "pc0uxr_task_003", "pc0uxr_task_004", "pc0uxr_task_005", "pc0uxr_task_006", "pc0uxr_task_007"],
       "criticality": "MEDIUM",
-      "status": "PENDING",
+      "status": "DONE",
       "linked_issue_ids": [],
       "notes": ["This is the final wrap-up task to ensure all artifacts are correctly documented and registered."],
       "sub_tasks": []

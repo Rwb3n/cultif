@@ -1,6 +1,6 @@
 {
-  "v": 10,
-  "g_updated": 160,
+  "v": 11,
+  "g_updated": 179,
   "issues_map": {
     "issue_prop_types_g144": {
       "status": "RESOLVED",
@@ -31,6 +31,11 @@
       "status": "RESOLVED",
       "title": "Project Type Mismatch with Provided shadcn/ui Setup Guide",
       "severity": "HIGH"
+    },
+    "issue_ux_cleanup_g173": {
+      "status": "RESOLVED",
+      "title": "UX Cleanup: Finalize App-level Navigation Strategy",
+      "severity": "MEDIUM"
     }
   }
 } 

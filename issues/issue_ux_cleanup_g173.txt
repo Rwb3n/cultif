@@ -1,0 +1,22 @@
+{
+  "v": 1,
+  "id": "issue_ux_cleanup_g173",
+  "title": "UX Cleanup: Finalize App-level Navigation Strategy",
+  "description": "Issue to track the finalization of the app-level navigation strategy, specifically ensuring that the global Header/Footer components are correctly managed or removed in favor of page-specific navigation elements (TopLogoBar, BottomStickyNav) as per plan_cycle0_ux_realignment_g163. This involves changes in App.tsx and ensuring all relevant pages adhere to the new model.",
+  "type": "TASK",
+  "severity": "MEDIUM",
+  "status": "RESOLVED",
+  "g_reported": 173,
+  "g_status_updated": 179,
+  "g_resolved": 179,
+  "reported_by": "AI_CONSTRUCTION_PHASE",
+  "plan_id_ref": "plan_cycle0_ux_realignment_g163",
+  "task_id_ref": "pc0uxr_task_007",
+  "artifact_id_ref": "cycle0_prototype_app_entry_g112", 
+  "artifact_filepath_ref": "prototypes/cycle0_react_web/src/App.tsx",
+  "resolution_summary": "Resolved as part of task pc0uxr_task_007 (checklist item miscpage_check_005). The global Header and Footer components were removed from App.tsx, and pages now implement their own navigation (TopLogoBar, BottomStickyNav) as required, standardizing the app-like navigation pattern.",
+  "comments": [
+    { "g_ts": 173, "author": "AI_AGENT", "comment_text": "Issue identified during execution of pc0uxr_task_007 relating to the need to fully remove global Header/Footer from App.tsx and ensure all pages use the new navigation model." },
+    { "g_ts": 179, "author": "AI_AGENT", "comment_text": "Issue confirmed resolved. App.tsx no longer manages global Header/Footer. Page-specific navigation is consistently applied." }
+  ]
+} 
