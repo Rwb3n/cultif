@@ -28,7 +28,7 @@
     "Advanced or highly polished animations; initial animations will be placeholders to demonstrate intent."
   ],
   "g_created": 163,
-  "g_updated": 171,
+  "g_updated": 173,
   "tasks": [
     {
       "id": "pc0uxr_task_000_anim_setup",
@@ -314,21 +314,22 @@
           "name": "Updated App.tsx",
           "artifact_id": "cycle0_prototype_app_entry_g112",
           "expected_path": "prototypes/cycle0_react_web/src/App.tsx",
-          "description": "App.tsx updated with refined logic for Header/Footer visibility across different routes.",
+          "description": "App.tsx updated with refined logic for Header/Footer visibility across different routes, and subsequently to remove global Header/Footer entirely.",
           "embed_annotations_required": "true"
         }
       ],
       "execution_checklist": [
         {"item_id": "miscpage_check_001", "description": "Review StyleGuidePage.tsx, remove internal header/footer, ensure global Header/Footer from App.tsx apply. Update annotations.", "status": "DONE", "target_artifact_id": "cycle1_styleguide_page_g131", "notes": "g170: Completed. Page now relies on global Header/Footer."},
-        {"item_id": "miscpage_check_002", "description": "Review RecipeDetailPage.tsx, ensure global Header/Footer from App.tsx apply. Convert styles to Tailwind, use shadcn/ui components. Update annotations.", "status": "DONE", "target_artifact_id": "cycle0_page_recipedetail_g112", "notes": "g170: Styling converted to Tailwind/shadcn. g171: Info bar updated to two rows (Time/Servings, Macros), 'Back to Home' link removed."},
+        {"item_id": "miscpage_check_002", "description": "Review RecipeDetailPage.tsx, ensure global Header/Footer from App.tsx apply. Convert styles to Tailwind, use shadcn/ui components. Update annotations.", "status": "DONE", "target_artifact_id": "cycle0_page_recipedetail_g112", "notes": "g170: Styling converted to Tailwind/shadcn. g171: Info bar updated to two rows (Time/Servings, Macros), 'Back to Home' link removed. g172: Macros row updated to include Calories (4 items), separate Nutrition section removed. g173: App.tsx logic updated to hide global Header/Footer for /recipe/ paths, RecipeDetailPage aligned to use TopLogoBar/BottomStickyNav."},
         {"item_id": "miscpage_check_003", "description": "Review CreatorProfilePage.tsx, integrate TopLogoBar/BottomStickyNav, convert styles to Tailwind/shadcn. Update annotations. Ensure App.tsx correctly hides global Header/Footer.", "status": "DONE", "target_artifact_id": "cycle0_page_creatorprofile_g112", "notes": "g170: Completed. Page uses app-like nav. Shadcn Avatar & Tabs added."},
-        {"item_id": "miscpage_check_004", "description": "Update App.tsx to correctly manage Header/Footer visibility for dynamic routes (e.g. /creator/:id) and specific static routes (e.g. /login, /signup).", "status": "DONE", "target_artifact_id": "cycle0_prototype_app_entry_g112", "notes": "g170: Logic updated for /creator/:id using startsWith. g170: /login and /signup added to exactNoMainHeaderFooterPaths."}
+        {"item_id": "miscpage_check_004", "description": "Update App.tsx to correctly manage Header/Footer visibility for dynamic routes (e.g. /creator/:id) and specific static routes (e.g. /login, /signup).", "status": "DONE", "target_artifact_id": "cycle0_prototype_app_entry_g112", "notes": "g170: Logic updated for /creator/:id using startsWith. g170: /login and /signup added to exactNoMainHeaderFooterPaths."},
+        {"item_id": "miscpage_check_005", "description": "Completely remove global Header and Footer from App.tsx and all related conditional rendering logic. Update App.tsx annotations.", "status": "DONE", "target_artifact_id": "cycle0_prototype_app_entry_g112", "notes": "g173: Global Header/Footer removed. App.tsx now expects pages to provide their own navigation (TopLogoBar/BottomStickyNav)."}
       ],
       "dependencies": ["pc0uxr_task_004"],
       "criticality": "LOW",
-      "status": "PENDING",
-      "linked_issue_ids": [],
-      "notes": ["The focus is on removing old nav and adding new nav where logical, not full page redesigns unless explicitly stated.", "g170: Reviewed StyleGuidePage, RecipeDetailPage, CreatorProfilePage. Updated App.tsx logic for Header/Footer visibility.", "g171: Further refined RecipeDetailPage layout based on feedback."],
+      "status": "IN_PROGRESS_SUBTASKS",
+      "linked_issue_ids": ["issue_ux_cleanup_g173"],
+      "notes": ["The focus is on removing old nav and adding new nav where logical, not full page redesigns unless explicitly stated.", "g170: Reviewed StyleGuidePage, RecipeDetailPage, CreatorProfilePage. Updated App.tsx logic for Header/Footer visibility.", "g171: Further refined RecipeDetailPage layout based on feedback.", "g172: Additional refinements to RecipeDetailPage (Macros row with Calories, removed Nutrition section).", "g173: RecipeDetailPage now uses app-specific navigation (TopLogoBar/BottomStickyNav) as App.tsx logic for /recipe/ paths was updated. Subsequently, the global Header and Footer were removed entirely from App.tsx, simplifying its role to routing only. This makes page-specific navigation the standard."],
       "sub_tasks": []
     },
     {

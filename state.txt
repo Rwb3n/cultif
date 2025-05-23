@@ -1,11 +1,11 @@
 {
-  "v": 55,
-  "g": 171,
+  "v": 57,
+  "g": 173,
   "ph": "CONSTRUCT",
   "st": "READY",
   "cp_id": "plan_cycle0_ux_realignment_g163",
   "ct_id": "pc0uxr_task_007",
   "rt": {},
-  "active_issue_ids": [],
+  "active_issue_ids": ["issue_ux_cleanup_g173"],
   "last_error": null
 } 
