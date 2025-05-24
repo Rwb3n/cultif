@@ -1,0 +1,22 @@
+{
+  "v": 2,
+  "id": "issue_onboarding_top_align_g192",
+  "title": "Onboarding content area not top-aligned",
+  "description": "The main content area in OnboardingPage.tsx (artifact OnboardingPage_tsx_g181), which shows either the logo or the slides, is vertically centered on the page due to 'justify-center' on the outermost container. It should be aligned to the top of the viewport, respecting the space taken by the fixed CTA buttons at the bottom.",
+  "type": "DESIGN_FLAW",
+  "severity": "MEDIUM",
+  "status": "RESOLVED",
+  "g_reported": 192,
+  "g_status_updated": 194,
+  "g_resolved": 194,
+  "reported_by": "USER_FEEDBACK",
+  "plan_id_ref": "plan_cycle0_onboarding_g181",
+  "task_id_ref": null,
+  "artifact_id_ref": "OnboardingPage_tsx_g181",
+  "artifact_filepath_ref": "prototypes/cycle0_react_web/src/pages/OnboardingPage.tsx",
+  "resolution_summary": "Outer container in OnboardingPage.tsx modified: justify-center changed to justify-start and min-h-screen to h-screen. This aligns the main content block to the top. Change implemented at g=192.",
+  "comments": [
+    { "g_ts": 192, "author": "USER_FEEDBACK", "comment_text": "User identified that the content block is centered instead of top-aligned. Suggested changing justify-center on outer div and min-h-screen to h-screen." },
+    { "g_ts": 194, "author": "AI_SYSTEM", "comment_text": "Issue marked as RESOLVED. Code changes applied at g=192." }
+  ]
+} 

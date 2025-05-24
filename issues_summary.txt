@@ -1,6 +1,6 @@
 {
-  "v": 11,
-  "g_updated": 179,
+  "v": 20,
+  "g_updated": 198,
   "issues_map": {
     "issue_prop_types_g144": {
       "status": "RESOLVED",
@@ -35,6 +35,41 @@
     "issue_ux_cleanup_g173": {
       "status": "RESOLVED",
       "title": "UX Cleanup: Finalize App-level Navigation Strategy",
+      "severity": "MEDIUM"
+    },
+    "issue_onboarding_scroll_g190": {
+      "status": "OPEN",
+      "title": "Onboarding page scrollable after static CTA buttons added",
+      "severity": "HIGH"
+    },
+    "issue_slide_shadow_g191": {
+      "status": "RESOLVED",
+      "title": "Unnecessary shadow effect on onboarding slide card",
+      "severity": "LOW"
+    },
+    "issue_onboarding_top_align_g192": {
+      "status": "RESOLVED",
+      "title": "Onboarding content area not top-aligned",
+      "severity": "MEDIUM"
+    },
+    "issue_figma_ref_placement_g193": {
+      "status": "RESOLVED",
+      "title": "Relocate Figma ref paragraph and adjust slide container padding",
+      "severity": "LOW"
+    },
+    "issue_onboarding_animation_jank_g195": {
+      "status": "RESOLVED",
+      "title": "Onboarding slide animation direction is inversed for specific transitions",
+      "severity": "MEDIUM"
+    },
+    "issue_animation_direction_fix_g196": {
+      "status": "RESOLVED",
+      "title": "Slide animation direction inconsistent with swipe direction",
+      "severity": "MEDIUM"
+    },
+    "issue_animation_final_fix_g197": {
+      "status": "RESOLVED",
+      "title": "Animation direction still inconsistent after previous fixes",
       "severity": "MEDIUM"
     }
   }

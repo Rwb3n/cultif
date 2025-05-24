@@ -6,7 +6,7 @@
   "g_last_modified": 160,
   "description": "REFACTORED (TSX): Header component refactored for mobile-first presentation using Tailwind CSS. Mobile view features a logo and a hamburger menu icon triggering a shadcn/ui Sheet for navigation and user actions. Desktop view displays navigation and user actions inline. Uses lucide-react for icons and shadcn/ui components.",
   "artifact_type": "CODE_MODULE",
-  "status_in_lifecycle": "DEVELOPMENT",
+  "status_in_lifecycle": "DEPRECATED",
   "purpose_statement": "To provide a consistent, responsive top navigation bar. Utilizes Tailwind CSS for styling, shadcn/ui Sheet for mobile navigation, and lucide-react for icons, ensuring a mobile-first user experience.",
   "key_logic_points": [
     "Refactored with Tailwind CSS for mobile-first responsive design (flexbox, responsive prefixes like 'md:').",

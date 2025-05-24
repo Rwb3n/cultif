@@ -1,0 +1,22 @@
+{
+  "v": 2,
+  "id": "issue_onboarding_animation_jank_g195",
+  "title": "Onboarding slide animation direction is inversed for specific transitions",
+  "description": "The slide animation in OnboardingPage.tsx (artifact OnboardingPage_tsx_g181) shows incorrect directionality when transitioning from slide 1 to 2 (acts like 'previous' instead of 'next') and from slide 3 to 2 (acts like 'next' instead of 'previous'). Transitions originating from slide 2 (2->1 or 2->3) are correct. This suggests the 'slideDirection' variable is effectively misinterpreted by Framer Motion in specific cases. Proposing refactor to use variants and the 'custom' prop.",
+  "type": "BUG",
+  "severity": "MEDIUM",
+  "status": "RESOLVED",
+  "g_reported": 195,
+  "g_status_updated": 198,
+  "g_resolved": 198,
+  "reported_by": "USER_FEEDBACK",
+  "plan_id_ref": "plan_cycle0_onboarding_g181", 
+  "task_id_ref": null,
+  "artifact_id_ref": "OnboardingPage_tsx_g181",
+  "artifact_filepath_ref": "prototypes/cycle0_react_web/src/pages/OnboardingPage.tsx",
+  "resolution_summary": "The initial jank described (1->2 and 3->2 inversed) was superseded by more complex directional inconsistencies. Ultimately resolved by a complete reimplementation of the animation logic in OnboardingPage.tsx at g=197 using an index-based approach (see issue_animation_final_fix_g197). The variant-based approach attempted at g=195 did not fully solve the underlying problem.",
+  "comments": [
+    { "g_ts": 195, "author": "USER_FEEDBACK", "comment_text": "User reported inversed slide animations for 1->2 and 3->2 transitions." },
+    { "g_ts": 198, "author": "AI_SYSTEM", "comment_text": "Issue marked as RESOLVED. Superseded and fixed by solution for issue_animation_final_fix_g197 implemented at g=197." }
+  ]
+} 

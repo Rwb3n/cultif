@@ -1,20 +1,21 @@
 /* ANNOTATION_BLOCK_START
 {
   "artifact_id": "OnboardingSlide_tsx_g181",
-  "version_tag": "0.1.0",
+  "version_tag": "0.1.3-figma-ref-added-g193",
   "g_created": 182,
-  "g_last_modified": 185,
-  "description": "Reusable component to display individual onboarding slide content. It composes SlideVisual, SlideTextContent, and SlideNavigation components.",
+  "g_last_modified": 193,
+  "description": "Reusable component to display individual onboarding slide content. It composes SlideVisual, SlideTextContent, and SlideNavigation components. Now also displays a Figma reference paragraph.",
   "artifact_type": "CODE_MODULE",
   "status_in_lifecycle": "DEVELOPMENT",
-  "purpose_statement": "To provide a consistent structure for each slide in the onboarding carousel, ensuring modularity and separation of concerns.",
+  "purpose_statement": "To provide a consistent structure for each slide in the onboarding carousel, including dev-facing reference information, ensuring modularity and separation of concerns.",
   "key_logic_points": [
-    "Receives slide-specific data (title, description, image/placeholder) and navigation handlers as props.",
+    "Receives slide-specific data (title, description, image/placeholder) and dot navigation handlers as props.",
     "Renders SlideVisual, SlideTextContent, and SlideNavigation components with the appropriate data and handlers.",
+    "Displays a Figma reference paragraph at the bottom of the slide's content area.",
     "Designed to be animated by its parent (e.g., Framer Motion transitions in OnboardingPage)."
   ],
   "interfaces_provided": [
-    { "name": "OnboardingSlide", "interface_type": "REACT_COMPONENT", "details": "Component representing a single onboarding slide.", "notes": "Props include slide data and navigation callbacks." }
+    { "name": "OnboardingSlide", "interface_type": "REACT_COMPONENT", "details": "Component representing a single onboarding slide, including Figma ref text.", "notes": "Props include slide data and dot navigation callbacks." }
   ],
   "requisites": [],
   "external_dependencies": [
@@ -26,10 +27,10 @@
     "SlideNavigation_tsx_g181"
   ],
   "dependents": ["OnboardingPage_tsx_g181"],
-  "linked_issue_ids": [],
+  "linked_issue_ids": ["issue_figma_ref_placement_g193"],
   "quality_notes": {
     "unit_tests": "N/A",
-    "manual_review_comment": "Initial structure for the composable onboarding slide component at g=182."
+    "manual_review_comment": "At g=193, added the Figma reference paragraph. Linked issue_figma_ref_placement_g193. Previous CTA prop removal at g=189."
   }
 }
 ANNOTATION_BLOCK_END */
@@ -52,8 +53,6 @@ interface OnboardingSlideProps {
   totalSteps: number;
   currentStepIndex: number; // Index of the current slide
   onDotClick: (stepIndex: number) => void;
-  onLoginClick: () => void;
-  onSignupClick: () => void;
   className?: string;
 }
 
@@ -62,8 +61,6 @@ const OnboardingSlide: React.FC<OnboardingSlideProps> = ({
   totalSteps,
   currentStepIndex,
   onDotClick,
-  onLoginClick,
-  onSignupClick,
   className
 }) => {
   return (
@@ -73,19 +70,20 @@ const OnboardingSlide: React.FC<OnboardingSlideProps> = ({
         placeholderText={slideData.imagePlaceholder} 
         className="shrink-0"
       />
-      <div className="flex flex-col items-center justify-center p-6 space-y-6 bg-teal-500 dark:bg-teal-700 w-full rounded-t-3xl sm:rounded-t-none flex-grow">
+      <div className="flex flex-col items-center justify-center p-6 space-y-6 bg-slate-200 dark:bg-slate-800 w-full rounded-t-3xl sm:rounded-t-none flex-grow">
         <SlideTextContent 
           title={slideData.title} 
           description={slideData.description} 
-          className="text-white dark:text-teal-50"
+          className="text-slate-800 dark:text-slate-100"
         />
         <SlideNavigation
           totalSteps={totalSteps}
           currentStep={currentStepIndex}
           onDotClick={onDotClick}
-          onLoginClick={onLoginClick}
-          onSignupClick={onSignupClick}
         />
+        <p className="pt-2 pb-1 text-xs text-slate-400 dark:text-slate-500 shrink-0">
+          Figma Ref: T-01 (Slide {currentStepIndex + 1} of {totalSteps})
+        </p>
       </div>
     </div>
   );

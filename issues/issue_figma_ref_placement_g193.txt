@@ -1,0 +1,22 @@
+{
+  "v": 2,
+  "id": "issue_figma_ref_placement_g193",
+  "title": "Relocate Figma ref paragraph and adjust slide container padding",
+  "description": "The paragraph displaying 'Figma Ref' in OnboardingPage.tsx should be moved into the OnboardingSlide.tsx component, specifically within its main content area (the div with bg-slate-200). Concurrently, the pb-28 bottom padding on the swipeable motion.div in OnboardingPage.tsx should be removed, as the fixed CTA bar manages bottom spacing.",
+  "type": "REFACTOR",
+  "severity": "LOW",
+  "status": "RESOLVED",
+  "g_reported": 193,
+  "g_status_updated": 194,
+  "g_resolved": 194,
+  "reported_by": "USER_FEEDBACK",
+  "plan_id_ref": "plan_cycle0_onboarding_g181",
+  "task_id_ref": null,
+  "artifact_id_ref": "OnboardingPage_tsx_g181",
+  "artifact_filepath_ref": "prototypes/cycle0_react_web/src/pages/OnboardingPage.tsx",
+  "resolution_summary": "Figma reference paragraph moved from OnboardingPage.tsx to OnboardingSlide.tsx. Bottom padding pb-28 removed from the slide container in OnboardingPage.tsx. Changes implemented at g=193.",
+  "comments": [
+    { "g_ts": 193, "author": "USER_FEEDBACK", "comment_text": "User requested moving the Figma ref <p> into OnboardingSlide.tsx and removing pb-28 from the slide container in OnboardingPage.tsx." },
+    { "g_ts": 194, "author": "AI_SYSTEM", "comment_text": "Issue marked as RESOLVED. Code changes applied at g=193." }
+  ]
+} 

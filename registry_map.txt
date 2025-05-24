@@ -19,7 +19,8 @@
     "reports": {
         "plan_jsx_to_tsx_g157_completion_report_g159": "artifacts/reports/plan_jsx_to_tsx_g157_completion_report_g159.md",
         "plan_cycle0_mobile_styling_g150_validation_report_g162": "artifacts/reports/plan_cycle0_mobile_styling_g150_validation_report_g162.md",
-        "plan_cycle0_ux_realignment_g163_validation_report_g178": "artifacts/reports/plan_cycle0_ux_realignment_g163_validation_report_g178.md"
+        "plan_cycle0_ux_realignment_g163_validation_report_g178": "artifacts/reports/plan_cycle0_ux_realignment_g163_validation_report_g178.md",
+        "plan_cycle0_onboarding_g181_validation_report_g186": "artifacts/reports/plan_cycle0_onboarding_g181_validation_report_g186.md"
     },
     "reviews": {
         "cycle0_prototype_review_g130": "artifacts/reviews/cycle0_prototype_review_g130.md",

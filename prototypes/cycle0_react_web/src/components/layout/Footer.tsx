@@ -6,7 +6,7 @@
   "g_last_modified": 160,
   "description": "REFACTORED (TSX): A reusable footer component, refactored to use Tailwind CSS for styling and layout. It provides a simple, mobile-friendly bottom bar for copyright information and optional links.",
   "artifact_type": "CODE_MODULE",
-  "status_in_lifecycle": "DEVELOPMENT",
+  "status_in_lifecycle": "DEPRECATED",
   "purpose_statement": "To provide a consistent, responsive bottom navigation/information bar using Tailwind CSS for styling. Aims for simplicity and mobile-friendliness.",
   "key_logic_points": [
     "Refactored to use Tailwind CSS for all styling and layout.",

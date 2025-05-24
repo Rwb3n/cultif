@@ -1,0 +1,21 @@
+{
+  "v": 1,
+  "id": "issue_onboarding_scroll_g190",
+  "title": "Onboarding page scrollable after static CTA buttons added",
+  "description": "The OnboardingPage (OnboardingPage_tsx_g181) has become scrollable after introducing the fixed CTA buttons at the bottom. The combined height of the slide area and the CTA button bar effectively exceeds the viewport height, despite overflow-hidden on the main page container. The slide card container within the draggable area uses min-h-screen, forcing its height, which leads to this overflow. The slide area needs to be properly sized so that its content, along with the fixed CTA buttons, fits within the viewport without causing scrolling.",
+  "type": "BUG",
+  "severity": "HIGH",
+  "status": "OPEN",
+  "g_reported": 190,
+  "g_status_updated": 190,
+  "g_resolved": null,
+  "reported_by": "AI_VALIDATION",
+  "plan_id_ref": "plan_cycle0_onboarding_g181",
+  "task_id_ref": null,
+  "artifact_id_ref": "OnboardingPage_tsx_g181",
+  "artifact_filepath_ref": "prototypes/cycle0_react_web/src/pages/OnboardingPage.tsx",
+  "resolution_summary": null,
+  "comments": [
+    { "g_ts": 190, "author": "AI_SYSTEM", "comment_text": "Issue identified: Page scrollability due to slide content area and fixed CTA buttons exceeding viewport height. Root cause traced to 'min-h-screen' on slide card container." }
+  ]
+} 

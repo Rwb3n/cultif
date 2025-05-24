@@ -1,0 +1,22 @@
+{
+  "v": 2,
+  "id": "issue_animation_direction_fix_g196",
+  "title": "Slide animation direction inconsistent with swipe direction",
+  "description": "The slide animations in OnboardingPage.tsx (artifact OnboardingPage_tsx_g181) aren't consistently aligned with swipe direction. When swiping left from slide 1, slide 1 incorrectly exits to the right while slide 2 enters from the right. When swiping right from slide 3 to slide 2, slide 3 incorrectly exits to the left. When swiping left from slide 2 to slide 3 again, slide 2 incorrectly exits to the right. The previous attempt using variants didn't fix the issue. Need to refactor to focus on physical swipe direction rather than slide index relationship.",
+  "type": "BUG",
+  "severity": "MEDIUM",
+  "status": "RESOLVED",
+  "g_reported": 196,
+  "g_status_updated": 198,
+  "g_resolved": 198,
+  "reported_by": "USER_FEEDBACK",
+  "plan_id_ref": "plan_cycle0_onboarding_g181", 
+  "task_id_ref": null,
+  "artifact_id_ref": "OnboardingPage_tsx_g181",
+  "artifact_filepath_ref": "prototypes/cycle0_react_web/src/pages/OnboardingPage.tsx",
+  "resolution_summary": "The swipe-direction based animation logic implemented at g=196 still resulted in inconsistent animation directions. This approach was abandoned. Ultimately resolved by a complete reimplementation of the animation logic in OnboardingPage.tsx at g=197 using an index-based approach (see issue_animation_final_fix_g197).",
+  "comments": [
+    { "g_ts": 196, "author": "USER_FEEDBACK", "comment_text": "User provided detailed breakdown of specific animation issues based on swipe direction. Previous variants-based fix didn't resolve the problem." },
+    { "g_ts": 198, "author": "AI_SYSTEM", "comment_text": "Issue marked as RESOLVED. Superseded and fixed by solution for issue_animation_final_fix_g197 implemented at g=197." }
+  ]
+} 

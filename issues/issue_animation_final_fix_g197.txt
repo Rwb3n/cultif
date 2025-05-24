@@ -1,0 +1,22 @@
+{
+  "v": 2,
+  "id": "issue_animation_final_fix_g197",
+  "title": "Animation direction still inconsistent after previous fixes",
+  "description": "Despite the previous refactoring attempts, the slide animations in OnboardingPage.tsx still don't consistently align with swipe direction. The animations seem to alternate between correct and incorrect with each navigation. This suggests the swipeDirection state tracking is causing issues. A simpler, page index-based animation approach is needed that doesn't rely on maintaining a separate direction state variable.",
+  "type": "BUG",
+  "severity": "MEDIUM",
+  "status": "RESOLVED",
+  "g_reported": 197,
+  "g_status_updated": 198,
+  "g_resolved": 198,
+  "reported_by": "USER_FEEDBACK",
+  "plan_id_ref": "plan_cycle0_onboarding_g181", 
+  "task_id_ref": null,
+  "artifact_id_ref": "OnboardingPage_tsx_g181",
+  "artifact_filepath_ref": "prototypes/cycle0_react_web/src/pages/OnboardingPage.tsx",
+  "resolution_summary": "Animation logic in OnboardingPage.tsx was completely reimplemented at g=197 using a simple index-based approach. This involved using a prevIndexRef to determine direction at render time and passing this to the custom prop of a nested AnimatePresence and the motion.div for the slides. This resolved the inconsistent animation direction issues.",
+  "comments": [
+    { "g_ts": 197, "author": "USER_FEEDBACK", "comment_text": "User reported that animations still alternate between correct and incorrect behavior with each navigation. Previous swipe-direction based fix didn't fully resolve the issue." },
+    { "g_ts": 198, "author": "AI_SYSTEM", "comment_text": "Issue marked as RESOLVED. Code changes applied at g=197 successfully fixed the animation inconsistencies." }
+  ]
+} 

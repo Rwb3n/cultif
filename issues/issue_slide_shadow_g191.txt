@@ -1,0 +1,22 @@
+{
+  "v": 2,
+  "id": "issue_slide_shadow_g191",
+  "title": "Unnecessary shadow effect on onboarding slide card",
+  "description": "The main content card for each onboarding slide in OnboardingPage.tsx (artifact OnboardingPage_tsx_g181) has a shadow-2xl class applied. This shadow is considered irrelevant and should be removed to simplify the visual design.",
+  "type": "DESIGN_FLAW",
+  "severity": "LOW",
+  "status": "RESOLVED",
+  "g_reported": 191,
+  "g_status_updated": 194,
+  "g_resolved": 194,
+  "reported_by": "USER_FEEDBACK",
+  "plan_id_ref": "plan_cycle0_onboarding_g181",
+  "task_id_ref": null,
+  "artifact_id_ref": "OnboardingPage_tsx_g181",
+  "artifact_filepath_ref": "prototypes/cycle0_react_web/src/pages/OnboardingPage.tsx",
+  "resolution_summary": "Shadow effect (shadow-2xl) removed from the slide content card in OnboardingPage.tsx as per user request for a flatter design. Change implemented at g=191.",
+  "comments": [
+    { "g_ts": 191, "author": "USER_FEEDBACK", "comment_text": "User requested removal of shadow effect from the slide content card." },
+    { "g_ts": 194, "author": "AI_SYSTEM", "comment_text": "Issue marked as RESOLVED. Code changes applied at g=191." }
+  ]
+} 
