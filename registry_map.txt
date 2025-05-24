@@ -1,6 +1,6 @@
 {
-  "v": 24,
-  "g_updated": 180,
+  "v": 25,
+  "g_updated": 185,
   "artifact_registry_tree": {
     "os_control": {
         "registry_map_g1": "registry_map.txt"
@@ -77,13 +77,20 @@
               "shadcn_ui_label_g160": "prototypes/cycle0_react_web/src/components/ui/label.tsx",
               "shadcn_ui_checkbox_g160": "prototypes/cycle0_react_web/src/components/ui/checkbox.tsx",
               "shadcn_ui_dropdownmenu_g160": "prototypes/cycle0_react_web/src/components/ui/dropdown-menu.tsx"
+            },
+            "onboarding": {
+              "OnboardingLogo_tsx_g181": "prototypes/cycle0_react_web/src/components/onboarding/OnboardingLogo.tsx",
+              "SlideVisual_tsx_g181": "prototypes/cycle0_react_web/src/components/onboarding/SlideVisual.tsx",
+              "SlideTextContent_tsx_g181": "prototypes/cycle0_react_web/src/components/onboarding/SlideTextContent.tsx",
+              "SlideNavigation_tsx_g181": "prototypes/cycle0_react_web/src/components/onboarding/SlideNavigation.tsx",
+              "OnboardingSlide_tsx_g181": "prototypes/cycle0_react_web/src/components/onboarding/OnboardingSlide.tsx"
             }
           },
           "navigation": {
             "cycle0_router_config_g112": "prototypes/cycle0_react_web/src/navigation/AppRouter.tsx"
           },
           "pages": {
-            "cycle0_page_onboarding_g112": "prototypes/cycle0_react_web/src/pages/OnboardingPage.tsx",
+            "OnboardingPage_tsx_g181": "prototypes/cycle0_react_web/src/pages/OnboardingPage.tsx",
             "cycle0_page_login_g112": "prototypes/cycle0_react_web/src/pages/LoginPage.tsx",
             "cycle0_page_signup_g112": "prototypes/cycle0_react_web/src/pages/SignupPage.tsx",
             "cycle0_page_home_g112": "prototypes/cycle0_react_web/src/pages/HomePage.tsx",

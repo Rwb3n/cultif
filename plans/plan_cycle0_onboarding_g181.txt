@@ -1,0 +1,222 @@
+{
+  "v": 1,
+  "id": "plan_cycle0_onboarding_g181",
+  "status": "COMPLETED_SUCCESS",
+  "preceding_plan_id_ref": "cycle0_blueprint_proto_frame",
+  "origin_artifact_id": "cycle0_blueprint_proto_frame",
+  "goal": "To develop and implement the T-01b Onboarding flow as a web prototype for the target mobile-only application. This involves refactoring the existing OnboardingPage.tsx to include an initial 'Welcome' screen with logo animation, followed by a carousel of 3-4 interactive onboarding slides with distinct content. Slides will feature modular components (Logo, Background/Visual Area, Text Content, Navigation Controls with per-slide 'Log In' and 'Sign Up' Call-to-Actions). Navigation will be via swipe and clickable dot indicators only (no Next, Skip, or Back buttons). The implementation will use React, Vite, Tailwind CSS, shadcn/ui, and Framer Motion, adhering to a full-screen, no-scroll, mobile-first design.",
+  "scope": [
+    "Refactoring and enhancement of the main OnboardingPage.tsx component to orchestrate the new flow, including adapting the existing initial logo fade-in/out sequence.",
+    "Extraction and creation of a reusable OnboardingSlide.tsx component from the existing page structure.",
+    "Creation of new modular sub-components: OnboardingLogo.tsx (adapting existing logo animation logic), SlideVisual.tsx, SlideTextContent.tsx, and a new SlideNavigation.tsx (dots and per-slide 'Log In'/'Sign Up' CTAs).",
+    "Implementation of 3 distinct onboarding slides, each with placeholder image/visual and unique text content, and integrated Log In/Sign Up buttons.",
+    "Integration of swipe gestures for slide transitions (e.g., using Framer Motion).",
+    "Implementation of clickable dot indicators for slide navigation.",
+    "Direct 'Sign Up' and 'Log In' buttons on each onboarding slide (or a persistent area), housed within SlideNavigation.tsx, linking to the T-11 Auth flow placeholders.",
+    "Leveraging and enhancing existing Framer Motion animations for the initial logo, and implementing new animations for slide content or transitions.",
+    "Ensuring the Onboarding flow is full-screen and optimized for mobile viewports.",
+    "All new components to have basic EmbeddedAnnotationBlocks and be registered in registry_map.txt.",
+    "Localization or internationalization of text content.",
+    "Accessibility compliance beyond basic semantic HTML (full audit is out of scope for this task).",
+    "Desktop-optimized view (focus is strictly mobile-first).",
+    "Removal of existing 'Next', 'Skip', and 'Back' button functionalities from the current OnboardingPage.tsx."
+  ],
+  "exclusions": [
+    "Actual Sign Up / Log In functionality (will link to T-11 placeholder screens).",
+    "Dynamic loading of slide content from a backend.",
+    "Complex or highly detailed animations beyond simple transitions/fades.",
+    "Video or other advanced media types for slide visuals in this iteration (images only for now).",
+    "Accessibility compliance beyond basic semantic HTML (full audit is out of scope for this task).",
+    "Desktop-optimized view (focus is strictly mobile-first)."
+  ],
+  "g_created": 181,
+  "g_updated": 185,
+  "tasks": [
+    {
+      "id": "plan_cycle0_onboarding_g181_task_001",
+      "title": "Refactor OnboardingPage.tsx and Setup Core Modular Components",
+      "description": "Refactor the existing OnboardingPage.tsx to serve as the main orchestrator. Adapt its existing logo animation logic. Extract and create initial structures for OnboardingSlide.tsx, OnboardingLogo.tsx, SlideVisual.tsx, SlideTextContent.tsx, and the new SlideNavigation.tsx. Define basic props and structure, noting SlideNavigation will house dot indicators and Auth CTAs, replacing old navigation buttons.",
+      "intent": "To decompose the existing OnboardingPage.tsx into a modular structure, leveraging existing animation logic, and lay the foundation for the revised onboarding flow.",
+      "inputs": [
+        { "name": "UI Design Concepts", "source_description": "User-provided Figma screenshots and verbal descriptions.", "details": "Onboarding 1, 2, 3 and CircleUp screenshots. Discussion about modularity and positive CTAs." },
+        { "name": "Cycle 0 Blueprint", "source_description": "source/1.0 Cycle 0 Blueprint — Proto Frame.txt", "details": "Provides overall tech stack (React, Vite, Tailwind, shadcn/ui, Framer Motion) and context for T-01b." }
+      ],
+      "outputs": [
+        {
+          "name": "OnboardingPage.tsx",
+          "artifact_id": "OnboardingPage_tsx_g181",
+          "expected_path": "src/pages/OnboardingPage.tsx",
+          "description": "Main orchestrator for the onboarding flow. Will manage slides and navigation state.",
+          "embed_annotations_required": true
+        },
+        {
+          "name": "OnboardingSlide.tsx",
+          "artifact_id": "OnboardingSlide_tsx_g181",
+          "expected_path": "src/components/onboarding/OnboardingSlide.tsx",
+          "description": "Reusable component to display individual onboarding slide content.",
+          "embed_annotations_required": true
+        },
+        {
+          "name": "OnboardingLogo.tsx",
+          "artifact_id": "OnboardingLogo_tsx_g181",
+          "expected_path": "src/components/onboarding/OnboardingLogo.tsx",
+          "description": "Component for displaying the application logo during onboarding.",
+          "embed_annotations_required": true
+        },
+        {
+          "name": "SlideVisual.tsx",
+          "artifact_id": "SlideVisual_tsx_g181",
+          "expected_path": "src/components/onboarding/SlideVisual.tsx",
+          "description": "Component responsible for rendering the main visual (image) of an onboarding slide.",
+          "embed_annotations_required": true
+        },
+        {
+          "name": "SlideTextContent.tsx",
+          "artifact_id": "SlideTextContent_tsx_g181",
+          "expected_path": "src/components/onboarding/SlideTextContent.tsx",
+          "description": "Component for displaying the headline and body text of an onboarding slide.",
+          "embed_annotations_required": true
+        },
+        {
+          "name": "SlideNavigation.tsx",
+          "artifact_id": "SlideNavigation_tsx_g181",
+          "expected_path": "src/components/onboarding/SlideNavigation.tsx",
+          "description": "New component for handling navigation elements like dots and the 'Log In'/'Sign Up' CTAs on each slide, replacing previous button navigation.",
+          "embed_annotations_required": true
+        }
+      ],
+      "execution_checklist": [
+        {"item_id": "task_001_check_001", "description": "Refactor OnboardingPage.tsx structure, adapting existing logo animation logic and state management for slides.", "status": "DONE", "target_artifact_id": "OnboardingPage_tsx_g181"},
+        {"item_id": "task_001_check_002", "description": "Extract/Create OnboardingSlide.tsx basic structure.", "status": "DONE", "target_artifact_id": "OnboardingSlide_tsx_g181"},
+        {"item_id": "task_001_check_003", "description": "Extract/Create OnboardingLogo.tsx, adapting existing logo elements.", "status": "DONE", "target_artifact_id": "OnboardingLogo_tsx_g181"},
+        {"item_id": "task_001_check_004", "description": "Extract/Create SlideVisual.tsx basic structure.", "status": "DONE", "target_artifact_id": "SlideVisual_tsx_g181"},
+        {"item_id": "task_001_check_005", "description": "Extract/Create SlideTextContent.tsx basic structure.", "status": "DONE", "target_artifact_id": "SlideTextContent_tsx_g181"},
+        {"item_id": "task_001_check_006", "description": "Create new SlideNavigation.tsx basic structure for dot indicators and Auth CTAs.", "status": "DONE", "target_artifact_id": "SlideNavigation_tsx_g181"},
+        {"item_id": "task_001_check_007", "description": "Remove logic for 'Next', 'Skip', and 'Back' buttons from OnboardingPage.tsx.", "status": "DONE", "target_artifact_id": "OnboardingPage_tsx_g181"}
+      ],
+      "dependencies": [],
+      "criticality": "HIGH",
+      "status": "DONE",
+      "linked_issue_ids": [],
+      "notes": ["This task focuses on restructuring the existing page into new components and removing deprecated navigation elements. Existing state management for currentStep and animationState in OnboardingPage.tsx should be adapted."],
+      "sub_tasks": []
+    },
+    {
+      "id": "plan_cycle0_onboarding_g181_task_002",
+      "title": "Implement Slide Content and Styling, including Auth CTAs",
+      "description": "Populate 3 distinct onboarding slides with placeholder visual assets and unique text content. Style the SlideVisual, SlideTextContent, OnboardingLogo, and SlideNavigation components (including visible 'Log In' and 'Sign Up' buttons) based on the provided Figma references, ensuring a mobile-first, full-screen layout. The bottom section containing text and navigation/CTAs should have a distinct colored background/shape.",
+      "intent": "To visually construct the individual slides, apply core styling, and integrate the primary Auth CTAs.",
+      "inputs": [
+        { "name": "Component Structures", "source_description": "Outputs from task_001.", "details": "OnboardingSlide.tsx, OnboardingLogo.tsx, SlideVisual.tsx, SlideTextContent.tsx." },
+        { "name": "UI Design Concepts", "source_description": "User-provided Figma screenshots.", "details": "Visual styling, layout, color palette cues from Onboarding 1, 2, 3 and CircleUp." }
+      ],
+      "outputs": [
+        {
+          "name": "Styled Onboarding Components",
+          "artifact_id": "StyledOnboardingComponents_g181", 
+          "expected_path": "src/components/onboarding/",
+          "description": "Updated versions of OnboardingSlide.tsx, OnboardingLogo.tsx, SlideVisual.tsx, SlideTextContent.tsx, and SlideNavigation.tsx with styling, content for 3 slides, and visible Auth CTAs.",
+          "embed_annotations_required": true 
+        }
+      ],
+      "execution_checklist": [
+        {"item_id": "task_002_check_001", "description": "Source and integrate placeholder images for 3 slides into SlideVisual.tsx instances.", "status": "DONE"},
+        {"item_id": "task_002_check_002", "description": "Write and integrate unique headline/body text for 3 slides into SlideTextContent.tsx instances.", "status": "DONE"},
+        {"item_id": "task_002_check_003", "description": "Style OnboardingLogo.tsx component (for initial animation and potential on-slide use).", "status": "DONE", "target_artifact_id": "OnboardingLogo_tsx_g181"},
+        {"item_id": "task_002_check_004", "description": "Style SlideVisual.tsx to correctly display images, full-width at the top.", "status": "DONE", "target_artifact_id": "SlideVisual_tsx_g181"},
+        {"item_id": "task_002_check_005", "description": "Style SlideTextContent.tsx, including the distinct background for the bottom section.", "status": "DONE", "target_artifact_id": "SlideTextContent_tsx_g181"},
+        {"item_id": "task_002_check_006", "description": "Style SlideNavigation.tsx to include dot indicators and clearly visible 'Log In' and 'Sign Up' buttons.", "status": "DONE", "target_artifact_id": "SlideNavigation_tsx_g181"},
+        {"item_id": "task_002_check_007", "description": "Ensure OnboardingPage.tsx displays one slide correctly in a full-screen, mobile-first layout.", "status": "DONE", "target_artifact_id": "OnboardingPage_tsx_g181"}
+      ],
+      "dependencies": ["plan_cycle0_onboarding_g181_task_001"],
+      "criticality": "HIGH",
+      "status": "DONE",
+      "linked_issue_ids": [],
+      "notes": ["Focus on achieving the visual representation first. Slide transition logic comes next."],
+      "sub_tasks": []
+    },
+    {
+      "id": "plan_cycle0_onboarding_g181_task_003",
+      "title": "Implement Welcome Animation, Slide Navigation Logic (Swipe/Dots), and Auth CTA Functionality",
+      "description": "Ensure the adapted logo fade-in/out animation on OnboardingPage.tsx works as the initial 'Welcome' screen. Implement swipe gestures (using Framer Motion) to transition between slides. Add clickable dot indicators in SlideNavigation.tsx that update with slide changes and allow direct navigation. Implement functionality for the 'Sign Up' and 'Log In' buttons (housed in SlideNavigation.tsx on each slide) to navigate to T-11 Auth flow placeholders (/auth/signup and /auth/login). Enhance or add simple fade-in/out animations for slide transitions or content appearance.",
+      "intent": "To make the onboarding flow interactive with swipe/dot navigation, starting with a welcome animation, and ensure Auth CTAs are functional. Existing 'Back' button logic will be removed.",
+      "inputs": [
+        { "name": "Styled Onboarding Components", "source_description": "Outputs from task_002.", "details": "Fully styled slides and navigation placeholders." },
+        { "name": "Framer Motion Library", "source_description": "Tech stack.", "details": "To be used for gestures and animations."}
+      ],
+      "outputs": [
+        {
+          "name": "Interactive OnboardingPage.tsx",
+          "artifact_id": "OnboardingPage_tsx_g181", 
+          "expected_path": "src/pages/OnboardingPage.tsx",
+          "description": "Updated OnboardingPage.tsx with slide transition logic, swipe gestures, and animations.",
+          "embed_annotations_required": true
+        },
+        {
+          "name": "Functional SlideNavigation.tsx",
+          "artifact_id": "SlideNavigation_tsx_g181", 
+          "expected_path": "src/components/onboarding/SlideNavigation.tsx",
+          "description": "Updated SlideNavigation.tsx with working dot indicators and functional 'Log In'/'Sign Up' CTAs linking to auth routes. No 'Next', 'Skip', or 'Back' buttons.",
+          "embed_annotations_required": true
+        }
+      ],
+      "execution_checklist": [
+        {"item_id": "task_003_check_001", "description": "Verify and refine logo fade-in/out animation on initial view of OnboardingPage.tsx using Framer Motion.", "status": "DONE"},
+        {"item_id": "task_003_check_002", "description": "Integrate Framer Motion for swipe gesture detection on OnboardingPage/OnboardingSlide.", "status": "DONE"},
+        {"item_id": "task_003_check_003", "description": "Implement logic for slide transitions based on swipe.", "status": "DONE"},
+        {"item_id": "task_003_check_004", "description": "Implement clickable dot indicators in SlideNavigation.tsx.", "status": "DONE"},
+        {"item_id": "task_003_check_005", "description": "Implement 'Sign Up' and 'Log In' buttons in SlideNavigation.tsx on each slide to navigate to /auth/signup and /auth/login placeholder routes.", "status": "DONE"},
+        {"item_id": "task_003_check_006", "description": "Add/Enhance basic fade-in/out or slide-in/out animations for slide transitions using Framer Motion.", "status": "DONE"},
+        {"item_id": "task_003_check_007", "description": "Confirm removal of all 'Next', 'Skip', and 'Back' button related logic and UI.", "status": "DONE"}
+      ],
+      "dependencies": ["plan_cycle0_onboarding_g181_task_002"],
+      "criticality": "HIGH",
+      "status": "DONE",
+      "linked_issue_ids": [],
+      "notes": ["Ensure navigation state is correctly managed in OnboardingPage.tsx. Auth CTAs should be clearly visible and functional on each slide, or in a persistent bottom navigation bar area."],
+      "sub_tasks": []
+    },
+    {
+      "id": "plan_cycle0_onboarding_g181_task_004",
+      "title": "Final Review, Annotation, and Registration",
+      "description": "Conduct a final review of the onboarding flow for visuals, functionality, and mobile responsiveness. Ensure all new components (OnboardingPage.tsx, OnboardingSlide.tsx, OnboardingLogo.tsx, SlideVisual.tsx, SlideTextContent.tsx, SlideNavigation.tsx) have complete and accurate EmbeddedAnnotationBlocks. Update registry_map.txt with all new artifacts.",
+      "intent": "To ensure the implemented onboarding flow meets requirements and all artifacts are correctly documented and registered.",
+      "inputs": [
+        { "name": "Completed Onboarding Flow", "source_description": "Outputs from task_003.", "details": "Fully interactive onboarding prototype." }
+      ],
+      "outputs": [
+        {
+          "name": "Validated Onboarding Artifacts",
+          "artifact_id": "ValidatedOnboardingArtifacts_g181",
+          "expected_path": "src/", 
+          "description": "All onboarding related .tsx files with complete annotations.",
+          "embed_annotations_required": true 
+        },
+        {
+          "name": "Updated Registry Map",
+          "artifact_id": "registry_map_txt_g181_update",
+          "expected_path": "registry_map.txt",
+          "description": "registry_map.txt updated to include all new onboarding artifacts.",
+          "embed_annotations_required": false
+        }
+      ],
+      "execution_checklist": [
+        {"item_id": "task_004_check_001", "description": "Review onboarding flow against design concepts and functional requirements.", "status": "DONE"},
+        {"item_id": "task_004_check_002", "description": "Test on multiple mobile viewport sizes.", "status": "DONE"},
+        {"item_id": "task_004_check_003", "description": "Add/Update EmbeddedAnnotationBlock for OnboardingPage.tsx.", "status": "DONE", "target_artifact_id": "OnboardingPage_tsx_g181"},
+        {"item_id": "task_004_check_004", "description": "Add/Update EmbeddedAnnotationBlock for OnboardingSlide.tsx.", "status": "DONE", "target_artifact_id": "OnboardingSlide_tsx_g181"},
+        {"item_id": "task_004_check_005", "description": "Add/Update EmbeddedAnnotationBlock for OnboardingLogo.tsx.", "status": "DONE", "target_artifact_id": "OnboardingLogo_tsx_g181"},
+        {"item_id": "task_004_check_006", "description": "Add/Update EmbeddedAnnotationBlock for SlideVisual.tsx.", "status": "DONE", "target_artifact_id": "SlideVisual_tsx_g181"},
+        {"item_id": "task_004_check_007", "description": "Add/Update EmbeddedAnnotationBlock for SlideTextContent.tsx.", "status": "DONE", "target_artifact_id": "SlideTextContent_tsx_g181"},
+        {"item_id": "task_004_check_008", "description": "Add/Update EmbeddedAnnotationBlock for SlideNavigation.tsx.", "status": "DONE", "target_artifact_id": "SlideNavigation_tsx_g181"},
+        {"item_id": "task_004_check_009", "description": "Update registry_map.txt with all new artifact IDs and their paths.", "status": "DONE", "target_artifact_id": "registry_map_txt_g181_update"}
+      ],
+      "dependencies": ["plan_cycle0_onboarding_g181_task_003"],
+      "criticality": "MEDIUM",
+      "status": "DONE",
+      "linked_issue_ids": [],
+      "notes": ["This is the final step before considering the onboarding feature complete for this cycle."],
+      "sub_tasks": []
+    }
+  ]
+} 

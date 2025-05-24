@@ -1,7 +1,7 @@
 {
-  "v": 62,
-  "g": 180,
-  "ph": "ANALYZE",
+  "v": 68,
+  "g": 186,
+  "ph": "IDLE",
   "st": "READY",
   "cp_id": null,
   "ct_id": null,
